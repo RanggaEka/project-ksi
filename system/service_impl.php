@@ -11,6 +11,13 @@
             	$a[] = $arr;
             }
 			echo json_encode($a);
+		} else if ($type == "barang") {
+			$a = array();
+			$x = mysql_query("SELECT * FROM tbl_barang") or die(mysql_error());
+            while ($arr=mysql_fetch_assoc($x)) {
+            	$a[] = $arr;
+            }
+			echo json_encode($a);
 		}
 	}
 ?>

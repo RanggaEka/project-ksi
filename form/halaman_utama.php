@@ -1,4 +1,5 @@
 <?php 
+    include '../system/config_service.php'; 
     session_start();
     if (empty($_SESSION['username']) || empty($_SESSION['password']) ) {
         echo "<script>window.location.href='../'</script>";
@@ -21,7 +22,6 @@
     <script src="../lib/metro/js/jquery/jquery.min.js"></script>
     <script src="../lib/metro/js/jquery/jquery.widget.min.js"></script>
     <script src="../lib/metro/min/metro.min.js"></script>
-    <script src="../js/main.js"></script>
 </head>
 <body class="metro">
     <nav class="navigation-bar">
@@ -35,7 +35,7 @@
                     <span class="icon-newspaper"></span> Form Order</a>
                 <ul class="dropdown-menu" data-role="dropdown">
                     <li><a href="?page=order">Input Order</a></li>
-                    <li><a href="?page=order_detail">Input Detail Order</a></li>
+                    <!-- <li><a href="?page=order_detail">Input Detail Order</a></li> -->
                 </ul>
             </div>
             <!-- <a class="element" href="?page=order"><span class="icon-newspaper"></span> Form Order</a> -->
@@ -44,8 +44,9 @@
             <span class="element-divider"></span>
             <a class="element" href="?page=sj"><span class="icon-shipping"></span> Form SJ</a>
             <span class="element-divider"></span>
-            <a class="element" href="?page=verifikasi"><span class="icon-copy"></span> Form Verivikasi</a>
+            <a class="element" href="?page=verifikasi"><span class="icon-copy"></span> Form Verifikasi</a>
             <span class="element-divider"></span>
+            <a class="element" href="?page=sopir"><span class="icon-cars"></span> SOPIR</a>
         </nav>
     </nav>
     <table width="100%" border="0">
@@ -67,6 +68,8 @@
                         include 'verifikasi.php';
                     } elseif ($_GET['page'] == "approval") {
                         include 'approval.php';
+                    } elseif ($_GET['page'] == "sopir") {
+                        echo "<script>window.location.href='sopir.php'</script>";
                     } else {
                         echo '<td colspan="2"><img src="../images/utama.jpg" width=""></td>';
                     }
@@ -92,4 +95,5 @@ for (var selector in config) {
   // $(selector).chosen(config[selector]);
 }
 </script>
+<script src="../js/main.js"></script>
 <?php } ?>

@@ -19,23 +19,55 @@
 					<table class="table" width="100%" border="0" cellspacing="0" cellpadding="3">
 				        <tr>
 				          	<td>No.</td>
+				          	<td>Tanggal</td>
 				         	<td>No. PO</td>
 				         	<td>Nama Sales</td>
 				         	<td>Nama Customer</td>
 				         	<td>Alamat</td>
 				         	<td></td>
 				        </tr>
-				        <?php 
-				        	for ($i = 1; $i < 10; $i++) {
-				        ?>
-				        <tr>
+				        <?php
+                    		$count = 0;
+                    		$strQuery = "SELECT s.status_pengiriman, s.id as sj_id, p.photo, p.id, p.no_po,p.tanggal,c.nama,p.alamat,u.nama as nama_user
+                    						FROM surat_jalan s 
+                    						INNER JOIN po_header p ON p.id = s.id_po 
+                    						INNER JOIN customer c ON c.id = p.id_customer 
+                    						INNER JOIN user u ON u.id = c.id_referensi_user 
+                    						where (s.status_pengiriman = 'NEW' or s.status_pengiriman = 'READY')" ;
+                    		$result = mysql_query($strQuery) or die(mysql_error());
+                    		while($arrResult = mysql_fetch_array($result)) {
+                    			$count++;
+                    			$path = $arrResult['photo'];
+                    			$id = $arrResult['sj_id'];
+                    	?>
+                    	<tr>
+                        	<td><?php echo $count;?></td>
+                        	<td class="right"><?php echo $arrResult['tanggal'];?></td>
+                        	<td class="right"><?php echo $arrResult['no_po'];?></td>
+                        	<td class="right"><?php echo $arrResult['nama_user'];?></td>
+                        	<td class="right"><?php echo $arrResult['nama'];?></td>
+                        	<td class="right"><?php echo $arrResult['alamat'];?></td>
+				         	<td>
+				         		<?php 
+				         			if ($arrResult['status_pengiriman'] == "NEW") {
+				         				echo '<a href="cetak_sj.php?id_sj='.$id.'" ><i class="icon-printer"></i> Cetak</a>';
+				         			} elseif ($arrResult['status_pengiriman'] == "READY") {
+				         				echo '<i class="icon-cars"> Delivery</i>';
+				         			}
+				         		?>
+				         		
+				         	</td>
+                        	
+                        </tr>
+				        <!-- <tr>
 				          	<td><?php echo $i; ?></td>
 				         	<td>000<?php echo $i; ?></td>
 				         	<td>DJ<?php echo $i; ?></td>
 				         	<td>ANDIKA<?php echo $i; ?></td>
 				         	<td>JAKARTA<?php echo $i; ?></td>
+				         	<td>JAKARTA<?php echo $i; ?></td>
 				         	<td><a href="cetak_sj.php" target="_blank"><i class="icon-printer"></i> Cetak</a></td>
-				        </tr>
+				        </tr> -->
 				        <?php } ?>
 			    	</table>
 				</fieldset>

@@ -9,7 +9,44 @@
     <script src="../js/main.js"></script>
 </head>
 <body class="metro">
-    <fieldset style="width: 75%; padding: 10px;">
+  <?php 
+    include '../system/config_service.php'; 
+    $invID = "";
+    if (isset($_GET['id_invoice'])) {
+      $invID = $_GET['id_invoice'];
+    }
+
+
+    $count = 0;
+    $strQuery = "SELECT i.no_invoice, 
+                        i.status_penagihan as status_penagihan, 
+                        i.id as id_invoice, 
+                        s.status_pengiriman,
+                        s.no_sj as no_sj, 
+                        s.id as sj_id, 
+                        p.photo, 
+                        p.id, 
+                        p.no_po,
+                        p.tanggal,
+                        c.tlp,
+                        c.nama,
+                        p.alamat,
+                        u.nama as nama_user
+                                FROM invoice i
+                                INNER JOIN surat_jalan s ON s.id = i.id_sj 
+                                INNER JOIN po_header p ON p.id = s.id_po 
+                                INNER JOIN customer c ON c.id = p.id_customer 
+                                INNER JOIN user u ON u.id = c.id_referensi_user 
+                                where i.id = '$invID'" 
+                                ;
+    $result = mysql_query($strQuery) or die(mysql_error());
+    $arrResult = mysql_fetch_array($result);
+    
+  ?>
+  <table width="100%" cellspacing="30" cellpadding="30">
+    <tr>
+      <td>
+        <fieldset style="width: 85%; padding: 10px;">
         <!-- <legend>Cetak SJ</legend> -->
         <table width="100%" border="0" cellpadding="5" cellspacing="5" bordercolor="1" style="border:solid 1px #000000; padding:10px;">
           <tr>
@@ -20,8 +57,7 @@
               Kec. Tamansari Jakarta Barat 11140<br />
               (021) 2601616<br />
               </p>            </td>
-            <td width="21%" valign="bottom"><p>Jakarta, <br />
-            Kepada YTH.</p></td>
+            <td width="21%" valign="bottom"><p>Jakarta, <?php echo date('d/m/Y');?></p></td>
           </tr>
           <tr align="center">
             <td colspan="3" align="right"><strong><font size="+3" >CETAK INVOICE</font></strong><hr></td>
@@ -34,31 +70,31 @@
                 <td width="55%">&nbsp;</td>
                 <td width="18%">Sales</td>
                 <td width="2%">:</td>
-                <td width="12%">DJ</td>
+                <td width="12%"><?php echo $arrResult['nama_user']; ?></td>
               </tr>
               <tr>
                 <td>Nama</td>
                 <td>:</td>
-                <td>Andika</td>
+                <td><?php echo $arrResult['nama']; ?></td>
                 <td>No. Invoice</td>
                 <td>:</td>
-                <td>29842092</td>
+                <td><?php echo $arrResult['no_invoice']; ?></td>
               </tr>
               <tr>
                 <td>Telp</td>
                 <td>:</td>
-                <td>08438659854</td>
+                <td><?php echo $arrResult['tlp']; ?></td>
                 <td>Tanggal Invoice</td>
                 <td>:</td>
-                <td>09/09/2015</td>
+                <td><?php echo date('d/m/Y');?></td>
               </tr>
               <tr>
                 <td>Alamat</td>
                 <td>:</td>
-                <td>Jakarta</td>
+                <td><?php echo $arrResult['alamat']; ?></td>
                 <td>Tanggal Jatuh Tempo</td>
                 <td>:</td>
-                <td>14/09/2015</td>
+                <td><?php echo date('d/m/Y');?></td>
               </tr>
             </table></td>
           </tr>
@@ -73,22 +109,41 @@
                 <td width="8%">Diskon</td>
                 <td width="28%">Total</td>
               </tr>
+              <?php
+              $invID = $arrResult['id_invoice'];
+            
+              $sjIDPO = $arrResult['id'];
+              $count = 0;
+              $totalQty = 0;
+              $totalJumlah = 0;
+                        $strQuery = "SELECT b.kode_barang, b.nama_barang, b.deskripsi, b.harga, p.qty 
+                    FROM po_detail p 
+                    INNER JOIN tbl_barang b ON b.id = p.id_barang 
+                    where id_po_header = '$sjIDPO'";
+                        $result = mysql_query($strQuery) or die(mysql_error());
+                        while($arrResult = mysql_fetch_array($result)) {
+                          $count++;
+                $totalHarga = $arrResult['harga'] * $arrResult['qty']; 
+                $totalQty = $totalQty + $arrResult['qty'];
+                $totalJumlah = $totalJumlah + $totalHarga;
+                      ?>
               <tr>
-                <td>1</td>
-                <td>Tisu Makan</td>
-                <td>50</td>
-                <td>40.000</td>
+                <td><?php echo $count; ?></td>
+                <td><?php echo $arrResult['kode_barang']; ?></td>
+                <td><?php echo $arrResult['deskripsi']; ?></td>
+                <td><?php echo number_format($arrResult['qty']); ?></td>
+                <td><?php echo number_format($arrResult['harga']); ?></td>
                 <td>0</td>
-                <td>&nbsp;</td>
-                <td>2.000.000</td>
+                <td><?php echo number_format($totalHarga); ?></td>
               </tr>
+              <?php } ?>
               <tr>
                 <td colspan="3" rowspan="3" align="left" valign="bottom">Note: Barang yang sudah dibeli tidak dapat dikembalikan<br>
                   Transfer Via <br>
                   BCA 12345678<br>
                   A/N. PT GRAHA KERINDO UTAMA</td>
                 <td colspan="3" align="right">Sub Total</td>
-                <td>2.000.000</td>
+                <td><?php echo number_format($totalJumlah);?></td>
               </tr>
               <tr>
                 <td colspan="3" align="right">Diskon</td>
@@ -96,7 +151,7 @@
               </tr>
               <tr>
                 <td colspan="3" align="right">Total</td>
-                <td>2.000.000</td>
+                <td><?php echo number_format($totalJumlah);?></td>
               </tr>
             </table></td>
           </tr>
@@ -128,9 +183,13 @@
             </table></td>
           </tr>
           <tr>
-            <td colspan="3" align="center"><input type="submit" name="button" id="button" value="Cetak" onClick="print()"></td>
+            <td colspan="3" align="center"><a type="button" class="button" onclick="print()" href="../system/verifikasi_service.php?status=FINISHED&id_inv=<?php echo $invID; ?>" >Cetak</a></td>
           </tr>
         </table>
 </fieldset>
+      </td>
+    </tr>
+  </table>
+    
 </body>
 </html>

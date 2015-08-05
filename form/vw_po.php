@@ -9,65 +9,55 @@
     <script src="../js/main.js"></script>
 </head>
 <body class="metro">
-    <fieldset style="width: 50%;padding: 10px;">
-        <legend>Detail Order</legend>
-        <table width="50%" border="0" class="table">
-          <tr>
-            <td>No PO</td>
-            <td>:</td>
-            <td>0001</td>
-          </tr>
-          <tr>
-            <td>Tanggal</td>
-            <td>:</td>
-            <td>07/07/2015</td>
-          </tr>
-          <tr>
-            <td>Kode Barang</td>
-            <td>:</td>
-            <td>K0003</td>
-          </tr>
-          <tr>
-            <td>Deskripsi</td>
-            <td>:</td>
-            <td>Tisu makan</td>
-          </tr>
-          <tr>
-            <td>Qty</td>
-            <td>:</td>
-            <td>5</td>
-          </tr>
-          <tr>
-            <td>Harga </td>
-            <td>:</td>
-            <td>40.000</td>
-          </tr>
-          <tr>
-            <td>Diskon</td>
-            <td>:</td>
-            <td>0</td>
-          </tr>
-          <tr>
-            <td>Total</td>
-            <td>:</td>
-            <td>40.000</td>
-          </tr>
-          <tr>
-            <td>Customer</td>
-            <td>:</td>
-            <td>Andika</td>
-          </tr>
-          <tr>
-            <td>Alamat Pengiriman</td>
-            <td>:</td>
-            <td>Jakarta</td>
-          </tr>
-          <tr>
-            <td>Photo</td>
-            <td>:</td>
-            <td>&nbsp;</td>
-          </tr>
-        </table>
-    </fieldset>
+  <?php 
+    include '../system/config_service.php'; 
+    $poID = "";
+    if (isset($_GET['id_po'])) {
+      $poID = $_GET['id_po'];
+    }
+  ?>
+  <table width="50%" cellspacing="30" cellpadding="30">
+    <tr>
+      <td>
+        <fieldset>
+        <legend>Item Detail</legend>
+        <table class="table hovered">
+                    <thead>
+                    <tr>
+                        <th class="text-left">No</th>
+                        <th class="text-left">Kode Barang</th>
+                        <th class="text-left">Nama Barang</th>
+                        <th class="text-left">Harga</th>
+                        <th class="text-left">Qty</th>
+                        <th class="text-left">Total</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                  <?php
+                    $count = 0;
+                    $strQuery = "SELECT b.kode_barang, b.nama_barang, b.harga, p.qty FROM po_detail p INNER JOIN tbl_barang b ON b.id = p.id_barang where id_po_header = '$poID'";
+                    // echo $strQuery;
+                    $result = mysql_query($strQuery) or die(mysql_error());
+                    while($arrResult = mysql_fetch_array($result)) {
+                      $count++;
+                  ?>
+                    <tr>
+                      <td><?php echo $count;?></td>
+                      <td class="right"><?php echo $arrResult['kode_barang'];?></td>
+                      <td class="right"><?php echo $arrResult['nama_barang'];?></td>
+                      <td class="right"><?php echo $arrResult['harga'];?></td>
+                      <td class="right"><?php echo $arrResult['qty'];?></td>
+                      <td class="right"><?php echo number_format($arrResult['qty']*$arrResult['harga']);?></td>
+                    </tr>
+                    <?php } ?>
+                    </tbody>
+                </table>
+
+      </fieldset>
+      </td>
+    </tr>
+  </table>
+    
 </body>
 </html>

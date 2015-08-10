@@ -31,7 +31,7 @@
 				          	<td><label>Customer</label></td>
 				         	<td>:</td>
 				         	<td>
-				         		<select name="customer" id="customer" data-placeholder="Pilih Customer" class="chosen-select" style="width:100%;" tabindex="2">
+				         		<select name="customer" onchange="customerOnChange()" id="customer" data-placeholder="Pilih Customer" class="chosen-select" style="width:100%;" tabindex="2">
 								    <option value=""></option>
 								</select>
 				         	</td>
@@ -41,7 +41,7 @@
 			         	  <td valign="top">:</td>
          	  				<td>
 				          		<div class="input-control textarea">
-								    <textarea name="alamat"></textarea>
+								    <textarea id="alamat" name="alamat"></textarea>
 								</div>   
 				         	</td>
 				        </tr>

@@ -29,7 +29,7 @@ $.ajax({
 		// console.log(e);
 		var result = "<option value=''>Pilih</option>";
 	 	for (var i = 0; i < e.length; i++) {
-	 		result += '<option value="'+e[i].id+'">'+ e[i].kode_customer+" - "+e[i].nama+'</option>';
+	 		result += '<option alamat="'+e[i].alamat+'" value="'+e[i].id+'">'+ e[i].kode_customer+" - "+e[i].nama+'</option>';
 	 	}	
 
 	 	$('#customer').find('option').remove().end().append(result);
@@ -71,19 +71,43 @@ function barangOnChange() {
 	var deskripsi = attr.getAttribute('deskripsi');
 	var harga = attr.getAttribute('harga');
 
+
 	$('#deskripsi_barang').val(deskripsi);
 	$('#harga_barang').val(addCommas(harga));
+}
 
+function customerOnChange() {
+	var attr = $("#customer").find('option:selected')[0];
+	var alamat = attr.getAttribute('alamat');
 
+	$('#alamat').val(alamat);
 }
 
 function qtyOnblur() { 
 	var attr = $("#barang").find('option:selected')[0];
 	var harga = attr.getAttribute('harga');
 	var total = $('#qty').val() * harga;
+
+	var qty = $('#qty').val();
+	var diskon = 0;
+	if (qty > 50 && qty <= 100) {
+		diskon = total * 0.05;
+	} else if (qty > 101 && qty <= 200) {
+		diskon = total * 0.1;
+	} else if (qty > 200 && qty <= 500) {
+		diskon = total * 0.15;
+	} else if (qty > 501 && qty <= 1000) {
+		diskon = total * 0.2;
+	} else if (qty > 1001 ) {
+		diskon = total * 0.3;
+	} else {
+		diskon = 0;
+	}
+
 	console.log(harga, total);
 	$('#diskon').val(0);
-	$('#total').val(addCommas(total));
+	$('#diskon').val(addCommas(diskon));
+	$('#total').val(addCommas(total-diskon));
 
 }
 

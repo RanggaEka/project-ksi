@@ -16,7 +16,7 @@
 				<fieldset>
 					<legend>Data Input Order Detail</legend>
 					<form action="../system/order_detail_service.php" method="post" enctype="multipart/form-data">
-					<table width="50%" border="0" cellspacing="0" cellpadding="3">
+					<table width="100%" border="0" cellspacing="0" cellpadding="3">
 				        <tr>
 				          	<td><label>No. PO</label></td>
 				         	<td>:</td>

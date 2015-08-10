@@ -8,6 +8,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <title>PO Online</title>
     <meta charset="UTF-8">
     <!-- <link rel="stylesheet" href="../lib/chosen/style.css"> -->
     <!-- <link rel="stylesheet" href="../lib/chosen/prism.css"> -->
@@ -26,10 +27,13 @@
 <body class="metro">
     <nav class="navigation-bar">
         <nav class="navigation-bar-content">
-            <a href="?page=home" class="element"><img src="../images/logo-gku.jpeg" width="128px">
+            <!-- <a href="?page=home" class="element"><img src="../images/logo-gku.jpeg" width="128px"> -->
                 
-            </a>
+            <!-- </a> -->
             <span class="element-divider"></span>
+            <?php 
+                if ($_SESSION['jabatan'] == "SALES" || $_SESSION['jabatan'] == "ADMIN") {
+            ?>
             <div class="element">
                 <a class="dropdown-toggle" href="#">
                     <span class="icon-newspaper"></span> Form Order</a>
@@ -39,14 +43,31 @@
                 </ul>
             </div>
             <!-- <a class="element" href="?page=order"><span class="icon-newspaper"></span> Form Order</a> -->
+            <?php 
+                } 
+                if ($_SESSION['jabatan'] == "SUPERVISOR" || $_SESSION['jabatan'] == "ADMIN") {
+            ?>
             <span class="element-divider"></span>
             <a class="element" href="?page=approval"><span class="icon-checkmark"></span> Form Approval</a>
+            <?php 
+                } 
+                if ($_SESSION['jabatan'] == "STAFF EXPEDISI" || $_SESSION['jabatan'] == "ADMIN") {
+            ?>
             <span class="element-divider"></span>
             <a class="element" href="?page=sj"><span class="icon-shipping"></span> Form SJ</a>
+            <?php 
+                } 
+                if ($_SESSION['jabatan'] == "FINANCE" || $_SESSION['jabatan'] == "ADMIN") {
+            ?>
             <span class="element-divider"></span>
             <a class="element" href="?page=verifikasi"><span class="icon-copy"></span> Form Verifikasi</a>
+            <?php 
+                } 
+                if ($_SESSION['jabatan'] == "SOPIR" || $_SESSION['jabatan'] == "ADMIN") {
+            ?>
             <span class="element-divider"></span>
             <a class="element" href="?page=sopir"><span class="icon-cars"></span> SOPIR</a>
+            <?php } ?>
         </nav>
     </nav>
     <table width="100%" border="0">
@@ -71,10 +92,10 @@
                     } elseif ($_GET['page'] == "sopir") {
                         echo "<script>window.location.href='sopir.php'</script>";
                     } else {
-                        echo '<td colspan="2"><img src="../images/utama.jpg" width=""></td>';
+                        // echo '<td colspan="2"><img src="../images/utama.jpg" width=""></td>';
                     }
                 } else {
-                    echo '<td colspan="2"><img src="../images/utama.jpg" width=""></td>';
+                    // echo '<td colspan="2"><img src="../images/utama.jpg" width=""></td>';
                 }
             ?>
         </tr>

@@ -7,9 +7,10 @@
 		$po = $_POST['po'];
 		$barang = $_POST['barang'];
 		$qty = $_POST['qty'];
+		$diskon = $_POST['diskon'];
 
 		
-		$strQry = "INSERT INTO po_detail VALUES ('$id','$po','$barang','$qty')";
+		$strQry = "INSERT INTO po_detail VALUES ('$id','$po','$barang','$qty', '$diskon')";
 		// echo ">>>".$strQry;
 		$exQuery = mysql_query($strQry) or die(mysql_error());
 		if ($exQuery) {

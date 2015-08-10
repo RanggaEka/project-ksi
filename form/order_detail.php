@@ -83,6 +83,7 @@
 				         	<td>
 				          		<div class="input-control text" data-role="input-control" >
 					            	<input type="text" id="diskon" disabled="disabled" />
+					            	<input type="hidden" id="diskonRp" name="diskon" />
 				         		</div>          
 				         	</td>
 				        </tr>
@@ -120,6 +121,7 @@
                             <th class="text-left">Nama Barang</th>
                             <th class="text-left">Harga</th>
                             <th class="text-left">Qty</th>
+                            <th class="text-left">Discount</th>
                             <th class="text-left">Total</th>
                         </tr>
                         </thead>
@@ -127,21 +129,30 @@
                         <tbody>
                     	<?php
                     		$count = 0;
-                    		$strQuery = "SELECT b.kode_barang, b.nama_barang, b.harga, p.qty FROM po_detail p INNER JOIN tbl_barang b ON b.id = p.id_barang where id_po_header = '$poID'";
+                    		$total = 0;
+                    		$strQuery = "SELECT p.diskon, b.kode_barang, b.nama_barang, b.harga, p.qty FROM po_detail p INNER JOIN tbl_barang b ON b.id = p.id_barang where id_po_header = '$poID'";
                     		$result = mysql_query($strQuery) or die(mysql_error());
                     		while($arrResult = mysql_fetch_array($result)) {
                     			$count++;
+                    			$total = $total + (($arrResult['qty']*$arrResult['harga']) - $arrResult['diskon']);
                     	?>
                         <tr>
                         	<td><?php echo $count;?></td>
                         	<td class="right"><?php echo $arrResult['kode_barang'];?></td>
                         	<td class="right"><?php echo $arrResult['nama_barang'];?></td>
-                        	<td class="right"><?php echo $arrResult['harga'];?></td>
-                        	<td class="right"><?php echo $arrResult['qty'];?></td>
-                        	<td class="right"><?php echo number_format($arrResult['qty']*$arrResult['harga']);?></td>
+                        	<td class="right"><?php echo number_format($arrResult['harga']);?></td>
+                        	<td class="right"><?php echo number_format($arrResult['qty']);?></td>
+                        	<td class="right"><?php echo number_format($arrResult['diskon']);?></td>
+                        	<td align="right" class="right"><?php echo number_format((($arrResult['qty']*$arrResult['harga']) - $arrResult['diskon']));?></td>
                         </tr>
                         <?php } ?>
                         </tbody>
+                         <tfoot>
+                         	<tr >
+                        		<td align="right" colspan="6"><strong>GRAND TOTAL</strong></td>
+                        		<td align="right"><strong><?php echo number_format($total);?></strong></td>
+                        	</tr>
+                         </tfoot>
                     </table>
 
 	    		</fieldset>

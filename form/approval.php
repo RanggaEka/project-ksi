@@ -5,17 +5,33 @@
 		<tr>
           	<td>
 				<fieldset>
+					<?php
+						$pencarian = "";	
+			        	$keterangan = "";	
+			        	$sql = "";
+			        	if (isset($_POST['pencarian'])) {
+			        		$pencarian = $_POST['pencarian'];
+			        		$sql .=  "AND ".$pencarian;
+			        	}
+			        	if (isset($_POST['keterangan'])) {
+			        		$keterangan = $_POST['keterangan'];
+			        		$sql .= " like '%".$keterangan."%'"; 
+			        	}
+
+
+			        	// echo ">>>>>>>>>>>>>>".$sql;
+					?>
 					<legend>Approval PO</legend>
-					Kriteria Pencarian:
-					<select name="pencarian">
-						<option value="po">Nomor PO</option>
-						<option value="sales">Nama Sales</option>
-						<option value="customer">Nama Customer</option>
-					</select>
-				    <input class="text" name="keterangan" type="text" >
-				    <button>Cari</button>
-					<br />
-					<br />
+					<form action="" method="post">
+						Kriteria Pencarian:
+						<select name="pencarian">
+							<option  <?php if ($pencarian == "p.no_po") echo 'selected="selected"'; ?> value="p.no_po">Nomor PO</option>
+							<option  <?php if ($pencarian == "u.nama") echo 'selected="selected"'; ?> value="u.nama">Nama Sales</option>
+							<option  <?php if ($pencarian == "c.nama") echo 'selected="selected"'; ?> value="c.nama">Nama Customer</option>
+						</select>
+					    <input class="text" value="<?php echo $keterangan;?>" name="keterangan" type="text" >
+					    <button>Cari</button>
+					</form>	
 					<table class="table hovered">
 				        <tr>
 				          	<td>No.</td>
@@ -32,7 +48,7 @@
                     						FROM po_header p 
                     						INNER JOIN customer c ON c.id = p.id_customer 
                     						INNER JOIN user u ON u.id = c.id_referensi_user 
-                    						where p.status = 'NEW'";
+                    						where p.status = 'NEW'".$sql;
                     		$result = mysql_query($strQuery) or die(mysql_error());
                     		while($arrResult = mysql_fetch_array($result)) {
                     			$count++;

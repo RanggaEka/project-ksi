@@ -104,9 +104,10 @@ function qtyOnblur() {
 		diskon = 0;
 	}
 
-	console.log(harga, total);
+	// console.log(harga, total);
 	$('#diskon').val(0);
 	$('#diskon').val(addCommas(diskon));
+	$('#diskonRp').val(diskon);
 	$('#total').val(addCommas(total-diskon));
 
 }

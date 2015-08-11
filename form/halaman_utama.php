@@ -27,9 +27,7 @@
 <body class="metro">
     <nav class="navigation-bar">
         <nav class="navigation-bar-content">
-            <!-- <a href="?page=home" class="element"><img src="../images/logo-gku.jpeg" width="128px"> -->
-                
-            <!-- </a> -->
+            <a href="?page=home" class="element"><img src="../images/logo-gku.jpeg" width="128px"></a>
             <span class="element-divider"></span>
             <?php 
                 if ($_SESSION['jabatan'] == "SALES" || $_SESSION['jabatan'] == "ADMIN") {
@@ -42,7 +40,7 @@
                     <!-- <li><a href="?page=order_detail">Input Detail Order</a></li> -->
                 </ul>
             </div>
-            <!-- <a class="element" href="?page=order"><span class="icon-newspaper"></span> Form Order</a> -->
+            
             <?php 
                 } 
                 if ($_SESSION['jabatan'] == "SUPERVISOR" || $_SESSION['jabatan'] == "ADMIN") {
@@ -92,10 +90,10 @@
                     } elseif ($_GET['page'] == "sopir") {
                         echo "<script>window.location.href='sopir.php'</script>";
                     } else {
-                        // echo '<td colspan="2"><img src="../images/utama.jpg" width=""></td>';
+                        echo '<td colspan="2"><img src="../images/utama.jpg" width=""></td>';
                     }
                 } else {
-                    // echo '<td colspan="2"><img src="../images/utama.jpg" width=""></td>';
+                    echo '<td colspan="2"><img src="../images/utama.jpg" width=""></td>';
                 }
             ?>
         </tr>

@@ -67,6 +67,21 @@
       </fieldset>
       </td>
     </tr>
+    <tr>
+        <td>
+          <?php
+                    $pathPO = "";
+                    $strQuery = "SELECT * FROM po_header p  where id = '$poID'";
+                $result = mysql_query($strQuery) or die(mysql_error());
+                $arrResult = mysql_fetch_array($result);
+                $pathPO = $arrResult['photo'];
+          ?>
+          <fieldset>
+            <legend>Photo</legend>
+            <img src="../upload/photo/<?php echo $pathPO;?>" class="shadow">
+          </fieldset>
+        </td>
+      </tr>
   </table>
     
 </body>

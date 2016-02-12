@@ -61,17 +61,19 @@
 										<tr/>
 										<tr>
 											<td valign="middle">
-												<input name="kg" id="kg" type="text" class="easyui-numberbox" precision="2" style="width:120px;height:25px;padding:8px" data-options="prompt:'Berat'"> KG 
+												<input name="kg" id="kg" type="text" class="easyui-numberbox" precision="2" style="width:120px;height:25px;padding:8px" data-options="
+												prompt:'Berat',												
+											"> KG 
 											</td>
 										<tr/>
 										<tr>
 											<td valign="top">
-												<input name="vol" id="vol" type="text" class="easyui-numberbox" precision="2" style="width:150px;height:25px;padding:8px" data-options="prompt:'Volume'"> 
+												<input name="vol" id="vol" type="text" class="easyui-numberbox" precision="2" style="width:120px;height:25px;padding:8px" data-options="prompt:'Volume'"> M3
 											</td>
 										</tr>
 										<tr>
 											<td valign="top">
-												<input name="total" id="total" type="text" class="easyui-numberbox" precision="2" style="width:150px;height:25px;padding:8px" data-options="prompt:'Total'"> 
+												<input name="total" id="total" type="text" class="easyui-numberbox" precision="2" style="width:120px;height:25px;padding:8px" data-options="prompt:'Total'" readonly>
 											</td>
 										</tr>
                                     </table>
@@ -113,10 +115,23 @@
 														formatter: formatItem,
 														onSelect: function(val){
 															$('#alamat_pengirim').textbox('setText', val.alamat);
+															$('#telpon_pengirim').textbox('setText', val.telpon);
 														}
 												">
+                                        </div>                                        
+                                        <input name="alamat_pengirim" id="alamat_pengirim" class="easyui-textbox" data-options="multiline:true,prompt:'Alamat Pengirim'" style="width:300px;height:80px;padding:8px">
+										<input name="telpon_pengirim" id="telpon_pengirim" type="text" class="easyui-textbox" style="width:150px;height:25px;padding:8px" data-options="prompt:'Nomor Telpon / HP'">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td valign="top"><label>Penerima</label></td>
+                                    <td valign="top">:</td>
+                                    <td>										
+                                        <div style="padding-bottom:2px;">
+                                            <input name="penerima" id="penerima" type="text" class="easyui-textbox" style="width:240px;height:25px;padding:8px" data-options="prompt:'Penerima'">
                                         </div>
-                                        <div style="padding-bottom:2px;padding-top:2px;">
+                                        <input name="alamat_penerima" id="alamat_penerima" class="easyui-textbox" data-options="multiline:true,prompt:'Alamat Penerima'" style="width:300px;height:80px;padding:8px">
+										<div style="padding-bottom:2px;padding-top:2px;">
 											<input
 												class="easyui-combobox" 												
 												style="width:300px;height:25px;padding:8px"
@@ -124,8 +139,8 @@
 												data-options="
 														url:'../json/get_tujuan.php',
 														method:'get',
-														valueField:'kota',
-														textField:'tujuan',
+														valueField:'kecamatan',
+														textField:'kecamatan',
 														panelHeight:'150',
 														panelWidth: 350,
 														prompt:'Tujuan',
@@ -134,19 +149,9 @@
 															onSelectedTujuan(val)
 														}
 												">
-											
+											<input name="tarif" id="tarif" type="text" class="easyui-numberbox" precision="2" style="width:150px;height:25px;padding:8px" data-options="prompt:'Tarif'"> 
                                         </div>
-                                        <input name="alamat_pengirim" id="alamat_pengirim" class="easyui-textbox" data-options="multiline:true,prompt:'Alamat Pengirim'" style="width:300px;height:80px;padding:8px">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td valign="top"><label>Penerima</label></td>
-                                    <td valign="top">:</td>
-                                    <td>
-                                        <div style="padding-bottom:2px;">
-                                            <input name="penerima" id="penerima" type="text" class="easyui-textbox" style="width:240px;height:25px;padding:8px" data-options="prompt:'Penerima'">
-                                        </div>
-                                        <input name="alamat_penerima" id="alamat_penerima" class="easyui-textbox" data-options="multiline:true,prompt:'Alamat Penerima'" style="width:300px;height:80px;padding:8px">
+										<input name="telpon_penerima" id="telpon_penerima" type="text" class="easyui-textbox" style="width:150px;height:25px;padding:8px" data-options="prompt:'Nomor Telpon / HP'">
                                     </td>
                                 </tr>
                                 <tr>
@@ -160,10 +165,10 @@
                         </table>
                     </form>
                     <table id="gridTandaTerima" class="easyui-datagrid" style="width:100%;height:185px"
-						data-options="singleSelect:true,collapsible:true,url:'../json/get_tanda_terima.php',method:'get'">
+						data-options="rownumbers:true,singleSelect:true,collapsible:true,url:'../json/get_tanda_terima.php',method:'get'">
                         <thead>
                         <tr>
-                            <th data-options="field:'no',width:40">No</th>
+                            <!--th data-options="field:'no',width:40">No</th-->
                             <th data-options="field:'no_cn',width:180">CN</th>
                             <th data-options="field:'tanggal',width:100">Tanggal</th>
                             <th data-options="field:'pengirim',width:200">Pengirim</th>

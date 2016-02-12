@@ -24,9 +24,11 @@
 		
 		$pengirim = $_POST['pengirim'];
 		$alamat_pengirim = $_POST['alamat_pengirim'];
+		$telpon_pengirim = $_POST['telpon_pengirim'];
 		$tujuan = $_POST['tujuan'];
 		$penerima = $_POST['penerima'];
 		$alamat_penerima = $_POST['alamat_penerima'];
+		$telpon_penerima = $_POST['telpon_penerima'];
 		$udl = $_POST['udl'];
 		$dtddtp = $_POST['dtddtp'];
 		$agent = $_POST['agent'];
@@ -51,7 +53,7 @@
 		if(($cekCN)>=1){
 			echo "<script> alert('Maaf, Nomor CN $cn sudah ada di database, silahkan ganti dengan yang lain! '); window.history.back();</script>";
 		}else{		
-			$strQry = "INSERT INTO tanda_terima VALUES ('$id','$cnt','$cn','$hasil','$pengirim', '$alamat_pengirim', '$tujuan', '$penerima', '$alamat_penerima', '$udl', '$dtddtp', '$agent', '$coll', '$kg', '$vol', '$grandtotal', '$deskripsi', '$user_id', '$user_name')";
+			$strQry = "INSERT INTO tanda_terima VALUES ('$id','$cnt','$cn','$hasil','$pengirim', '$alamat_pengirim', '$telpon_pengirim', '$tujuan', '$penerima', '$alamat_penerima', '$telpon_penerima', '$udl', '$dtddtp', '$agent', '$coll', '$kg', '$vol', '$grandtotal', '$deskripsi', '$user_id', '$user_name')";
 			// echo ">>>".$strQry;
 			$exQuery = mysql_query($strQry) or die(mysql_error());
 			if ($exQuery) {

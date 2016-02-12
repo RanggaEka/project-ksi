@@ -39,7 +39,7 @@ function formatItemTujuan(row){
 function onSelectedTujuan(val) {
 	var comb = val.tujuan +" - "+ val.kota +" - "+ val.kecamatan;
 	$("#tujuan").textbox("setText", comb)
-	$("#total").textbox("setText", val.reg)
+	$("#tarif").textbox("setText", val.reg)
 }
 
 function doSearchRekapTandaTerima(value,name){

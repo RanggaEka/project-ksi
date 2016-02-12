@@ -4,7 +4,7 @@
 	<table width="75%" border="1" align="left" cellpadding="4" cellspacing="2" style="border: solid 1px #efefef;">
 		<tr>
           	<td>
-					<form action="../system/order_header_service.php" method="post" enctype="multipart/form-data">
+					<form action="" method="post" enctype="multipart/form-data">
 					<table width="100%" border="0" cellspacing="0" cellpadding="3">
 						<tr>
 				          	<td>
@@ -29,7 +29,7 @@
 												pageSize:20">
 									<thead>
 									<tr>
-										<th data-options="field:'no'">No</th>
+										<!--th data-options="field:'no'">No</th-->
 										<th data-options="field:'no_cn'">CN</th>
 										<th data-options="field:'tanggal'">Tanggal</th>
 										<th data-options="field:'pengirim'">Pengirim</th>

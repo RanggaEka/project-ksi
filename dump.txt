@@ -1,0 +1,31 @@
+<nav class="navigation-bar-content">
+            <a href="?page=home" class="element"><img src="../images/ksi.png" width="128px"></a>
+            <span class="element-divider"></span>
+            <?php 
+                if ($_SESSION['jabatan'] == "USER" || $_SESSION['jabatan'] == "ADMIN") {
+            ?>
+            <div class="element">
+                <a class="dropdown-toggle" href="#">
+                    <span class="icon-newspaper"></span> Form Tanda Terima</a>
+                <ul class="dropdown-menu" data-role="dropdown">
+                    <li><a href="?page=tandaterima">Input Tanda Terima</a></li>
+                    <li><a href="?page=rekaptandaterima">Rekap Tanda Terima</a></li>
+                </ul>
+            </div>
+            <div class="element">
+                <a class="dropdown-toggle" href="#">
+                    <span class="icon-coins"></span> Form Invoice</a>
+                <ul class="dropdown-menu" data-role="dropdown">
+                    <li><a href="?page=invoice">Input Invoice</a></li>
+                    <li><a href="?page=pembayaraninvoice">Input Pembayaran Invoice</a></li>
+                    <li><a href="?page=rekapinvoice">Rekap Invoice</a></li>
+                </ul>
+            </div>
+            <?php 
+                } 
+                if ($_SESSION['jabatan'] == "ADMIN") {
+            ?>
+            <span class="element-divider"></span>
+            <a class="element" href="?page=kelolaadmin"><span class="icon-tools"></span> Pengaturan Admin</a>
+            <?php } ?>
+		</nav>

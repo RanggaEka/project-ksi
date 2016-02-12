@@ -119,6 +119,7 @@ textarea {
   vertical-align: top;
 }
 input[type=text]::-ms-clear,
+input[type=text]::-ms-clear,
 input[type=email]::-ms-clear,
 input[type=url]::-ms-clear,
 input[type=tel]::-ms-clear,
@@ -3506,7 +3507,7 @@ a {
   display: none;
   z-index: 1000;
   background: #ffffff;
-  min-width: 220px;
+  min-width: 250px;
   width: auto;
   border: 1px solid #dcddde;
 }
@@ -6046,8 +6047,8 @@ a {
   z-index: 1049;
 }
 .metro .window {
-  border: 8px #6badf6 solid;
-  position: relative;
+  /*border: 8px #6badf6 solid;
+  position: relative;*/
   background-color: #ffffff;
   min-height: 200px;
   min-width: 200px;

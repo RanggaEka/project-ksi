@@ -16,6 +16,11 @@ function addCommas(nStr)
 	return x1 + x2;
 }
 
+$('#cc').combo({
+    required:true,
+    multiple:true
+});
+
 //customer
 $.ajax({
 	url: "../system/service_impl.php",

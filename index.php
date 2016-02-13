@@ -50,6 +50,6 @@
 </body>
 </html>
 <?php } else {
-    echo "<script>window.location.href='form/halaman_utama.php'</script>";
+    echo "<script>window.location.href='form/halaman_utama.php?page=home'</script>";
 }
 ?>

@@ -71,12 +71,12 @@
 										</tr>
 										<tr>
 											<td valign="top">
-												<input name="tarif" id="tarif" type="text" class="easyui-numberbox" precision="2" style="width:150px;height:25px;padding:8px" data-options="prompt:'Tarif'" readonly> 
+												<input name="tarif" id="tarif" type="text" class="easyui-numberbox" precision="2" style="width:150px;height:25px;padding:8px" data-options="prompt:'Tarif'"> 
 											</td>
 										</tr>
 										<tr>
 											<td valign="top">
-												<input name="total" id="total" type="text" class="easyui-numberbox" precision="2" style="width:150px;height:25px;padding:8px" data-options="prompt:'Total'" readonly> 
+												<input name="total" id="total" type="text" class="easyui-numberbox" precision="2" style="width:150px;height:25px;padding:8px" data-options="prompt:'Total'"> 
 											</td>
 										</tr>
                                     </table>
@@ -117,7 +117,6 @@
 														prompt:'Pengirim',
 														formatter: formatItem,
 														onSelect: function(val){
-															$('#pengirim').textbox('setText', val.nama);
 															$('#alamat_pengirim').textbox('setText', val.alamat);
 															$('#telpon_pengirim').textbox('setText', val.telpon);
 														}

@@ -36,7 +36,9 @@
 		$kg = $_POST['kg'];
 		$vol = $_POST['vol'];
 		$tarif = $_POST['tarif'];
+		
 		$grandtotal = $tarif * $kg;
+		
 		$deskripsi = $_POST['deskripsi'];
 		$user_id = $_SESSION['user_sid'];
 		$user_name = $_SESSION['username'];				
@@ -53,7 +55,7 @@
 		$cekCN	= mysql_num_rows(mysql_query("SELECT * FROM tanda_terima WHERE no_cn='$cn'"));
 		if(($cekCN)>=1){
 			echo "<script> alert('Maaf, Nomor CN $cn sudah ada di database, silahkan ganti dengan yang lain! '); window.history.back();</script>";
-		}else{		
+		}else{
 			$strQry = "INSERT INTO tanda_terima VALUES ('$id','$cnt','$cn','$hasil','$pengirim','$alamat_pengirim','$telpon_pengirim','$tujuan','$penerima','$alamat_penerima','$telpon_penerima','$udl','$dtddtp','$agent','$coll','$kg','$vol','$grandtotal','$deskripsi','$user_id','$user_name')";
 			// echo ">>>".$strQry;
 			$exQuery = mysql_query($strQry) or die(mysql_error());

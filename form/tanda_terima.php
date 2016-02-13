@@ -71,7 +71,12 @@
 										</tr>
 										<tr>
 											<td valign="top">
-												<input name="total" id="total" type="text" class="easyui-numberbox" precision="2" style="width:150px;height:25px;padding:8px" data-options="prompt:'Total'"> 
+												<input name="tarif" id="tarif" type="text" class="easyui-numberbox" precision="2" style="width:150px;height:25px;padding:8px" data-options="prompt:'Tarif'" readonly> 
+											</td>
+										</tr>
+										<tr>
+											<td valign="top">
+												<input name="total" id="total" type="text" class="easyui-numberbox" precision="2" style="width:150px;height:25px;padding:8px" data-options="prompt:'Total'" readonly> 
 											</td>
 										</tr>
                                     </table>
@@ -90,7 +95,7 @@
                                     <td><label>Tanggal</td>
 				         	<td>:</td>
 				         	<td>
-								<input name="tanggal" id="tanggal" class="easyui-datebox" style="width:150px;height:25px;padding:8px" placeholder="Tanggal" data-options="prompt:'Tanggal'"></input>					       
+								<input name="tanggal" id="tanggal" class="easyui-datebox" style="width:150px;height:25px;padding:8px" placeholder="Tanggal" data-options="formatter:formatTanggalIndonesia,parser:parserTanggal,prompt:'Tanggal'"></input>					       
 							 </td>
 			            </tr>
 				        <tr>
@@ -112,6 +117,7 @@
 														prompt:'Pengirim',
 														formatter: formatItem,
 														onSelect: function(val){
+															$('#pengirim').textbox('setText', val.nama);
 															$('#alamat_pengirim').textbox('setText', val.alamat);
 															$('#telpon_pengirim').textbox('setText', val.telpon);
 														}
@@ -136,7 +142,7 @@
 												data-options="
 														url:'../json/get_tujuan.php',
 														method:'get',
-														valueField:'tujuan',
+														valueField:'kecamatan',
 														textField:'kecamatan',
 														panelHeight:'150',
 														panelWidth: 350,

@@ -29,7 +29,7 @@
 														<option value="L">L</option>
 													</select>
                                             </td>
-                                            <tr/>
+                                            </tr>
                                             <tr>
                                                 <td valign="top">
                                                     <select class="easyui-combobox" name="dtddtp" id="dtddtp" style="width:180px;height:25px;padding:8px">
@@ -38,7 +38,7 @@
 														<option value="DTP">DTP</option>
 													</select>
                                                 </td>
-                                                <tr/>
+                                                </tr>
                                                 <tr>
                                                     <td valign="top">
                                                         <select class="easyui-combobox" name="agent" id="agent" style="width:180px;height:25px;padding:8px">
@@ -113,30 +113,12 @@
 														formatter: formatItem,
 														onSelect: function(val){
 															$('#alamat_pengirim').textbox('setText', val.alamat);
+															$('#telpon_pengirim').textbox('setText', val.telpon);
 														}
 												">
-                                        </div>
-                                        <div style="padding-bottom:2px;padding-top:2px;">
-											<input
-												class="easyui-combobox" 												
-												style="width:300px;height:25px;padding:8px"
-												name="tujuan" id="tujuan"
-												data-options="
-														url:'../json/get_tujuan.php',
-														method:'get',
-														valueField:'kota',
-														textField:'tujuan',
-														panelHeight:'150',
-														panelWidth: 350,
-														prompt:'Tujuan',
-														formatter: formatItemTujuan,
-														onSelect: function(val){
-															onSelectedTujuan(val)
-														}
-												">
-											
-                                        </div>
+                                        </div>                                        
                                         <input name="alamat_pengirim" id="alamat_pengirim" class="easyui-textbox" data-options="multiline:true,prompt:'Alamat Pengirim'" style="width:300px;height:80px;padding:8px">
+										<input name="telpon_pengirim" id="telpon_pengirim" class="easyui-textbox" data-options="prompt:'Telpon Pengirim'" style="width:150px;height:25px;padding:8px">
                                     </td>
                                 </tr>
                                 <tr>
@@ -146,7 +128,27 @@
                                         <div style="padding-bottom:2px;">
                                             <input name="penerima" id="penerima" type="text" class="easyui-textbox" style="width:240px;height:25px;padding:8px" data-options="prompt:'Penerima'">
                                         </div>
+										<div style="padding-bottom:2px;padding-top:2px;">
+											<input
+												class="easyui-combobox" 												
+												style="width:300px;height:25px;padding:8px"
+												name="tujuan" id="tujuan"
+												data-options="
+														url:'../json/get_tujuan.php',
+														method:'get',
+														valueField:'tujuan',
+														textField:'kecamatan',
+														panelHeight:'150',
+														panelWidth: 350,
+														prompt:'Tujuan',
+														formatter: formatItemTujuan,
+														onSelect: function(val){
+															onSelectedTujuan(val)
+														}
+												">											
+                                        </div>
                                         <input name="alamat_penerima" id="alamat_penerima" class="easyui-textbox" data-options="multiline:true,prompt:'Alamat Penerima'" style="width:300px;height:80px;padding:8px">
+										<input name="telpon_penerima" id="telpon_penerima" class="easyui-textbox" data-options="prompt:'Telpon Penerima'" style="width:150px;height:25px;padding:8px">
                                     </td>
                                 </tr>
                                 <tr>
@@ -160,10 +162,10 @@
                         </table>
                     </form>
                     <table id="gridTandaTerima" class="easyui-datagrid" style="width:100%;height:185px"
-						data-options="singleSelect:true,collapsible:true,url:'../json/get_tanda_terima.php',method:'get'">
+						data-options="rownumbers:true,singleSelect:true,collapsible:true,url:'../json/get_tanda_terima.php',method:'get'">
                         <thead>
                         <tr>
-                            <th data-options="field:'no',width:40">No</th>
+                            <!--th data-options="field:'no',width:40">No</th-->
                             <th data-options="field:'no_cn',width:180">CN</th>
                             <th data-options="field:'tanggal',width:100">Tanggal</th>
                             <th data-options="field:'pengirim',width:200">Pengirim</th>

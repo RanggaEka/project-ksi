@@ -36,10 +36,29 @@ function formatItemTujuan(row){
 	return s;
 }
 
+function formatTanggalIndonesia(date){
+	var y = date.getFullYear();
+	var m = date.getMonth()+1;
+	var d = date.getDate();
+	return (d<10?('0'+d):d)+'-'+(m<10?('0'+m):m)+'-'+y;
+}
+function parserTanggal(s){
+	if (!s) return new Date();
+	var ss = (s.split('-'));
+	var y = parseInt(ss[0],10);
+	var m = parseInt(ss[1],10);
+	var d = parseInt(ss[2],10);
+	if (!isNaN(y) && !isNaN(m) && !isNaN(d)){
+		return new Date(d,m-1,y);
+	} else {
+		return new Date();
+	}
+}
+
 function onSelectedTujuan(val) {
 	var comb = val.tujuan +" - "+ val.kota +" - "+ val.kecamatan;
 	$("#tujuan").textbox("setText", comb)
-	$("#total").textbox("setText", val.reg)
+	$("#tarif").textbox("setText", val.reg)	
 }
 
 function doSearchRekapTandaTerima(value,name){

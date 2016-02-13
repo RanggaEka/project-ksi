@@ -29,7 +29,7 @@
 												pageSize:20">
 									<thead>
 									<tr>
-										<th data-options="field:'no'">No</th>
+										<!--th data-options="field:'no'">No</th-->
 										<th data-options="field:'no_cn'">CN</th>
 										<th data-options="field:'tanggal'">Tanggal</th>
 										<th data-options="field:'pengirim'">Pengirim</th>

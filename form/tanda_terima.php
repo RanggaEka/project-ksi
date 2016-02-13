@@ -4,7 +4,7 @@
     <table width="75%" border="0" align="left" cellpadding="4" cellspacing="2" style="border: solid 1px #efefef;">
         <tr>
             <td>
-                <form action="../system/tanda_terima_service.php" method="post" enctype="multipart/form-data">
+                <!--<form action="../system/tanda_terima_service.php" method="post" enctype="multipart/form-data">-->
                         <table width="100%" border="0" cellspacing="0" cellpadding="1">
                             <tr>
                                 <td width="10%"><label>CN</label></td>
@@ -153,22 +153,22 @@
                                     <td></td>
                                     <td></td>
                                     <td>
-                                        <button type="submit" name="simpan_tt">Save</button>
-                                        <button type="reset" onclick="location.reload()">Batal</button>
+                                        <button name="simpan_tt" onclick="generateSaveTandaTerima()">Save</button>
+                                        <button onclick="location.reload()">Batal</button>
                                     </td>
                                 </tr>
                         </table>
-                    </form>
+                    <!--</form>-->
                     <table id="gridTandaTerima" class="easyui-datagrid" style="width:100%;height:185px"
 						data-options="singleSelect:true,collapsible:true,url:'../json/get_tanda_terima.php',method:'get'">
                         <thead>
                         <tr>
-                            <th data-options="field:'no',width:40">No</th>
-                            <th data-options="field:'no_cn',width:180">CN</th>
-                            <th data-options="field:'tanggal',width:100">Tanggal</th>
-                            <th data-options="field:'pengirim',width:200">Pengirim</th>
-                            <th data-options="field:'tujuan',width:120">Tujuan</th>
-                            <th data-options="field:'grand_total',width:170" formatter="formatPrice">Total</th>
+                            <th style="width:4%" data-options="field:'no'">No</th>
+                            <th style="width:15%" data-options="field:'no_cn'">CN</th>
+                            <th style="width:15%" data-options="field:'tanggal'">Tanggal</th>
+                            <th style="width:35%" data-options="field:'pengirim'">Pengirim</th>
+                            <th style="width:13%" data-options="field:'tujuan'">Tujuan</th>
+                            <th style="width:15%" data-options="field:'grand_total'" align="right" formatter="formatPrice">Total</th>
                         </tr>
                         </thead>
                     </table>

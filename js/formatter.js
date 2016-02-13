@@ -77,85 +77,95 @@ function doSearchRekapTandaTerima(value,name){
 }
 
 (function($){
-			function pagerFilter(data){
-				if ($.isArray(data)){	// is array
-					data = {
-						total: data.length,
-						rows: data
-					}
-				}
+	function pagerFilter(data){
+		if ($.isArray(data)){	// is array
+			data = {
+				total: data.length,
+				rows: data
+			}
+		}
+		var gridTandaTerima = $(this);
+		var state = gridTandaTerima.data('datagrid');
+		var opts = gridTandaTerima.datagrid('options');
+		if (!state.allRows){
+			state.allRows = (data.rows);
+		}
+		var start = (opts.pageNumber-1)*parseInt(opts.pageSize);
+		var end = start + parseInt(opts.pageSize);
+		data.rows = $.extend(true,[],state.allRows.slice(start, end));
+		return data;
+	}
+
+	var loadDataMethod = $.fn.datagrid.methods.loadData;
+	$.extend($.fn.datagrid.methods, {
+		clientPaging: function(jq){
+			return jq.each(function(){
 				var gridTandaTerima = $(this);
 				var state = gridTandaTerima.data('datagrid');
-				var opts = gridTandaTerima.datagrid('options');
-				if (!state.allRows){
-					state.allRows = (data.rows);
+				var opts = state.options;
+				opts.loadFilter = pagerFilter;
+				var onBeforeLoad = opts.onBeforeLoad;
+				opts.onBeforeLoad = function(param){
+					state.allRows = null;
+					return onBeforeLoad.call(this, param);
 				}
-				var start = (opts.pageNumber-1)*parseInt(opts.pageSize);
-				var end = start + parseInt(opts.pageSize);
-				data.rows = $.extend(true,[],state.allRows.slice(start, end));
-				return data;
-			}
-
-			var loadDataMethod = $.fn.datagrid.methods.loadData;
-			$.extend($.fn.datagrid.methods, {
-				clientPaging: function(jq){
-					return jq.each(function(){
-						var gridTandaTerima = $(this);
-                        var state = gridTandaTerima.data('datagrid');
-                        var opts = state.options;
-                        opts.loadFilter = pagerFilter;
-                        var onBeforeLoad = opts.onBeforeLoad;
-                        opts.onBeforeLoad = function(param){
-                            state.allRows = null;
-                            return onBeforeLoad.call(this, param);
-                        }
-						gridTandaTerima.datagrid('getPager').pagination({
-							onSelectPage:function(pageNum, pageSize){
-								opts.pageNumber = pageNum;
-								opts.pageSize = pageSize;
-								$(this).pagination('refresh',{
-									pageNumber:pageNum,
-									pageSize:pageSize
-								});
-								gridTandaTerima.datagrid('loadData',state.allRows);
-							}
+				gridTandaTerima.datagrid('getPager').pagination({
+					onSelectPage:function(pageNum, pageSize){
+						opts.pageNumber = pageNum;
+						opts.pageSize = pageSize;
+						$(this).pagination('refresh',{
+							pageNumber:pageNum,
+							pageSize:pageSize
 						});
-                        $(this).datagrid('loadData', state.data);
-                        if (opts.url){
-                        	$(this).datagrid('reload');
-                        }
-					});
-				},
-                loadData: function(jq, data){
-                    jq.each(function(){
-                        $(this).data('datagrid').allRows = null;
-                    });
-                    return loadDataMethod.call($.fn.datagrid.methods, jq, data);
-                },
-                getAllRows: function(jq){
-                	return jq.data('datagrid').allRows;
-                }
-			})
-		})(jQuery);
-
-		function getData(){
-			var rows = [];
-			for(var i=1; i<=800; i++){
-				var amount = Math.floor(Math.random()*1000);
-				var price = Math.floor(Math.random()*1000);
-				rows.push({
-					inv: 'Inv No '+i,
-					date: $.fn.datebox.defaults.formatter(new Date()),
-					name: 'Name '+i,
-					amount: amount,
-					price: price,
-					cost: amount*price,
-					note: 'Note '+i
+						gridTandaTerima.datagrid('loadData',state.allRows);
+					}
 				});
-			}
-			return rows;
+				$(this).datagrid('loadData', state.data);
+				if (opts.url){
+					$(this).datagrid('reload');
+				}
+			});
+		},
+		loadData: function(jq, data){
+			jq.each(function(){
+				$(this).data('datagrid').allRows = null;
+			});
+			return loadDataMethod.call($.fn.datagrid.methods, jq, data);
+		},
+		getAllRows: function(jq){
+			return jq.data('datagrid').allRows;
 		}
-		
-		$(function(){
-			$('#gridTandaTerima').datagrid({data:getData()}).datagrid('clientPaging');
+	})
+})(jQuery);
+
+function getData(){
+	var rows = [];
+	for(var i=1; i<=800; i++){
+		var amount = Math.floor(Math.random()*1000);
+		var price = Math.floor(Math.random()*1000);
+		rows.push({
+			inv: 'Inv No '+i,
+			date: $.fn.datebox.defaults.formatter(new Date()),
+			name: 'Name '+i,
+			amount: amount,
+			price: price,
+			cost: amount*price,
+			note: 'Note '+i
 		});
+	}
+	return rows;
+}
+
+$(function(){
+	$('#gridTandaTerima').datagrid({data:getData()}).datagrid('clientPaging');
+});
+		
+function progress(){
+	var win = $.messager.progress({
+		title:'Please wait',
+		msg:'Loading data...'
+	});
+	setTimeout(function(){
+		$.messager.progress('close');
+	},3000)
+}

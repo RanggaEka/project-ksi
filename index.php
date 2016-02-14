@@ -13,6 +13,10 @@
     <script type="text/javascript" src="lib/jquery/jquery.easyui.min.js"></script>
     <script>
 		function onLoadBody() {
+			$('#gridFormTandaTerima').datagrid({striped:$(this)})
+			$('#gridTandaTerima').datagrid({striped:$(this)})
+			$('#gridLookupTandaTerima').datagrid({striped:$(this)})
+			$('#gridDetailInvoice').datagrid({striped:$(this)})
 			setTimeout(function(){
 				$('#username').textbox('clear').textbox('textbox').focus();
 			},200)

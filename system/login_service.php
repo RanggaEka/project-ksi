@@ -14,15 +14,20 @@ if (isset($_POST['btn_login'])) {
 	$nama = $arr['nama'];
 	// $role = $arr['has_role'];
 
-	if (($userN == $username && $pass == $password) && ($userN != "" && $pass != "")) {
 
+	//echo "atas".$userN."<br/>";
+	//echo "atas".$pass."<br/>";
+	//echo "bawah".$username."<br/>";
+	//echo "bawah".$password."<br/>";
+	if (($userN == $username && $pass == $password) && ($userN != "" && $pass != "")) {
+    
 		session_start();
 		$_SESSION['username'] = $username;
 		$_SESSION['password'] = $password;
 		$_SESSION['user_sid'] = $id;
 		$_SESSION['nama'] = $nama;
 		$_SESSION['jabatan'] = $jabatan;
-
+    
 		echo "<script> window.location.href='../form/halaman_utama.php';</script>";
 	} else {
 		echo "<script> alert('Email atau password anda belum terdaftar, silahkan ulangi kembali! '); window.history.back();</script>";

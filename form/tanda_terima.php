@@ -10,20 +10,15 @@
                                 <td width="10%"><label>CN</label></td>
                                 <td width="1%">:</td>
                                 <td width="40%">
-                                    <input name="cn" id="cn" type="text" class="easyui-searchbox" style="width:150px;height:25px;padding:8px" data-options="prompt:'CN',searcher:doSearch">
-                                    <script>
-										function doSearch(value){
-											alert('You input: ' + value);
-										}
-									</script>
+                                    <input name="cn" id="cn" type="text" class="easyui-searchbox" style="width:150px;height:25px;padding:8px" data-options="prompt:'CN',searcher:searchNoCN">
                                 </td>
                                 <td width="70%" rowspan="5" valign="top">
                                     Service :
-                                    <table width="20%" border="0" cellpadding="2" cellspacing="1" >
+                                    <table width="40%" border="0" cellpadding="2" cellspacing="1" style="border:1px solid #CCCCCC; border-radius:4px;"">
                                         <tr>
-                                            <td valign="top">
-                                                <select class="easyui-combobox" name="udl" id="udl" style="width:180px;height:25px;padding:8px">
-														<option value="" default>U/D/L</option>
+											<td width="30">U/D/L</td>
+                                            <td valign="middle">
+                                                <select class="easyui-combobox" name="udl" id="udl" style="width:110px;height:25px;padding:8px">
 														<option value="U">U</option>
 														<option value="D">D</option>
 														<option value="L">L</option>
@@ -31,18 +26,18 @@
                                             </td>
                                             <tr/>
                                             <tr>
-                                                <td valign="top">
-                                                    <select class="easyui-combobox" name="dtddtp" id="dtddtp" style="width:180px;height:25px;padding:8px">
-														<option value="" default>DTD/DTP</option>
+												<td>DTD/DTP</td>
+                                                <td valign="middle">
+                                                    <select class="easyui-combobox" name="dtddtp" id="dtddtp" style="width:110px;height:25px;padding:8px">
 														<option value="DTD">DTD</option>
 														<option value="DTP">DTP</option>
 													</select>
                                                 </td>
                                                 <tr/>
                                                 <tr>
-                                                    <td valign="top">
-                                                        <select class="easyui-combobox" name="agent" id="agent" style="width:180px;height:25px;padding:8px">
-														<option value="" default>Agent</option>
+													<td>Agent</td>
+                                                    <td valign="middle">
+                                                        <select class="easyui-combobox" name="agent" id="agent" style="width:110px;height:25px;padding:8px">
 														<option value="JNE">JNE</option>
 														<option value="Tiki">Tiki</option>
 														<option value="RPX">RPX</option>
@@ -53,34 +48,42 @@
                                                     </td>
                                                 </tr>
                                     </table>
-                                    <br/> Berat Total :
-                                    <table width="20%" border="0" cellpadding="2" cellspacing="1">
+                                    Akumulasi :
+                                    <table width="40%" border="0" cellpadding="2" cellspacing="1" style="border:1px solid #CCCCCC; border-radius:4px;">
                                         <tr>
+											<td width="56">Coll</td>
                                             <td valign="top">
-                                                <input name="coll" id="coll" type="text" class="easyui-numberbox" style="width:150px;height:25px;padding:8px" data-options="prompt:'Coll'"> </td>
+                                                <input name="coll" id="coll" type="text" class="easyui-numberbox" style="width:110px;height:25px;padding:8px" data-options="prompt:'Coll'"> </td>
 										<tr/>
 										<tr>
+											<td>Berat</td>
 											<td valign="middle">
-												<input name="kg" id="kg" type="text" class="easyui-numberbox" precision="2" style="width:120px;height:25px;padding:8px" data-options="prompt:'Berat'"> KG 
+												<input name="kg" id="kg" type="text" class="easyui-numberbox" precision="2" style="width:80px;height:25px;padding:8px" 
+												data-options="prompt:'Berat',onChange: function(value){
+													var total = parseInt($('#total').textbox('getText'))
+													var sum = total * parseInt($('#kg').textbox('getText'))
+													$('#total').textbox('setText',sum)
+												  }"> KG 
 											</td>
 										<tr/>
 										<tr>
+											<td>Volume</td>
 											<td valign="top">
-												<input name="vol" id="vol" type="text" class="easyui-numberbox" precision="2" style="width:150px;height:25px;padding:8px" data-options="prompt:'Volume'"> 
+												<input name="vol" id="vol" type="text" class="easyui-numberbox" precision="2" style="width:110px;height:25px;padding:8px" data-options="prompt:'Volume'"> 
 											</td>
 										</tr>
 										<tr>
+											<td>Total</td>
 											<td valign="top">
-												<input name="total" id="total" type="text" class="easyui-numberbox" precision="2" style="width:150px;height:25px;padding:8px" data-options="prompt:'Total'"> 
+												<input name="total" id="total" type="text" class="easyui-numberbox" disabled min="0" precision="0" style="width:110px;height:25px;padding:8px" data-options="prompt:'Total'"> 
 											</td>
 										</tr>
                                     </table>
-                                    <br/>
                                     Deskripsi Paket :
                                     <table width="20%" border="0" cellpadding="2" cellspacing="1" >
                                         <tr>
                                             <td valign="top">
-                                                <input name="deskripsi" id="deskripsi" class="easyui-textbox" data-options="multiline:true,prompt:'Deskripsi Paket'" style="width:290px;height:50px;padding:8px">
+                                                <input name="deskripsi" id="deskripsi" class="easyui-textbox" data-options="multiline:true,prompt:'Deskripsi Paket'" style="width:290px;height:46px;padding:8px">
                                             </td>
                                             <tr/>
                                     </table>
@@ -153,22 +156,22 @@
                                     <td></td>
                                     <td></td>
                                     <td>
-                                        <button name="simpan_tt" onclick="generateSaveTandaTerima()">Save</button>
-                                        <button onclick="location.reload()">Batal</button>
+                                        <button name="simpan_tt" id="simpan_tt" onclick="saveTandaTerima()">Save</button>
+                                        <button onclick="refreshTandaTerima()">Batal</button>
                                     </td>
                                 </tr>
                         </table>
                     <!--</form>-->
-                    <table id="gridTandaTerima" class="easyui-datagrid" style="width:100%;height:185px"
+                    <table id="gridFormTandaTerima" class="easyui-datagrid" style="width:100%;height:185px"
 						data-options="singleSelect:true,collapsible:true,url:'../json/get_tanda_terima.php',method:'get'">
                         <thead>
                         <tr>
                             <th style="width:4%" data-options="field:'no'">No</th>
-                            <th style="width:15%" data-options="field:'no_cn'">CN</th>
-                            <th style="width:15%" data-options="field:'tanggal'">Tanggal</th>
-                            <th style="width:35%" data-options="field:'pengirim'">Pengirim</th>
-                            <th style="width:13%" data-options="field:'tujuan'">Tujuan</th>
-                            <th style="width:15%" data-options="field:'grand_total'" align="right" formatter="formatPrice">Total</th>
+                            <th style="width:14%" data-options="field:'no_cn'">CN</th>
+                            <th style="width:14%" data-options="field:'tanggal'">Tanggal</th>
+                            <th style="width:20%" data-options="field:'pengirim'">Pengirim</th>
+                            <th style="width:55%" data-options="field:'tujuan'">Tujuan</th>
+                            <th style="width:16%" data-options="field:'grand_total'" align="right" formatter="formatPrice">Total</th>
                         </tr>
                         </thead>
                     </table>

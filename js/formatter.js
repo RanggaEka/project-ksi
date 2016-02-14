@@ -1,4 +1,5 @@
-function onLoadBody() {
+function onLoadBodyGrid() {
+	$('#gridFormTandaTerima').datagrid({striped:$(this)})
 	$('#gridTandaTerima').datagrid({striped:$(this)})
 	$('#gridLookupTandaTerima').datagrid({striped:$(this)})
 	$('#gridDetailInvoice').datagrid({striped:$(this)})
@@ -39,7 +40,7 @@ function formatItemTujuan(row){
 function onSelectedTujuan(val) {
 	var comb = val.tujuan +" - "+ val.kota +" - "+ val.kecamatan;
 	$("#tujuan").textbox("setText", comb)
-	$("#total").textbox("setText", val.reg)
+	$("#total").textbox("setText", parseInt(val.reg))
 }
 
 function doSearchRekapTandaTerima(value,name){

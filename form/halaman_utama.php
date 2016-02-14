@@ -39,7 +39,7 @@
     <script type="text/javascript" src="../js/mainController.js"></script>
 </head>
 
-<body class="metro" onLoad="onLoadBody()">
+<body class="metro" onLoad="onLoadBodyGrid()">
     <nav class="navigation-bar">
 		<nav class="navigation-bar-content">
 			<a href="?page=home" class="element"><img src="../images/ksi.png" width="128px"></a>
@@ -93,10 +93,10 @@
                     } elseif ($_GET['page'] == "kelolaadmin") {
                         include 'kelola_admin.php';
                     } else {
-                        echo '<td colspan="2"><img src="../images/utama2.jpg" width="69%"></td>';
+                        echo '<td colspan="2"><br/><br/><br/><br/><h2>KIKI SOLUSI INTERNUSA</h2></td>';
                     }
                 } else {
-                    echo '<td colspan="2"><img src="../images/utama2.jpg" width="69%"></td>';
+                    echo '<td colspan="2"><br/><br/><br/><br/><h2>KIKI SOLUSI INTERNUSA</h2></td>';
                 }
             ?>
         </tr>

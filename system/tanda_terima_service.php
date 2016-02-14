@@ -2,39 +2,32 @@
 	include 'config_service.php';
 	include 'gen_uuid_service.php';
 	session_start();
-	if (isset($_POST['simpan_tt'])) {				
+	if ($_POST['data'] != null) {				
 		
-		if (trim($_POST['cn'])=="") { 
-			echo "<script> alert('Nomor CN harus diisi ! '); window.history.back();</script>"; 
-			return false;
-		}
-		if (trim($_POST['tanggal'])=="") { 
-			echo "<script> alert('Tanggal harus diisi ! '); window.history.back();</script>"; 
-			return false;
-		}
-				
+		$test = json_encode($_POST['data']);
+		$jsondata = json_decode($test);
 		$id = gen_uuid();
-		$cn = $_POST['cn'];
+		$cn = $jsondata[0]->cn;
 		
-		$tanggal = $_POST['tanggal'];		
+		$tanggal = $jsondata[0]->tanggal;		
 		$tgl=substr($tanggal,0,2);
 		$bln=substr($tanggal,3,2);
 		$thn=substr($tanggal,6,4);
 		$hasil="$thn-$bln-$tgl";
 		
-		$pengirim = $_POST['pengirim'];
-		$alamat_pengirim = $_POST['alamat_pengirim'];
-		$tujuan = $_POST['tujuan'];
-		$penerima = $_POST['penerima'];
-		$alamat_penerima = $_POST['alamat_penerima'];
-		$udl = $_POST['udl'];
-		$dtddtp = $_POST['dtddtp'];
-		$agent = $_POST['agent'];
-		$coll = $_POST['coll'];
-		$kg = $_POST['kg'];
-		$vol = $_POST['vol'];
-		$grandtotal = 123456789;
-		$deskripsi = $_POST['deskripsi'];
+		$pengirim = $jsondata[0]->pengirim;
+		$alamat_pengirim = $jsondata[0]->alamat_pengirim;
+		$tujuan = $jsondata[0]->tujuan;
+		$penerima = $jsondata[0]->penerima;
+		$alamat_penerima = $jsondata[0]->alamat_penerima;
+		$udl = $jsondata[0]->udl;
+		$dtddtp = $jsondata[0]->dtddtp;
+		$agent = $jsondata[0]->agent;
+		$coll = $jsondata[0]->coll;
+		$kg = $jsondata[0]->kg;
+		$vol = $jsondata[0]->vol;
+		$grandtotal = ($jsondata[0]->grand_total * $jsondata[0]->kg);
+		$deskripsi = $jsondata[0]->deskripsi;
 		$user_id = $_SESSION['user_sid'];
 		$user_name = $_SESSION['username'];				
 		
@@ -55,10 +48,19 @@
 			// echo ">>>".$strQry;
 			$exQuery = mysql_query($strQry) or die(mysql_error());
 			if ($exQuery) {
-				echo "<script> alert('Berhasil Input Tanda Terima'); window.location.href='../form/cetak_tanda_terima.php?CN=$cn';</script>";
+				echo "OKE";
 			} else {
-				echo "<script> alert('Gagal Input Tanda Terima, silahkan ulangi! '); window.history.back();</script>";
+				echo "FAIL";
 			}
 		}
+		
+	} else if ($_GET['sch_cn'] != null) {	
+		$sch = mysql_query("select * from tanda_terima where no_cn = '".$_GET['sch_cn']."' ");
+		$result = array();
+		while($row = mysql_fetch_object($sch)){
+			array_push($result, $row);
+		}
+		//$row = mysql_fetch_array($sch);
+		echo json_encode($result);
 	}
 ?>

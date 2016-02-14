@@ -46,21 +46,21 @@
 				         	<td></td>
 				        </tr>
 			    	</table>
-			    	<button type="submit" name="simpan_po">Save</button>
+			    	<button type="submit" name="simpan_inv">Save</button>
 					<button type="reset" onclick="location.reload()">Batal</button>	
-	    			<table class="table hovered" id="detail_invoice">
+	    			<table class="table hovered" id="detail_invoice" class="easyui-datagrid" title="" style="width:98%;height:180px"
+						   data-options="rownumbers:true,singleSelect:true,collapsible:true,url:'../json/get_invoice_detail.php',method:'get'">
                         <thead>
                         <tr>
-                            <th align="left" width="3px">No</th>
-                            <th align="left" width="260px">No CN</th>
-                            <th align="left" width="">Tanggal</th>
-                            <th align="left" width="">Tujuan</th>
-                            <th align="left" width="">Coll</th>
-							<th align="left" width="">KG</th>
-							<th align="left" width="">Total</th>
+                            <th data-options="field:'tanda_terima_nomor'">CN</th>
+							<th data-options="field:'tanda_terima_tanggal'">Tanggal</th>
+							<th data-options="field:'tarif'">Tarif</th>
+							<th data-options="field:'coll'">Coll</th>
+							<th data-options="field:'berat'">Berat</th>
+							<th data-options="field:'vol'">Volume</th>
+							<th data-options="field:'grand_total'" formatter="formatPrice">Total</th>
                         </tr>
                         </thead>
-
                         <tbody>
                     	<tr>
                         	<td>
@@ -71,12 +71,9 @@
 									}
 								</script>
 								<span id="nomor">&nbsp;</span>
-                        	</td>
-                        	<td>
-								
-								<input class="easyui-textbox" style="width:190px;height:25px;padding:8px" data-options="prompt:'No Tanda Terima',iconWidth:38" id="no_inv" name="no_inv">
-                                    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="$('#lookupinvoice').window('open')"><img src="../images/famfam/application_xp.png" /></a>
-                                    <div id="lookupinvoice" class="easyui-window" title="Lookup Tanda Terima" data-options="modal:true,closed:true,iconCls:'icon-save'" style="width:67%;height:320px;padding:10px; text-align:left;">
+								<input class="easyui-textbox" style="width:190px;height:25px;padding:8px" data-options="prompt:'No CN',iconWidth:38" id="no_cn" name="no_cn">
+								<a href="javascript:void(0)" class="easyui-linkbutton" onclick="$('#lookuptandaterima').window('open')"><img src="../images/famfam/application_xp.png" /></a>
+								<div id="lookuptandaterima" class="easyui-window" title="Lookup Tanda Terima" data-options="modal:true,closed:true,iconCls:'icon-save'" style="width:67%;height:320px;padding:10px; text-align:left;">
                                         Pencarian : <input class="easyui-searchbox" data-options="prompt:'.......',menu:'#mm',searcher:doSearch" style="width:480px;height:25px;padding:10px;"></input>
                                         <br/>
                                         <br/>
@@ -92,11 +89,11 @@
                                                 alert('You input: ' + value + '(' + name + ')');
                                             }
                                         </script>
-                                        <table id="gridLookupTandaTerima" class="easyui-datagrid" title="" style="width:98%;height:180px"
-									data-options="singleSelect:true,collapsible:true,url:'../json/get_tanda_terima.php',method:'get'">
+                                <table id="gridLookupTandaTerima" class="easyui-datagrid" title="" style="width:98%;height:180px"
+									data-options="rownumbers:true,singleSelect:true,collapsible:true,url:'../json/get_tanda_terima.php',method:'get'">
 									<thead>
 									<tr>
-										<th data-options="field:'no',width:40">No</th>
+										<!--th data-options="field:'no',width:40">No</th-->
 										<th data-options="field:'no_cn',width:180">CN</th>
 										<th data-options="field:'tanggal',width:100">Tanggal</th>
 										<th data-options="field:'pengirim',width:200">Pengirim</th>
@@ -107,14 +104,16 @@
 								</table>
                                         <br/>
                                         <div style="float:right;">
-											<button type="submit" onclick="$('#lookupinvoice').window('close')">Pilih</button>
+											<button type="submit" onclick="tambahDetail()">Pilih</button>
 										</div>
                                     </div>
-								
-							</td>
-                        	<td></td>
-                        	<td></td>
-                        	<td></td>
+                        	</td>
+                        	<td><span id="tanggal">&nbsp;</span></td>
+                        	<td><span id="tarif">&nbsp;</span></td>
+                        	<td><span id="coll">&nbsp;</span></td>
+                        	<td><span id="berat">&nbsp;</span></td>
+							<td><span id="tarif">&nbsp;</span></td>
+							<td><span id="total">&nbsp;</span></td>
                         </tr>
                         </tbody>
                     </table>
@@ -123,3 +122,14 @@
 	    </tr>
 	</table>
 </td>
+	<script type="text/javascript">
+		function tambahDetail(){
+			var row = $('#gridLookupTandaTerima').datagrid('getSelected');
+			if (row){
+				$('#no_cn').textbox('setValue', row.no_cn);				
+				$('#lookuptandaterima').window('close');				
+			}else{
+				$.messager.alert('Kesalahan', 'Belum Ada Tanda Terima Yang dipilih');
+			}
+		}		
+	</script>

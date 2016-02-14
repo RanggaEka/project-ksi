@@ -75,7 +75,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><label>Nilai Ppembayaran</label></td>
+                                <td><label>Nilai Pembayaran</label></td>
                                 <td>:</td>
                                 <td>
 
@@ -92,10 +92,10 @@
                         </table>
                     </form>
                     <table id="gridDetailInvoice" class="easyui-datagrid" title="" style="width:98%;height:250px"
-									data-options="singleSelect:true,collapsible:true,url:'../json/get_tanda_terima.php',method:'get'">
+									data-options="rownumbers:true,singleSelect:true,collapsible:true,url:'../json/get_tanda_terima.php',method:'get'">
 									<thead>
 									<tr>
-										<th data-options="field:'no',width:40">No</th>
+										<!--th data-options="field:'no',width:40">No</th-->
 										<th data-options="field:'no_cn',width:180">CN</th>
 										<th data-options="field:'tanggal',width:100">Tanggal</th>
 										<th data-options="field:'pengirim',width:200">Pengirim</th>

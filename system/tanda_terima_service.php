@@ -76,6 +76,7 @@
 							'$udl',
 							'$dtddtp',
 							'$agent',
+							'$tarif',
 							'$coll',
 							'$kg',
 							'$vol',
@@ -100,6 +101,7 @@
 					'service_udl' => $udl,
 					'service_dtddtp' => $dtddtp,
 					'service_agent' => $agent,
+					'tarif' => $tarif,
 					'total_coll' => $coll,
 					'total_berat' => $kg,
 					'total_vol' => $vol,
@@ -108,7 +110,7 @@
 					'user_id' => $user_id,
 					'user_name' => $user_name
 				));
-				echo "<script> alert('Berhasil Input Tanda Terima'); window.location.href='../form/cetak_tanda_terima.php?CN=$cn';</script>";
+				echo "<script> alert('Berhasil Input Tanda Terima'); window.location.href='../form/halaman_utama.php?page=tandaterima;</script>";
 			} else {				
 				echo json_encode(array('errorMsg'=>'Terjadi Kesalahan.'));
 			}

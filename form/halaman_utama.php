@@ -36,6 +36,7 @@
     <script type="text/javascript" src="../lib/jquery/jquery.min.js"></script>
     <script type="text/javascript" src="../lib/jquery/jquery.easyui.min.js"></script>
     <script type="text/javascript" src="../js/formatter.js"></script>
+    <script type="text/javascript" src="../js/mainController.js"></script>
 </head>
 
 <body class="metro" onLoad="onLoadBody()">

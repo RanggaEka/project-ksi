@@ -11,8 +11,15 @@
     <link rel="stylesheet" type="text/css" href="lib/jquery/themes/icon.css">
     <script type="text/javascript" src="lib/jquery/jquery.min.js"></script>
     <script type="text/javascript" src="lib/jquery/jquery.easyui.min.js"></script>
+    <script>
+		function onLoadBody() {
+			setTimeout(function(){
+				$('#username').textbox('clear').textbox('textbox').focus();
+			},200)
+		}
+    </script>
 </head>
-<body>
+<body onload="onLoadBody()">
     <table border="0" width="100%" height="500px">
         <tr align="center">
             <!-- <td></td> -->

@@ -29,12 +29,21 @@
 												pageSize:20">
 									<thead>
 									<tr>
+<<<<<<< HEAD
 										<!--th data-options="field:'no'">No</th-->
 										<th data-options="field:'no_cn'">CN</th>
 										<th data-options="field:'tanggal'">Tanggal</th>
 										<th data-options="field:'pengirim'">Pengirim</th>
 										<th data-options="field:'tujuan'">Tujuan</th>
 										<th data-options="field:'grand_total'" formatter="formatPrice">Total</th>
+=======
+										<th style="width:4%" data-options="field:'no'">No</th>
+										<th style="width:15%" data-options="field:'no_cn'">CN</th>
+										<th style="width:13%" data-options="field:'tanggal'">Tanggal</th>
+										<th style="width:35%" data-options="field:'pengirim'">Pengirim</th>
+										<th style="width:13%" data-options="field:'tujuan'">Tujuan</th>
+										<th style="width:15%" data-options="field:'grand_total'" formatter="formatPrice">Total</th>
+>>>>>>> 28f8aebee8c50027b627278cf8dccda8b43deedc
 									</tr>
 									</thead>
 								</table>

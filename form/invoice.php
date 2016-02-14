@@ -4,7 +4,7 @@
 	<table width="75%" border="1" align="left" cellpadding="10" cellspacing="3" style="border: solid 1px #efefef;">
 		<tr>
           	<td>
-					<form action="../system/order_header_service.php" method="post" enctype="multipart/form-data">
+					<form action="../system/invoice_service.php" method="post" enctype="multipart/form-data">
 					<table width="80%" border="0" cellspacing="0" cellpadding="3">
 						<tr>
 				          	<td width="80px"><label>No. Invoice </label></td>
@@ -52,26 +52,24 @@
 						   data-options="rownumbers:true,singleSelect:true,collapsible:true,url:'../json/get_invoice_detail.php',method:'get'">
                         <thead>
                         <tr>
-                            <th data-options="field:'tanda_terima_nomor'">CN</th>
-							<th data-options="field:'tanda_terima_tanggal'">Tanggal</th>
-							<th data-options="field:'tarif'">Tarif</th>
-							<th data-options="field:'coll'">Coll</th>
-							<th data-options="field:'berat'">Berat</th>
-							<th data-options="field:'vol'">Volume</th>
-							<th data-options="field:'grand_total'" formatter="formatPrice">Total</th>
+                            <th data-options="field:'no_cn',width:180">CN</th>							
+							<th data-options="field:'tanggal',width:100">Tanggal</th>
+							<th data-options="field:'pengirim',width:200">Pengirim</th>
+							<th data-options="field:'tujuan',width:120">Tujuan</th>
+							<th data-options="field:'grand_total',width:170" formatter="formatPrice">Total</th>
                         </tr>
                         </thead>
                         <tbody>
-                    	<tr>
+                    	<tr>														
                         	<td>
-								<script>
+								<!--script>
 									function nomor() {
 										var no = (document.getElementById("detail_invoice").rows.length - 2) + 1;
 										document.getElementById("nomor").innerHTML = no;
 									}
 								</script>
-								<span id="nomor">&nbsp;</span>
-								<input class="easyui-textbox" style="width:190px;height:25px;padding:8px" data-options="prompt:'No CN',iconWidth:38" id="no_cn" name="no_cn">
+								<span id="nomor">&nbsp;</span-->								
+								<input class="easyui-textbox" style="width:150px;height:25px;padding:8px" data-options="prompt:'No CN',iconWidth:38" id="no_cn" name="no_cn">
 								<a href="javascript:void(0)" class="easyui-linkbutton" onclick="$('#lookuptandaterima').window('open')"><img src="../images/famfam/application_xp.png" /></a>
 								<div id="lookuptandaterima" class="easyui-window" title="Lookup Tanda Terima" data-options="modal:true,closed:true,iconCls:'icon-save'" style="width:67%;height:320px;padding:10px; text-align:left;">
                                         Pencarian : <input class="easyui-searchbox" data-options="prompt:'.......',menu:'#mm',searcher:doSearch" style="width:480px;height:25px;padding:10px;"></input>
@@ -108,12 +106,10 @@
 										</div>
                                     </div>
                         	</td>
-                        	<td><span id="tanggal">&nbsp;</span></td>
-                        	<td><span id="tarif">&nbsp;</span></td>
-                        	<td><span id="coll">&nbsp;</span></td>
-                        	<td><span id="berat">&nbsp;</span></td>
-							<td><span id="tarif">&nbsp;</span></td>
-							<td><span id="total">&nbsp;</span></td>
+                        	<td><input class="easyui-textbox" style="width:190px;height:25px;padding:8px" data-options="prompt:'Tanggal',iconWidth:38" id="tanggal" name="tanggal"></td>
+                        	<td><input class="easyui-textbox" style="width:190px;height:25px;padding:8px" data-options="prompt:'Pengirim',iconWidth:38" id="pengirim" name="pengirim"></td>
+                        	<td><input class="easyui-textbox" style="width:190px;height:25px;padding:8px" data-options="prompt:'Tujuan',iconWidth:38" id="tujuan" name="tujuan"></td>
+                        	<td><input class="easyui-textbox" style="width:190px;height:25px;padding:8px" data-options="prompt:'Total',iconWidth:38" id="total" name="total"></td>							
                         </tr>
                         </tbody>
                     </table>
@@ -126,7 +122,11 @@
 		function tambahDetail(){
 			var row = $('#gridLookupTandaTerima').datagrid('getSelected');
 			if (row){
-				$('#no_cn').textbox('setValue', row.no_cn);				
+				$('#no_cn').textbox('setValue', row.no_cn);
+				$('#tanggal').textbox('setValue', row.tanggal);
+				$('#pengirim').textbox('setValue', row.pengirim);
+				$('#tujuan').textbox('setValue', row.tujuan);
+				$('#total').textbox('setValue', row.grand_total);
 				$('#lookuptandaterima').window('close');				
 			}else{
 				$.messager.alert('Kesalahan', 'Belum Ada Tanda Terima Yang dipilih');

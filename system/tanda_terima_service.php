@@ -4,21 +4,21 @@
 	session_start();
 	if (isset($_POST['simpan_tt'])) {				
 		
-		if (trim($_POST['cn'])=="") { 
+		/*if (trim($_POST['cn'])=="") { 
 			echo "<script> alert('Nomor CN harus diisi ! '); window.history.back();</script>"; 
 			return false;
 		}
 		if (trim($_POST['tanggal'])=="") { 
 			echo "<script> alert('Tanggal harus diisi ! '); window.history.back();</script>"; 
 			return false;
-		}
+		}*/
 				
 		$id = gen_uuid();
 		$cn = $_POST['cn'];
 		
 		$tanggal = $_POST['tanggal'];		
-		$tgl=substr($tanggal,0,2);
-		$bln=substr($tanggal,3,2);
+		$bln=substr($tanggal,0,2);
+		$tgl=substr($tanggal,3,2);
 		$thn=substr($tanggal,6,4);
 		$hasil="$thn-$bln-$tgl";
 		
@@ -35,7 +35,14 @@
 		$coll = $_POST['coll'];
 		$kg = $_POST['kg'];
 		$vol = $_POST['vol'];
-		$grandtotal = 123456789;
+		$tarif = $_POST['tarif'];
+		
+		if($vol>$kg){
+			$grandtotal = $tarif * $vol;
+		}else{
+			$grandtotal = $tarif * $kg;
+		}
+		
 		$deskripsi = $_POST['deskripsi'];
 		$user_id = $_SESSION['user_sid'];
 		$user_name = $_SESSION['username'];				
@@ -48,19 +55,71 @@
 		} else {
 			$cnt = $arrCountQry['no'] + 1;
 		}
-		//$nomor = "P".str_pad($cnt,5,"0",STR_PAD_LEFT);		
+		//$nomor = "P".str_pad($cnt,5,"0",STR_PAD_LEFT);
+		
 		$cekCN	= mysql_num_rows(mysql_query("SELECT * FROM tanda_terima WHERE no_cn='$cn'"));
 		if(($cekCN)>=1){
 			echo "<script> alert('Maaf, Nomor CN $cn sudah ada di database, silahkan ganti dengan yang lain! '); window.history.back();</script>";
-		}else{		
-			$strQry = "INSERT INTO tanda_terima VALUES ('$id','$cnt','$cn','$hasil','$pengirim', '$alamat_pengirim', '$telpon_pengirim', '$tujuan', '$penerima', '$alamat_penerima', '$telpon_penerima', '$udl', '$dtddtp', '$agent', '$coll', '$kg', '$vol', '$grandtotal', '$deskripsi', '$user_id', '$user_name')";
+		}else{
+			$sql = "INSERT INTO tanda_terima 
+					VALUES ('$id',
+							'$cnt',
+							'$cn',
+							'$hasil',
+							'$pengirim',
+							'$alamat_pengirim',
+							'$telpon_pengirim',
+							'$tujuan',
+							'$penerima',
+							'$alamat_penerima',
+							'$telpon_penerima',
+							'$udl',
+							'$dtddtp',
+							'$agent',
+							'$coll',
+							'$kg',
+							'$vol',
+							'$grandtotal',
+							'$deskripsi',
+							'$user_id',
+							'$user_name')";
+			$result = @mysql_query($sql);
+			if ($result){
+				echo json_encode(array(
+					'sid' => $id,
+					'no' => $cnt,
+					'no_cn' => $cn,
+					'tanggal' => $hasil,
+					'pengirim' => $pengirim,
+					'alamat_pengirim' => $alamat_pengirim,
+					'telpon_pengirim' => $telpon_pengirim,
+					'tujuan' => $tujuan,
+					'penerima' => $penerima,
+					'alamat_penerima' => $alamat_penerima,
+					'telpon_penerima' => $telpon_penerima,
+					'service_udl' => $udl,
+					'service_dtddtp' => $dtddtp,
+					'service_agent' => $agent,
+					'total_coll' => $coll,
+					'total_berat' => $kg,
+					'total_vol' => $vol,
+					'grand_total' => $grandtotal,
+					'deskripsi_paket' => $deskripsi,
+					'user_id' => $user_id,
+					'user_name' => $user_name
+				));
+				echo "<script> alert('Berhasil Input Tanda Terima'); window.location.href='../form/cetak_tanda_terima.php?CN=$cn';</script>";
+			} else {				
+				echo json_encode(array('errorMsg'=>'Terjadi Kesalahan.'));
+			}
+			/*$strQry = "INSERT INTO tanda_terima VALUES ('$id','$cnt','$cn','$hasil','$pengirim','$alamat_pengirim','$telpon_pengirim','$tujuan','$penerima','$alamat_penerima','$telpon_penerima','$udl','$dtddtp','$agent','$coll','$kg','$vol','$grandtotal','$deskripsi','$user_id','$user_name')";
 			// echo ">>>".$strQry;
 			$exQuery = mysql_query($strQry) or die(mysql_error());
 			if ($exQuery) {
 				echo "<script> alert('Berhasil Input Tanda Terima'); window.location.href='../form/cetak_tanda_terima.php?CN=$cn';</script>";
 			} else {
 				echo "<script> alert('Gagal Input Tanda Terima, silahkan ulangi! '); window.history.back();</script>";
-			}
+			}*/
 		}
 	}
 ?>

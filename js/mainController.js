@@ -84,7 +84,6 @@ function searchNoCN(value){
 					alert('Data tidak ditemukan !')
 				} else {
 					var dataa = JSON.parse(data);
-					console.log(dataa)
 					$('#cn').textbox('setText',dataa[0].no_cn)
 					$('#tanggal').datebox('setValue',dataa[0].tanggal)
 					$('#pengirim').combo("setText",dataa[0].pengirim)
@@ -107,4 +106,36 @@ function searchNoCN(value){
 			}
 		});
 	}
+}
+
+function saveInvoice() {
+	var objDtl = []
+	var dtl = {}
+	var count = document.getElementById("detail_invoice").rows.length;
+	
+	for (var i = 1; i < count; i++) {
+		dtl = {
+			sid :  document.getElementById("sid"+i).value
+		}
+		objDtl.push(dtl)
+	}
+	
+	var objHeader = [{
+			no_inv :  $('#no_inv').textbox('getText'),
+			tanggal :  $('#tgl_inv').datebox('getValue'),
+			customer_nama :  $('#customer_inv').textbox('getText'),
+			listDetail : objDtl
+		}];
+	
+	$.ajax({
+		type	: "POST",
+		url		: "../system/invoice_service.php",
+		data	: {
+			data : objHeader
+		},
+		success	: function(data){
+			location.reload();
+		}
+	});
+		
 }

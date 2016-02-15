@@ -4,7 +4,7 @@
 	<table width="75%" border="1" align="left" cellpadding="10" cellspacing="3" style="border: solid 1px #efefef;">
 		<tr>
           	<td>
-					<form action="../system/invoice_service.php" method="post" enctype="multipart/form-data">
+				<!--<form action="../system/invoice_service.php" method="post" enctype="multipart/form-data">-->
 					<table width="80%" border="0" cellspacing="0" cellpadding="3">
 						<tr>
 				          	<td width="80px"><label>No. Invoice </label></td>
@@ -19,7 +19,7 @@
 				        <tr>
 				          	<td><label>Tanggal</label></td>
 				         	<td>:</td>
-				         	<td><input class="easyui-datebox" style="width:150px;height:25px;padding:8px" placeholder="Tanggal" data-options="prompt:'Tanggal'"></input></td>
+				         	<td><input id="tgl_inv" nama="tgl_inv" class="easyui-datebox" style="width:150px;height:25px;padding:8px" placeholder="Tanggal" data-options="prompt:'Tanggal'"></input></td>
 				        </tr>
 				        <tr>
 				          	<td><label>Customer</label></td>
@@ -27,6 +27,8 @@
 				         	<td>
 				         		<input class="easyui-combobox" 
 									name="language"
+									id="customer_inv"
+									name="customer_inv"
 									style="width:180px;height:25px;padding:8px"
 									data-options="
 											prompt:'Customer',
@@ -46,7 +48,7 @@
 				         	<td></td>
 				        </tr>
 			    	</table>
-			    	<button type="submit" name="simpan_po">Save</button>
+			    	<button type="submit" onclick="saveInvoice()" name="simpan_po">Save</button>
 					<button type="reset" onclick="location.reload()">Batal</button>	
 					<br/><br/>
 	    			<table id="detail_invoice" border=0 width="100%">
@@ -111,11 +113,14 @@
                         	</td>
                         	<td><input type="text" disabled style="width:100%;height:25px;padding:1px" id="tanggal1" name="tanggal1"/></td>
                         	<td><input type="text" disabled style="width:100%;height:25px;padding:1px" id="tujuan1" name="tujuan1"/></td>
-                        	<td><input disabled style="width:100%;height:25px;padding:1px" id="total1" name="total1"></td>
+                        	<td>
+								<input disabled style="width:100%;height:25px;padding:1px" id="total1" name="total1" />
+								<input disabled style="width:100%;height:25px;padding:1px" id="sid1" name="sid1" hidden />
+                        	</td>
                         </tr>
                         </tbody>
                     </table>
-			    </form>
+			    <!--</form>-->
 			</td>
 	    </tr>
 	</table>
@@ -139,6 +144,7 @@
 		var row = $('#gridLookupTandaTerima').datagrid('getSelected');
 		if (row){
 			//$("#no_cn"+tblIndex).textbox('setValue', row.no_cn);
+			document.getElementById("sid"+tblIndex).value = row.sid
 			document.getElementById("no"+tblIndex).value = tblIndex 
 			document.getElementById("no_cn"+tblIndex).value = row.no_cn 
 			document.getElementById("tanggal"+tblIndex).value = row.tanggal 
@@ -167,7 +173,8 @@
 			cell3.innerHTML = "<div style='width:100%; text-align:center;'> <a id='btnLookup"+tblIndex+"' href='javascript:void(0)' class='easyui-linkbutton' onclick='test()'><img src='../images/famfam/application_xp.png' /></a></div>";
 			cell4.innerHTML = "<input type='text' disabled style='width:100%;height:25px;padding:1px' id='tanggal"+count+"' name='tanggal"+count+"'/>";
 			cell5.innerHTML = "<input type='text' disabled style='width:100%;height:25px;padding:1px' id='tujuan"+count+"' name='tujuan"+count+"'/>";
-			cell6.innerHTML = "<input disabled style='width:100%;height:25px;padding:1px' id='total"+count+"' name='total"+count+"'>";
+			cell6.innerHTML = "<input disabled style='width:100%;height:25px;padding:1px' id='total"+count+"' name='total"+count+"'>" + 
+							  "<input hidden disabled style='width:100%;height:25px;padding:1px' id='sid"+count+"' name='sid"+count+"'>";
 			
 			//var table=document.getElementById("detail_invoice")
 			//var clnNode=document.getElementById("detail_invoice_row").cloneNode(true);  

@@ -28,7 +28,7 @@ if (isset($_POST['btn_login'])) {
 		$_SESSION['nama'] = $nama;
 		$_SESSION['jabatan'] = $jabatan;
     
-		echo "<script> window.location.href='../form/halaman_utama.php';</script>";
+		echo "<script> window.location.href='../form/halaman_utama.php?page=home';</script>";
 	} else {
 		echo "<script> alert('Email atau password anda belum terdaftar, silahkan ulangi kembali! '); window.history.back();</script>";
 	}

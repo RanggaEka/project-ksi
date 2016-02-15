@@ -1,6 +1,7 @@
 <?php
 	include '../system/config_service.php';
 	
+	/*
 	$param1 = "";
 	$param2 = "";
 	$param3 = "";
@@ -17,8 +18,8 @@
 	if ($_GET['tujuan'] != null) {
 		$param1 = "where tujuan = '".$_GET['tujuan']."'";
 	}
-	
-	$rs = mysql_query('SELECT * FROM tanda_terima '.$param1.$param2.$param3.$param4.' order by no_cn desc');
+	*/
+	$rs = mysql_query('SELECT * FROM tanda_terima order by no_cn desc');//'.$param1.$param2.$param3.$param4.' 
 	$result = array();
 	while($row = mysql_fetch_object($rs)){
 		array_push($result, $row);

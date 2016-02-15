@@ -9,24 +9,26 @@
 		$id = gen_uuid();
 		$cn = $jsondata[0]->cn;
 		
-		$tanggal = $jsondata[0]->tanggal;		
-		$tgl=substr($tanggal,0,2);
+		$tanggal = $jsondata[0]->tanggal;
+		/*$tgl=substr($tanggal,0,2);
 		$bln=substr($tanggal,3,2);
 		$thn=substr($tanggal,6,4);
-		$hasil="$thn-$bln-$tgl";
+		$hasil="$thn-$bln-$tgl";*/
 		
 		$pengirim = $jsondata[0]->pengirim;
 		$alamat_pengirim = $jsondata[0]->alamat_pengirim;
+		$telpon_pengirim = $jsondata[0]->telpon_pengirim;
 		$tujuan = $jsondata[0]->tujuan;
 		$penerima = $jsondata[0]->penerima;
 		$alamat_penerima = $jsondata[0]->alamat_penerima;
+		$telpon_penerima = $jsondata[0]->telpon_penerima;
 		$udl = $jsondata[0]->udl;
 		$dtddtp = $jsondata[0]->dtddtp;
 		$agent = $jsondata[0]->agent;
 		$coll = $jsondata[0]->coll;
 		$kg = $jsondata[0]->kg;
 		$vol = $jsondata[0]->vol;
-		$grandtotal = ($jsondata[0]->grand_total * $jsondata[0]->kg);
+		$grandtotal = $jsondata[0]->grand_total;
 		$deskripsi = $jsondata[0]->deskripsi;
 		$user_id = $_SESSION['user_sid'];
 		$user_name = $_SESSION['username'];				
@@ -44,7 +46,7 @@
 		if(($cekCN)>=1){
 			echo "<script> alert('Maaf, Nomor CN $cn sudah ada di database, silahkan ganti dengan yang lain! '); window.history.back();</script>";
 		}else{		
-			$strQry = "INSERT INTO tanda_terima VALUES ('$id','$cnt','$cn','$hasil','$pengirim', '$alamat_pengirim', '$tujuan', '$penerima', '$alamat_penerima', '$udl', '$dtddtp', '$agent', '$coll', '$kg', '$vol', '$grandtotal', '$deskripsi', '$user_id', '$user_name')";
+			$strQry = "INSERT INTO tanda_terima VALUES ('$id','$cnt','$cn','$tanggal','$pengirim', '$alamat_pengirim', $telpon_pengirim,'$tujuan', '$penerima', '$alamat_penerima', $telpon_penerima, '$udl', '$dtddtp', '$agent', '$coll', '$kg', '$vol', '$grandtotal', '$deskripsi', '$user_id', '$user_name')";
 			// echo ">>>".$strQry;
 			$exQuery = mysql_query($strQry) or die(mysql_error());
 			if ($exQuery) {

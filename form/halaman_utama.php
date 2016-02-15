@@ -2,7 +2,7 @@
     include '../system/config_service.php'; 
     session_start();
     if (empty($_SESSION['username']) || empty($_SESSION['password']) ) {
-        echo "<script>window.location.href='../'</script>";
+        echo "<script>window.location.href='../form/halaman_utama.php?page=home'</script>";
     } else {
 ?>
 <!DOCTYPE html>

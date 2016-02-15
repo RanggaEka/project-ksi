@@ -7,7 +7,7 @@
 		$test = json_encode($_POST['data']);
 		$jsondata = json_decode($test);
 		$id = gen_uuid();
-		$cn = $jsondata[0]->cn;
+		$cn = strtoupper($jsondata[0]->cn);
 		
 		$tanggal = $jsondata[0]->tanggal;
 		/*$tgl=substr($tanggal,0,2);
@@ -43,6 +43,12 @@
 		}
 		//$nomor = "P".str_pad($cnt,5,"0",STR_PAD_LEFT);		
 		$cekCN	= mysql_num_rows(mysql_query("SELECT * FROM tanda_terima WHERE no_cn='$cn'"));
+		$cekCustomer = mysql_num_rows(mysql_query("SELECT * FROM customer WHERE nama='$pengirim'"));
+		
+		if(($cekCustomer)<=1){
+			$newCust = mysql_query("insert into customer values ('".$id."','".$pengirim."','".$alamat_pengirim."') ");
+		}
+		
 		if(($cekCN)>=1){
 			echo "<script> alert('Maaf, Nomor CN $cn sudah ada di database, silahkan ganti dengan yang lain! '); window.history.back();</script>";
 		}else{		
@@ -58,11 +64,17 @@
 		
 	} else if ($_GET['sch_cn'] != null) {	
 		$sch = mysql_query("select * from tanda_terima where no_cn = '".$_GET['sch_cn']."' ");
-		$result = array();
-		while($row = mysql_fetch_object($sch)){
-			array_push($result, $row);
+		$count = mysql_num_rows($sch);
+		
+		if (($count) >= 1) {
+			$result = array();
+			while($row = mysql_fetch_object($sch)){
+				array_push($result, $row);
+			}
+			//$row = mysql_fetch_array($sch);
+			echo json_encode($result);
+		} else {
+			echo "";
 		}
-		//$row = mysql_fetch_array($sch);
-		echo json_encode($result);
 	}
 ?>

@@ -25,7 +25,7 @@ function saveTandaTerima() {
 	var obj = [{
 			cn :  $('#cn').textbox('getValue'),
 			tanggal :  $('#tanggal').datebox('getValue'),
-			pengirim :  $('#pengirim').combo("getValue"),
+			pengirim :  $('#pengirim').combo("getText"),
 			tujuan :  $('#tujuan').combo("getText"),
 			alamat_pengirim :  $('#alamat_pengirim').textbox('getValue'),
 			telpon_pengirim :  $('#telpon_pengirim').textbox('getValue'),
@@ -41,8 +41,18 @@ function saveTandaTerima() {
 			grand_total :  $('#total').textbox('getValue'),
 			deskripsi :  $('#deskripsi').textbox('getValue')
 		}];
+		
+	if ($('#cn').textbox('getValue') != "" && $('#tanggal').datebox('getValue') != ""
+		&& $('#pengirim').textbox('getValue') != "" && $('#tujuan').combo("getText") != ""
+		&& $('#alamat_pengirim').textbox('getValue') != "" && $('#telpon_pengirim').textbox('getValue') != ""
+		&& $('#penerima').textbox('getValue') != "" &&  $('#alamat_penerima').textbox('getValue') != "" 
+		&& $('#telpon_penerima').textbox('getValue') != "" && $('#udl').combo('getValue') != "" 
+		&& $('#dtddtp').combo("getValue") != "" && $('#agent').combo("getValue") != ""
+		&& $('#coll').textbox('getValue') != "" && $('#kg').textbox("getValue") != ""
+		&& $('#vol').textbox('getValue') != "" && $('#total').textbox("getValue") != ""
+		&& $('#deskripsi').textbox('getValue') != "") {
 	
-	$.ajax({
+		$.ajax({
 			type	: "POST",
 			url		: "../system/tanda_terima_service.php",
 			data	: {
@@ -52,35 +62,49 @@ function saveTandaTerima() {
 				refreshTandaTerima();
 			}
 		});
+	} else {
+		alert("Field yang bertanda * harus di isi! ")
+	}
 }
 
 function searchNoCN(value){
-	$.ajax({
-		type	: "GET",
-		url		: "../system/tanda_terima_service.php",
-		data	: {
-			sch_cn : value
-		},
-		success	: function(data){
-			var dataa = JSON.parse(data);
-			$('#cn').textbox('setText',dataa[0].no_cn)
-			$('#tanggal').datebox('setValue',dataa[0].tanggal)
-			$('#pengirim').combo("setText",dataa[0].pengirim)
-			$('#tujuan').combo("setText",dataa[0].tujuan)
-			$('#alamat_pengirim').textbox('setText',dataa[0].alamat_pengirim)
-			$('#telpon_pengirim').textbox('setText',dataa[0].telpon_pengirim)
-			$('#penerima').textbox('setText',dataa[0].penerima)
-			$('#alamat_penerima').textbox('setText',dataa[0].alamat_penerima)
-			$('#telpon_penerima').textbox('setText',dataa[0].telpon_penerima)
-			$('#udl').combo('setText',dataa[0].service_udl)
-			$('#dtddtp').combo("setText",dataa[0].service_dtddtp)
-			$('#agent').combo("setText",dataa[0].service_agent)
-			$('#coll').textbox('setText',parseInt(dataa[0].total_coll))
-			$('#kg').textbox('setText',parseInt(dataa[0].total_berat))
-			$('#vol').textbox('setText',parseInt(dataa[0].total_vol))
-			$('#total').textbox('setText',parseInt(dataa[0].grand_total))
-			$('#deskripsi').textbox('setText',dataa[0].deskripsi_paket)
-			document.getElementById('simpan_tt').style.display = "none"
-		}
-	});
+	if (value == "") {
+		//alert('Data tidak ditemukan !')
+		console.log("kosong");
+	} else {
+		$.ajax({
+			type	: "GET",
+			url		: "../system/tanda_terima_service.php",
+			data	: {
+				sch_cn : value
+			},
+			success	: function(data){
+				console.log(data)
+				if (data == "") {
+					alert('Data tidak ditemukan !')
+				} else {
+					var dataa = JSON.parse(data);
+					console.log(dataa)
+					$('#cn').textbox('setText',dataa[0].no_cn)
+					$('#tanggal').datebox('setValue',dataa[0].tanggal)
+					$('#pengirim').combo("setText",dataa[0].pengirim)
+					$('#tujuan').combo("setText",dataa[0].tujuan)
+					$('#alamat_pengirim').textbox('setText',dataa[0].alamat_pengirim)
+					$('#telpon_pengirim').textbox('setText',dataa[0].telepon_pengirim)
+					$('#penerima').textbox('setText',dataa[0].penerima)
+					$('#alamat_penerima').textbox('setText',dataa[0].alamat_penerima)
+					$('#telpon_penerima').textbox('setText',dataa[0].telepon_penerima)
+					$('#udl').combo('setText',dataa[0].service_udl)
+					$('#dtddtp').combo("setText",dataa[0].service_dtddtp)
+					$('#agent').combo("setText",dataa[0].service_agent)
+					$('#coll').textbox('setText',parseInt(dataa[0].total_coll))
+					$('#kg').textbox('setText',parseInt(dataa[0].total_berat))
+					$('#vol').textbox('setText',parseInt(dataa[0].total_vol))
+					$('#total').textbox('setText',parseInt(dataa[0].grand_total))
+					$('#deskripsi').textbox('setText',dataa[0].deskripsi_paket)
+					document.getElementById('simpan_tt').style.display = "none"
+				}
+			}
+		});
+	}
 }

@@ -29,7 +29,6 @@
 												pageSize:20">
 									<thead>
 									<tr>
-										<th style="width:4%" data-options="field:'no'">No</th>
 										<th style="width:15%" data-options="field:'no_cn'">CN</th>
 										<th style="width:13%" data-options="field:'tanggal'">Tanggal</th>
 										<th style="width:35%" data-options="field:'pengirim'">Pengirim</th>

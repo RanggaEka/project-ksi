@@ -100,7 +100,7 @@
                 }
             ?>
         </tr>
-    </table>\
+    </table>
 </body>
 
 </html>

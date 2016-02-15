@@ -66,10 +66,10 @@
 						<style>
 							
 						</style>
-                        <tbody style="border:1px solid #CCCCCC;border-collapse: collapse;">
+                        <tbody style="border:1px solid #CCCCCC; max-height: 60px;overflow: auto;">
                     	<tr>
                         	<td><input type="text" disabled style="width:100%;height:25px;padding:1px;text-align:center;" id="no1" name="no1"/></td>
-                        	<td><input style="width:100%;height:25px;padding:8px" id="no_cn1" name="no_cn1"/></td>
+                        	<td><input style="width:100%;height:25px;padding:1px" id="no_cn1" name="no_cn1"/></td>
                         	<td>
 								<div style="width:100%; text-align:center;">
 								<a id="btnLookup1" href="javascript:void(0)" onclick="test()"><img src="../images/famfam/application_xp.png" /></a>
@@ -163,7 +163,7 @@
 			var cell6 = newRow.insertCell(5);
 			
 			cell1.innerHTML = "<input type='text' disabled style='width:100%;height:25px;padding:1px;text-align:center;' id='no"+count+"' name='no"+count+"'/>";
-			cell2.innerHTML = "<input style='width:100%;height:25px;padding:8px' id='no_cn"+count+"' name='no_cn"+count+"'/>";
+			cell2.innerHTML = "<input style='width:100%;height:25px;padding:1px' id='no_cn"+count+"' name='no_cn"+count+"'/>";
 			cell3.innerHTML = "<div style='width:100%; text-align:center;'> <a id='btnLookup"+tblIndex+"' href='javascript:void(0)' class='easyui-linkbutton' onclick='test()'><img src='../images/famfam/application_xp.png' /></a></div>";
 			cell4.innerHTML = "<input type='text' disabled style='width:100%;height:25px;padding:1px' id='tanggal"+count+"' name='tanggal"+count+"'/>";
 			cell5.innerHTML = "<input type='text' disabled style='width:100%;height:25px;padding:1px' id='tujuan"+count+"' name='tujuan"+count+"'/>";

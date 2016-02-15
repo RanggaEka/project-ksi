@@ -37,10 +37,38 @@ function formatItemTujuan(row){
 	return s;
 }
 
+function myformatter(date){
+	var y = date.getFullYear();
+	var m = date.getMonth()+1;
+	var d = date.getDate();
+	return y+'-'+(m<10?('0'+m):m)+'-'+(d<10?('0'+d):d);
+}
+function myparser(s){
+	if (!s) return new Date();
+		var ss = (s.split('-'));
+		var y = parseInt(ss[0],10);
+		var m = parseInt(ss[1],10);
+		var d = parseInt(ss[2],10);
+	if (!isNaN(y) && !isNaN(m) && !isNaN(d)){
+		return new Date(y,m-1,d);
+	} else {
+		return new Date();
+	}
+}
+
 function onSelectedTujuan(val) {
 	var comb = val.tujuan +" - "+ val.kota +" - "+ val.kecamatan;
 	$("#tujuan").textbox("setText", comb)
-	$("#total").textbox("setText", parseInt(val.reg))
+	$("#tarif").textbox("setValue", parseInt(val.reg))
+	var tarif = parseInt($('#tarif').textbox('getValue'))
+	var kg = parseInt($('#kg').textbox('getValue'))
+	var vol = parseInt($('#vol').textbox('getValue'))
+	if(vol > kg){
+		var sum = tarif * vol
+	}else{
+		var sum = tarif * kg
+	}
+	$('#total').textbox('setValue',sum)
 }
 
 function doSearchRekapTandaTerima(value,name){

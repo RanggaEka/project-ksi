@@ -12,6 +12,7 @@ function refreshTandaTerima() {
 	$('#coll').textbox('setText','')
 	$('#kg').textbox('setText','')
 	$('#vol').textbox('setText','')
+	$('#tarif').textbox('setText','')
 	$('#total').textbox('setText','')
 	$('#deskripsi').textbox('setText','')
 	document.getElementById('simpan_tt').style.display = "inline-block"
@@ -20,21 +21,21 @@ function refreshTandaTerima() {
 
 function saveTandaTerima() {
 	var obj = [{
-			cn :  $('#cn').textbox('getText'),
-			tanggal :  $('#tanggal').datebox('getValue'),
-			pengirim :  $('#pengirim').combo("getText"),
-			tujuan :  $('#tujuan').combo("getText"),
-			alamat_pengirim :  $('#alamat_pengirim').textbox('getText'),
-			penerima :  $('#penerima').textbox('getText'),
-			alamat_penerima :  $('#alamat_penerima').textbox('getText'),
-			udl : $('#udl').combo('getText'),
-			dtddtp :  $('#dtddtp').combo("getText"),
-			agent :  $('#agent').combo("getText"),
-			coll :  $('#coll').textbox('getText'),
-			kg :  $('#kg').textbox('getText'),
-			vol :  $('#vol').textbox('getText'),
-			grand_total :  $('#total').textbox('getText'),
-			deskripsi :  $('#deskripsi').textbox('getText')
+			cn :  $('#cn').textbox('getValue'),
+			tanggal :  $('#tanggal').datebox('getText'),
+			pengirim :  $('#pengirim').combo("getValue"),
+			tujuan :  $('#tujuan').combo("getValue"),
+			alamat_pengirim :  $('#alamat_pengirim').textbox('getValue'),
+			penerima :  $('#penerima').textbox('getValue'),
+			alamat_penerima :  $('#alamat_penerima').textbox('getValue'),
+			udl : $('#udl').combo('getValue'),
+			dtddtp :  $('#dtddtp').combo("getValue"),
+			agent :  $('#agent').combo("getValue"),
+			coll :  $('#coll').textbox('getValue'),
+			kg :  $('#kg').textbox('getValue'),
+			vol :  $('#vol').textbox('getValue'),
+			grand_total :  $('#total').textbox('getValue'),
+			deskripsi :  $('#deskripsi').textbox('getValue')
 		}];
 	
 	$.ajax({

@@ -4,7 +4,7 @@
 	<table width="75%" border="1" align="left" cellpadding="10" cellspacing="3" style="border: solid 1px #efefef;">
 		<tr>
           	<td>
-					<form action="../system/order_header_service.php" method="post" enctype="multipart/form-data">
+					<form action="../system/invoice_service.php" method="post" enctype="multipart/form-data">
 					<table width="80%" border="0" cellspacing="0" cellpadding="3">
 						<tr>
 				          	<td width="80px"><label>No. Invoice </label></td>

@@ -43,7 +43,7 @@
 														<option value="RPX">RPX</option>
 														<option value="Atm Logistic">Atm Logistic</option>
 														<option value="Kumis Logistic">Kumis Logistic</option>
-														<!--$(agent).combo("getText")-->
+														<!--$(agent).combo("getValue")-->
 													</select>
                                                     </td>
                                                 </tr>
@@ -60,18 +60,41 @@
 											<td valign="middle">
 												<input name="kg" id="kg" type="text" class="easyui-numberbox" precision="2" style="width:80px;height:25px;padding:8px" 
 												data-options="prompt:'Berat',onChange: function(value){
-													var total = parseInt($('#total').textbox('getText'))
-													var sum = total * parseInt($('#kg').textbox('getText'))
-													$('#total').textbox('setText',sum)
+													var tarif = parseInt($('#tarif').textbox('getValue'))
+													var kg = parseInt($('#kg').textbox('getValue'))
+													var vol = parseInt($('#vol').textbox('getValue'))
+														if(vol > kg){
+															var sum = tarif * vol
+														}else{
+															var sum = tarif * kg
+														}													
+													$('#total').textbox('setValue',sum)
 												  }"> KG 
 											</td>
 										<tr/>
 										<tr>
 											<td>Volume</td>
 											<td valign="top">
-												<input name="vol" id="vol" type="text" class="easyui-numberbox" precision="2" style="width:110px;height:25px;padding:8px" data-options="prompt:'Volume'"> 
+												<input name="vol" id="vol" type="text" class="easyui-numberbox" precision="2" style="width:80px;height:25px;padding:8px" 
+												data-options="prompt:'Volume',onChange: function(value){
+													var tarif = parseInt($('#tarif').textbox('getValue'))
+													var kg = parseInt($('#kg').textbox('getValue'))
+													var vol = parseInt($('#vol').textbox('getValue'))
+														if(vol > kg){
+															var sum = tarif * vol
+														}else{
+															var sum = tarif * kg
+														}													
+													$('#total').textbox('setValue',sum)
+												}"> M3
 											</td>
 										</tr>
+										<tr>
+											<td>Tarif</td>
+											<td valign="top">
+												<input name="tarif" id="tarif" type="text" class="easyui-numberbox" disabled min="0" precision="0" style="width:110px;height:25px;padding:8px" data-options="prompt:'Tarif'"> 
+											</td>
+										</tr>											
 										<tr>
 											<td>Total</td>
 											<td valign="top">
@@ -93,7 +116,7 @@
                                     <td><label>Tanggal</td>
 				         	<td>:</td>
 				         	<td>
-								<input name="tanggal" id="tanggal" class="easyui-datebox" style="width:150px;height:25px;padding:8px" placeholder="Tanggal" data-options="prompt:'Tanggal'"></input>					       
+								<input name="tanggal" id="tanggal" class="easyui-datebox" style="width:150px;height:25px;padding:8px" placeholder="Tanggal" data-options="prompt:'Tanggal',formatter:myformatter,parser:myparser"></input>					       
 							 </td>
 			            </tr>
 				        <tr>
@@ -115,8 +138,8 @@
 														prompt:'Pengirim',
 														formatter: formatItem,
 														onSelect: function(val){
-															$('#alamat_pengirim').textbox('setText', val.alamat);
-														}
+															$('#alamat_pengirim').textbox('setValue', val.alamat);																																															
+														}														
 												">
                                         </div>
                                         <div style="padding-bottom:2px;padding-top:2px;">
@@ -163,14 +186,13 @@
                         </table>
                     <!--</form>-->
                     <table id="gridFormTandaTerima" class="easyui-datagrid" style="width:100%;height:185px"
-						data-options="singleSelect:true,collapsible:true,url:'../json/get_tanda_terima.php',method:'get'">
+						data-options="rownumbers:true,singleSelect:true,collapsible:true,url:'../json/get_tanda_terima.php',method:'get'">
                         <thead>
-                        <tr>
-                            <th style="width:4%" data-options="field:'no'">No</th>
-                            <th style="width:14%" data-options="field:'no_cn'">CN</th>
+                        <tr>                            
+                            <th style="width:10%" data-options="field:'no_cn'">CN</th>
                             <th style="width:14%" data-options="field:'tanggal'">Tanggal</th>
                             <th style="width:20%" data-options="field:'pengirim'">Pengirim</th>
-                            <th style="width:55%" data-options="field:'tujuan'">Tujuan</th>
+                            <th style="width:35%" data-options="field:'tujuan'">Tujuan</th>
                             <th style="width:16%" data-options="field:'grand_total'" align="right" formatter="formatPrice">Total</th>
                         </tr>
                         </thead>

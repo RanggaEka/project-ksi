@@ -53,12 +53,12 @@
                                         <tr>
 											<td width="56">Coll</td>
                                             <td valign="top">
-                                                <input name="coll" id="coll" type="text" class="easyui-numberbox" style="width:110px;height:25px;padding:8px" data-options="prompt:'Coll'"> </td>
+                                                <input name="coll" id="coll" type="text" value="1" class="easyui-numberbox" style="width:110px;height:25px;padding:8px" data-options="prompt:'Coll'"> </td>
 										<tr/>
 										<tr>
 											<td>Berat</td>
 											<td valign="middle">
-												<input name="kg" id="kg" type="text" class="easyui-numberbox" precision="2" style="width:80px;height:25px;padding:8px" 
+												<input name="kg" id="kg" type="text" value="1" class="easyui-numberbox" precision="2" style="width:80px;height:25px;padding:8px" 
 												data-options="prompt:'Berat',onChange: function(value){
 													var tarif = parseInt($('#tarif').textbox('getValue'))
 													var kg = parseInt($('#kg').textbox('getValue'))
@@ -75,7 +75,7 @@
 										<tr>
 											<td>Volume</td>
 											<td valign="top">
-												<input name="vol" id="vol" type="text" class="easyui-numberbox" precision="2" style="width:80px;height:25px;padding:8px" 
+												<input name="vol" id="vol" type="text" value="1" class="easyui-numberbox" precision="2" style="width:80px;height:25px;padding:8px" 
 												data-options="prompt:'Volume',onChange: function(value){
 													var tarif = parseInt($('#tarif').textbox('getValue'))
 													var kg = parseInt($('#kg').textbox('getValue'))
@@ -138,7 +138,8 @@
 														prompt:'Pengirim',
 														formatter: formatItem,
 														onSelect: function(val){
-															$('#alamat_pengirim').textbox('setValue', val.alamat);																																															
+															$('#alamat_pengirim').textbox('setValue', val.alamat);
+															$('#telpon_pengirim').textbox('setValue', val.telpon);
 														}														
 												">
                                         </div>
@@ -150,8 +151,8 @@
 												data-options="
 														url:'../json/get_tujuan.php',
 														method:'get',
-														valueField:'kota',
-														textField:'tujuan',
+														valueField:'kecamatan',
+														textField:'kecamatan',
 														panelHeight:'150',
 														panelWidth: 350,
 														prompt:'Tujuan',
@@ -163,6 +164,7 @@
 											
                                         </div>
                                         <input name="alamat_pengirim" id="alamat_pengirim" class="easyui-textbox" data-options="multiline:true,prompt:'Alamat Pengirim'" style="width:300px;height:80px;padding:8px">
+										<input name="telpon_pengirim" id="telpon_pengirim" class="easyui-textbox" data-options="prompt:'Telpon Pengirim'" style="width:150px;height:25px;padding:8px">
                                     </td>
                                 </tr>
                                 <tr>
@@ -173,6 +175,7 @@
                                             <input name="penerima" id="penerima" type="text" class="easyui-textbox" style="width:240px;height:25px;padding:8px" data-options="prompt:'Penerima'">
                                         </div>
                                         <input name="alamat_penerima" id="alamat_penerima" class="easyui-textbox" data-options="multiline:true,prompt:'Alamat Penerima'" style="width:300px;height:80px;padding:8px">
+										<input name="telpon_penerima" id="telpon_penerima" class="easyui-textbox" data-options="prompt:'Telpon Penerima'" style="width:150px;height:25px;padding:8px">
                                     </td>
                                 </tr>
                                 <tr>

@@ -4,14 +4,16 @@ function refreshTandaTerima() {
 	$('#pengirim').combo("clear")
 	$('#tujuan').combo("clear")
 	$('#alamat_pengirim').textbox('setText','')
+	$('#telpon_pengirim').textbox('setText','')
 	$('#penerima').textbox('setText','')
 	$('#alamat_penerima').textbox('setText','')
+	$('#telpon_penerima').textbox('setText','')
 	$('#udl').combo('clear','')
 	$('#dtddtp').combo("clear")
 	$('#agent').combo("clear")
-	$('#coll').textbox('setText','')
-	$('#kg').textbox('setText','')
-	$('#vol').textbox('setText','')
+	$('#coll').textbox('setText','1')
+	$('#kg').textbox('setText','1')
+	$('#vol').textbox('setText','1')
 	$('#tarif').textbox('setText','')
 	$('#total').textbox('setText','')
 	$('#deskripsi').textbox('setText','')
@@ -22,12 +24,14 @@ function refreshTandaTerima() {
 function saveTandaTerima() {
 	var obj = [{
 			cn :  $('#cn').textbox('getValue'),
-			tanggal :  $('#tanggal').datebox('getText'),
+			tanggal :  $('#tanggal').datebox('getValue'),
 			pengirim :  $('#pengirim').combo("getValue"),
-			tujuan :  $('#tujuan').combo("getValue"),
+			tujuan :  $('#tujuan').combo("getText"),
 			alamat_pengirim :  $('#alamat_pengirim').textbox('getValue'),
+			telpon_pengirim :  $('#telpon_pengirim').textbox('getValue'),
 			penerima :  $('#penerima').textbox('getValue'),
 			alamat_penerima :  $('#alamat_penerima').textbox('getValue'),
+			telpon_penerima :  $('#telpon_penerima').textbox('getValue'),
 			udl : $('#udl').combo('getValue'),
 			dtddtp :  $('#dtddtp').combo("getValue"),
 			agent :  $('#agent').combo("getValue"),
@@ -64,8 +68,10 @@ function searchNoCN(value){
 			$('#pengirim').combo("setText",dataa[0].pengirim)
 			$('#tujuan').combo("setText",dataa[0].tujuan)
 			$('#alamat_pengirim').textbox('setText',dataa[0].alamat_pengirim)
+			$('#telpon_pengirim').textbox('setText',dataa[0].telpon_pengirim)
 			$('#penerima').textbox('setText',dataa[0].penerima)
 			$('#alamat_penerima').textbox('setText',dataa[0].alamat_penerima)
+			$('#telpon_penerima').textbox('setText',dataa[0].telpon_penerima)
 			$('#udl').combo('setText',dataa[0].service_udl)
 			$('#dtddtp').combo("setText",dataa[0].service_dtddtp)
 			$('#agent').combo("setText",dataa[0].service_agent)

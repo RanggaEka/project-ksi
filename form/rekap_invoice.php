@@ -32,7 +32,6 @@
 											data-options="singleSelect:true,collapsible:true,url:'../json/get_invoice.php',method:'get'">
 											<thead>
 											<tr>
-												<th data-options="field:'id',width:40">No</th>
 												<th data-options="field:'no_inv',width:200">No. Invoice</th>
 												<th data-options="field:'tanggal',width:100">Tanggal</th>
 												<th data-options="field:'customer_nama',width:250">Customer</th>
@@ -92,15 +91,12 @@
                         </table>
                     </form>
                     <table id="gridDetailInvoice" class="easyui-datagrid" title="" style="width:98%;height:250px"
-									data-options="singleSelect:true,collapsible:true,url:'../json/get_tanda_terima.php',method:'get'">
+									data-options="singleSelect:true,collapsible:true,url:'../json/get_invoice.php',method:'get'">
 									<thead>
 									<tr>
-										<th data-options="field:'no',width:40">No</th>
-										<th data-options="field:'no_cn',width:180">CN</th>
+										<th data-options="field:'no_inv',width:180">CN</th>
 										<th data-options="field:'tanggal',width:100">Tanggal</th>
-										<th data-options="field:'pengirim',width:200">Pengirim</th>
-										<th data-options="field:'tujuan',width:120">Tujuan</th>
-										<th data-options="field:'grand_total',width:170" formatter="formatPrice">Total</th>
+										<th data-options="field:'customer_nama',width:200">Pengirim</th>
 									</tr>
 									</thead>
 								</table>

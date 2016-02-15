@@ -7,13 +7,13 @@
                 <!--<form action="../system/tanda_terima_service.php" method="post" enctype="multipart/form-data">-->
                         <table width="100%" border="0" cellspacing="0" cellpadding="1">
                             <tr>
-                                <td width="10%"><label>CN</label></td>
+                                <td width="10%"><label>CN <font color='red'>*</font></label></td>
                                 <td width="1%">:</td>
                                 <td width="40%">
                                     <input name="cn" id="cn" type="text" class="easyui-searchbox" style="width:150px;height:25px;padding:8px" data-options="prompt:'CN',searcher:searchNoCN">
                                 </td>
                                 <td width="70%" rowspan="5" valign="top">
-                                    Service :
+                                    Service <font color='red'>*</font> :
                                     <table width="40%" border="0" cellpadding="2" cellspacing="1" style="border:1px solid #CCCCCC; border-radius:4px;"">
                                         <tr>
 											<td width="30">U/D/L</td>
@@ -48,7 +48,7 @@
                                                     </td>
                                                 </tr>
                                     </table>
-                                    Akumulasi :
+                                    Akumulasi <font color='red'>*</font> :
                                     <table width="40%" border="0" cellpadding="2" cellspacing="1" style="border:1px solid #CCCCCC; border-radius:4px;">
                                         <tr>
 											<td width="56">Coll</td>
@@ -102,7 +102,7 @@
 											</td>
 										</tr>
                                     </table>
-                                    Deskripsi Paket :
+                                    Deskripsi Paket <font color='red'>*</font> :
                                     <table width="20%" border="0" cellpadding="2" cellspacing="1" >
                                         <tr>
                                             <td valign="top">
@@ -113,14 +113,14 @@
                                 </td>
                                 </tr>
                                 <tr>
-                                    <td><label>Tanggal</td>
+                                    <td><label>Tanggal <font color='red'>*</font></td>
 				         	<td>:</td>
 				         	<td>
 								<input name="tanggal" id="tanggal" class="easyui-datebox" style="width:150px;height:25px;padding:8px" placeholder="Tanggal" data-options="prompt:'Tanggal',formatter:myformatter,parser:myparser"></input>					       
 							 </td>
 			            </tr>
 				        <tr>
-				          	<td valign="top"><label>Pengirim</label></td>
+				          	<td valign="top"><label>Pengirim <font color='red'>*</font></label></td>
                                     <td valign="top">:</td>
                                     <td>
                                         <div>
@@ -163,19 +163,23 @@
 												">
 											
                                         </div>
-                                        <input name="alamat_pengirim" id="alamat_pengirim" class="easyui-textbox" data-options="multiline:true,prompt:'Alamat Pengirim'" style="width:300px;height:80px;padding:8px">
-										<input name="telpon_pengirim" id="telpon_pengirim" class="easyui-textbox" data-options="prompt:'Telpon Pengirim'" style="width:150px;height:25px;padding:8px">
+                                        <input name="alamat_pengirim" id="alamat_pengirim" class="easyui-textbox" data-options="multiline:true,prompt:'Alamat Pengirim'" style="width:300px;height:50px;padding:8px">
+										<div style="padding-bottom:2px;padding-top:2px;">
+										<input name="telpon_pengirim" id="telpon_pengirim" class="easyui-numberbox" data-options="prompt:'Telpon Pengirim'" style="width:150px;height:25px;padding:8px">
+										</div>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td valign="top"><label>Penerima</label></td>
+                                    <td valign="top"><label>Penerima <font color='red'>*</font></label></td>
                                     <td valign="top">:</td>
                                     <td>
                                         <div style="padding-bottom:2px;">
                                             <input name="penerima" id="penerima" type="text" class="easyui-textbox" style="width:240px;height:25px;padding:8px" data-options="prompt:'Penerima'">
                                         </div>
-                                        <input name="alamat_penerima" id="alamat_penerima" class="easyui-textbox" data-options="multiline:true,prompt:'Alamat Penerima'" style="width:300px;height:80px;padding:8px">
-										<input name="telpon_penerima" id="telpon_penerima" class="easyui-textbox" data-options="prompt:'Telpon Penerima'" style="width:150px;height:25px;padding:8px">
+                                        <input name="alamat_penerima" id="alamat_penerima" class="easyui-textbox" data-options="multiline:true,prompt:'Alamat Penerima'" style="width:300px;height:50px;padding:8px">
+										<div style="padding-bottom:2px;padding-top:2px;">
+										<input name="telpon_penerima" id="telpon_penerima" class="easyui-numberbox" data-options="prompt:'Telpon Penerima'" style="width:150px;height:25px;padding:8px">
+										</div>
                                     </td>
                                 </tr>
                                 <tr>
@@ -188,8 +192,9 @@
                                 </tr>
                         </table>
                     <!--</form>-->
-                    <table id="gridFormTandaTerima" class="easyui-datagrid" style="width:100%;height:185px"
-						data-options="rownumbers:true,singleSelect:true,collapsible:true,url:'../json/get_tanda_terima.php',method:'get'">
+                    <table id="gridFormTandaTerima" class="easyui-datagrid" style="width:100%;height:180px"
+						data-options="rownumbers:true,singleSelect:true,collapsible:true,url:'../json/get_tanda_terima.php',method:'get',pagination:true,
+												pageSize:20">
                         <thead>
                         <tr>                            
                             <th style="width:10%" data-options="field:'no_cn'">CN</th>

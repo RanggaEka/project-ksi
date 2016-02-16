@@ -11,8 +11,8 @@
 		
 		$tanggal = $jsondata[0]->tanggal;	
 		
-		$bln=substr($tanggal,0,2);
-		$tgl=substr($tanggal,3,2);
+		$tgl=substr($tanggal,0,2);
+		$bln=substr($tanggal,3,2);
 		$thn=substr($tanggal,6,4);
 		$hasil="$thn-$bln-$tgl";
 		
@@ -40,7 +40,8 @@
 							'$no_inv',
 							'$hasil',
 							'$customer_sid',
-							'$customer_nama',							
+							'$customer_nama',
+							'0',
 							'$user_id',
 							'$user_name')";
 			$result = mysql_query($sql);
@@ -50,14 +51,21 @@
 					$arQ = mysql_fetch_array($Qry);
 					$idDetail = gen_uuid();
 					mysql_query("INSERT INTO invoice_detail 
-					VALUES ('$idDetail',							
+					VALUES ('$idDetail',
+							'$no_inv',
 							'$arQ[sid]',
 							'$arQ[no_cn]',
 							'$arQ[grand_total]')");
 				}
+				$hitungTotal = mysql_query("SELECT SUM(tarif) as total FROM invoice_detail WHERE no_inv='$no_inv'");
+				$hitungTotalArr = mysql_fetch_array($hitungTotal);
+				$total_inv = $hitungTotalArr['total'];
+				mysql_query("UPDATE invoice_header
+							SET total='$total_inv'
+							WHERE no_inv='$no_inv'");
 			} else {	
 				echo "<script>alert('Exception Error SQL Save');</script>";
-			}			//'$sid_header',
+			}			
 		}
 	}
 ?>

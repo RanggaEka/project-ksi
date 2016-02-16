@@ -19,7 +19,7 @@
 				        <tr>
 				          	<td><label>Tanggal</label></td>
 				         	<td>:</td>
-				         	<td><input id="tgl_inv" nama="tgl_inv" class="easyui-datebox" style="width:150px;height:25px;padding:8px" placeholder="Tanggal" data-options="prompt:'Tanggal'"></input></td>
+				         	<td><input id="tgl_inv" name="tgl_inv" class="easyui-datebox" style="width:150px;height:25px;padding:8px" placeholder="Tanggal" data-options="prompt:'Tanggal',formatter:myformatter,parser:myparser"></input></td>
 				        </tr>
 				        <tr>
 				          	<td><label>Customer</label></td>

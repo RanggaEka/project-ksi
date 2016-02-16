@@ -152,7 +152,7 @@
 														url:'../json/get_tujuan.php',
 														method:'get',
 														valueField:'kecamatan',
-														textField:'tujuan',
+														textField:'kecamatan',
 														panelHeight:'150',
 														panelWidth: 350,
 														prompt:'Tujuan',

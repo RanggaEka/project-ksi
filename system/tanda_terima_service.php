@@ -10,10 +10,10 @@
 		$cn = strtoupper($jsondata[0]->cn);
 		
 		$tanggal = $jsondata[0]->tanggal;
-		/*$tgl=substr($tanggal,0,2);
+		$tgl=substr($tanggal,0,2);
 		$bln=substr($tanggal,3,2);
 		$thn=substr($tanggal,6,4);
-		$hasil="$thn-$bln-$tgl";*/
+		$hasil="$thn-$bln-$tgl";
 		
 		$pengirim = $jsondata[0]->pengirim;
 		$alamat_pengirim = $jsondata[0]->alamat_pengirim;
@@ -45,14 +45,14 @@
 		$cekCN	= mysql_num_rows(mysql_query("SELECT * FROM tanda_terima WHERE no_cn='$cn'"));
 		$cekCustomer = mysql_num_rows(mysql_query("SELECT * FROM customer WHERE nama='$pengirim'"));
 		
-		if(($cekCustomer)<=1){
-			$newCust = mysql_query("insert into customer values ('".$id."','".$pengirim."','".$alamat_pengirim."') ");
+		if(($cekCustomer)<1){
+			$newCust = mysql_query("insert into customer values ('".$id."','".$pengirim."','".$alamat_pengirim."','".$telpon_pengirim."') ");
 		}
 		
 		if(($cekCN)>=1){
 			echo "<script> alert('Maaf, Nomor CN $cn sudah ada di database, silahkan ganti dengan yang lain! ');</script>";
 		}else{		
-			$strQry = "INSERT INTO tanda_terima VALUES ('$id','$cnt','$cn','$tanggal','$pengirim', '$alamat_pengirim', $telpon_pengirim,'$tujuan', '$penerima', '$alamat_penerima', $telpon_penerima, '$udl', '$dtddtp', '$agent', '$coll', '$kg', '$vol', '$grandtotal', '$deskripsi', '$user_id', '$user_name')";
+			$strQry = "INSERT INTO tanda_terima VALUES ('$id','$cnt','$cn','$hasil','$pengirim', '$alamat_pengirim', $telpon_pengirim,'$tujuan', '$penerima', '$alamat_penerima', $telpon_penerima, '$udl', '$dtddtp', '$agent', '$coll', '$kg', '$vol', '$grandtotal', '$deskripsi', '$user_id', '$user_name')";
 			// echo ">>>".$strQry;
 			$exQuery = mysql_query($strQry) or die(mysql_error());
 			if ($exQuery) {

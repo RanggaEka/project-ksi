@@ -19,7 +19,7 @@ function formatNumber(number) {
 
 function formatPrice(val,row){
     //if (val < 20){
-        return '<span style="color:red;">'+formatNumber(parseInt(val))+'</span>';
+        return '<span style="color:blue;">'+formatNumber(parseInt(val))+'</span>';
     //} else {
     //    return val;
     //}
@@ -41,7 +41,7 @@ function myformatter(date){
 	var y = date.getFullYear();
 	var m = date.getMonth()+1;
 	var d = date.getDate();
-	return y+'-'+(m<10?('0'+m):m)+'-'+(d<10?('0'+d):d);
+	return d+'-'+(m<10?('0'+m):m)+'-'+(d<10?('0'+d):y);
 }
 function myparser(s){
 	if (!s) return new Date();
@@ -50,7 +50,7 @@ function myparser(s){
 		var m = parseInt(ss[1],10);
 		var d = parseInt(ss[2],10);
 	if (!isNaN(y) && !isNaN(m) && !isNaN(d)){
-		return new Date(y,m-1,d);
+		return new Date(d,m-1,y);
 	} else {
 		return new Date();
 	}

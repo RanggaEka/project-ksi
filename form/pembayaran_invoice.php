@@ -4,7 +4,7 @@
     <table width="80%" border="1" align="left" cellpadding="10" cellspacing="3" style="border: solid 1px #efefef;">
         <tr>
             <td>
-                    <form action="../system/order_header_service.php" method="post" enctype="multipart/form-data">
+                    <form action="../system/pembayaran_invoice_service.php" method="post" enctype="multipart/form-data">
                         <table width="80%" border="0" cellspacing="0" cellpadding="3">
                             <tr>
                                 <td width="150px"><label>No. Invoice</label></td>
@@ -29,19 +29,19 @@
                                             }
                                         </script>
                                         <table id="tblLookupInvoice" class="easyui-datagrid" title="" style="width:98%;height:180px"
-											data-options="singleSelect:true,collapsible:true,url:'../json/get_invoice.php',method:'get'">
+											data-options="rownumbers:true,singleSelect:true,collapsible:true,url:'../json/get_invoice.php',method:'get'">
 											<thead>
-											<tr>
-												<th data-options="field:'id',width:40">No</th>
+											<tr>												
 												<th data-options="field:'no_inv',width:200">No. Invoice</th>
 												<th data-options="field:'tanggal',width:100">Tanggal</th>
 												<th data-options="field:'customer_nama',width:250">Customer</th>
+												<th data-options="field:'total',width:150" formatter="formatPrice" align="right">Total</th>
 											</tr>
 											</thead>
 										</table>
                                         <br/>
                                         <div style="float:right;">
-											<button type="submit" onclick="$('#lookupinvoice').window('close')">Pilih</button>
+											<button type="submit" onclick="selectInvoice()">Pilih</button>
 										</div>
                                     </div>
                                 </td>
@@ -50,52 +50,51 @@
                                 <td><label>Tanggal</label></td>
                                 <td>:</td>
                                 <td>
-									
+									<input class="easyui-textbox" style="width:150px;height:25px;padding:8px" data-options="prompt:'Tanggal Invoice',formatter:myformatter,parser:myparser" id="tanggal" name="tanggal" disabled>
                                 </td>
                             </tr>
                             <tr>
                                 <td><label>Customer</label></td>
                                 <td>:</td>
                                 <td>
-
+									<input class="easyui-textbox" style="width:150px;height:25px;padding:8px" data-options="prompt:'Nama Customer'" id="customer" name="customer" disabled>
                                 </td>
                             </tr>
                             <tr>
                                 <td><label>Total</label></td>
                                 <td>:</td>
                                 <td>
-
+									<input type="text" class="easyui-numberbox" min="0" precision="0" style="width:150px;height:25px;padding:8px" data-options="prompt:'Total'" id="total" name="total" disabled>
                                 </td>
                             </tr>
                             <tr>
                                 <td><label>Tanggal Pembayaran</label></td>
                                 <td>:</td>
                                 <td>
-									<input class="easyui-datebox" style="width:150px;height:25px;padding:8px" placeholder="Tanggal" data-options="prompt:'Tanggal'"></input>
+									<input type="text" id="tanggal_bayar" name="tanggal_bayar" class="easyui-datebox" style="width:150px;height:25px;padding:8px" placeholder="Tanggal Pembayaran" data-options="prompt:'Tanggal Pembayaran'"></input>
                                 </td>
                             </tr>
                             <tr>
-                                <td><label>Nilai Ppembayaran</label></td>
+                                <td><label>Nilai Pembayaran</label></td>
                                 <td>:</td>
                                 <td>
-
+									<input type="text" class="easyui-numberbox" min="0" precision="0" style="width:150px;height:25px;padding:8px" data-options="prompt:'Nilai Pembayaran'" id="bayar" name="bayar">
                                 </td>
                             </tr>
                             <tr>
                                 <td></td>
                                 <td></td>
                                 <td>
-                                    <button type="submit" name="simpan_po">Save</button>
+                                    <button type="submit" name="simpan_inv">Save</button>
                                     <button type="reset" onclick="location.reload()">Batal</button>
                                 </td>
                             </tr>
                         </table>
                     </form>
                     <table id="gridDetailInvoice" class="easyui-datagrid" title="" style="width:98%;height:250px"
-									data-options="singleSelect:true,collapsible:true,url:'../json/get_tanda_terima.php',method:'get'">
+									data-options="rownumbers:true,singleSelect:true,collapsible:true,url:'../json/get_invoice_detail.php',method:'get'">
 									<thead>
-									<tr>
-										<th data-options="field:'no',width:40">No</th>
+									<tr>										
 										<th data-options="field:'no_cn',width:180">CN</th>
 										<th data-options="field:'tanggal',width:100">Tanggal</th>
 										<th data-options="field:'pengirim',width:200">Pengirim</th>
@@ -108,3 +107,17 @@
         </tr>
     </table>
 </td>
+<script type="text/javascript">	
+	function selectInvoice(){
+		var row = $('#tblLookupInvoice').datagrid('getSelected');
+		if (row){
+			$('#no_inv').textbox('setValue', row.no_inv);
+			$('#tanggal').textbox('setValue', row.tanggal);
+			$('#customer').textbox('setValue', row.customer_nama);
+			$('#total').textbox('setValue', row.total);
+			$('#lookupinvoice').window('close');			
+		}else{
+			$.messager.alert('Kesalahan', 'Data belum di pilih !');
+		}
+	}
+</script>

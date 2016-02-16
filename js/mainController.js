@@ -139,3 +139,23 @@ function saveInvoice() {
 	});
 		
 }
+
+function savePembayaran() {
+	var objBayar = [{
+			no_inv :  $('#no_inv').textbox('getText'),
+			tanggal :  $('#tanggal_bayar').datebox('getValue'),
+			nilai_bayar :  $('#bayar').textbox('getText')
+		}];
+	
+	$.ajax({
+		type	: "POST",
+		url		: "../system/pembayaran_invoice_service.php",
+		data	: {
+			data : objBayar
+		},
+		success	: function(data){
+			location.reload();			
+		}
+	});
+		
+}

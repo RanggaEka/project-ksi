@@ -32,7 +32,7 @@
 											data-options="rownumbers:true,singleSelect:true,collapsible:true,url:'../json/get_invoice.php',method:'get'">
 											<thead>
 											<tr>												
-												<th data-options="field:'no_inv',width:200">No. Invoice</th>
+												<th data-options="field:'no_inv',width:200">No. Invoice</th>												
 												<th data-options="field:'tanggal',width:100">Tanggal</th>
 												<th data-options="field:'customer_nama',width:250">Customer</th>
 												<th data-options="field:'total',width:150" formatter="formatPrice" align="right">Total</th>
@@ -50,7 +50,7 @@
                                 <td><label>Tanggal</label></td>
                                 <td>:</td>
                                 <td>
-									<input class="easyui-textbox" style="width:150px;height:25px;padding:8px" data-options="prompt:'Tanggal Invoice',formatter:myformatter,parser:myparser" id="tanggal" name="tanggal" disabled>
+									<input class="easyui-textbox" style="width:150px;height:25px;padding:8px" data-options="prompt:'Tanggal Invoice'" id="tanggal" name="tanggal" disabled>
                                 </td>
                             </tr>
                             <tr>
@@ -71,7 +71,7 @@
                                 <td><label>Tanggal Pembayaran</label></td>
                                 <td>:</td>
                                 <td>
-									<input type="text" id="tanggal_bayar" name="tanggal_bayar" class="easyui-datebox" style="width:150px;height:25px;padding:8px" placeholder="Tanggal Pembayaran" data-options="prompt:'Tanggal Pembayaran'"></input>
+									<input type="text" id="tanggal_bayar" name="tanggal_bayar" class="easyui-datebox" style="width:150px;height:25px;padding:8px" placeholder="Tanggal Pembayaran" data-options="prompt:'Tanggal Pembayaran',formatter:myformatter,parser:myparser"></input>
                                 </td>
                             </tr>
                             <tr>

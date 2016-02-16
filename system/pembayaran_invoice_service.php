@@ -9,10 +9,10 @@
 		$id = gen_uuid();
 		$no_inv = strtoupper($jsondata[0]->no_inv);
 		
-		$tanggal = $jsondata[0]->tanggal;	
+		$tanggal = $jsondata[0]->tanggal;
 		
-		$bln=substr($tanggal,0,2);
-		$tgl=substr($tanggal,3,2);
+		$tgl=substr($tanggal,0,2);
+		$bln=substr($tanggal,3,2);
 		$thn=substr($tanggal,6,4);
 		$hasil="$thn-$bln-$tgl";
 		

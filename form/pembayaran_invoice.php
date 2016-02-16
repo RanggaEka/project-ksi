@@ -7,7 +7,7 @@
                     <form action="../system/pembayaran_invoice_service.php" method="post" enctype="multipart/form-data">
                         <table width="80%" border="0" cellspacing="0" cellpadding="3">
                             <tr>
-                                <td width="150px"><label>No. Invoice</label></td>
+                                <td width="150px"><label>No. Invoice <font color='red'>*</font></label></td>
                                 <td>:</td>
                                 <td>
                                     <input class="easyui-textbox" style="width:150px;height:25px;padding:8px" data-options="prompt:'No Invoice',iconWidth:38" id="no_inv" name="no_inv">
@@ -68,14 +68,14 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><label>Tanggal Pembayaran</label></td>
+                                <td><label>Tanggal Pembayaran <font color='red'>*</font></label></td>
                                 <td>:</td>
                                 <td>
 									<input type="text" id="tanggal_bayar" name="tanggal_bayar" class="easyui-datebox" style="width:150px;height:25px;padding:8px" placeholder="Tanggal Pembayaran" data-options="prompt:'Tanggal Pembayaran'"></input>
                                 </td>
                             </tr>
                             <tr>
-                                <td><label>Nilai Pembayaran</label></td>
+                                <td><label>Nilai Pembayaran <font color='red'>*</font></label></td>
                                 <td>:</td>
                                 <td>
 									<input type="text" class="easyui-numberbox" min="0" precision="0" style="width:150px;height:25px;padding:8px" data-options="prompt:'Nilai Pembayaran'" id="bayar" name="bayar">

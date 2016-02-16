@@ -128,7 +128,7 @@ function saveInvoice() {
 		}];
 		
 	if ($('#no_inv').textbox('getValue') != "" && $('#tgl_inv').datebox('getValue') != ""
-		&& $('#customer_inv').textbox('getValue') != "" && $('#no_cn1').textbox('getValue') != ""){
+		&& $('#customer_inv').textbox('getValue') != ""){
 		
 	$.ajax({
 		type	: "POST",
@@ -163,4 +163,36 @@ function savePembayaran() {
 		}
 	});
 		
+}
+
+function saveUser() {
+	var obj = [{
+			username :  $('#username').textbox('getValue'),
+			password :  $('#password').textbox('getValue'),
+			nama :  $('#nama').textbox('getValue'),
+			jenis_kelamin :  $('#jenis_kelamin').combo("getText"),
+			tempat_lahir :  $('#tempat_lahir').textbox('getValue'),
+			tanggal_lahir :  $('#tanggal_lahir').datebox('getValue'),
+			alamat :  $('#alamat').textbox('getValue'),
+			jabatan :  $('#jabatan').combo("getText")
+		}];
+		
+	if ($('#username').textbox('getValue') != "" && $('#password').datebox('getValue') != ""
+		&& $('#nama').textbox('getValue') != "" && $('#jenis_kelamin').combo("getText") != ""
+		&& $('#tempat_lahir').textbox('getValue') != "" && $('#tanggal_lahir').textbox('getValue') != ""
+		&& $('#alamat').textbox('getValue') != "" &&  $('#jabatan').textbox('getText') != "") {
+	
+		$.ajax({
+			type	: "POST",
+			url		: "../system/kelola_admin_service.php",
+			data	: {
+				data : obj
+			},
+			success	: function(data){
+				location.reload();
+			}
+		});
+	} else {
+		alert("Field yang bertanda * harus di isi! ")
+	}
 }

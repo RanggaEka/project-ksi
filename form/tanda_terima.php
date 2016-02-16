@@ -14,7 +14,7 @@
                                 </td>
                                 <td width="70%" rowspan="5" valign="top">
                                     Service <font color='red'>*</font> :
-                                    <table width="40%" border="0" cellpadding="2" cellspacing="1" style="border:1px solid #CCCCCC; border-radius:4px;"">
+                                    <table width="40%" border="0" cellpadding="2" cellspacing="1" style="border:1px solid #CCCCCC; border-radius:4px;">
                                         <tr>
 											<td width="30">U/D/L</td>
                                             <td valign="middle">
@@ -24,7 +24,7 @@
 														<option value="L">L</option>
 													</select>
                                             </td>
-                                            <tr/>
+                                        </tr>
                                             <tr>
 												<td>DTD/DTP</td>
                                                 <td valign="middle">
@@ -33,7 +33,7 @@
 														<option value="DTP">DTP</option>
 													</select>
                                                 </td>
-                                                <tr/>
+                                            </tr>
                                                 <tr>
 													<td>Agent</td>
                                                     <td valign="middle">

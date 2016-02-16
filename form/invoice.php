@@ -7,7 +7,7 @@
 				<!--<form action="../system/invoice_service.php" method="post" enctype="multipart/form-data">-->
 					<table width="80%" border="0" cellspacing="0" cellpadding="3">
 						<tr>
-				          	<td width="80px"><label>No. Invoice </label></td>
+				          	<td width="80px"><label>No. Invoice <font color='red'>*</font></label></td>
 				         	<td>:</td>
 				         	<td><input class="easyui-searchbox" style="width:150px;height:25px;padding:8px" data-options="prompt:'No Invoice',iconWidth:38,searcher:doSearch" id="no_inv" name="no_inv"></td>
 				         	<script>
@@ -17,12 +17,12 @@
 							</script>
 				        </tr>
 				        <tr>
-				          	<td><label>Tanggal</label></td>
+				          	<td><label>Tanggal <font color='red'>*</font></label></td>
 				         	<td>:</td>
 				         	<td><input id="tgl_inv" name="tgl_inv" class="easyui-datebox" style="width:150px;height:25px;padding:8px" placeholder="Tanggal" data-options="prompt:'Tanggal',formatter:myformatter,parser:myparser"></input></td>
 				        </tr>
 				        <tr>
-				          	<td><label>Customer</label></td>
+				          	<td><label>Customer <font color='red'>*</font></label></td>
 				         	<td>:</td>
 				         	<td>
 				         		<input class="easyui-combobox" 
@@ -58,7 +58,7 @@
                         <thead style="background:#ADE5F7;">
                         <tr>
                             <th class="cTh" width="15px" height="30px">No</th>
-                            <th class="cTh" width="120px">No CN</th>
+                            <th class="cTh" width="120px">No CN <font color='red'>*</font></th>
                             <th class="cTh" width="25px">&nbsp;</th>
                             <th class="cTh" width="70px">Tanggal</th>
                             <th class="cTh" width="330px">Tujuan</th>
@@ -97,7 +97,7 @@
 									<thead>
 									<tr>
 										<th data-options="field:'no',width:40">No</th>
-										<th data-options="field:'no_cn',width:180">CN</th>
+										<th data-options="field:'no_cn',width:180">CN </th>
 										<th data-options="field:'tanggal',width:100">Tanggal</th>
 										<th data-options="field:'pengirim',width:200">Pengirim</th>
 										<th data-options="field:'tujuan',width:120">Tujuan</th>

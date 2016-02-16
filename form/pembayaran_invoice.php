@@ -100,7 +100,7 @@
 													var sisa = parseInt($('#sisa').textbox('getText'))													
 														if(bayar > sisa){
 															$.messager.alert('Kesalahan', 'Nilai bayar tidak boleh lebih besar dari sisa !');
-															$('#bayar').focus()
+															$('#bayar').textbox('clear').textbox('textbox').focus();
 														}													
 												}">									
                                 </td>

@@ -42,6 +42,9 @@
 							'$customer_sid',
 							'$customer_nama',
 							'0',
+							'0',
+							'0',
+							'BELUM LUNAS',
 							'$user_id',
 							'$user_name')";
 			$result = mysql_query($sql);
@@ -61,7 +64,7 @@
 				$hitungTotalArr = mysql_fetch_array($hitungTotal);
 				$total_inv = $hitungTotalArr['total'];
 				mysql_query("UPDATE invoice_header
-							SET total='$total_inv'
+							SET total='$total_inv', sisa='$total_inv'
 							WHERE no_inv='$no_inv'");
 			} else {	
 				echo "<script>alert('Exception Error SQL Save');</script>";

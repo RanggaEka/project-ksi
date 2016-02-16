@@ -10,6 +10,7 @@
 		$no_inv = strtoupper($jsondata[0]->no_inv);
 		
 		$tanggal = $jsondata[0]->tanggal;	
+		
 		$bln=substr($tanggal,0,2);
 		$tgl=substr($tanggal,3,2);
 		$thn=substr($tanggal,6,4);
@@ -49,15 +50,14 @@
 					$arQ = mysql_fetch_array($Qry);
 					$idDetail = gen_uuid();
 					mysql_query("INSERT INTO invoice_detail 
-					VALUES ('$idDetail',
-							'$sid_header',
+					VALUES ('$idDetail',							
 							'$arQ[sid]',
 							'$arQ[no_cn]',
 							'$arQ[grand_total]')");
 				}
 			} else {	
 				echo "<script>alert('Exception Error SQL Save');</script>";
-			}			
+			}			//'$sid_header',
 		}
 	}
 ?>

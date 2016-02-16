@@ -126,7 +126,10 @@ function saveInvoice() {
 			customer_nama :  $('#customer_inv').textbox('getText'),
 			listDetail : objDtl
 		}];
-	
+		
+	if ($('#no_inv').textbox('getValue') != "" && $('#tgl_inv').datebox('getValue') != ""
+		&& $('#customer_inv').textbox('getValue') != "" && $('#no_cn1').textbox('getValue') != ""){
+		
 	$.ajax({
 		type	: "POST",
 		url		: "../system/invoice_service.php",
@@ -136,8 +139,10 @@ function saveInvoice() {
 		success	: function(data){
 			location.reload();
 		}
-	});
-		
+	});	
+	} else {
+		alert("Field yang bertanda * harus di isi! ");
+	}
 }
 
 function savePembayaran() {

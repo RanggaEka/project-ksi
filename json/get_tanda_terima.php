@@ -1,25 +1,89 @@
 <?php
 	include '../system/config_service.php';
-	
-	/*
 	$param1 = "";
-	$param2 = "";
-	$param3 = "";
-	$param4 = "";
-	if ($_GET['cn'] != null) {
-		$param1 = "where no_cn = '".$_GET['cn']."'";
+	if ($_GET['cn'] != "") {
+		$countArr = 0;
+		if ($_GET['arrSID'] != null || $_GET['arrSID'] != "") {
+			$json = json_encode($_GET['arrSID']);
+			$dec = json_decode($json);
+			$countArr = count($dec);
+			$data = array();
+			for ($i = 0; $i < $countArr; $i++) {
+				array_push($data, $dec[$i]);
+			}
+			$string = join(',', $data);
+			$param1 = "where no_cn = '".$_GET['cn']."' and pengirim = '".$_GET['customer']."' and sid not in (".$string.") ";
+		} else {
+			$param1 = "where no_cn = '".$_GET['cn']."'";
+		}
+		
+	} else if ($_GET['tanggal'] != "") {
+		$countArr = 0;
+		if ($_GET['arrSID'] != null || $_GET['arrSID'] != "") {
+			$json = json_encode($_GET['arrSID']);
+			$dec = json_decode($json);
+			$countArr = count($dec);
+			$data = array();
+			for ($i = 0; $i < $countArr; $i++) {
+				array_push($data, $dec[$i]);
+			}
+			$string = join(',', $data);
+			$param1 = "where tanggal = '".$_GET['tanggal']."' and pengirim = '".$_GET['customer']."'  and sid not in (".$string.") ";
+		} else {
+			$param1 = "where tanggal = '".$_GET['tanggal']."'";
+		}
+		
+	} else if ($_GET['pengirim'] != "") {
+		$countArr = 0;
+		if ($_GET['arrSID'] != null || $_GET['arrSID'] != "") {
+			$json = json_encode($_GET['arrSID']);
+			$dec = json_decode($json);
+			$countArr = count($dec);
+			$data = array();
+			for ($i = 0; $i < $countArr; $i++) {
+				array_push($data, $dec[$i]);
+			}
+			$string = join(',', $data);
+			$param1 = "where pengirim = '".$_GET['pengirim']."' and pengirim = '".$_GET['customer']."'  and sid not in (".$string.") ";
+		} else {
+			$param1 = "where pengirim = '".$_GET['pengirim']."'";
+		}
+		
+	} else if ($_GET['tujuan'] != "") {
+		if ($_GET['arrSID'] != null || $_GET['arrSID'] != "") {
+			$json = json_encode($_GET['arrSID']);
+			$dec = json_decode($json);
+			$countArr = count($dec);
+			$data = array();
+			for ($i = 0; $i < $countArr; $i++) {
+				array_push($data, $dec[$i]);
+			}
+			$string = join(',', $data);
+			$param1 = "where tujuan = '".$_GET['tujuan']."' and pengirim = '".$_GET['customer']."'  and sid not in (".$string.") ";
+		} else {
+			$param1 = "where tujuan = '".$_GET['tujuan']."'";
+		}
+		
+	} else if ($_GET['customer'] != "") {
+		$countArr = 0;
+		if ($_GET['arrSID'] != null || $_GET['arrSID'] != "") {
+			$json = json_encode($_GET['arrSID']);
+			$dec = json_decode($json);
+			$countArr = count($dec);
+			$data = array();
+			for ($i = 0; $i < $countArr; $i++) {
+				array_push($data, $dec[$i]);
+			}
+			$string = join(',', $data);
+			$param1  = "where pengirim = '".$_GET['customer']."' and pengirim = '".$_GET['customer']."'  and sid not in (".$string.") ";
+		} else {
+			$param1  = "where pengirim = '".$_GET['customer']."' ";
+		}
+	} else {
+		$param1 = "";
 	}
-	if ($_GET['tanggal'] != null) {
-		$param1 = "where tanggal = '".$_GET['tanggal']."'";
-	}
-	if ($_GET['pengirim'] != null) {
-		$param1 = "where pengirim = '".$_GET['pengirim']."'";
-	}
-	if ($_GET['tujuan'] != null) {
-		$param1 = "where tujuan = '".$_GET['tujuan']."'";
-	}
-	*/
-	$rs = mysql_query('SELECT * FROM tanda_terima order by no_cn desc');//'.$param1.$param2.$param3.$param4.' 
+	
+	$rs = mysql_query("SELECT * FROM tanda_terima $param1 order by no_cn desc");
 	$result = array();
 	while($row = mysql_fetch_object($rs)){
 		array_push($result, $row);

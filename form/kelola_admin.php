@@ -74,7 +74,7 @@
                                 <td></td>
                                 <td>
                                     <button type="" onclick="saveUser()">Save</button>
-									<button type="" onclick="editUser()">Edit</button>
+									<!--<button type="" onclick="editUser()">Edit</button>-->
                                     <button type="" onclick="location.reload()">Batal</button>
                                 </td>
                             </tr>

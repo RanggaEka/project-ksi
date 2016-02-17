@@ -71,40 +71,6 @@ function onSelectedTujuan(val) {
 	$('#total').textbox('setValue',sum)
 }
 
-function doSearchRekapTandaTerima(value,name){
-	if (name == "cn") {
-		$('#gridTandaTerima').datagrid({
-			queryParams: {
-				cn: value
-			}
-		});
-	} else if (name == "tanggal") {
-		$('#gridTandaTerima').datagrid({
-			queryParams: {
-				tanggal: value
-			}
-		});
-	} else if (name == "tujuan") {
-		$('#gridTandaTerima').datagrid({
-			queryParams: {
-				tujuan: value
-			}
-		});
-	} else if (name == "pengirim") {
-		$('#gridTandaTerima').datagrid({
-			queryParams: {
-				pengirim: value
-			}
-		});
-	} else {
-		$('#gridTandaTerima').datagrid({
-			queryParams: {
-				 free: 'free'
-			}
-		});
-	}
-}
-
 (function($){
 	function pagerFilter(data){
 		if ($.isArray(data)){	// is array

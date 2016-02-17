@@ -63,6 +63,7 @@
                             <th class="cTh" width="70px">Tanggal</th>
                             <th class="cTh" width="330px">Tujuan</th>
 							<th class="cTh" width="100px">Total</th>
+							<!--<th class="cTh" width="25px">&nbsp;</th>-->
                         </tr>
                         </thead>
 						<style>
@@ -74,34 +75,26 @@
                         	<td><input style="width:100%;height:25px;padding:1px" id="no_cn1" name="no_cn1"/></td>
                         	<td>
 								<div style="width:100%; text-align:center;">
-								<a id="btnLookup1" href="javascript:void(0)" onclick="test()"><img src="../images/famfam/application_xp.png" /></a>
+								<a id="btnLookup1" href="javascript:void(0)" onclick="showLookupTandaTerima()"><img src="../images/famfam/application_xp.png" /></a>
 								</div>
                                     <div id="lookupinvoice" class="easyui-window" title="Lookup Tanda Terima" data-options="modal:true,closed:true,iconCls:'icon-save'" style="width:700px;height:320px;padding:10px; text-align:left;">
-                                        Pencarian : <input class="easyui-searchbox" data-options="prompt:'.......',menu:'#mm',searcher:doSearch" style="width:480px;height:25px;padding:10px;"></input>
+                                        Pencarian : <input id="searchBoxLookupTandaInvoice" class="easyui-searchbox" data-options="prompt:'.......',menu:'#mm',searcher:doSearchRekapLookupTandaTerima" style="width:480px;height:25px;padding:10px;"></input>
                                         <br/>
                                         <br/>
                                         <div id="mm">
                                             <div data-options="name:'semua'">Semua</div>
                                             <div data-options="name:'cn'">CN</div>
                                             <div data-options="name:'tanggal'">Tanggal</div>
-                                            <div data-options="name:'pengirim'">Pengirim</div>
                                             <div data-options="name:'tujuan'">Tujuan</div>
                                         </div>
-                                        <script>
-                                            function doSearch(value, name) {
-                                                alert('You input: ' + value + '(' + name + ')');
-                                            }
-                                        </script>
                                         <table id="gridLookupTandaTerima" class="easyui-datagrid" title="" style="width:98%;height:180px"
 									data-options="singleSelect:true,collapsible:true,url:'../json/get_tanda_terima.php',method:'get'">
 									<thead>
 									<tr>
-										<th data-options="field:'no',width:40">No</th>
-										<th data-options="field:'no_cn',width:180">CN </th>
+										<th data-options="field:'no_cn',width:100">No CN </th>
 										<th data-options="field:'tanggal',width:100">Tanggal</th>
-										<th data-options="field:'pengirim',width:200">Pengirim</th>
-										<th data-options="field:'tujuan',width:120">Tujuan</th>
-										<th data-options="field:'grand_total',width:170" formatter="formatPrice">Total</th>
+										<th data-options="field:'tujuan',width:300">Tujuan</th>
+										<th data-options="field:'grand_total',width:140" formatter="formatPrice">Total</th>
 									</tr>
 									</thead>
 								</table>
@@ -117,6 +110,11 @@
 								<input disabled style="width:100%;height:25px;padding:1px" id="total1" name="total1" />
 								<input disabled style="width:100%;height:25px;padding:1px" id="sid1" name="sid1" hidden />
                         	</td>
+                        	<td>
+                        	<!--<div style="width:100%; text-align:center;">
+								<a id="btnDelete2" style="visibility:hidden;" href="javascript:void(0)" onclick="deleteRowTandaTerima()"><img src="../images/famfam/delete.png" /></a>
+								</div>-->
+                        	</td>
                         </tr>
                         </tbody>
                     </table>
@@ -128,16 +126,42 @@
 
 <script type="text/javascript">	
 	var tblIndex = "";
-	function myFunction(x) {
-		tblIndex = x.rowIndex;
-		document.getElementById('no'+tblIndex).value = tblIndex 
+	function showLookupTandaTerima() {
+		if ($('#customer_inv').combo('getText') != "") {
+			$('#detail_invoice').find('tr').click( function(){
+				tblIndex = ($(this).index()+1);
+			});
+			
+			setTimeout(function(){
+				$('#lookupinvoice').window('open')
+				$('#searchBoxLookupTandaInvoice').searchbox('clear');
+				var count = document.getElementById("detail_invoice").rows.length;
+				var dataSelected = []
+				for (var i = 1; i < count; i++) {
+					if ($("#sid"+i).val() != "") {
+						dataSelected.push("'"+$("#sid"+i).val()+"'")
+					}
+				}
+				
+				$('#gridLookupTandaTerima').datagrid({
+					queryParams: {
+						customer: $('#customer_inv').combo('getText'),
+						arrSID:dataSelected
+					}
+				});
+			},120);
+		} else {
+			alert("Customer belum di pilih! ")
+		}
 	}
 	
-	function test() {
-		$('#lookupinvoice').window('open')
+	function deleteRowTandaTerima() {
 		$('#detail_invoice').find('tr').click( function(){
 			tblIndex = ($(this).index()+1);
 		});
+		setTimeout(function(){
+			document.getElementById("detail_invoice").deleteRow(tblIndex);
+		},100)
 	}
 	
 	function selectDetailTandaTerima(){
@@ -149,7 +173,7 @@
 			document.getElementById("no_cn"+tblIndex).value = row.no_cn 
 			document.getElementById("tanggal"+tblIndex).value = row.tanggal 
 			document.getElementById('tujuan'+tblIndex).value = row.tujuan 
-			document.getElementById('total'+tblIndex).value = row.grand_total 
+			document.getElementById('total'+tblIndex).value = row.grand_total
 			//$('#tanggal').textbox('setValue', row.tanggal);
 			//$('#pengirim').textbox('setValue', row.pengirim);
 			//$('#tujuan').textbox('setValue', row.tujuan);
@@ -167,22 +191,104 @@
 			var cell4 = newRow.insertCell(3);
 			var cell5 = newRow.insertCell(4);
 			var cell6 = newRow.insertCell(5);
+			//var cell7 = newRow.insertCell(6);
 			
 			cell1.innerHTML = "<input type='text' disabled style='width:100%;height:25px;padding:1px;text-align:center;' id='no"+count+"' name='no"+count+"'/>";
 			cell2.innerHTML = "<input style='width:100%;height:25px;padding:1px' id='no_cn"+count+"' name='no_cn"+count+"'/>";
-			cell3.innerHTML = "<div style='width:100%; text-align:center;'> <a id='btnLookup"+tblIndex+"' href='javascript:void(0)' class='easyui-linkbutton' onclick='test()'><img src='../images/famfam/application_xp.png' /></a></div>";
+			cell3.innerHTML = "<div style='width:100%; text-align:center;'> <a id='btnLookup"+count+"' href='javascript:void(0)' class='easyui-linkbutton' onclick='showLookupTandaTerima()'><img src='../images/famfam/application_xp.png' /></a></div>";
 			cell4.innerHTML = "<input type='text' disabled style='width:100%;height:25px;padding:1px' id='tanggal"+count+"' name='tanggal"+count+"'/>";
 			cell5.innerHTML = "<input type='text' disabled style='width:100%;height:25px;padding:1px' id='tujuan"+count+"' name='tujuan"+count+"'/>";
 			cell6.innerHTML = "<input disabled style='width:100%;height:25px;padding:1px' id='total"+count+"' name='total"+count+"'>" + 
 							  "<input hidden disabled style='width:100%;height:25px;padding:1px' id='sid"+count+"' name='sid"+count+"'>";
+			//cell7.innerHTML = "<div style='width:100%; text-align:center;'> <a id='btnDelete"+(count+1)+"' style='visibility:hidden;' href='javascript:void(0)' class='easyui-linkbutton' onclick='deleteRowTandaTerima()'><img src='../images/famfam/delete.png' /></a></div>";
 			
-			//var table=document.getElementById("detail_invoice")
-			//var clnNode=document.getElementById("detail_invoice_row").cloneNode(true);  
-			//table.insertBefore(clnNode,table.lastChild);
-			
+			setTimeout(function(){
+				document.getElementById("btnLookup"+tblIndex).style.visibility = 'hidden'  
+			},500)
 			$('#lookupinvoice').window('close')			
+		
 		}else{
 			$.messager.alert('Kesalahan', 'Data belum di pilih !');
+		}
+	}
+	
+	function doSearchRekapLookupTandaTerima(value,name){
+		var count = document.getElementById("detail_invoice").rows.length;
+		var dataSelected = []
+		for (var i = 1; i < count; i++) {
+			if ($("#sid"+i).val() != "") {
+				dataSelected.push("'"+$("#sid"+i).val()+"'")
+			}
+		}
+		
+		if (name == "cn") {
+			$('#gridLookupTandaTerima').datagrid({
+				queryParams: {
+					cn: value,
+					customer: $('#customer_inv').combo('getText'),
+					arrSID:dataSelected
+				}
+			});
+		} else if (name == "tanggal") {
+			$('#gridLookupTandaTerima').datagrid({
+				queryParams: {
+					tanggal: value,
+					customer: $('#customer_inv').combo('getText'),
+					arrSID:dataSelected
+				}
+			});
+		} else if (name == "tujuan") {
+			$('#gridLookupTandaTerima').datagrid({
+				queryParams: {
+					tujuan: value,
+					customer: $('#customer_inv').combo('getText'),
+					arrSID:dataSelected
+				}
+			});
+		} else {
+			$('#gridLookupTandaTerima').datagrid({
+				queryParams: {
+					customer: $('#customer_inv').combo('getText'),
+					arrSID:dataSelected
+				}
+			});
+		}
+	}
+	
+	function saveInvoice() {
+		var objDtl = []
+		var dtl = {}
+		var count = document.getElementById("detail_invoice").rows.length;
+		
+		for (var i = 1; i < count; i++) {
+			dtl = {
+				sid :  document.getElementById("sid"+i).value
+			}
+			objDtl.push(dtl)
+		}
+		
+		var objHeader = [{
+				no_inv :  $('#no_inv').textbox('getText'),
+				tanggal :  $('#tgl_inv').datebox('getValue'),
+				customer_nama :  $('#customer_inv').textbox('getText'),
+				listDetail : objDtl
+			}];
+			
+		if ($('#no_inv').textbox('getValue') != "" && $('#tgl_inv').datebox('getValue') != ""
+			&& $('#customer_inv').textbox('getValue') != ""){
+			
+		$.ajax({
+			type	: "POST",
+			url		: "../system/invoice_service.php",
+			data	: {
+				data : objHeader
+			},
+			success	: function(data){
+				location.reload();
+			}
+		});	
+		} else {
+			alert("Field yang bertanda * harus di isi! ");
 		}
 	}
 </script>

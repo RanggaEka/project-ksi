@@ -50,5 +50,56 @@
 				</table>
 			</td>
         </tr>
+        <tr>
+			<td>
+				<table id="dg" style="width:100%;height:250px"
+					url="../json/data-header-rekap-invoice.php" 
+					singleSelect="true" fitColumns="true">
+				<thead>
+					<tr>
+						<th field="no_inv" width="80">No Inv</th>
+						<th field="tanggal" width="100">Tanggal</th>
+						<th field="customer_nama" align="right" width="80">Cust</th>
+						<th field="total" align="right" width="80">Total</th>
+					</tr>
+				</thead>
+			</table>
+			</td>
+        </tr>
     </table>
 </td>
+
+<script type="text/javascript">
+	$(function(){
+		$('#dg').datagrid({
+			view: detailview,
+			detailFormatter:function(index,row){
+				return '<div style="padding:2px"><table id="ddv-' + index + '"></table></div>';
+			},
+			onExpandRow: function(index,row){
+				$('#ddv-'+index).datagrid({
+					url:'../json/data-detail-rekap-invoice.php?no_inv='+row.no_inv,
+					fitColumns:true,
+					singleSelect:true,
+					rownumbers:true,
+					loadMsg:'',
+					height:'auto',
+					columns:[[
+						{field:'no_cn',title:'No Tanda Terima',width:80},
+						{field:'tujuan',title:'Tujuan',width:300,},
+						{field:'pengirim',title:'total',width:100,align:'right'}
+					]],
+					onResize:function(){
+						$('#dg').datagrid('fixDetailRowHeight',index);
+					},
+					onLoadSuccess:function(){
+						setTimeout(function(){
+							$('#dg').datagrid('fixDetailRowHeight',index);
+						},0);
+					}
+				});
+				$('#dg').datagrid('fixDetailRowHeight',index);
+			}
+		});
+	});
+</script>

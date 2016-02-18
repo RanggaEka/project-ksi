@@ -204,7 +204,7 @@
 			
 			setTimeout(function(){
 				document.getElementById("btnLookup"+tblIndex).style.visibility = 'hidden'  
-			},500)
+			},200)
 			$('#lookupinvoice').window('close')			
 		
 		}else{

@@ -49,20 +49,20 @@
 							'$user_name')";
 			$result = mysql_query($sql);
 			if ($result){
-				for ($i = 0; $i < count($jsondataDetail)-1; $i++) {
+				for ($i = 0; $i < count($jsondataDetail); $i++) {
 					$Qry = mysql_query("select * from tanda_terima where sid = '".$jsondata[0]->listDetail[$i]->sid."' ") or die(mysql_error());
 					$arQ = mysql_fetch_array($Qry);
 					$idDetail = gen_uuid();
-					mysql_query("UPDATE tanda_terima
-							SET is_sudah_invoice = 1
-							where sid = '".$jsondata[0]->listDetail[$i]->sid."' ");
-					
 					mysql_query("INSERT INTO invoice_detail 
 					VALUES ('$idDetail',
 							'$no_inv',
 							'$arQ[sid]',
 							'$arQ[no_cn]',
 							'$arQ[grand_total]')");
+							
+					mysql_query("UPDATE tanda_terima
+							SET is_sudah_invoice = 1
+							where sid = '".$jsondata[0]->listDetail[$i]->sid."' ");
 				}
 				$hitungTotal = mysql_query("SELECT SUM(tarif) as total FROM invoice_detail WHERE no_inv='$no_inv'");
 				$hitungTotalArr = mysql_fetch_array($hitungTotal);

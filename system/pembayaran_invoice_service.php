@@ -29,7 +29,7 @@
 			$headerArr = mysql_fetch_array($cekHeader);
 			if($headerArr['sisa']<=0){
 						mysql_query("UPDATE invoice_header
-						SET status='LUNAS'
+						SET keterangan='LUNAS'
 						WHERE no_inv='$no_inv'");
 			}
 			$idBayar = gen_uuid();

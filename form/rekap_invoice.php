@@ -52,7 +52,7 @@
         </tr>
         <tr>
 			<td>
-				<table id="dg" style="width:100%;height:250px"
+				<table id="gridRekapInvoice" style="width:100%;height:250px"
 					url="../json/data-header-rekap-invoice.php" 
 					singleSelect="true" fitColumns="true">
 				<thead>
@@ -61,6 +61,7 @@
 						<th field="tanggal" width="100">Tanggal</th>
 						<th field="customer_nama" align="right" width="80">Cust</th>
 						<th field="total" align="right" width="80">Total</th>
+						<th field="keterangan" align="right" width="100">Keterangan</th>
 					</tr>
 				</thead>
 			</table>
@@ -71,7 +72,7 @@
 
 <script type="text/javascript">
 	$(function(){
-		$('#dg').datagrid({
+		$('#gridRekapInvoice').datagrid({
 			view: detailview,
 			detailFormatter:function(index,row){
 				return '<div style="padding:2px"><table id="ddv-' + index + '"></table></div>';
@@ -90,15 +91,23 @@
 						{field:'pengirim',title:'total',width:100,align:'right'}
 					]],
 					onResize:function(){
-						$('#dg').datagrid('fixDetailRowHeight',index);
+						$('#gridRekapInvoice').datagrid('fixDetailRowHeight',index);
 					},
 					onLoadSuccess:function(){
 						setTimeout(function(){
-							$('#dg').datagrid('fixDetailRowHeight',index);
+							$('#gridRekapInvoice').datagrid('fixDetailRowHeight',index);
 						},0);
 					}
 				});
-				$('#dg').datagrid('fixDetailRowHeight',index);
+				$('#gridRekapInvoice').datagrid('fixDetailRowHeight',index);
+			}
+		});
+		
+		$('#gridRekapInvoice').datagrid({
+			rowStyler:function(index,row){
+				if (row.keterangan == 'LUNAS'){
+					return 'background-color:pink;color:blue;font-weight:bold;';
+				}
 			}
 		});
 	});

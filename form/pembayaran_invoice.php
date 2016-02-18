@@ -13,21 +13,14 @@
                                     <input class="easyui-textbox" style="width:150px;height:25px;padding:8px" data-options="prompt:'No Invoice',iconWidth:38" id="no_inv" name="no_inv" disabled>
                                     <a href="javascript:void(0)" class="easyui-linkbutton" onclick="$('#lookupinvoice').window('open')"><img src="../images/famfam/application_xp.png" /></a>
                                     <div id="lookupinvoice" class="easyui-window" title="Lookup Invoice" data-options="modal:true,closed:true,iconCls:'icon-save'" style="width:70%;height:320px;padding:10px; text-align:left;">
-                                        Pencarian : <input class="easyui-searchbox" data-options="prompt:'.......',menu:'#mm',searcher:doSearch" style="width:480px;height:25px;padding:10px;"></input>
+                                        Pencarian : <input class="easyui-searchbox" data-options="prompt:'.......',menu:'#mm',searcher:searchLookupInvoice" style="width:480px;height:25px;padding:10px;"></input>
                                         <br/>
                                         <br/>
                                         <div id="mm">
                                             <div data-options="name:'semua'">Semua</div>
-                                            <div data-options="name:'cn'">CN</div>
+                                            <div data-options="name:'no_inv'">No Inv</div>
                                             <div data-options="name:'tanggal'">Tanggal</div>
-                                            <div data-options="name:'pengirim'">Pengirim</div>
-                                            <div data-options="name:'tujuan'">Tujuan</div>
                                         </div>
-                                        <script>
-                                            function doSearch(value, name) {
-                                                alert('You input: ' + value + '(' + name + ')');
-                                            }
-                                        </script>
                                         <table id="tblLookupInvoice" class="easyui-datagrid" title="" style="width:98%;height:180px"
 											data-options="rownumbers:true,singleSelect:true,collapsible:true,url:'../json/get_invoice.php',method:'get'">
 											<thead>
@@ -178,6 +171,28 @@
 			
 		}else{
 			$.messager.alert('Kesalahan', 'Field yang bertanda * harus di isi ! ', 'error');
+		}
+	}
+	
+	function searchLookupInvoice(value,name) {
+		if (value == "") {
+			//alert('Data tidak ditemukan !')
+			console.log("kosong");
+		} else {
+			if (name == "no_inv") {
+				$('#tblLookupInvoice').datagrid({
+					queryParams: {
+						no_inv: value
+					}
+				});
+				
+			} else if (name == "no_inv") { 
+				$('#tblLookupInvoice').datagrid({
+					queryParams: {
+						tanggal: value
+					}
+				});
+			}
 		}
 	}
 </script>

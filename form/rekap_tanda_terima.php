@@ -1,7 +1,7 @@
 <td width="156">&nbsp;</td>
 <td>
 	<br>
-	<table width="75%" border="1" align="left" cellpadding="4" cellspacing="2" style="border: solid 1px #efefef;">
+	<table width="80%" border="1" align="left" cellpadding="4" cellspacing="2" style="border: solid 1px #efefef;">
 		<tr>
           	<td>
 					<form action="../system/order_header_service.php" method="post" enctype="multipart/form-data">

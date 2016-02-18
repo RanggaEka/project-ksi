@@ -106,16 +106,15 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td></td>
-                                <td></td>
-                                <td>
+                                <td colspan="3">
                                     <button type="submit" name="simpan_inv" onclick="savePembayaran()">Save</button>
                                     <button type="reset" onclick="location.reload()">Batal</button>
                                 </td>
                             </tr>
                         </table>
                     </form>
-                    <table id="gridDetailInvoice" class="easyui-datagrid" title="" style="width:98%;height:250px"
+                    <br/>
+                    <table id="gridDetailInvoice" class="easyui-datagrid" title="" style="width:98%;height:228px"
 									data-options="rownumbers:true,singleSelect:true,collapsible:true,url:'../json/get_invoice_detail.php',method:'get'">
 									<thead>
 									<tr>										
@@ -141,9 +140,44 @@
 			$('#total').textbox('setValue', row.total);
 			$('#cicilan').textbox('setValue', row.cicilan);
 			$('#sisa').textbox('setValue', row.sisa);
-			$('#lookupinvoice').window('close');			
+			$('#lookupinvoice').window('close');	
+			
+			setTimeout(function(){
+				$('#gridDetailInvoice').datagrid({
+					queryParams: {
+						custNama: row.customer_nama,
+						no_inv: row.no_inv,
+					}
+				});
+			},150)		
 		}else{
-			$.messager.alert('Kesalahan', 'Data belum di pilih !');
+			$.messager.alert('Peringatan', 'Data belum di pilih !', 'warning');
+		}
+	}
+	
+	function savePembayaran() {
+		if ($('#no_inv').textbox('getText') != "" && $('#tanggal_bayar').datebox('getValue') != "" 
+			&& $('#bayar').textbox('getText') != "") {
+		
+			var objBayar = [{
+					no_inv :  $('#no_inv').textbox('getText'),
+					tanggal :  $('#tanggal_bayar').datebox('getValue'),
+					nilai_bayar :  $('#bayar').textbox('getText')
+				}];
+			
+			$.ajax({
+				type	: "POST",
+				url		: "../system/pembayaran_invoice_service.php",
+				data	: {
+					data : objBayar
+				},
+				success	: function(data){
+					location.reload();			
+				}
+			});
+			
+		}else{
+			$.messager.alert('Kesalahan', 'Field yang bertanda * harus di isi ! ', 'error');
 		}
 	}
 </script>

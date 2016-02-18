@@ -9,19 +9,54 @@
 					<tr>
 						<td width="120px"><label>No. Invoice</label></td>
 						<td>:</td>
-						<td width="180px"><input class="easyui-textbox" style="width:150px;height:25px;padding:8px" data-options="prompt:'No Invoice',iconWidth:38" id="no_inv" name="no_inv"></td>
+						<td width="180px">
+							<input class="easyui-textbox" style="width:130px;height:25px;padding:8px" data-options="prompt:'No Invoice',iconWidth:38" id="no_inv" name="no_inv">
+							<a href="javascript:void(0)" onclick="$('#lookupinvoiceRekap').window('open')"><img src="../images/famfam/application_xp.png" /></a>
+							<div id="lookupinvoiceRekap" class="easyui-window" title="Lookup Invoice" data-options="modal:true,closed:true,iconCls:'icon-save'" style="width:70%;height:320px;padding:10px; text-align:left;">
+								Pencarian : <input class="easyui-searchbox" data-options="prompt:'.......',menu:'#mm',searcher:searchLookupInvoice" style="width:480px;height:25px;padding:10px;"></input>
+								<br/>
+								<br/>
+								<div id="mm">
+									<div data-options="name:'semua'">Semua</div>
+									<div data-options="name:'no_inv'">No Inv</div>
+									<div data-options="name:'tanggal'">Tanggal</div>
+								</div>
+								<table id="tblLookupInvoiceRekap" class="easyui-datagrid" title="" style="width:98%;height:180px"
+									data-options="rownumbers:true,singleSelect:true,collapsible:true,url:'../json/get_invoice.php',method:'get'">
+									<thead>
+									<tr>												
+										<th data-options="field:'no_inv',width:100">No. Invoice</th>												
+										<th data-options="field:'tanggal',width:100">Tanggal</th>
+										<th data-options="field:'customer_nama',width:250">Customer</th>
+										<th data-options="field:'total',width:100" formatter="formatPrice" align="right">Total</th>
+										<th data-options="field:'cicilan',width:100" formatter="formatPrice" align="right">Cicilan</th>
+										<th data-options="field:'sisa',width:100" formatter="formatPrice" align="right">Sisa</th>
+									</tr>
+									</thead>
+								</table>
+								<br/>
+								<div style="float:right;">
+									<button type="submit" onclick="selectInvoice()">Pilih</button>
+								</div>
+							</div>
+						</td>
 						<td width="110px"><label>Tanggal</label></td>
 						<td>:</td>
 						<td>
-							<input class="easyui-textbox" style="width:150px;height:25px;padding:8px" data-options="prompt:'No Invoice',iconWidth:38" id="no_inv" name="no_inv">
-							s/d
-							<input class="easyui-textbox" style="width:150px;height:25px;padding:8px" data-options="prompt:'No Invoice',iconWidth:38" id="no_inv" name="no_inv">
+							<input class="easyui-datebox" style="width:150px;height:25px;padding:8px" data-options="prompt:'No Invoice',iconWidth:38" id="no_inv" name="no_inv"> 
+							s/d 
+							<input class="easyui-datebox" style="width:150px;height:25px;padding:8px" data-options="prompt:'No Invoice',iconWidth:38" id="no_inv" name="no_inv">
 						</td>
 					</tr>
 					<tr>
 						<td><label>Status Pembayaran</label></td>
 						<td>:</td>
-						<td><input class="easyui-textbox" style="width:150px;height:25px;padding:8px" data-options="prompt:'No Invoice',iconWidth:38" id="no_inv" name="no_inv"></td>
+						<td>
+							<select class="easyui-combobox" name="status" id="status" style="width:150px;padding:8px">
+								<option value="LUNAS">LUNAS</option>
+								<option value="BELUM LUNAS">BELUM LUNAS</option>
+							</select>
+						</td>
 						<td><label>Customer</label></td>
 						<td>:</td>
 						<td>
@@ -111,4 +146,26 @@
 			}
 		});
 	});
+	
+	function searchLookupInvoice(value,name) {
+		if (value == "") {
+			//alert('Data tidak ditemukan !')
+			console.log("kosong");
+		} else {
+			if (name == "no_inv") {
+				$('#tblLookupInvoiceRekap').datagrid({
+					queryParams: {
+						no_inv: value
+					}
+				});
+				
+			} else if (name == "no_inv") { 
+				$('#tblLookupInvoiceRekap').datagrid({
+					queryParams: {
+						tanggal: value
+					}
+				});
+			}
+		}
+	}
 </script>

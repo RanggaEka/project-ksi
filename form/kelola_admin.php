@@ -76,8 +76,8 @@
                                 <td></td>
                                 <td></td>
                                 <td>
-                                    <button onclick="saveUser()">Save</button>
-									<button onclick="hapusUser()">Hapus</button>
+                                    <button id="btnSaveUser" onclick="saveUser()">Save</button>
+									<button id="btnDeleteUser" onclick="hapusUser()">Hapus</button>
                                     <button onclick="location.reload()">Batal</button>
                                 </td>
                             </tr>
@@ -147,7 +147,6 @@
 					data : obj
 				},
 				success	: function(data){
-					alert('Data berhasil disimpan');
 					location.reload();
 					//$.messager.alert('Info', 'Data berhasil disimpan ', 'info');
 					//refreshUser();

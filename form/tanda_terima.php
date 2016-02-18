@@ -273,8 +273,8 @@
 		$('#coll').textbox('setText','1')
 		$('#kg').textbox('setText','1')
 		$('#vol').textbox('setText','1')
-		$('#tarif').textbox('setText','')
-		$('#total').textbox('setText','')
+		$('#tarif').textbox('setValue','')
+		$('#total').textbox('setValue','')
 		$('#deskripsi').textbox('setText','')
 		document.getElementById('simpan_tt').style.display = "inline-block"
 		$('#gridFormTandaTerima').datagrid('reload')
@@ -318,6 +318,7 @@
 					data : obj
 				},
 				success	: function(data){
+					$.messager.alert('Info','Data berhasil disimpan!','info');
 					refreshTandaTerima();
 				}
 			});

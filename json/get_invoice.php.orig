@@ -1,5 +1,7 @@
 <?php
 	include '../system/config_service.php';
+<<<<<<< HEAD
+	
 	$param1= "";
 	if ($_GET['no_inv'] != "") {
 		$param1 = " and no_inv = '".$_GET['no_inv']."' ";
@@ -9,6 +11,11 @@
 	}
 	
 	$rs = mysql_query("SELECT * FROM invoice_header WHERE keterangan = 'BELUM LUNAS' $param1 order by no_inv desc");
+=======
+
+	$rs = mysql_query('SELECT * FROM invoice_header WHERE keterangan="BELUM LUNAS" order by no_inv desc');
+	
+>>>>>>> f115bfda9fed13e4ef09e910fe3e092e80157e1f
 	$result = array();
 	while($row = mysql_fetch_object($rs)){
 		array_push($result, $row);

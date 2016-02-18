@@ -44,7 +44,7 @@
 		//$nomor = "P".str_pad($cnt,5,"0",STR_PAD_LEFT);		
 		$cekCN	= mysql_num_rows(mysql_query("SELECT * FROM tanda_terima WHERE no_cn='$cn'"));
 		$cekCustomer = mysql_num_rows(mysql_query("SELECT * FROM customer WHERE nama like '%$pengirim%'"));
-		$cekAgent = mysql_num_rows(mysql_query("SELECT * FROM agent WHERE agent='%$agent%' "));
+		$cekAgent = mysql_num_rows(mysql_query("SELECT * FROM agent WHERE agent like '%$agent%'"));
 		
 		if(($cekCustomer)<1){
 			$newCust = mysql_query("insert into customer values ('".$id."','".$pengirim."','".$alamat_pengirim."','".$telpon_pengirim."') ");

@@ -80,7 +80,7 @@
 			$param1  = "where pengirim = '".$_GET['customer']."' and is_sudah_invoice = 0 ";
 		}
 	} else {
-		$param1 = " where is_sudah_invoice = 0 ";
+		$param1 = "";// where is_sudah_invoice = 0 
 	}
 	
 	$rs = mysql_query("SELECT * FROM tanda_terima $param1 order by no_cn desc");

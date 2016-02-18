@@ -88,7 +88,7 @@
 					columns:[[
 						{field:'no_cn',title:'No Tanda Terima',width:80},
 						{field:'tujuan',title:'Tujuan',width:300,},
-						{field:'pengirim',title:'total',width:100,align:'right'}
+						{field:'grand_total',title:'Total',width:100,align:'right'}
 					]],
 					onResize:function(){
 						$('#gridRekapInvoice').datagrid('fixDetailRowHeight',index);

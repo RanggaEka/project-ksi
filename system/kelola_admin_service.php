@@ -48,7 +48,7 @@
 				$_SESSION['username'] = $username;
 				$_SESSION['password'] = $password;		
 				$_SESSION['nama'] = $nama;
-				$_SESSION['jabatan'] = $jabatan;
+				$_SESSION['jabatan'] = $jabatan;				
 			}		
 		}
 		if ($exQuery) {

@@ -1,3 +1,4 @@
+<?php if ($_SESSION['jabatan'] == "ADMIN") { ?>
 <td width="156">&nbsp;</td>
 <td>
     <br>
@@ -193,3 +194,4 @@
 		}
 	}
 </script>
+<?php }else{ echo "<script>window.location.href='../form/halaman_utama.php?page=home'</script>"; }?>

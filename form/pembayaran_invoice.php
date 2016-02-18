@@ -108,7 +108,7 @@
                             <tr>
                                 <td colspan="3">
                                     <button type="submit" name="simpan_inv" onclick="savePembayaran()">Save</button>
-                                    <button type="reset" onclick="location.reload()">Batal</button>
+                                    <button onclick="location.reload()">Batal</button>
                                 </td>
                             </tr>
                         </table>
@@ -118,11 +118,11 @@
 									data-options="rownumbers:true,singleSelect:true,collapsible:true,url:'../json/get_invoice_detail.php',method:'get'">
 									<thead>
 									<tr>										
-										<th data-options="field:'no_cn',width:180">CN</th>
-										<th data-options="field:'tanggal',width:100">Tanggal</th>
-										<th data-options="field:'pengirim',width:200">Pengirim</th>
-										<th data-options="field:'tujuan',width:120">Tujuan</th>
-										<th data-options="field:'grand_total',width:170" formatter="formatPrice">Total</th>
+										<th style="width:10%" data-options="field:'no_cn'">CN</th>
+										<th style="width:14%" data-options="field:'tanggal'">Tanggal</th>
+										<th style="width:20%" data-options="field:'pengirim'">Pengirim</th>
+										<th style="width:35%" data-options="field:'tujuan'">Tujuan</th>
+										<th style="width:16%" data-options="field:'grand_total'" align="right" formatter="formatPrice">Total</th>
 									</tr>
 									</thead>
 								</table>
@@ -172,12 +172,27 @@
 					data : objBayar
 				},
 				success	: function(data){
-					location.reload();			
+					alert('Pembayaran berhasil diupdate !');
+					//refreshPembayaran();		
+					location.reload();
 				}
 			});
 			
 		}else{
 			$.messager.alert('Kesalahan', 'Field yang bertanda * harus di isi ! ', 'error');
 		}
+	}
+	function refreshPembayaran() {
+		$('#no_inv').textbox('setValue', '')
+		$('#tanggal').textbox('setValue', '')
+		$('#customer').textbox('setValue', '')
+		$('#total').textbox('setValue', '')
+		$('#cicilan').textbox('setValue', '')
+		$('#sisa').textbox('setValue', '')
+		$('#tanggal_bayar').textbox('setValue', '')
+		$('#bayar').textbox('setValue', '')
+		document.getElementById('simpan_inv').style.display = "inline-block"
+		$('#gridDetailInvoice').datagrid('reload')
+		$('#tblLookupInvoice').datagrid('reload')
 	}
 </script>

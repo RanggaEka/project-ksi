@@ -286,6 +286,7 @@
 					data : objHeader
 				},
 				success	: function(data){
+					$.messager.alert('Info', 'Invoice Berhasil disimpan ! ', 'info');
 					location.reload();
 				}
 			});	

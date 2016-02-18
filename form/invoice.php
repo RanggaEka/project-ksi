@@ -277,8 +277,8 @@
 			}];
 		
 		if ($('#no_inv').textbox('getValue') != "" && $('#tgl_inv').datebox('getValue') != ""
-			&& $('#customer_inv').textbox('getValue') != "" && objDtl != []){
-			
+			&& $('#customer_inv').textbox('getValue') != "" && objDtl.length > 0){
+			console.log("sini")
 			$.ajax({
 				type	: "POST",
 				url		: "../system/invoice_service.php",

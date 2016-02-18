@@ -165,7 +165,9 @@
 					data : objBayar
 				},
 				success	: function(data){
-					location.reload();			
+					alert('Pembayaran berhasil diupdate !');
+					//refreshPembayaran();		
+					location.reload();
 				}
 			});
 			
@@ -173,21 +175,8 @@
 			$.messager.alert('Kesalahan', 'Field yang bertanda * harus di isi ! ', 'error');
 		}
 	}
+<<<<<<< HEAD
 	
-	function refreshPembayaran() {
-		$('#no_inv').textbox('setValue', '')
-		$('#tanggal').textbox('setValue', '')
-		$('#customer').textbox('setValue', '')
-		$('#total').textbox('setValue', '')
-		$('#cicilan').textbox('setValue', '')
-		$('#sisa').textbox('setValue', '')
-		$('#tanggal_bayar').textbox('setValue', '')
-		$('#bayar').textbox('setValue', '')
-		document.getElementById('simpan_inv').style.display = "inline-block"
-		$('#gridDetailInvoice').datagrid('reload')
-		$('#tblLookupInvoice').datagrid('reload')
-	}
-
 	function searchLookupInvoice(value,name) {
 		if (value == "") {
 			//alert('Data tidak ditemukan !')
@@ -208,5 +197,19 @@
 				});
 			}
 		}
+=======
+	function refreshPembayaran() {
+		$('#no_inv').textbox('setValue', '')
+		$('#tanggal').textbox('setValue', '')
+		$('#customer').textbox('setValue', '')
+		$('#total').textbox('setValue', '')
+		$('#cicilan').textbox('setValue', '')
+		$('#sisa').textbox('setValue', '')
+		$('#tanggal_bayar').textbox('setValue', '')
+		$('#bayar').textbox('setValue', '')
+		document.getElementById('simpan_inv').style.display = "inline-block"
+		$('#gridDetailInvoice').datagrid('reload')
+		$('#tblLookupInvoice').datagrid('reload')
+>>>>>>> f115bfda9fed13e4ef09e910fe3e092e80157e1f
 	}
 </script>

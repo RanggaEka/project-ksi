@@ -114,4 +114,36 @@
 			$.messager.alert('Peringatan', 'Data belum di pilih !', 'warning');
 		}
 	}
+	
+	function saveUser() {
+		var obj = [{
+				username :  $('#username').textbox('getValue'),
+				password :  $('#password').textbox('getValue'),
+				nama :  $('#nama').textbox('getValue'),
+				jenis_kelamin :  $('#jenis_kelamin').combo("getText"),
+				tempat_lahir :  $('#tempat_lahir').textbox('getValue'),
+				tanggal_lahir :  $('#tanggal_lahir').datebox('getValue'),
+				alamat :  $('#alamat').textbox('getValue'),
+				jabatan :  $('#jabatan').combo("getText")
+			}];
+			
+		if ($('#username').textbox('getValue') != "" && $('#password').datebox('getValue') != ""
+			&& $('#nama').textbox('getValue') != "" && $('#jenis_kelamin').combo("getText") != ""
+			&& $('#tempat_lahir').textbox('getValue') != "" && $('#tanggal_lahir').textbox('getValue') != ""
+			&& $('#alamat').textbox('getValue') != "" &&  $('#jabatan').textbox('getText') != "") {
+		
+			$.ajax({
+				type	: "POST",
+				url		: "../system/kelola_admin_service.php",
+				data	: {
+					data : obj
+				},
+				success	: function(data){
+					location.reload();
+				}
+			});
+		} else {
+			$.messager.alert('Kesalahan', 'Field yang bertanda * harus di isi ! ', 'error');
+		}
+	}
 </script>

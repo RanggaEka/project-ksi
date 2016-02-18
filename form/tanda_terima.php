@@ -1,7 +1,7 @@
 <td width="156">&nbsp;</td>
 <td>
     <br>
-    <table width="75%" border="0" align="left" cellpadding="4" cellspacing="2" style="border: solid 1px #efefef;">
+    <table width="80%" border="0" align="left" cellpadding="4" cellspacing="2" style="border: solid 1px #efefef;">
         <tr>
             <td>
                 <!--<form action="../system/tanda_terima_service.php" method="post" enctype="multipart/form-data">-->
@@ -37,14 +37,19 @@
                                                 <tr>
 													<td>Agent</td>
                                                     <td valign="middle">
-                                                        <select class="easyui-combobox" name="agent" id="agent" style="width:110px;height:25px;padding:8px">
-														<option value="JNE">JNE</option>
-														<option value="Tiki">Tiki</option>
-														<option value="RPX">RPX</option>
-														<option value="Atm Logistic">Atm Logistic</option>
-														<option value="Kumis Logistic">Kumis Logistic</option>
-														<!--$(agent).combo("getValue")-->
-													</select>
+														<input
+															class="easyui-combobox" 												
+															style="width:110px;height:25px;padding:8px"
+															name="agent" id="agent"
+															data-options="
+																	url:'../json/get_agent.php',
+																	method:'get',
+																	valueField:'agent',
+																	textField:'agent',
+																	panelHeight:'150',
+																	panelWidth: 150,
+																	prompt:'Agent'														
+															">
                                                     </td>
                                                 </tr>
                                     </table>
@@ -192,7 +197,8 @@
                                 </tr>
                         </table>
                     <!--</form>-->
-                    <table id="gridFormTandaTerima" class="easyui-datagrid" style="width:100%;height:180px"
+                    <br/>
+                    <table id="gridFormTandaTerima" class="easyui-datagrid" style="width:100%;height:190px"
 						data-options="rownumbers:true,singleSelect:true,collapsible:true,url:'../json/get_tanda_terima.php',method:'get',pagination:true,
 												pageSize:20">
                         <thead>
@@ -224,7 +230,7 @@
 				success	: function(data){
 					console.log(data)
 					if (data == "") {
-						alert('Data tidak ditemukan !')
+						$.messager.alert('Peringatan', 'Data tidak ditemukan !', 'warning');
 					} else {
 						var dataa = JSON.parse(data);
 						$('#cn').textbox('setText',dataa[0].no_cn)
@@ -316,7 +322,7 @@
 				}
 			});
 		} else {
-			alert("Field yang bertanda * harus di isi! ")
+			$.messager.alert('Kesalahan', 'Field yang bertanda * harus di isi ! ', 'error');
 		}
 	}
 </script>

@@ -192,7 +192,7 @@
                                     <td></td>
                                     <td>
                                         <button name="simpan_tt" id="simpan_tt" onclick="saveTandaTerima()">Save</button>
-                                        <button onclick="refreshTandaTerima()">Batal</button>
+                                        <button onclick="location.reload()">Batal</button>
                                     </td>
                                 </tr>
                         </table>
@@ -317,9 +317,11 @@
 				data	: {
 					data : obj
 				},
-				success	: function(data){
-					$.messager.alert('Info','Data berhasil disimpan!','info');
-					refreshTandaTerima();
+				success	: function(data){					
+					alert('Data berhasil disimpan!');
+					location.reload();
+					//$.messager.alert('Info','Data berhasil disimpan!','info');
+					//refreshTandaTerima();
 				}
 			});
 		} else {

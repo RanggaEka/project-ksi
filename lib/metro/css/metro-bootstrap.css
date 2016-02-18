@@ -6050,8 +6050,8 @@ a {
   /*border: 8px #6badf6 solid;
   position: relative;*/
   background-color: #ffffff;
-  min-height: 200px;
-  min-width: 200px;
+  /*min-height: 200px;
+  min-width: 200px;*/
   border-top: 0;
 }
 .metro .window .caption {

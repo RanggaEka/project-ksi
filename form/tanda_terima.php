@@ -312,6 +312,7 @@
 					data : obj
 				},
 				success	: function(data){
+					$.messager.alert('Info','Data berhasil disimpan!','info');
 					refreshTandaTerima();
 				}
 			});

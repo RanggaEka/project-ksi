@@ -1,7 +1,7 @@
 <td width="156">&nbsp;</td>
 <td>
 	<br>
-	<table width="75%" border="1" align="left" cellpadding="4" cellspacing="2" style="border: solid 1px #efefef;">
+	<table width="80%" border="1" align="left" cellpadding="4" cellspacing="2" style="border: solid 1px #efefef;">
 		<tr>
           	<td>
 					<form action="../system/order_header_service.php" method="post" enctype="multipart/form-data">
@@ -29,11 +29,11 @@
 												pageSize:20">
 									<thead>
 									<tr>
-										<th style="width:15%" data-options="field:'no_cn'">CN</th>
-										<th style="width:13%" data-options="field:'tanggal'">Tanggal</th>
-										<th style="width:35%" data-options="field:'pengirim'">Pengirim</th>
-										<th style="width:13%" data-options="field:'tujuan'">Tujuan</th>
-										<th style="width:15%" data-options="field:'grand_total'" formatter="formatPrice">Total</th>
+										<th style="width:10%" data-options="field:'no_cn'">CN</th>
+										<th style="width:14%" data-options="field:'tanggal'">Tanggal</th>
+										<th style="width:20%" data-options="field:'pengirim'">Pengirim</th>
+										<th style="width:35%" data-options="field:'tujuan'">Tujuan</th>
+										<th style="width:16%" data-options="field:'grand_total'" align="right" formatter="formatPrice">Total</th>
 									</tr>
 									</thead>
 								</table>

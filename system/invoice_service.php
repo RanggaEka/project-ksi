@@ -49,7 +49,7 @@
 							'$user_name')";
 			$result = mysql_query($sql);
 			if ($result){
-				for ($i = 0; $i < count($jsondataDetail)-1; $i++) {
+				for ($i = 0; $i < count($jsondataDetail); $i++) {
 					$Qry = mysql_query("select * from tanda_terima where sid = '".$jsondata[0]->listDetail[$i]->sid."' ") or die(mysql_error());
 					$arQ = mysql_fetch_array($Qry);
 					$idDetail = gen_uuid();
@@ -59,6 +59,10 @@
 							'$arQ[sid]',
 							'$arQ[no_cn]',
 							'$arQ[grand_total]')");
+							
+					mysql_query("UPDATE tanda_terima
+							SET is_sudah_invoice = 1
+							where sid = '".$jsondata[0]->listDetail[$i]->sid."' ");
 				}
 				$hitungTotal = mysql_query("SELECT SUM(tarif) as total FROM invoice_detail WHERE no_inv='$no_inv'");
 				$hitungTotalArr = mysql_fetch_array($hitungTotal);
@@ -69,6 +73,21 @@
 			} else {	
 				echo "<script>alert('Exception Error SQL Save');</script>";
 			}			
+		}
+		
+	} else if ($_GET['sch_inv'] != null) {	
+		$sch = mysql_query("select * from invoice_header where no_inv = '".$_GET['sch_inv']."' ");
+		$count = mysql_num_rows($sch);
+		
+		if (($count) >= 1) {
+			$result = array();
+			while($row = mysql_fetch_object($sch)){
+				array_push($result, $row);
+			}
+			//$row = mysql_fetch_array($sch);
+			echo json_encode($result);
+		} else {
+			echo "";
 		}
 	}
 ?>

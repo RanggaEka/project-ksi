@@ -43,16 +43,21 @@
 		}
 		//$nomor = "P".str_pad($cnt,5,"0",STR_PAD_LEFT);		
 		$cekCN	= mysql_num_rows(mysql_query("SELECT * FROM tanda_terima WHERE no_cn='$cn'"));
-		$cekCustomer = mysql_num_rows(mysql_query("SELECT * FROM customer WHERE nama='$pengirim'"));
+		$cekCustomer = mysql_num_rows(mysql_query("SELECT * FROM customer WHERE nama like '%$pengirim%'"));
+		$cekAgent = mysql_num_rows(mysql_query("SELECT * FROM agent WHERE agent like '%$agent%'"));
 		
 		if(($cekCustomer)<1){
 			$newCust = mysql_query("insert into customer values ('".$id."','".$pengirim."','".$alamat_pengirim."','".$telpon_pengirim."') ");
 		}
 		
+		if(($cekAgent)<1){
+			$newAgent = mysql_query("insert into agent values ('".$id."','".$agent."') ");
+		}
+		
 		if(($cekCN)>=1){
 			echo "<script> alert('Maaf, Nomor CN $cn sudah ada di database, silahkan ganti dengan yang lain! ');</script>";
 		}else{		
-			$strQry = "INSERT INTO tanda_terima VALUES ('$id','$cnt','$cn','$hasil','$pengirim', '$alamat_pengirim', $telpon_pengirim,'$tujuan', '$penerima', '$alamat_penerima', $telpon_penerima, '$udl', '$dtddtp', '$agent', '$coll', '$kg', '$vol', '$grandtotal', '$deskripsi', '$user_id', '$user_name')";
+			$strQry = "INSERT INTO tanda_terima VALUES ('$id','$cnt','$cn','$hasil','$pengirim', '$alamat_pengirim', $telpon_pengirim,'$tujuan', '$penerima', '$alamat_penerima', $telpon_penerima, '$udl', '$dtddtp', '$agent', '$coll', '$kg', '$vol', '$grandtotal', '$deskripsi', '$user_id', '$user_name', 0)";
 			// echo ">>>".$strQry;
 			$exQuery = mysql_query($strQry) or die(mysql_error());
 			if ($exQuery) {

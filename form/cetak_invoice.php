@@ -10,42 +10,20 @@
 </head>
 <style>
 body {padding:10px}
-.print-area {border:1px dashed red;padding:1em;margin:0 0 1em}
+.print-area {border:1px solid blue;padding:1em;margin:0 0 1em}
 </style>
 <body class="metro">
-  <?php /*
+  <?php
+	date_default_timezone_set('Asia/Jakarta');
     include '../system/config_service.php'; 
-    $invID = "";
-    if (isset($_GET['id_invoice'])) {
-      $invID = $_GET['id_invoice'];
+    $no_inv = "";
+    if (isset($_GET['no_inv'])) {
+      $no_inv = $_GET['no_inv'];
     }
-
-
-    $count = 0;
-    $strQuery = "SELECT i.no_invoice, 
-                        i.status_penagihan as status_penagihan, 
-                        i.id as id_invoice, 
-                        s.status_pengiriman,
-                        s.no_sj as no_sj, 
-                        s.id as sj_id, 
-                        p.photo, 
-                        p.id, 
-                        p.no_po,
-                        p.tanggal,
-                        c.tlp,
-                        c.nama,
-                        p.alamat,
-                        u.nama as nama_user
-                                FROM invoice i
-                                INNER JOIN surat_jalan s ON s.id = i.id_sj 
-                                INNER JOIN po_header p ON p.id = s.id_po 
-                                INNER JOIN customer c ON c.id = p.id_customer 
-                                INNER JOIN user u ON u.id = c.id_referensi_user 
-                                where i.id = '$invID'" 
-                                ;
+    
+    $strQuery = "select * from invoice_detail id inner join tanda_terima tt on id.tanda_terima_sid = tt.sid where id.no_inv= '$no_inv'";
     $result = mysql_query($strQuery) or die(mysql_error());
     $arrResult = mysql_fetch_array($result);
-  */  
   ?>
   <table width="100%" cellspacing="30" cellpadding="30">
     <tr>
@@ -69,7 +47,7 @@ body {padding:10px}
             <td colspan="3" align="center"><strong><font size="+2"><u>INVOICE</u></font></strong></td>			
           </tr>
 		  <tr align="center">
-			<td colspan="3" align="center"><strong><font>No.1009/KSI-JKT/I/2016</font></strong></td>
+			<td colspan="3" align="center"><strong><font><?php echo $arrResult['no_inv']; ?></font></strong></td>
 		  </tr>
           <tr>
             <td colspan="3"><table width="100%" border="0" cellpadding="0" cellspacing="0">
@@ -79,31 +57,31 @@ body {padding:10px}
                 <td width="2%">&nbsp;</td>
                 <td width="18%">Tanggal Invoice</td>
                 <td width="2%">:</td>
-                <td width="12%"><?php //echo $arrResult['nama_user']; ?></td>
+                <td width="12%"><?php echo date('Y-m-d'); ?></td>
               </tr>
               <tr>
-                <td>Fuad</td>
+                <td><?php echo $arrResult['pengirim']; ?></td>
                 <td></td>
-                <td><?php //echo $arrResult['nama']; ?></td>
+                <td></td>
                 <td>Cara Pembayaran</td>
                 <td>:</td>
-                <td><?php //echo $arrResult['no_invoice']; ?></td>
+                <td></td>
               </tr>
               <tr>
-                <td>Taman Griya Permai Blok A4 No. 11</td>
+                <td><?php echo $arrResult['alamat_pengirim']; ?></td>
                 <td></td>
-                <td><?php //echo $arrResult['tlp']; ?></td>
+                <td></td>
                 <td>Tanggal Jatuh Tempo</td>
                 <td>:</td>
-                <td><?php //echo date('d/m/Y');?></td>
+                <td></td>
               </tr>
               <tr>
-                <td>08986265770</td>
-                <td></td>
-                <td><?php //echo $arrResult['alamat']; ?></td>
+                <td><?php echo $arrResult['telpon_pengirim']; ?></td>
                 <td></td>
                 <td></td>
-                <td><?php //echo date('d/m/Y');?></td>
+                <td></td>
+                <td></td>
+                <td></td>
               </tr>
             </table></td>
           </tr>
@@ -111,45 +89,46 @@ body {padding:10px}
             <td colspan="3"><table width="100%" border="1" cellpadding="5" cellspacing="5">
               <tr align="center">
                 <td width="3%" align="center">No</td>
-                <td width="15%" align="center">Tanggal Tanda Terima</td>
+                <td width="10%" align="center">Tanggal Tanda Terima</td>
                 <td width="20%" align="center">Tujuan</td>
                 <td width="8%" align="center">Service</td>
                 <td width="8%" align="center">CN</td>
                 <td width="5%" align="center">Coll</td>
                 <td width="5%" align="center">Berat(Kg)</td>
-				<td width="10%" align="center">Tarif</td>
-                <td width="15%" align="center">Jumlah</td>
+				<td width="8%" align="center">Tarif</td>
+                <td width="12%" align="center">Jumlah</td>
               </tr>
-              <?php /*
-              $invID = $arrResult['id_invoice'];
-            
-              $sjIDPO = $arrResult['id'];
-              $count = 0;
-              $totalQty = 0;
-              $totalJumlah = 0;
-                        $strQuery = "SELECT b.kode_barang, b.nama_barang, b.deskripsi, b.harga, p.qty 
-                    FROM po_detail p 
-                    INNER JOIN tbl_barang b ON b.id = p.id_barang 
-                    where id_po_header = '$sjIDPO'";
-                        $result = mysql_query($strQuery) or die(mysql_error());
-                        while($arrResult = mysql_fetch_array($result)) {
-                          $count++;
-                $totalHarga = $arrResult['harga'] * $arrResult['qty']; 
-                $totalQty = $totalQty + $arrResult['qty'];
-                $totalJumlah = $totalJumlah + $totalHarga;
-                     */ ?>
+				<?php										
+                    $count = 0;
+					$totalQty = 0;
+					$totalJumlah = 0;
+                    $strQuery = "select * from tanda_terima tt 
+								inner join invoice_detail id on tt.sid = id.tanda_terima_sid 
+								where id.no_inv= '$no_inv'";
+					$result = mysql_query($strQuery) or die(mysql_error());					
+                    while($arrDetail = mysql_fetch_array($result)) {
+                    			$count++;
+								if($arrDetail['total_vol']>$arrDetail['total_berat']){
+									$totalKG = $arrDetail['total_vol'];
+									$tarif = $arrDetail['grand_total'] / $arrDetail['total_vol'];
+								}else{
+									$totalKG = $arrDetail['total_berat'];
+									$tarif = $arrDetail['grand_total'] / $arrDetail['total_berat'];
+								}															
+								$subtotal = $subtotal + $arrDetail['grand_total'];
+				?>
               <tr>
-                <td><?php //echo $count; ?></td>
-                <td><?php //echo $arrResult['kode_barang']; ?></td>
-                <td><?php //echo $arrResult['deskripsi']; ?></td>
-                <td><?php //echo number_format($arrResult['qty']); ?></td>
-                <td><?php //echo number_format($arrResult['harga']); ?></td>
-                <td>0</td>
-                <td><?php //echo number_format($totalHarga); ?></td>
-				<td>0</td>
-                <td><?php //echo number_format($totalHarga); ?></td>
+                <td align="center"><?php echo $count; ?></td>
+                <td align="center"><?php echo $arrDetail['tanggal']; ?></td>
+                <td align="center"><?php echo $arrDetail['tujuan']; ?></td>
+				<td align="center"><?php echo "$arrDetail[service_udl]/$arrDetail[service_dtddtp]/$arrDetail[service_agent]"; ?></td>
+				<td align="center"><?php echo $arrDetail['no_cn']; ?></td>
+				<td align="right"><?php echo number_format($arrDetail['total_coll']); ?></td>
+				<td align="right"><?php echo number_format($totalKG); ?></td>
+				<td align="right"><?php echo number_format($tarif); ?></td>
+				<td align="right"><?php echo number_format($arrDetail['grand_total']); ?></td>               
               </tr>
-              <?php // } ?>
+              <?php } ?>
               <tr>
                 <td colspan="6" rowspan="4" align="left" valign="top"><b>Pembayaran dapat ditransfer ke Rekening :</b><br>
                   <b>Bank Danamon, No. 003571498470 a/n CV.KiKi Solusi Internusa </b><br>
@@ -157,19 +136,19 @@ body {padding:10px}
                   <b>Bank Mandiri, No, Rek. 117-00-0587544-8 a/n HARYAKA </b>
 				 </td>
                 <td colspan="2" align="right">Sub Total</td>
-                <td><?php //echo number_format($totalJumlah);?></td>
+                <td align="right"><?php echo number_format($subtotal);?></td>
               </tr>
               <tr>
                 <td colspan="2" align="right">Packing Kayu</td>
-                <td>0</td>
+                <td align="right">0</td>
               </tr>
 			  <tr>
                 <td colspan="2" align="right">Asuransi</td>
-                <td>0</td>
+                <td align="right">0</td>
               </tr>
               <tr>
                 <td colspan="2" align="right">Total</td>
-                <td><?php //echo number_format($totalJumlah);?></td>
+                <td align="right"><?php echo number_format($subtotal);?></td>
               </tr>
             </table></td>
           </tr>

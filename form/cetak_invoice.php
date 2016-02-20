@@ -9,8 +9,8 @@
     <script src="../js/main.js"></script>
 </head>
 <style>
-body {padding:10px}
-.print-area {border:1px solid blue;padding:1em;margin:0 0 1em}
+body {padding:0px}
+.print-area {border:1px solid blue;padding:0;margin:0}
 </style>
 <body class="metro">
   <?php
@@ -28,7 +28,7 @@ body {padding:10px}
   <table width="100%" cellspacing="30" cellpadding="30">
     <tr>
       <td>
-		<div id="print-area-1" class="print-area" style="width: 100%; padding: 10px;" align="center">
+		<div id="print-area-1" class="print-area" style="width: 100%; padding: 0px;" align="center">
         <!--<fieldset style="width: 85%; padding: 10px;">-->
         <!-- <legend>Cetak SJ</legend> -->
         <table width="100%" border="0" cellpadding="5" cellspacing="5" style="border:solid 0px #000000; padding:10px;">
@@ -100,8 +100,9 @@ body {padding:10px}
               </tr>
 				<?php										
                     $count = 0;
-					$totalQty = 0;
-					$totalJumlah = 0;
+					$subtotal = 0;
+					$totalKG = 0;
+					$tarif = 0;
                     $strQuery = "select * from tanda_terima tt 
 								inner join invoice_detail id on tt.sid = id.tanda_terima_sid 
 								where id.no_inv= '$no_inv'";
@@ -183,7 +184,10 @@ body {padding:10px}
 		<!-- </fieldset> -->		
 		</div>		
 		<tr>
-			<td colspan="3" align="center"><a type="button" class="button" href="javascript:printDiv('print-area-1');" >Cetak</a></td>
+			<td align="center">
+				<a type="button" class="button" onclick="window.location.href='../form/halaman_utama.php?page=home';">Kembali ke Home</a>
+				<a type="button" class="button" href="javascript:printDiv('print-area-1');" >Cetak</a>
+			</td>
         </tr>
       </td>		
     </tr>

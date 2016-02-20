@@ -22,7 +22,7 @@
 				        <tr>
 							<td>
 								<table id="gridTandaTerima" class="easyui-datagrid" style="width:98%;height:480px"
-									data-options="singleSelect:true,collapsible:true,url:'../json/get_tanda_terima.php',method:'get',
+									title="Tanda Terima" data-options="singleSelect:true,collapsible:true,url:'../json/get_tanda_terima.php',method:'get',
 												rownumbers:true,
 												autoRowHeight:false,
 												pagination:true,

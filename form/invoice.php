@@ -38,9 +38,9 @@
 								</td>
 				        </tr>
 				        <tr>
-				          	<td></td>
-				         	<td></td>
-				         	<td></td>
+				          	<td>Jatuh Tempo</td>
+				         	<td>:</td>
+				         	<td><input id="jatuh_tempo" name="jatuh_tempo" class="easyui-datebox" style="width:150px;height:25px;padding:8px" data-options="prompt:'Jatuh Tempo',formatter:myformatter,parser:myparser"></input></td>
 				        </tr>
 			    	</table>
 			    	<button type="submit" onclick="saveInvoice()" name="simpan_inv" id="simpan_inv">Save</button>
@@ -61,7 +61,10 @@
 						<style>
 							.cTh {border:1px solid #CCCCCC;}
 						</style>
-                        <thead style="background:#ADE5F7;">
+                        <thead>
+                        <tr style="background:#ADE5F7;">
+                            <th colspan="6" height="25px" align="left" style="padding-left:5px;">Detail Invoice</th>
+                        </tr>
                         <tr>
                             <th class="cTh" width="15px" height="30px">No</th>
                             <th class="cTh" width="120px">No CN <font color='red'>*</font></th>
@@ -260,25 +263,25 @@
 		var dtl = {}
 		var count = document.getElementById("detail_invoice").rows.length;
 		
-		for (var i = 1; i < count; i++) {
-			if (document.getElementById("sid"+i).value != "") {
-				dtl = {
-					sid :  document.getElementById("sid"+i).value
-				}
-				objDtl.push(dtl)
-			}
-		}
-		
-		var objHeader = [{
-				no_inv :  $('#no_inv').textbox('getText'),
-				tanggal :  $('#tgl_inv').datebox('getValue'),
-				customer_nama :  $('#customer_inv').textbox('getText'),
-				listDetail : objDtl
-			}];
-		
 		if ($('#no_inv').textbox('getValue') != "" && $('#tgl_inv').datebox('getValue') != ""
 			&& $('#customer_inv').textbox('getValue') != "" && objDtl.length > 0){
 			console.log("sini")
+			for (var i = 1; i < count; i++) {
+				if (document.getElementById("sid"+i).value != "") {
+					dtl = {
+						sid :  document.getElementById("sid"+i).value
+					}
+					objDtl.push(dtl)
+				}
+			}
+			
+			var objHeader = [{
+				no_inv :  $('#no_inv').textbox('getText'),
+				tanggal :  $('#tgl_inv').datebox('getValue'),
+				customer_nama :  $('#customer_inv').textbox('getText'),
+				jatuh_tempo :  $('#jatuh_tempo').datebox('getValue'),
+				listDetail : objDtl
+			}];
 			$.ajax({
 				type	: "POST",
 				url		: "../system/invoice_service.php",

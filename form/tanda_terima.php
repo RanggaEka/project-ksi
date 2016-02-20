@@ -198,6 +198,7 @@
                         </table>
                     <!--</form>-->
                     <br/>
+                    <br/>
                     <table id="gridFormTandaTerima" class="easyui-datagrid" style="width:100%;height:190px"
 						data-options="rownumbers:true,singleSelect:true,collapsible:true,url:'../json/get_tanda_terima.php',method:'get',pagination:true,
 												pageSize:20">
@@ -318,7 +319,7 @@
 					data : obj
 				},
 				success	: function(data){					
-					alert('Data berhasil disimpan!');
+					//alert('Data berhasil disimpan!');
 					location.reload();
 					//$.messager.alert('Info','Data berhasil disimpan!','info');
 					//refreshTandaTerima();

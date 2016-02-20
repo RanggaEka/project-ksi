@@ -63,7 +63,7 @@
 						<th field="service" colspan="3" align="center">Service</th>
 						<th field="total" colspan="3" align="center">Total</th>
 						<th field="inv" colspan="4" align="center">Invoice</th>
-						<th field="tgl_cicilan" width="9%" rowspan="2" align="center">Jatuh Tempo</th>
+						<th field="jatuh_tempo_inv" width="9%" rowspan="2" align="center">Jatuh Tempo</th>
 						<th field="tgl_pembayaran" width="9%" rowspan="2" align="center">Tgl. Bayar </th>
 						<th field="tanda_terima" colspan="2" align="center">Tanda Terima </th>
 						<th field="biaya" colspan="4" align="center">Biaya</th>

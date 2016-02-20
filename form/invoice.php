@@ -7,7 +7,7 @@
 				<!--<form action="../system/invoice_service.php" method="post" enctype="multipart/form-data">-->
 					<table width="80%" border="0" cellspacing="0" cellpadding="3">
 						<tr>
-				          	<td width="80px"><label>No. Invoice <font color='red'>*</font></label></td>
+				          	<td width="100px"><label>No. Invoice <font color='red'>*</font></label></td>
 				         	<td>:</td>
 				         	<td><input class="easyui-searchbox" style="width:150px;height:25px;padding:8px" data-options="prompt:'No Invoice',iconWidth:38,searcher:searchNoInv" id="no_inv" name="no_inv"></td>
 				        </tr>
@@ -33,18 +33,21 @@
 											textField:'nama',
 											panelHeight:'150',
 											panelWidth: 350,
-											formatter: formatItem
+											formatter: formatItem,
+											onSelect: function(rec){
+												onLockingData(rec.nama,'INVOICE')
+											}
 									">			         	
 								</td>
 				        </tr>
 				        <tr>
-				          	<td>Jatuh Tempo</td>
+				          	<td>Jatuh Tempo <font color='red'>*</font></td>
 				         	<td>:</td>
 				         	<td><input id="jatuh_tempo" name="jatuh_tempo" class="easyui-datebox" style="width:150px;height:25px;padding:8px" data-options="prompt:'Jatuh Tempo',formatter:myformatter,parser:myparser"></input></td>
 				        </tr>
 			    	</table>
 			    	<button type="submit" onclick="saveInvoice()" name="simpan_inv" id="simpan_inv">Save</button>
-					<button type="reset" onclick="location.reload()">Batal</button>	
+					<button type="reset" onclick="releaseLocking()">Batal</button>	
 					<br/><br/>
 					<table id="detail_invoice_ui" class="easyui-datagrid" title="" style="width:98%;height:250px;"
 									data-options="singleSelect:true,collapsible:true,url:'../json/get_invoice_detail.php',method:'get'">
@@ -63,9 +66,6 @@
 						</style>
                         <thead>
                         <tr style="background:#ADE5F7;">
-                            <th colspan="6" height="25px" align="left" style="padding-left:5px;">Detail Invoice</th>
-                        </tr>
-                        <tr>
                             <th class="cTh" width="15px" height="30px">No</th>
                             <th class="cTh" width="120px">No CN <font color='red'>*</font></th>
                             <th class="cTh" width="25px">&nbsp;</th>
@@ -140,7 +140,7 @@
 				$('#searchBoxLookupTandaInvoice').searchbox('clear');
 				var count = document.getElementById("detail_invoice").rows.length;
 				var dataSelected = []
-				for (var i = 1; i < count; i++) {
+				for (var i = 1; i < count-1; i++) {
 					if ($("#sid"+i).val() != "") {
 						dataSelected.push("'"+$("#sid"+i).val()+"'")
 					}
@@ -196,13 +196,13 @@
 			var cell6 = newRow.insertCell(5);
 			//var cell7 = newRow.insertCell(6);
 			
-			cell1.innerHTML = "<input type='text' disabled style='width:100%;height:25px;padding:1px;text-align:center;' id='no"+count+"' name='no"+count+"'/>";
-			cell2.innerHTML = "<input style='width:100%;height:25px;padding:1px' id='no_cn"+count+"' name='no_cn"+count+"'/>";
-			cell3.innerHTML = "<div style='width:100%; text-align:center;'> <a id='btnLookup"+count+"' href='javascript:void(0)' class='easyui-linkbutton' onclick='showLookupTandaTerima()'><img src='../images/famfam/application_xp.png' /></a></div>";
-			cell4.innerHTML = "<input type='text' disabled style='width:100%;height:25px;padding:1px' id='tanggal"+count+"' name='tanggal"+count+"'/>";
-			cell5.innerHTML = "<input type='text' disabled style='width:100%;height:25px;padding:1px' id='tujuan"+count+"' name='tujuan"+count+"'/>";
-			cell6.innerHTML = "<input disabled style='width:100%;height:25px;padding:1px' id='total"+count+"' name='total"+count+"'>" + 
-							  "<input hidden disabled style='width:100%;height:25px;padding:1px' id='sid"+count+"' name='sid"+count+"'>";
+			cell1.innerHTML = "<input type='text' disabled style='width:100%;height:25px;padding:1px;text-align:center;' id='no"+(tblIndex + 1)+"' name='no"+(tblIndex + 1)+"'/>";
+			cell2.innerHTML = "<input style='width:100%;height:25px;padding:1px' id='no_cn"+(tblIndex + 1)+"' name='no_cn"+(tblIndex + 1)+"'/>";
+			cell3.innerHTML = "<div style='width:100%; text-align:center;'> <a id='btnLookup"+(tblIndex + 1)+"' href='javascript:void(0)' class='easyui-linkbutton' onclick='showLookupTandaTerima()'><img src='../images/famfam/application_xp.png' /></a></div>";
+			cell4.innerHTML = "<input type='text' disabled style='width:100%;height:25px;padding:1px' id='tanggal"+(tblIndex + 1)+"' name='tanggal"+(tblIndex + 1)+"'/>";
+			cell5.innerHTML = "<input type='text' disabled style='width:100%;height:25px;padding:1px' id='tujuan"+(tblIndex + 1)+"' name='tujuan"+(tblIndex + 1)+"'/>";
+			cell6.innerHTML = "<input disabled style='width:100%;height:25px;padding:1px' id='total"+(tblIndex + 1)+"' name='total"+(tblIndex + 1)+"'>" + 
+							  "<input hidden disabled style='width:100%;height:25px;padding:1px' id='sid"+(tblIndex + 1)+"' name='sid"+(tblIndex + 1)+"'>";
 			//cell7.innerHTML = "<div style='width:100%; text-align:center;'> <a id='btnDelete"+(count+1)+"' style='visibility:hidden;' href='javascript:void(0)' class='easyui-linkbutton' onclick='deleteRowTandaTerima()'><img src='../images/famfam/delete.png' /></a></div>";
 			
 			setTimeout(function(){
@@ -262,11 +262,10 @@
 		var objDtl = []
 		var dtl = {}
 		var count = document.getElementById("detail_invoice").rows.length;
-		
 		if ($('#no_inv').textbox('getValue') != "" && $('#tgl_inv').datebox('getValue') != ""
-			&& $('#customer_inv').textbox('getValue') != "" && objDtl.length > 0){
-			console.log("sini")
-			for (var i = 1; i < count; i++) {
+			&& $('#customer_inv').textbox('getValue') != "" && $('#jatuh_tempo').datebox('getValue') != ""){	
+
+			for (var i = 1; i < count-1; i++) {
 				if (document.getElementById("sid"+i).value != "") {
 					dtl = {
 						sid :  document.getElementById("sid"+i).value
@@ -282,17 +281,22 @@
 				jatuh_tempo :  $('#jatuh_tempo').datebox('getValue'),
 				listDetail : objDtl
 			}];
-			$.ajax({
-				type	: "POST",
-				url		: "../system/invoice_service.php",
-				data	: {
-					data : objHeader
-				},
-				success	: function(data){
-					$.messager.alert('Info', 'Invoice Berhasil disimpan ! ', 'info');
-					location.reload();
-				}
-			});	
+			
+			if (objDtl.length > 0) {
+				$.ajax({
+					type	: "POST",
+					url		: "../system/invoice_service.php",
+					data	: {
+						data : objHeader
+					},
+					success	: function(data){
+						$.messager.alert('Info', 'Invoice Berhasil disimpan ! ', 'info');
+						location.reload();
+					}
+				});	
+			} else {
+				$.messager.alert('Kesalahan', 'Field yang bertanda * harus di isi ! ', 'error');
+			}
 		} else {
 			$.messager.alert('Kesalahan', 'Field yang bertanda * harus di isi ! ', 'error');
 		}

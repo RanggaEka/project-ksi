@@ -21,7 +21,7 @@
 		$user_id = $_SESSION['user_sid'];
 		$user_name = $_SESSION['username'];
 				
-		$result = 	mysql_query("UPDATE invoice_header
+		$result = mysql_query("UPDATE invoice_header
 					SET cicilan=cicilan+'$nilai_bayar', sisa=sisa-'$nilai_bayar'
 					WHERE no_inv='$no_inv'");
 		if ($result){			
@@ -36,7 +36,7 @@
 			mysql_query("INSERT INTO invoice_pembayaran 
 				VALUES ('$idBayar',
 						'$no_inv',
-						'$hasil',
+						'$tanggal',
 						'$nilai_bayar',						
 						'$user_id',
 						'$user_name')");

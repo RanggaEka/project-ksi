@@ -20,7 +20,8 @@
 		$cekCustomer = mysql_query("SELECT * FROM customer WHERE nama='$customer_nama'");
 		$custArr = mysql_fetch_array($cekCustomer);
 		$customer_sid = $custArr['sid'];
-			
+		$jatuh_tempo = $jsondata[0]->jatuh_tempo;
+		
 		$user_id = $_SESSION['user_sid'];
 		$user_name = $_SESSION['username'];				
 		
@@ -38,12 +39,13 @@
 			$sql = "INSERT INTO invoice_header 
 					VALUES ('$id',
 							'$no_inv',
-							'$hasil',
+							'$tanggal',
 							'$customer_sid',
 							'$customer_nama',
 							'0',
 							'0',
 							'0',
+							'$jatuh_tempo',
 							'BELUM LUNAS',
 							'$user_id',
 							'$user_name')";

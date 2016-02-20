@@ -101,7 +101,7 @@
                             <tr>
                                 <td colspan="3">
                                     <button type="submit" name="simpan_inv" onclick="savePembayaran()">Save</button>
-                                    <button onclick="location.reload()">Batal</button>
+                                    <button onclick="releaseLocking()">Batal</button>
                                 </td>
                             </tr>
                         </table>
@@ -134,7 +134,7 @@
 			$('#cicilan').textbox('setValue', row.cicilan);
 			$('#sisa').textbox('setValue', row.sisa);
 			$('#lookupinvoice').window('close');	
-			
+			onLockingData(row.no_inv,'PEMBAYARANINVOICE')
 			setTimeout(function(){
 				$('#gridDetailInvoice').datagrid({
 					queryParams: {

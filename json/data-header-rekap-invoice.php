@@ -17,6 +17,7 @@
 		ih.total as total_inv,
 		ih.cicilan as cicilan_inv,
 		ih.sisa as sisa_inv,
+		ih.jatuh_tempo as jatuh_tempo_inv,
 		ih.keterangan as keterangan,
 		id.no_inv as no_inv_detail,
 		id.tarif as tarif_inv,
@@ -31,7 +32,8 @@
 		tt.total_coll as total_coll,
 		tt.total_berat as total_berat,
 		tt.total_vol as total_vol,
-		tt.grand_total as grand_total
+		tt.grand_total as grand_total,
+		(SELECT MAX(tanggal) FROM  invoice_pembayaran where no_inv = ih.no_inv) as tgl_pembayaran
 		
 		from invoice_header ih 
 		inner join invoice_detail id on ih.no_inv = id.no_inv

@@ -76,7 +76,7 @@
 						<th field="service_agent" width="5%" align="center">Agent</th>
 						<th field="total_coll" width="5%" align="center">Coll</th>
 						<th field="total_berat" width="5%" align="center">KG</th>
-						<th field="total_kg" width="5%" align="center">Vol/M3</th>
+						<th field="total_vol" width="5%" align="center">Vol/M3</th>
 						<th field="tgl_inv" width="7%" align="center">Tgl</th>
 						<th field="no_inv" width="9%" align="center">No</th>
 						<th field="tarif_inv" width="6%" align="center">Tarif</th>

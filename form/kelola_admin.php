@@ -128,17 +128,17 @@
 				username :  $('#username').textbox('getValue'),
 				password :  $('#password').textbox('getValue'),
 				nama :  $('#nama').textbox('getValue'),
-				jenis_kelamin :  $('#jenis_kelamin').combo("getValue"),
+				jenis_kelamin :  $('#jenis_kelamin').combobox("getValue"),
 				tempat_lahir :  $('#tempat_lahir').textbox('getValue'),
 				tanggal_lahir :  $('#tanggal_lahir').textbox('getValue'),
 				alamat :  $('#alamat').textbox('getValue'),
-				jabatan :  $('#jabatan').combo("getText")
+				jabatan :  $('#jabatan').combobox("getValue")
 			}];
 			
 		if ($('#username').textbox('getValue') != "" && $('#password').textbox('getValue') != ""
-			&& $('#nama').textbox('getValue') != "" && $('#jenis_kelamin').combo("getText") != ""
+			&& $('#nama').textbox('getValue') != "" && $('#jenis_kelamin').combobox("getValue") != ""
 			&& $('#tempat_lahir').textbox('getValue') != "" && $('#tanggal_lahir').textbox('getValue') != ""
-			&& $('#alamat').textbox('getValue') != "" &&  $('#jabatan').textbox('getText') != "") {
+			&& $('#alamat').textbox('getValue') != "" &&  $('#jabatan').combobox('getValue') != "") {
 		
 			$.ajax({
 				type	: "POST",
@@ -162,11 +162,11 @@
 		$('#username').textbox('setValue','')
 		$('#password').textbox('setValue','')
 		$('#nama').textbox('setValue','')
-		$('#jenis_kelamin').combo('setValue','L')
+		$('#jenis_kelamin').combobox('setValue','L')
 		$('#tempat_lahir').textbox('setValue','')
 		$('#tanggal_lahir').textbox('setValue','')
 		$('#alamat').textbox('setValue','')
-		$('#jabatan').combo('setValue','ADMIN')
+		$('#jabatan').combobox('setValue','ADMIN')
 		$('#gridUser').datagrid('reload')
 	}
 	

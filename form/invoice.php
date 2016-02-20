@@ -291,7 +291,8 @@
 					},
 					success	: function(data){
 						$.messager.alert('Info', 'Invoice Berhasil disimpan ! ', 'info');
-						location.reload();
+						window.location.href='../form/cetak_invoice.php?no_inv='+$('#no_inv').textbox('getValue');
+						//location.reload();
 					}
 				});	
 			} else {

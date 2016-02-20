@@ -320,7 +320,7 @@
 				},
 				success	: function(data){					
 					//alert('Data berhasil disimpan!');
-					window.location.href='../form/cetak_tanda_terima.php?CN=no_cn';
+					window.location.href='../form/cetak_tanda_terima.php?CN='+$('#cn').textbox('getValue');
 					//location.reload();
 					//$.messager.alert('Info','Data berhasil disimpan!','info');
 					//refreshTandaTerima();

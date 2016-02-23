@@ -105,6 +105,14 @@ body {padding:0px}
 
     $count = 0;    
     $result = mysql_query($strQuery) or die(mysql_error());
+	$cekData= mysql_num_rows($result);
+	if(($cekData)<=0){
+		echo"<style>
+			body {display:none}			
+		</style>";
+		echo "<script> alert('Maaf, Data tidak ditemukan! ');</script>";
+		echo "<meta http-equiv='refresh' content='0; url=halaman_utama.php?page=rekapinvoice'>";
+	}
 	while($arrResult = mysql_fetch_array($result)) {
 		$count++;
 ?>			  

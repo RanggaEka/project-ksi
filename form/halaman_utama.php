@@ -37,7 +37,7 @@
     <script type="text/javascript" src="../lib/jquery/jquery.easyui.min.js"></script>
     <script type="text/javascript" src="../lib/datagrid-detailview.js"></script>
     <!--<script type="text/javascript" src="../lib/jquery-1.4.4.min.js"></script>-->
-	<script type="text/javascript" src="../js/formatter.js"></script>
+	<script type="text/javascript" src="../js/formatter.js"></script>	
     <script type="text/javascript" src="../js/mainController.js"></script>
 </head>
 

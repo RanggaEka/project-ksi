@@ -20,7 +20,7 @@
 		ih.jatuh_tempo as jatuh_tempo_inv,
 		ih.keterangan as keterangan,
 		id.no_inv as no_inv_detail,
-		id.tarif as tarif_inv,
+		tt.tarif as tarif_inv,
 		tt.no_cn as no_cn,
 		tt.tanggal as tgl_tanda_terima,
 		tt.tujuan as tujuan,

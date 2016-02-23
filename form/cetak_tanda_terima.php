@@ -82,8 +82,8 @@ body {padding:0px}
             <td colspan="3"><table width="100%" border="1" cellpadding="5" cellspacing="5">
               <tr align="center">                
                 <td width="10%" align="center"><b>Coll</b></td>
-                <td width="60%" align="center"><b>Isi yang diberitahukan</b></td>
-				<td width="15%" align="center"><b>Dimensi Barang</b></td>
+                <td width="57%" align="center"><b>Isi yang diberitahukan</b></td>
+				<td width="18%" align="center"><b>Dimensi Barang</b></td>
                 <td width="15%" align="center"><b>Berat</b></td>
               </tr>				
               <tr>
@@ -101,7 +101,7 @@ body {padding:0px}
                   <b>2. Biaya bongkar muat diluar tanggung jawab pengangkut  </b>
 				 </td>
                 <td align="right">Tarif</td>
-                <td align="right"><?php echo number_format($tarif);?></td>
+                <td align="right"><?php echo number_format($arrResult['tarif']);?></td>
               </tr>              
               <tr>
                 <td align="right">Jumlah</td>

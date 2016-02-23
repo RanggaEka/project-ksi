@@ -59,7 +59,7 @@ function myparser(s){
 
 function onSelectedTujuan(val) {
 	var comb = val.tujuan +" - "+ val.kota +" - "+ val.kecamatan;
-	$("#tujuan").textbox("setText", comb)
+	$("#tujuan").textbox("setText", val.tujuan)
 	$("#tarif").textbox("setValue", parseInt(val.reg))
 	var tarif = parseInt($('#tarif').textbox('getValue'))
 	var kg = parseInt($('#kg').textbox('getValue'))

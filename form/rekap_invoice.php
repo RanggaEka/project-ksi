@@ -1,64 +1,50 @@
 <td width="156">&nbsp;</td>
 <td>
-    <br>
+	<br/>
+	<div id="tb" style="padding:2px 5px;">
+		Customer :
+		<input class="easyui-combobox" 
+				name="language"
+				id="customer_inv"
+				name="customer_inv"
+				style="width:180px;height:25px;padding:8px"
+				data-options="
+						prompt:'Customer',
+						url:'../json/get_customer.php',
+						method:'get',
+						valueField:'sid',
+						textField:'nama',
+						panelHeight:'150',
+						panelWidth: 330,
+						formatter: formatItem"/>
+		Tanggal : 
+		<input class="easyui-datebox" style="width:120px;height:25px;padding:8px" data-options="prompt:'No Invoice',iconWidth:38" id="tgl_dari" name="tgl_dari"> 
+		s/d 
+		<input class="easyui-datebox" style="width:120px;height:25px;padding:8px" data-options="prompt:'No Invoice',iconWidth:38" id="tgl_sampai" name="tgl_sampai">
+		Status Pembayaran : 
+		<select class="easyui-combobox" name="status" id="status" style="width:150px;padding:8px">
+			<option value="LUNAS">LUNAS</option>
+			<option value="BELUM LUNAS">BELUM LUNAS</option>
+		</select>
+		<button type="submit" onclick="searchRekapInvoice()" name="cari_rekap" id="cari_rekap">Cari</button>
+		<button type="reset" onclick="location.reload()">Batal</button>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<img src="../images/famfam/printer.png" onClick="cetakRekapInvoice()" style="cursor:pointer;"/>
+	</div>
     <table width="99%" border="0" align="left" cellpadding="10" cellspacing="3" style="border: solid 1px #efefef;">
         <tr>
-            <td>
-				Pencarian :
-				<table width="81%" border="0" cellspacing="0" cellpadding="3" style="border:1px solid #efefef;">
-					<tr>
-						<td width="50px"><label>Customer</label></td>
-						<td width="5px">:</td>
-						<td width="180px">
-							<input class="easyui-combobox" 
-									name="language"
-									id="customer_inv"
-									name="customer_inv"
-									style="width:180px;height:25px;padding:8px"
-									data-options="
-											prompt:'Customer',
-											url:'../json/get_customer.php',
-											method:'get',
-											valueField:'sid',
-											textField:'nama',
-											panelHeight:'150',
-											panelWidth: 350,
-											formatter: formatItem">
-						</td>
-						<td width="50px"><label>Tanggal</label></td>
-						<td width="5px">:</td>
-						<td width="300px">
-							<input class="easyui-datebox" style="width:130px;height:25px;padding:8px" data-options="prompt:'No Invoice',iconWidth:38" id="tgl_dari" name="tgl_dari"> 
-							s/d 
-							<input class="easyui-datebox" style="width:130px;height:25px;padding:8px" data-options="prompt:'No Invoice',iconWidth:38" id="tgl_sampai" name="tgl_sampai">
-						</td>
-						<td width="120px"><label>Status Pembayaran</label></td>
-						<td width="5px">:</td>
-						<td>
-							<select class="easyui-combobox" name="status" id="status" style="width:150px;padding:8px">
-								<option value="LUNAS">LUNAS</option>
-								<option value="BELUM LUNAS">BELUM LUNAS</option>
-							</select>
-						</td>
-					</tr>
-					<tr>
-						<td colspan="9">
-							<button type="submit" onclick="searchRekapInvoice()" name="cari_rekap" id="cari_rekap">Cari</button>
-							<button type="reset" onclick="location.reload()">Batal</button>	
-						</td>
-					</tr>
-				</table>
-			</td>
-        </tr>
-        <tr>
 			<td>
-				<table id="gridRekapInvoice" style="width:100%;height:250px" title="Rekap Pengiriman"
-				data-options="singleSelect:true,collapsible:true,url:'../json/data-header-rekap-invoice.php',method:'get'" class="easyui-datagrid">
+				<table id="gridRekapInvoice" style="width:100%;height:540px" title="Rekap Pengiriman"
+				data-options="singleSelect:true,
+					collapsible:true,url:'../json/data-header-rekap-invoice.php',
+					method:'get',
+					toolbar:'#tb',
+					pagination:true" class="easyui-datagrid">
 				  <thead>
 					<tr>
-						<th field="tgl_tanda_terima" width="7%" rowspan="2" align="center">Tgl</th>
+						<th field="tgl_tanda_terima" width="10%" rowspan="2" align="center">Tgl</th>
 						<th field="pengirim" width="10%" rowspan="2" align="left">Pengirim</th>
-						<th field="no_cn" width="8%" rowspan="2" align="left">CN</th>
+						<th field="no_cn" width="13%" rowspan="2" align="left">CN</th>
 						<th field="tujuan" width="40%" rowspan="2" align="left">Tujuan</th>
 						<th field="service" colspan="3" align="center">Service</th>
 						<th field="total" colspan="3" align="center">Total</th>
@@ -78,7 +64,7 @@
 						<th field="total_berat" width="5%" align="center">KG</th>
 						<th field="total_vol" width="5%" align="center">Vol/M3</th>
 						<th field="tgl_inv" width="7%" align="center">Tgl</th>
-						<th field="no_inv" width="9%" align="center">No</th>
+						<th field="no_inv" width="13%" align="center">No</th>
 						<th field="tarif_inv" width="6%" align="center">Tarif</th>
 						<th field="grand_total" width="5%" align="center">Jumlah</th>
 						<th field="penerima" width="10%" align="center">Penerima</th>
@@ -167,6 +153,11 @@
 	//		}
 	//	});
 	//});
+	
+	function cetakRekapInvoice() {
+		//blm di buat, cetak All sama cetak berdasarkan kriteria
+		window.open('../form/cetak_rekap_invoice.php','_blank');
+	}
 	
 	function searchRekapInvoice() {
 		if ($('#customer_inv').combo('getText') != "") {

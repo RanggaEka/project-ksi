@@ -25,12 +25,12 @@
 											data-options="rownumbers:true,singleSelect:true,collapsible:true,url:'../json/get_invoice.php',method:'get'">
 											<thead>
 											<tr>												
-												<th data-options="field:'no_inv',width:100">No. Invoice</th>												
-												<th data-options="field:'tanggal',width:100">Tanggal</th>
-												<th data-options="field:'customer_nama',width:250">Customer</th>
-												<th data-options="field:'total',width:100" formatter="formatPrice" align="right">Total</th>
-												<th data-options="field:'cicilan',width:100" formatter="formatPrice" align="right">Cicilan</th>
-												<th data-options="field:'sisa',width:100" formatter="formatPrice" align="right">Sisa</th>
+												<th style="width:20%" data-options="field:'no_inv'">No. Invoice</th>												
+												<th style="width:12%" data-options="field:'tanggal'">Tanggal</th>
+												<th style="width:25%" data-options="field:'customer_nama'">Customer</th>
+												<th style="width:14%" data-options="field:'total'" formatter="formatPrice" align="right">Total</th>
+												<th style="width:13%" data-options="field:'cicilan'" formatter="formatPrice" align="right">Cicilan</th>
+												<th style="width:13%" data-options="field:'sisa'" formatter="formatPrice" align="right">Sisa</th>
 											</tr>
 											</thead>
 										</table>

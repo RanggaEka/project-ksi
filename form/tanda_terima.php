@@ -191,6 +191,7 @@
                                     <td></td>
                                     <td></td>
                                     <td>
+										<button name="cetak_tt" id="cetak_tt" onclick="cetakTandaTerima()">Cetak</button>
                                         <button name="simpan_tt" id="simpan_tt" onclick="saveTandaTerima()">Save</button>
                                         <button onclick="location.reload()">Batal</button>
                                     </td>
@@ -199,9 +200,14 @@
                     <!--</form>-->
                     <br/>
                     <br/>
-                    <table id="gridFormTandaTerima" class="easyui-datagrid" style="width:100%;height:190px"
-						data-options="rownumbers:true,singleSelect:true,collapsible:true,url:'../json/get_tanda_terima.php',method:'get',pagination:true,
-												pageSize:20">
+                    <table id="gridFormTandaTerima" class="easyui-datagrid" style="width:100%;height:185px"
+						data-options="rownumbers:true,singleSelect:true,
+									collapsible:true,url:'../json/get_tanda_terima.php',
+									method:'get',pagination:true,
+									pageSize:20,
+									onSelect: function(){
+										rowClickTandaTerima()
+									}">
                         <thead>
                         <tr>                            
                             <th style="width:10%" data-options="field:'no_cn'">CN</th>
@@ -217,6 +223,35 @@
     </table>
 </td>
 <script>
+	document.getElementById('cetak_tt').style.display = "none";	
+	function cetakTandaTerima() {
+		window.open('../form/cetak_tanda_terima.php?CN='+$('#cn').textbox('getText'),'_blank');
+	}
+	
+	function rowClickTandaTerima() {
+		var row = $('#gridFormTandaTerima').datagrid('getSelected');
+		if (row){
+			$('#cn').textbox('setText',row.no_cn)
+			$('#tanggal').datebox('setValue',row.tanggal)
+			$('#pengirim').combo("setText",row.pengirim)
+			$('#tujuan').combo("setText",row.tujuan)
+			$('#alamat_pengirim').textbox('setText',row.alamat_pengirim)
+			$('#telpon_pengirim').textbox('setText',row.telepon_pengirim)
+			$('#penerima').textbox('setText',row.penerima)
+			$('#alamat_penerima').textbox('setText',row.alamat_penerima)
+			$('#telpon_penerima').textbox('setText',row.telepon_penerima)
+			$('#udl').combo('setText',row.service_udl)
+			$('#dtddtp').combo("setText",row.service_dtddtp)
+			$('#agent').combo("setText",row.service_agent)
+			$('#coll').textbox('setText',parseInt(row.total_coll))
+			$('#kg').textbox('setText',parseInt(row.total_berat))
+			$('#vol').textbox('setText',parseInt(row.total_vol))
+			$('#total').textbox('setText',parseInt(row.grand_total))
+			$('#deskripsi').textbox('setText',row.deskripsi_paket)
+			document.getElementById('simpan_tt').style.display = "none"	
+			document.getElementById('cetak_tt').style.display = "inline-table"	
+		}
+	}
 	function searchNoCN(value){
 		if (value == "") {
 			//alert('Data tidak ditemukan !')
@@ -251,7 +286,8 @@
 						$('#vol').textbox('setText',parseInt(dataa[0].total_vol))
 						$('#total').textbox('setText',parseInt(dataa[0].grand_total))
 						$('#deskripsi').textbox('setText',dataa[0].deskripsi_paket)
-						document.getElementById('simpan_tt').style.display = "none"
+						document.getElementById('simpan_tt').style.display = "none"	
+						document.getElementById('cetak_tt').style.display = "inline-table"	
 					}
 				}
 			});
@@ -320,7 +356,7 @@
 				},
 				success	: function(data){					
 					//alert('Data berhasil disimpan!');
-					window.location.href='../form/cetak_tanda_terima.php?CN='+$('#cn').textbox('getValue');
+					//window.location.href='../form/cetak_tanda_terima.php?CN='+$('#cn').textbox('getValue');
 					//location.reload();
 					//$.messager.alert('Info','Data berhasil disimpan!','info');
 					//refreshTandaTerima();

@@ -1,51 +1,67 @@
 <td width="156">&nbsp;</td>
 <td>
 	<br>
-	<table width="80%" border="1" align="left" cellpadding="4" cellspacing="2" style="border: solid 1px #efefef;">
-		<tr>
-          	<td>
-					<form action="../system/order_header_service.php" method="post" enctype="multipart/form-data">
-					<table width="100%" border="0" cellspacing="0" cellpadding="3">
+	<table width="100%" border="0" cellspacing="0" cellpadding="3" style="border: solid 1px #efefef;">
+		 <tr>
+			<td>
+				<div id="tbTT" style="padding:2px 5px;">
+					Pencarian Data :
+					<input class="easyui-searchbox" data-options="prompt:'.......',menu:'#mm',searcher:doSearchRekapTandaTerima" style="width:480px;height:25px;padding:10px;"></input>
+					<div id="mm">
+						<div data-options="name:'semua'">Semua</div>
+						<div data-options="name:'cn'">CN</div>
+						<div data-options="name:'tanggal'">Tanggal</div>
+						<div data-options="name:'pengirim'">Pengirim</div>
+						<div data-options="name:'tujuan'">Tujuan</div>
+					</div>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<img src="../images/famfam/printer.png" onClick="cetakRekapTandaTerima()" style="cursor:pointer;"/>
+				</div>
+				<table id="gridTandaTerima" class="easyui-datagrid" 
+					style="width:100%;height:543px;"
+					title="Tanda Terima" 
+					data-options="singleSelect:true,
+								collapsible:true,url:'../json/get_tanda_terima.php',
+								method:'get',
+								toolbar:'#tbTT',
+								rownumbers:true,
+								autoRowHeight:false,
+								pagination:true,
+								pageSize:20">
+					<thead>
 						<tr>
-				          	<td>
-								Pencarian Data :
-								<input class="easyui-searchbox" data-options="prompt:'.......',menu:'#mm',searcher:doSearchRekapTandaTerima" style="width:480px;height:25px;padding:10px;"></input>
-								<div id="mm">
-									<div data-options="name:'semua'">Semua</div>
-									<div data-options="name:'cn'">CN</div>
-									<div data-options="name:'tanggal'">Tanggal</div>
-									<div data-options="name:'pengirim'">Pengirim</div>
-									<div data-options="name:'tujuan'">Tujuan</div>
-								</div>
-							</td>
-				        </tr>
-				        <tr>
-							<td>
-								<table id="gridTandaTerima" class="easyui-datagrid" style="width:98%;height:480px"
-									title="Tanda Terima" data-options="singleSelect:true,collapsible:true,url:'../json/get_tanda_terima.php',method:'get',
-												rownumbers:true,
-												autoRowHeight:false,
-												pagination:true,
-												pageSize:20">
-									<thead>
-									<tr>
-										<th style="width:10%" data-options="field:'no_cn'">CN</th>
-										<th style="width:14%" data-options="field:'tanggal'">Tanggal</th>
-										<th style="width:20%" data-options="field:'pengirim'">Pengirim</th>
-										<th style="width:35%" data-options="field:'tujuan'">Tujuan</th>
-										<th style="width:16%" data-options="field:'grand_total'" align="right" formatter="formatPrice">Total</th>
-									</tr>
-									</thead>
-								</table>
-							</td>
-				        </tr>
-			    	</table>
-			    </form>
+							<th field="no_cn" width="9%" rowspan="2" align="left">CN</th>
+							<th field="tanggal" width="9%" rowspan="2" align="center">Tgl</th>
+							<th field="pengirim" width="18%" rowspan="2" align="left">Pengirim</th>
+							<th field="tujuan" width="40%" rowspan="2" align="left">Tujuan</th>
+							<th field="penerima" width="18%" rowspan="2" align="left">Penerima</th>
+							<th field="service" colspan="3" align="center">Service</th>
+							<th field="total" colspan="5" align="center">Total</th>
+						</tr>
+						</thead>
+						<thead>
+						<tr>
+							<th field="service_udl" width="5%" align="center">U/D/L</th>
+							<th field="service_dtddtp" width="8%" align="center">DTD/DTP</th>
+							<th field="service_agent" width="5%" align="center">Agent</th>
+							<th field="total_coll" width="5%" align="center">Coll</th>
+							<th field="total_berat" width="5%" align="center">KG</th>
+							<th field="total_kg" width="6%" align="center">Vol/M3</th>
+							<th field="tarif" width="10%" align="center">Tarif</th>
+							<th field="grand_total" width="10%" align="center">Total</th>
+						</tr>
+					</thead>
+				</table>
 			</td>
-	    </tr>
+		</tr>
 	</table>
 </td>
 <script>
+	function cetakRekapTandaTerima() {
+		//blm di buat, cetak All sama cetak berdasarkan kriteria
+		window.open('../form/cetak_rekap_tanda_terima.php','_blank');
+	}
+	
 	function doSearchRekapTandaTerima(value,name){
 		if (name == "cn") {
 			$('#gridTandaTerima').datagrid({

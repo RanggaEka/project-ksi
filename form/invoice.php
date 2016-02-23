@@ -41,7 +41,7 @@
 								</td>
 				        </tr>
 				        <tr>
-				          	<td>Jatuh Tempo <font color='red'>*</font></td>
+				          	<td>Jatuh Tempo </td>
 				         	<td>:</td>
 				         	<td><input id="jatuh_tempo" name="jatuh_tempo" class="easyui-datebox" style="width:150px;height:25px;padding:8px" data-options="prompt:'Jatuh Tempo',formatter:myformatter,parser:myparser"></input></td>
 				        </tr>
@@ -53,10 +53,10 @@
 									data-options="singleSelect:true,collapsible:true,url:'../json/get_invoice_detail.php',method:'get'">
 									<thead>
 									<tr>
-										<th data-options="field:'no_cn',width:180">No CN</th>
-										<th data-options="field:'tanggal',width:100">Tanggal</th>
-										<th data-options="field:'tujuan',width:200">Tujuan</th>
-										<th data-options="field:'total',width:200">Total</th>
+										<th style="width:15%" data-options="field:'no_cn'">No CN</th>
+										<th style="width:10%" data-options="field:'tanggal'">Tanggal</th>
+										<th style="width:50%" data-options="field:'tujuan'">Tujuan</th>
+										<th style="width:15%" data-options="field:'total'">Total</th>
 									</tr>
 									</thead>
 								</table>
@@ -96,13 +96,13 @@
                                             <div data-options="name:'tujuan'">Tujuan</div>
                                         </div>
                                         <table id="gridLookupTandaTerima" class="easyui-datagrid" title="" style="width:98%;height:180px"
-									data-options="singleSelect:true,collapsible:true,url:'../json/get_tanda_terima.php',method:'get'">
+									data-options="rownumbers:true,singleSelect:true,collapsible:true,url:'../json/get_tanda_terima.php',method:'get'">
 									<thead>
 									<tr>
-										<th data-options="field:'no_cn',width:100">No CN </th>
-										<th data-options="field:'tanggal',width:100">Tanggal</th>
-										<th data-options="field:'tujuan',width:300">Tujuan</th>
-										<th data-options="field:'grand_total',width:140" formatter="formatPrice">Total</th>
+										<th style="width:13%" data-options="field:'no_cn'">No CN </th>
+										<th style="width:13%" data-options="field:'tanggal'">Tanggal</th>
+										<th style="width:55%" data-options="field:'tujuan'">Tujuan</th>
+										<th style="width:15%" data-options="field:'grand_total'" formatter="formatPrice">Total</th>
 									</tr>
 									</thead>
 								</table>
@@ -263,7 +263,7 @@
 		var dtl = {}
 		var count = document.getElementById("detail_invoice").rows.length;
 		if ($('#no_inv').textbox('getValue') != "" && $('#tgl_inv').datebox('getValue') != ""
-			&& $('#customer_inv').textbox('getValue') != "" && $('#jatuh_tempo').datebox('getValue') != ""){	
+			&& $('#customer_inv').textbox('getValue') != ""){	
 
 			for (var i = 1; i < count-1; i++) {
 				if (document.getElementById("sid"+i).value != "") {
@@ -290,9 +290,19 @@
 						data : objHeader
 					},
 					success	: function(data){
-						$.messager.alert('Info', 'Invoice Berhasil disimpan ! ', 'info');
-						window.location.href='../form/cetak_invoice.php?no_inv='+$('#no_inv').textbox('getValue');
+						//$.messager.alert('Info', 'Invoice Berhasil disimpan ! ', 'info');
 						//location.reload();
+						setTimeout(function() {
+							$.messager.confirm('Print Invoice', 'Cetak Invoice Sekarang ?', function(r){
+								if (r){
+									//window.location.href='../form/cetak_invoice.php?no_inv='+$('#no_inv').textbox('getValue');
+									window.open('../form/cetak_invoice.php?no_inv='+$('#no_inv').textbox('getValue'),'_blank');
+									location.reload()
+								} else {
+									location.reload()
+								}
+							});
+						},100)
 					}
 				});	
 			} else {

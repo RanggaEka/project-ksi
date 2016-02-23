@@ -22,7 +22,14 @@
                                             <div data-options="name:'tanggal'">Tanggal</div>
                                         </div>
                                         <table id="tblLookupInvoice" class="easyui-datagrid" title="" style="width:98%;height:180px"
-											data-options="rownumbers:true,singleSelect:true,collapsible:true,url:'../json/get_invoice.php',method:'get'">
+											data-options="rownumbers:true,
+											singleSelect:true,
+											collapsible:true,
+											url:'../json/get_invoice.php',
+											method:'get',
+											onDblClickRow:function(){
+												selectInvoice()
+											}">
 											<thead>
 											<tr>												
 												<th style="width:20%" data-options="field:'no_inv'">No. Invoice</th>												

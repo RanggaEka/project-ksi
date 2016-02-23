@@ -33,7 +33,7 @@
 				
 		$cekCN	= mysql_num_rows(mysql_query("SELECT * FROM invoice_header WHERE no_inv='$no_inv'"));
 		if(($cekCN)>=1){
-			echo "<script> alert('Maaf, Nomor Invoice $no_inv sudah ada di database, silahkan ganti dengan yang lain! ');</script>";
+			echo "Nomor Invoice $no_inv sudah ada di database, silahkan ganti dengan yang lain !";
 		}else{
 			$sid_header = $id;
 			$sql = "INSERT INTO invoice_header 
@@ -73,7 +73,7 @@
 							SET total='$total_inv', sisa='$total_inv'
 							WHERE no_inv='$no_inv'");
 			} else {	
-				echo "<script>alert('Exception Error SQL Save');</script>";
+				echo "Exception Error SQL Save";
 			}			
 		}
 		

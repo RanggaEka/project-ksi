@@ -96,7 +96,13 @@
                                             <div data-options="name:'tujuan'">Tujuan</div>
                                         </div>
                                         <table id="gridLookupTandaTerima" class="easyui-datagrid" title="" style="width:98%;height:180px"
-									data-options="rownumbers:true,singleSelect:true,collapsible:true,url:'../json/get_tanda_terima.php',method:'get'">
+									data-options="rownumbers:true,
+									singleSelect:true,
+									collapsible:true,url:'../json/get_tanda_terima.php',
+									method:'get',
+									onDblClickRow:function(){
+										selectDetailTandaTerima()
+									}">
 									<thead>
 									<tr>
 										<th style="width:13%" data-options="field:'no_cn'">No CN </th>
@@ -290,19 +296,21 @@
 						data : objHeader
 					},
 					success	: function(data){
-						//$.messager.alert('Info', 'Invoice Berhasil disimpan ! ', 'info');
-						//location.reload();
-						setTimeout(function() {
-							$.messager.confirm('Print Invoice', 'Cetak Invoice Sekarang ?', function(r){
-								if (r){
-									//window.location.href='../form/cetak_invoice.php?no_inv='+$('#no_inv').textbox('getValue');
-									window.open('../form/cetak_invoice.php?no_inv='+$('#no_inv').textbox('getValue'),'_blank');
-									location.reload()
-								} else {
-									location.reload()
-								}
-							});
-						},100)
+						if (data != "") {
+							$.messager.alert('Peringatan', data, 'warning');
+						} else {
+							setTimeout(function() {
+								$.messager.confirm('Print Invoice', 'Cetak Invoice Sekarang ?', function(r){
+									if (r){
+										//window.location.href='../form/cetak_invoice.php?no_inv='+$('#no_inv').textbox('getValue');
+										window.open('../form/cetak_invoice.php?no_inv='+$('#no_inv').textbox('getValue'),'_blank');
+										location.reload()
+									} else {
+										location.reload()
+									}
+								});
+							},100)
+						}
 					}
 				});	
 			} else {

@@ -354,12 +354,22 @@
 				data	: {
 					data : obj
 				},
-				success	: function(data){					
-					//alert('Data berhasil disimpan!');
-					//window.location.href='../form/cetak_tanda_terima.php?CN='+$('#cn').textbox('getValue');
-					//location.reload();
-					//$.messager.alert('Info','Data berhasil disimpan!','info');
-					//refreshTandaTerima();
+				success	: function(data){
+					if (data != "") {
+						$.messager.alert('Peringatan', data, 'warning');
+					} else {					
+						setTimeout(function() {
+							$.messager.confirm('Print Tanda Terima', 'Cetak Tanda Terima Sekarang ?', function(r){
+								if (r){
+									//window.location.href='../form/cetak_invoice.php?no_inv='+$('#no_inv').textbox('getValue');
+									window.open('../form/cetak_tanda_terima.php?CN='+$('#cn').textbox('getValue'),'_blank');
+									location.reload()
+								} else {
+									location.reload()
+								}
+							});
+						},100)
+					}
 				}
 			});
 		} else {

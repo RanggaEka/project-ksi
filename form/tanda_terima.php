@@ -15,7 +15,7 @@
                                 <td width="80%" rowspan="5" valign="top">
                                     <!--SERVICE-->
                                     Service <font color='red'>*</font> :
-                                    <table width="28%" border="0" cellpadding="4" cellspacing="0" style="border:1px solid #CCCCCC; border-radius:4px;">
+                                    <table width="28%" border="0" cellpadding="2" cellspacing="0" style="border:1px solid #CCCCCC; border-radius:4px;">
                                         <tr>
 											<td width="30">U/D/L</td>
                                             <td valign="middle">

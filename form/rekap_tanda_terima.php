@@ -6,7 +6,9 @@
 			<td>
 				<div id="tbTT" style="padding:2px 5px;">
 					Pencarian Data :
-					<input id="cari" class="easyui-searchbox" data-options="prompt:'.......',menu:'#mm',searcher:doSearchRekapTandaTerima" style="width:480px;height:25px;padding:10px;"></input>
+					<input id="cari" class="easyui-searchbox" 
+						   data-options="prompt:'.......',menu:'#mm',
+						   searcher:doSearchRekapTandaTerima" style="width:480px;height:25px;padding:10px;"></input>
 					<div id="mm">
 						<div data-options="name:'semua'">Semua</div>
 						<div data-options="name:'cn'">CN</div>
@@ -14,8 +16,8 @@
 						<div data-options="name:'pengirim'">Pengirim</div>
 						<div data-options="name:'tujuan'">Tujuan</div>
 					</div>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<img src="../images/famfam/printer.png" onClick="cetakRekapTandaTerima()" style="cursor:pointer;"/>
+					&nbsp;
+					<img src="../images/famfam/printer.png" onClick="cetakRekapTandaTerima()" style="cursor:pointer;" width="18px"/>
 				</div>
 				<table id="gridTandaTerima" class="easyui-datagrid" 
 					style="width:100%;height:543px;"
@@ -57,17 +59,23 @@
 	</table>
 </td>
 <script>
+	var searchBoxNameRTT = "";
 	function cetakRekapTandaTerima() {
-		if (name == "cn") {
+		if (searchBoxNameRTT == "cn") {
 			window.open('../form/cetak_rekap_tanda_terima.php?cn='+$('#cari').textbox('getText'),'_blank');
-		} else if (name == "tanggal") {
+		} else if (searchBoxNameRTT == "tanggal") {
 			window.open('../form/cetak_rekap_tanda_terima.php?tanggal='+$('#cari').textbox('getText'),'_blank');
+		} else if (searchBoxNameRTT == "tujuan") {
+			window.open('../form/cetak_rekap_tanda_terima.php?tujuan='+$('#cari').textbox('getText'),'_blank');
+		} else if (searchBoxNameRTT == "pengirim") {
+			window.open('../form/cetak_rekap_tanda_terima.php?pengirim='+$('#cari').textbox('getText'),'_blank');
+		} else {
+			window.open('../form/cetak_rekap_tanda_terima.php','_blank');
 		}
-		//blm di buat, cetak All sama cetak berdasarkan kriteria
-		//window.open('../form/cetak_rekap_tanda_terima.php?cn='+$('#cari').textbox('getText')+'&tanggal='+$('#cari').textbox('getText'),'_blank');
 	}
 	
 	function doSearchRekapTandaTerima(value,name){
+		searchBoxNameRTT = name
 		if (name == "cn") {
 			$('#gridTandaTerima').datagrid({
 				queryParams: {

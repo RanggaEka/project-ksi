@@ -29,8 +29,8 @@
 		</select>
 		<button type="submit" onclick="searchRekapInvoice()" name="cari_rekap" id="cari_rekap">Cari</button>
 		<button type="reset" onclick="location.reload()">Batal</button>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		<img src="../images/famfam/printer.png" onClick="cetakRekapInvoice()" style="cursor:pointer;"/>
+		&nbsp;
+		<img src="../images/famfam/printer.png" onClick="cetakRekapInvoice()" style="cursor:pointer;" width="18px"/>
 	</div>
     <table width="99%" border="0" align="left" cellpadding="10" cellspacing="3" style="border: solid 1px #efefef;">
         <tr>
@@ -157,7 +157,11 @@
 	
 	function cetakRekapInvoice() {
 		//blm di buat, cetak All sama cetak berdasarkan kriteria
-		window.open('../form/cetak_rekap_invoice.php?customer_inv='+$('#customer_inv').textbox('getText')+'&status='+$('#status').textbox('getValue')+'&tgl_dari='+$('#tgl_dari').textbox('getText')+'&tgl_sampai='+$('#tgl_sampai').textbox('getText'),'_blank');
+		window.open('../form/cetak_rekap_invoice.php?customer_inv='+
+					$('#customer_inv').textbox('getText')+'&status='+
+					$('#status').textbox('getValue')+'&tgl_dari='+
+					$('#tgl_dari').textbox('getText')+'&tgl_sampai='+
+					$('#tgl_sampai').textbox('getText'),'_blank');
 	}
 	
 	function searchRekapInvoice() {

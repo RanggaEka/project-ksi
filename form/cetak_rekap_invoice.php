@@ -152,7 +152,6 @@ body {padding:0px}
   <table width="100%" border="0" cellpadding="0" cellspacing="0">
 	<tr align="center">
 		<td align="center">
-			<a type="button" class="button" onclick="window.location.href='../form/halaman_utama.php?page=home';">Kembali ke Home</a>
 			<a type="button" class="button" href="javascript:printDiv('print-area-1');" >Cetak</a>
 		</td>
 	</tr>

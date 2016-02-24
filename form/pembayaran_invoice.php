@@ -114,7 +114,7 @@
                         </table>
                     </form>
                     <br/>
-                    <table id="gridDetailInvoice" class="easyui-datagrid" title="" style="width:98%;height:228px"
+                    <table id="gridDetailInvoice" class="easyui-datagrid" title="" style="width:100%;height:228px" title="Invoice Detail"
 									data-options="rownumbers:true,singleSelect:true,collapsible:true,url:'../json/get_invoice_detail.php',method:'get'">
 									<thead>
 									<tr>										

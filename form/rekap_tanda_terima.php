@@ -1,7 +1,7 @@
 <td width="156">&nbsp;</td>
 <td>
 	<br>
-	<table width="100%" border="0" cellspacing="0" cellpadding="3" style="border: solid 1px #efefef;">
+	<table width="99%" border="0" align="left" cellpadding="10" cellspacing="3" style="border: solid 1px #efefef;">
 		 <tr>
 			<td>
 				<div id="tbTT" style="padding:2px 5px;">

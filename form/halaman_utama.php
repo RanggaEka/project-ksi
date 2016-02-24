@@ -50,12 +50,13 @@
             <div class="easyui-panel" style="padding:5px;">
                 <a href="#" class="easyui-menubutton" data-options="menu:'#mm1',iconCls:'icon-newspaper'">Form Tanda Terima</a>
                 <a href="#" class="easyui-menubutton" data-options="menu:'#mm2',iconCls:'icon-coins'">Form Invoice</a>
+				<a href="?page=rekappengiriman" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-file-excel'">Rekap Pengiriman</a>
                 <?php 
 					if ($_SESSION['jabatan'] == "ADMIN") {
 				?>
-                <a href="?page=kelolaadmin" class="easyui-linkbutton" data-options="plain:true">Pengaturan Admin</a>
+                <a href="?page=kelolaadmin" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-tools'">Pengaturan Admin</a>
 				<?php } ?>
-            </div>
+			</div>
             <div id="mm1" style="width:200px;">
                 <div><a href="?page=tandaterima">Input Tanda Terima</a></div>
                 <div><a href="?page=rekaptandaterima">Rekap Tanda Terima</a></div>
@@ -92,6 +93,8 @@
                         include 'pembayaran_invoice.php';
                     } elseif ($_GET['page'] == "rekapinvoice") {
                         include 'rekap_invoice.php';
+                    } elseif ($_GET['page'] == "rekappengiriman") {
+                        include 'rekap_pengiriman.php';
                     } elseif ($_GET['page'] == "kelolaadmin") {
                         include 'kelola_admin.php';
                     } else {

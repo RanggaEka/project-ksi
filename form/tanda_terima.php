@@ -236,16 +236,17 @@
 			$('#pengirim').combo("setText",row.pengirim)
 			$('#tujuan').combo("setText",row.tujuan)
 			$('#alamat_pengirim').textbox('setText',row.alamat_pengirim)
-			$('#telpon_pengirim').textbox('setText',row.telepon_pengirim)
+			$('#telpon_pengirim').textbox('setText',row.telpon_pengirim)
 			$('#penerima').textbox('setText',row.penerima)
 			$('#alamat_penerima').textbox('setText',row.alamat_penerima)
-			$('#telpon_penerima').textbox('setText',row.telepon_penerima)
+			$('#telpon_penerima').textbox('setText',row.telpon_penerima)
 			$('#udl').combo('setText',row.service_udl)
 			$('#dtddtp').combo("setText",row.service_dtddtp)
 			$('#agent').combo("setText",row.service_agent)
 			$('#coll').textbox('setText',parseInt(row.total_coll))
 			$('#kg').textbox('setText',parseInt(row.total_berat))
 			$('#vol').textbox('setText',parseInt(row.total_vol))
+			$('#tarif').textbox('setText',parseInt(row.tarif))			
 			$('#total').textbox('setText',parseInt(row.grand_total))
 			$('#deskripsi').textbox('setText',row.deskripsi_paket)
 			document.getElementById('simpan_tt').style.display = "none"	
@@ -274,16 +275,17 @@
 						$('#pengirim').combo("setText",dataa[0].pengirim)
 						$('#tujuan').combo("setText",dataa[0].tujuan)
 						$('#alamat_pengirim').textbox('setText',dataa[0].alamat_pengirim)
-						$('#telpon_pengirim').textbox('setText',dataa[0].telepon_pengirim)
+						$('#telpon_pengirim').textbox('setText',dataa[0].telpon_pengirim)
 						$('#penerima').textbox('setText',dataa[0].penerima)
 						$('#alamat_penerima').textbox('setText',dataa[0].alamat_penerima)
-						$('#telpon_penerima').textbox('setText',dataa[0].telepon_penerima)
+						$('#telpon_penerima').textbox('setText',dataa[0].telpon_penerima)
 						$('#udl').combo('setText',dataa[0].service_udl)
 						$('#dtddtp').combo("setText",dataa[0].service_dtddtp)
 						$('#agent').combo("setText",dataa[0].service_agent)
 						$('#coll').textbox('setText',parseInt(dataa[0].total_coll))
 						$('#kg').textbox('setText',parseInt(dataa[0].total_berat))
 						$('#vol').textbox('setText',parseInt(dataa[0].total_vol))
+						$('#tarif').textbox('setText',parseInt(dataa[0].tarif))
 						$('#total').textbox('setText',parseInt(dataa[0].grand_total))
 						$('#deskripsi').textbox('setText',dataa[0].deskripsi_paket)
 						document.getElementById('simpan_tt').style.display = "none"	
@@ -334,6 +336,7 @@
 				coll :  $('#coll').textbox('getValue'),
 				kg :  $('#kg').textbox('getValue'),
 				vol :  $('#vol').textbox('getValue'),
+				tarif :  $('#tarif').textbox('getValue'),
 				grand_total :  $('#total').textbox('getValue'),
 				deskripsi :  $('#deskripsi').textbox('getValue')
 			}];
@@ -345,8 +348,8 @@
 			&& $('#telpon_penerima').textbox('getValue') != "" && $('#udl').combo('getValue') != "" 
 			&& $('#dtddtp').combo("getValue") != "" && $('#agent').combo("getValue") != ""
 			&& $('#coll').textbox('getValue') != "" && $('#kg').textbox("getValue") != ""
-			&& $('#vol').textbox('getValue') != "" && $('#total').textbox("getValue") != ""
-			&& $('#deskripsi').textbox('getValue') != "") {
+			&& $('#vol').textbox('getValue') != "" && $('#tarif').textbox('getValue') != ""
+			&& $('#total').textbox("getValue") != "" && $('#deskripsi').textbox('getValue') != "") {
 		
 			$.ajax({
 				type	: "POST",

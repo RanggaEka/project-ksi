@@ -14,7 +14,7 @@
 			$string = join(',', $data);
 			$param1 = "where no_cn = '".$_GET['cn']."' and pengirim = '".$_GET['customer']."' and sid not in (".$string.")  and is_sudah_invoice = 0 ";
 		} else {
-			$param1 = "where no_cn = '".$_GET['cn']."' and is_sudah_invoice = 0 ";
+			$param1 = "where no_cn = '".$_GET['cn']."'"; //and is_sudah_invoice = 0 
 		}
 		
 	} else if ($_GET['tanggal'] != "") {
@@ -30,7 +30,7 @@
 			$string = join(',', $data);
 			$param1 = "where tanggal = '".$_GET['tanggal']."' and pengirim = '".$_GET['customer']."'  and sid not in (".$string.")  and is_sudah_invoice = 0 ";
 		} else {
-			$param1 = "where tanggal = '".$_GET['tanggal']."' and is_sudah_invoice = 0 ";
+			$param1 = "where tanggal = '".$_GET['tanggal']."'"; //and is_sudah_invoice = 0 
 		}
 		
 	} else if ($_GET['pengirim'] != "") {
@@ -46,7 +46,7 @@
 			$string = join(',', $data);
 			$param1 = "where pengirim = '".$_GET['pengirim']."' and pengirim = '".$_GET['customer']."'  and sid not in (".$string.")  and is_sudah_invoice = 0 ";
 		} else {
-			$param1 = "where pengirim = '".$_GET['pengirim']."' and is_sudah_invoice = 0 ";
+			$param1 = "where pengirim = '".$_GET['pengirim']."'"; // and is_sudah_invoice = 0 
 		}
 		
 	} else if ($_GET['tujuan'] != "") {
@@ -61,7 +61,7 @@
 			$string = join(',', $data);
 			$param1 = "where tujuan = '".$_GET['tujuan']."' and pengirim = '".$_GET['customer']."'  and sid not in (".$string.")  and is_sudah_invoice = 0 ";
 		} else {
-			$param1 = "where tujuan = '".$_GET['tujuan']."' and is_sudah_invoice = 0 ";
+			$param1 = "where tujuan = '".$_GET['tujuan']."'";  //and is_sudah_invoice = 0 
 		}
 		
 	} else if ($_GET['customer'] != "") {
@@ -77,10 +77,10 @@
 			$string = join(',', $data);
 			$param1  = "where pengirim = '".$_GET['customer']."' and pengirim = '".$_GET['customer']."'  and sid not in (".$string.")  and is_sudah_invoice = 0 ";
 		} else {
-			$param1  = "where pengirim = '".$_GET['customer']."' and is_sudah_invoice = 0 ";
+			$param1  = "where pengirim = '".$_GET['customer']."'"; // and is_sudah_invoice = 0 
 		}
 	} else {
-		$param1 = "";// where is_sudah_invoice = 0 
+		$param1 = "";// where is_sudah_invoice = 0
 	}
 	
 	$rs = mysql_query("SELECT * FROM tanda_terima $param1 order by no_cn desc");

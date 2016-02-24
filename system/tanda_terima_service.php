@@ -28,6 +28,7 @@
 		$coll = $jsondata[0]->coll;
 		$kg = $jsondata[0]->kg;
 		$vol = $jsondata[0]->vol;
+		$tarif = $jsondata[0]->tarif;
 		$grandtotal = $jsondata[0]->grand_total;
 		$deskripsi = $jsondata[0]->deskripsi;
 		$user_id = $_SESSION['user_sid'];
@@ -57,7 +58,7 @@
 		if(($cekCN)>=1){
 			echo "Nomor CN $cn sudah ada di database, silahkan ganti dengan yang lain !";
 		}else{		
-			$strQry = "INSERT INTO tanda_terima VALUES ('$id','$cnt','$cn','$tanggal','$pengirim', '$alamat_pengirim', $telpon_pengirim,'$tujuan', '$penerima', '$alamat_penerima', $telpon_penerima, '$udl', '$dtddtp', '$agent', '$coll', '$kg', '$vol', '$grandtotal', '$deskripsi', '$user_id', '$user_name', 0)";
+			$strQry = "INSERT INTO tanda_terima VALUES ('$id','$cnt','$cn','$tanggal','$pengirim', '$alamat_pengirim', $telpon_pengirim,'$tujuan', '$penerima', '$alamat_penerima', $telpon_penerima, '$udl', '$dtddtp', '$agent', '$coll', '$kg', '$vol', '$tarif', '$grandtotal', '$deskripsi', '$user_id', '$user_name', 0)";
 			// echo ">>>".$strQry;
 			mysql_query($strQry) or die(mysql_error());
 			

@@ -121,7 +121,7 @@
                                     <td><label>Tanggal <font color='red'>*</font></td>
 				         	<td>:</td>
 				         	<td>
-								<input name="tanggal" id="tanggal" class="easyui-datebox" style="width:150px;height:25px;padding:8px" placeholder="Tanggal" data-options="prompt:'Tanggal',formatter:myformatter,parser:myparser"></input>					       
+								<input name="tanggal" id="tanggal" class="easyui-datebox" style="width:150px;height:25px;padding:8px" placeholder="Tanggal" data-options="prompt:'Tanggal',formatter:myformatter"></input>					       
 							 </td>
 			            </tr>
 				        <tr>
@@ -191,6 +191,7 @@
                                     <td></td>
                                     <td></td>
                                     <td>
+										<button name="cetak_tt" id="cetak_tt" onclick="cetakTandaTerima()">Cetak</button>
                                         <button name="simpan_tt" id="simpan_tt" onclick="saveTandaTerima()">Save</button>
                                         <button onclick="location.reload()">Batal</button>
                                     </td>
@@ -199,9 +200,14 @@
                     <!--</form>-->
                     <br/>
                     <br/>
-                    <table id="gridFormTandaTerima" class="easyui-datagrid" style="width:100%;height:190px"
-						data-options="rownumbers:true,singleSelect:true,collapsible:true,url:'../json/get_tanda_terima.php',method:'get',pagination:true,
-												pageSize:20">
+                    <table id="gridFormTandaTerima" class="easyui-datagrid" style="width:100%;height:185px"
+						data-options="rownumbers:true,singleSelect:true,
+									collapsible:true,url:'../json/get_tanda_terima.php',
+									method:'get',pagination:true,
+									pageSize:20,
+									onSelect: function(){
+										rowClickTandaTerima()
+									}">
                         <thead>
                         <tr>                            
                             <th style="width:10%" data-options="field:'no_cn'">CN</th>
@@ -217,6 +223,36 @@
     </table>
 </td>
 <script>
+	document.getElementById('cetak_tt').style.display = "none";	
+	function cetakTandaTerima() {
+		window.open('../form/cetak_tanda_terima.php?CN='+$('#cn').textbox('getText'),'_blank');
+	}
+	
+	function rowClickTandaTerima() {
+		var row = $('#gridFormTandaTerima').datagrid('getSelected');
+		if (row){
+			$('#cn').textbox('setText',row.no_cn)
+			$('#tanggal').datebox('setValue',row.tanggal)
+			$('#pengirim').combo("setText",row.pengirim)
+			$('#tujuan').combo("setText",row.tujuan)
+			$('#alamat_pengirim').textbox('setText',row.alamat_pengirim)
+			$('#telpon_pengirim').textbox('setText',row.telpon_pengirim)
+			$('#penerima').textbox('setText',row.penerima)
+			$('#alamat_penerima').textbox('setText',row.alamat_penerima)
+			$('#telpon_penerima').textbox('setText',row.telpon_penerima)
+			$('#udl').combo('setText',row.service_udl)
+			$('#dtddtp').combo("setText",row.service_dtddtp)
+			$('#agent').combo("setText",row.service_agent)
+			$('#coll').textbox('setText',parseInt(row.total_coll))
+			$('#kg').textbox('setText',parseInt(row.total_berat))
+			$('#vol').textbox('setText',parseInt(row.total_vol))
+			$('#tarif').textbox('setText',parseInt(row.tarif))			
+			$('#total').textbox('setText',parseInt(row.grand_total))
+			$('#deskripsi').textbox('setText',row.deskripsi_paket)
+			document.getElementById('simpan_tt').style.display = "none"	
+			document.getElementById('cetak_tt').style.display = "inline-table"	
+		}
+	}
 	function searchNoCN(value){
 		if (value == "") {
 			//alert('Data tidak ditemukan !')
@@ -239,19 +275,21 @@
 						$('#pengirim').combo("setText",dataa[0].pengirim)
 						$('#tujuan').combo("setText",dataa[0].tujuan)
 						$('#alamat_pengirim').textbox('setText',dataa[0].alamat_pengirim)
-						$('#telpon_pengirim').textbox('setText',dataa[0].telepon_pengirim)
+						$('#telpon_pengirim').textbox('setText',dataa[0].telpon_pengirim)
 						$('#penerima').textbox('setText',dataa[0].penerima)
 						$('#alamat_penerima').textbox('setText',dataa[0].alamat_penerima)
-						$('#telpon_penerima').textbox('setText',dataa[0].telepon_penerima)
+						$('#telpon_penerima').textbox('setText',dataa[0].telpon_penerima)
 						$('#udl').combo('setText',dataa[0].service_udl)
 						$('#dtddtp').combo("setText",dataa[0].service_dtddtp)
 						$('#agent').combo("setText",dataa[0].service_agent)
 						$('#coll').textbox('setText',parseInt(dataa[0].total_coll))
 						$('#kg').textbox('setText',parseInt(dataa[0].total_berat))
 						$('#vol').textbox('setText',parseInt(dataa[0].total_vol))
+						$('#tarif').textbox('setText',parseInt(dataa[0].tarif))
 						$('#total').textbox('setText',parseInt(dataa[0].grand_total))
 						$('#deskripsi').textbox('setText',dataa[0].deskripsi_paket)
-						document.getElementById('simpan_tt').style.display = "none"
+						document.getElementById('simpan_tt').style.display = "none"	
+						document.getElementById('cetak_tt').style.display = "inline-table"	
 					}
 				}
 			});
@@ -298,6 +336,7 @@
 				coll :  $('#coll').textbox('getValue'),
 				kg :  $('#kg').textbox('getValue'),
 				vol :  $('#vol').textbox('getValue'),
+				tarif :  $('#tarif').textbox('getValue'),
 				grand_total :  $('#total').textbox('getValue'),
 				deskripsi :  $('#deskripsi').textbox('getValue')
 			}];
@@ -309,8 +348,8 @@
 			&& $('#telpon_penerima').textbox('getValue') != "" && $('#udl').combo('getValue') != "" 
 			&& $('#dtddtp').combo("getValue") != "" && $('#agent').combo("getValue") != ""
 			&& $('#coll').textbox('getValue') != "" && $('#kg').textbox("getValue") != ""
-			&& $('#vol').textbox('getValue') != "" && $('#total').textbox("getValue") != ""
-			&& $('#deskripsi').textbox('getValue') != "") {
+			&& $('#vol').textbox('getValue') != "" && $('#tarif').textbox('getValue') != ""
+			&& $('#total').textbox("getValue") != "" && $('#deskripsi').textbox('getValue') != "") {
 		
 			$.ajax({
 				type	: "POST",
@@ -318,17 +357,31 @@
 				data	: {
 					data : obj
 				},
-				success	: function(data){					
 <<<<<<< HEAD
-					//alert('Data berhasil disimpan!');
-					location.reload();
+				success	: function(data){
+					if (data != "") {
+						$.messager.alert('Peringatan', data, 'warning');
+					} else {					
+						setTimeout(function() {
+							$.messager.confirm('Print Tanda Terima', 'Cetak Tanda Terima Sekarang ?', function(r){
+								if (r){
+									//window.location.href='../form/cetak_invoice.php?no_inv='+$('#no_inv').textbox('getValue');
+									window.open('../form/cetak_tanda_terima.php?CN='+$('#cn').textbox('getValue'),'_blank');
+									location.reload()
+								} else {
+									location.reload()
+								}
+							});
+						},100)
+					}
 =======
+				success	: function(data){					
 					alert('Data berhasil disimpan!');
-					window.location.href='../form/cetak_tanda_terima.php?CN=no_cn';
-					//location.reload();
->>>>>>> 36602670728dd2f654feb271ee3be287428cf0d5
+					//window.location.href='../form/cetak_tanda_terima.php?CN='+$('#cn').textbox('getValue');
+					location.reload();
 					//$.messager.alert('Info','Data berhasil disimpan!','info');
 					//refreshTandaTerima();
+>>>>>>> 4a73d3a84fecb2502dcbd2a1941ff5253812dab2
 				}
 			});
 		} else {

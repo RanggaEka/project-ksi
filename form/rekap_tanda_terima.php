@@ -6,7 +6,7 @@
 			<td>
 				<div id="tbTT" style="padding:2px 5px;">
 					Pencarian Data :
-					<input class="easyui-searchbox" data-options="prompt:'.......',menu:'#mm',searcher:doSearchRekapTandaTerima" style="width:480px;height:25px;padding:10px;"></input>
+					<input id="cari" class="easyui-searchbox" data-options="prompt:'.......',menu:'#mm',searcher:doSearchRekapTandaTerima" style="width:480px;height:25px;padding:10px;"></input>
 					<div id="mm">
 						<div data-options="name:'semua'">Semua</div>
 						<div data-options="name:'cn'">CN</div>
@@ -46,7 +46,7 @@
 							<th field="service_agent" width="5%" align="center">Agent</th>
 							<th field="total_coll" width="5%" align="center">Coll</th>
 							<th field="total_berat" width="5%" align="center">KG</th>
-							<th field="total_kg" width="6%" align="center">Vol/M3</th>
+							<th field="total_vol" width="6%" align="center">Vol/M3</th>
 							<th field="tarif" width="10%" align="center">Tarif</th>
 							<th field="grand_total" width="10%" align="center">Total</th>
 						</tr>
@@ -58,8 +58,13 @@
 </td>
 <script>
 	function cetakRekapTandaTerima() {
+		if (name == "cn") {
+			window.open('../form/cetak_rekap_tanda_terima.php?cn='+$('#cari').textbox('getText'),'_blank');
+		} else if (name == "tanggal") {
+			window.open('../form/cetak_rekap_tanda_terima.php?tanggal='+$('#cari').textbox('getText'),'_blank');
+		}
 		//blm di buat, cetak All sama cetak berdasarkan kriteria
-		window.open('../form/cetak_rekap_tanda_terima.php','_blank');
+		//window.open('../form/cetak_rekap_tanda_terima.php?cn='+$('#cari').textbox('getText')+'&tanggal='+$('#cari').textbox('getText'),'_blank');
 	}
 	
 	function doSearchRekapTandaTerima(value,name){

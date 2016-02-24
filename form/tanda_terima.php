@@ -1,20 +1,21 @@
 <td width="156">&nbsp;</td>
 <td>
     <br>
-    <table width="80%" border="0" align="left" cellpadding="4" cellspacing="2" style="border: solid 1px #efefef;">
+    <table width="80%" border="1" align="left" cellpadding="4" cellspacing="2" style="border: solid 1px #efefef;">
         <tr>
             <td>
                 <!--<form action="../system/tanda_terima_service.php" method="post" enctype="multipart/form-data">-->
                         <table width="100%" border="0" cellspacing="0" cellpadding="1">
                             <tr>
-                                <td width="10%"><label>CN <font color='red'>*</font></label></td>
+                                <td width="8%"><label>CN <font color='red'>*</font></label></td>
                                 <td width="1%">:</td>
-                                <td width="40%">
+                                <td width="23%">
                                     <input name="cn" id="cn" type="text" class="easyui-searchbox" style="width:150px;height:25px;padding:8px" data-options="prompt:'CN',searcher:searchNoCN">
                                 </td>
-                                <td width="70%" rowspan="5" valign="top">
+                                <td width="80%" rowspan="5" valign="top">
+                                    <!--SERVICE-->
                                     Service <font color='red'>*</font> :
-                                    <table width="40%" border="0" cellpadding="2" cellspacing="1" style="border:1px solid #CCCCCC; border-radius:4px;">
+                                    <table width="28%" border="0" cellpadding="4" cellspacing="0" style="border:1px solid #CCCCCC; border-radius:4px;">
                                         <tr>
 											<td width="30">U/D/L</td>
                                             <td valign="middle">
@@ -22,161 +23,149 @@
 														<option value="U">U</option>
 														<option value="D">D</option>
 														<option value="L">L</option>
-													</select>
+											  </select>
                                             </td>
                                         </tr>
-                                            <tr>
-												<td>DTD/DTP</td>
-                                                <td valign="middle">
-                                                    <select class="easyui-combobox" name="dtddtp" id="dtddtp" style="width:110px;height:25px;padding:8px">
-														<option value="DTD">DTD</option>
-														<option value="DTP">DTP</option>
-													</select>
-                                                </td>
-                                            </tr>
-                                                <tr>
-													<td>Agent</td>
-                                                    <td valign="middle">
-														<input
-															class="easyui-combobox" 												
-															style="width:110px;height:25px;padding:8px"
-															name="agent" id="agent"
-															data-options="
-																	url:'../json/get_agent.php',
-																	method:'get',
-																	valueField:'agent',
-																	textField:'agent',
-																	panelHeight:'150',
-																	panelWidth: 150,
-																	prompt:'Agent'														
-															">
-                                                    </td>
-                                                </tr>
-                                    </table>
-                                    Akumulasi <font color='red'>*</font> :
-                                    <table width="40%" border="0" cellpadding="2" cellspacing="1" style="border:1px solid #CCCCCC; border-radius:4px;">
-                                        <tr>
-											<td width="56">Coll</td>
-                                            <td valign="top">
-                                                <input name="coll" id="coll" type="text" value="1" class="easyui-numberbox" style="width:110px;height:25px;padding:8px" data-options="prompt:'Coll'"> </td>
-										<tr/>
 										<tr>
-											<td>Berat</td>
+											<td>DTD/DTP</td>
 											<td valign="middle">
-												<input name="kg" id="kg" type="text" value="1" class="easyui-numberbox" precision="2" style="width:80px;height:25px;padding:8px" 
-												data-options="prompt:'Berat',onChange: function(value){
-													var tarif = parseInt($('#tarif').textbox('getValue'))
-													var kg = parseInt($('#kg').textbox('getValue'))
-													var vol = parseInt($('#vol').textbox('getValue'))
-														if(vol > kg){
-															var sum = tarif * vol
-														}else{
-															var sum = tarif * kg
-														}													
-													$('#subtotal').textbox('setValue',sum)
-													$('#total').textbox('setValue',sum)
-												  }"> KG 
-											</td>
-										<tr/>
-										<tr>
-											<td>Volume</td>
-											<td valign="top">
-												<input name="vol" id="vol" type="text" value="1" class="easyui-numberbox" precision="2" style="width:80px;height:25px;padding:8px" 
-												data-options="prompt:'Volume',onChange: function(value){
-													var tarif = parseInt($('#tarif').textbox('getValue'))
-													var kg = parseInt($('#kg').textbox('getValue'))
-													var vol = parseInt($('#vol').textbox('getValue'))
-														if(vol > kg){
-															var sum = tarif * vol
-														}else{
-															var sum = tarif * kg
-														}													
-													$('#subtotal').textbox('setValue',sum)
-													$('#total').textbox('setValue',sum)
-												}"> M3
+												<select class="easyui-combobox" name="dtddtp" id="dtddtp" style="width:110px;height:25px;padding:8px">
+													<option value="DTD">DTD</option>
+													<option value="DTP">DTP</option>
+												</select>
 											</td>
 										</tr>
 										<tr>
-											<td>Tarif</td>
-											<td valign="top">
-												<input name="tarif" id="tarif" type="text" value="0" class="easyui-numberbox" min="0" precision="0" style="width:110px;height:25px;padding:8px" 
-												data-options="prompt:'Tarif',onChange: function(value){
-													var tarif = parseInt($('#tarif').textbox('getValue'))
-													var kg = parseInt($('#kg').textbox('getValue'))
-													var vol = parseInt($('#vol').textbox('getValue'))
-														if(vol > kg){
-															var sum = tarif * vol
-														}else{
-															var sum = tarif * kg
-														}													
-													$('#subtotal').textbox('setValue',sum)
-													$('#total').textbox('setValue',sum)
-												}"> 
+											<td>Agent</td>
+											<td valign="middle">
+												<input
+													class="easyui-combobox" 												
+													style="width:110px;height:25px;padding:8px"
+													name="agent" id="agent"
+													data-options="
+															url:'../json/get_agent.php',
+															method:'get',
+															valueField:'agent',
+															textField:'agent',
+															panelHeight:'150',
+															panelWidth: 150,
+															prompt:'Agent'">
 											</td>
 										</tr>
+									</table>
+                                    <!--AKUMULASI-->
+                                    Akumulasi <font color='red'>*</font> :
+									<table width="85%" border="1" cellpadding="2" cellspacing="0" style="border:1px solid #CCCCCC; border-radius:4px;">
 										<tr>
-											<td>SubTotal</td>
-											<td valign="top">
-												<input name="subtotal" id="subtotal" type="text" class="easyui-numberbox" disabled min="0" precision="0" style="width:110px;height:25px;padding:8px" data-options="prompt:'SubTotal'"> 
-											</td>
-										</tr>
+											<td width="40" valign="middle">Coll</td>
+											<td width="40" valign="middle">
+										  <input name="coll" id="coll" type="text" value="1" class="easyui-numberbox" style="width:80px;height:25px;padding:8px" data-options="prompt:'Coll'"> </td>
+											<td width="30" valign="middle">Berat</td>
+											<td width="40" valign="middle"><input name="kg" id="kg" type="text" value="1" class="easyui-numberbox" precision="2" 
+																				style="width:60px;height:25px;padding:8px" 
+																				data-options="prompt:'Berat',onChange: function(value){
+																				var tarif = parseInt($('#tarif').textbox('getValue'))
+																				var kg = parseInt($('#kg').textbox('getValue'))
+																				var vol = parseInt($('#vol').textbox('getValue'))
+																				if(vol > kg){
+																				var sum = tarif * vol
+																				}else{
+																				var sum = tarif * kg
+																				}													
+																				$('#subtotal').textbox('setValue',sum)
+																				$('#total').textbox('setValue',sum)
+																				}">
+												KG </td>
+											<td width="80" valign="middle">Volume</td>
+											<td width="60" valign="middle"><input name="vol" id="vol" type="text" value="1" class="easyui-numberbox" 
+																			precision="2" style="width:60px;height:25px;padding:8px" 
+																			data-options="prompt:'Volume',onChange: function(value){
+																			var tarif = parseInt($('#tarif').textbox('getValue'))
+																			var kg = parseInt($('#kg').textbox('getValue'))
+																			var vol = parseInt($('#vol').textbox('getValue'))
+																			if(vol > kg){
+																			var sum = tarif * vol
+																			}else{
+																			var sum = tarif * kg
+																			}													
+																			$('#subtotal').textbox('setValue',sum)
+																			$('#total').textbox('setValue',sum)
+																			}">
+												M3 </td>
 										<tr>
-											<td>Packing Kayu</td>
-											<td valign="top">
-												<input name="packing_kayu" id="packing_kayu" type="text" value="0" class="easyui-numberbox" min="0" precision="0" style="width:110px;height:25px;padding:8px" 
-												data-options="prompt:'Packing Kayu',onChange: function(value){													
-													var biaya = parseInt($('#biaya').textbox('getValue'))
-													var packing_kayu = parseInt($('#packing_kayu').textbox('getValue'))
-													var asuransi = parseInt($('#asuransi').textbox('getValue'))													
-													var subtotal = parseInt($('#subtotal').textbox('getValue'))														
-													var grand = subtotal + packing_kayu + asuransi + biaya
-													$('#total').textbox('setValue',grand)
-												}"> 
-											</td>
-										</tr>
+											<td valign="middle">Packing Kayu</td>
+											<td valign="middle"><input name="packing_kayu" id="packing_kayu" type="text" value="0" class="easyui-numberbox" 
+																	min="0" precision="0" style="width:80px;height:25px;padding:8px" 
+																	data-options="prompt:'Packing Kayu',onChange: function(value){													
+																	var biaya = parseInt($('#biaya').textbox('getValue'))
+																	var packing_kayu = parseInt($('#packing_kayu').textbox('getValue'))
+																	var asuransi = parseInt($('#asuransi').textbox('getValue'))													
+																	var subtotal = parseInt($('#subtotal').textbox('getValue'))														
+																	var grand = subtotal + packing_kayu + asuransi + biaya
+																	$('#total').textbox('setValue',grand)
+																	}">											</td>
+											<td valign="middle">Asuransi</td>
+											<td valign="middle"><input name="asuransi" id="asuransi" type="text" value="0" class="easyui-numberbox" 
+																	min="0" precision="0" style="width:80px;height:25px;padding:8px" 
+																	data-options="prompt:'Asuransi',onChange: function(value){
+																	var biaya = parseInt($('#biaya').textbox('getValue'))
+																	var packing_kayu = parseInt($('#packing_kayu').textbox('getValue'))
+																	var asuransi = parseInt($('#asuransi').textbox('getValue'))													
+																	var subtotal = parseInt($('#subtotal').textbox('getValue'))														
+																	var grand = subtotal + packing_kayu + asuransi + biaya
+																	$('#total').textbox('setValue',grand)
+																	}">											</td>
+											<td valign="middle" bgcolor="#ADE5F7">Biaya Lainnya</td>
+										  <td valign="middle" bgcolor="#ADE5F7"><input name="biaya" id="biaya" type="text" value="0" class="easyui-numberbox" min="0" 
+																	precision="0" style="width:80px;height:25px;padding:8px" 
+																	data-options="prompt:'Biaya Lainnya',onChange: function(value){
+																	var biaya = parseInt($('#biaya').textbox('getValue'))
+																	var packing_kayu = parseInt($('#packing_kayu').textbox('getValue'))
+																	var asuransi = parseInt($('#asuransi').textbox('getValue'))													
+																	var subtotal = parseInt($('#subtotal').textbox('getValue'))														
+																	var grand = subtotal + packing_kayu + asuransi + biaya
+																	$('#total').textbox('setValue',grand)
+																	}">											</td>
 										<tr>
-											<td>Asuransi</td>
-											<td valign="top">
-												<input name="asuransi" id="asuransi" type="text" value="0" class="easyui-numberbox" min="0" precision="0" style="width:110px;height:25px;padding:8px" 
-												data-options="prompt:'Asuransi',onChange: function(value){
-													var biaya = parseInt($('#biaya').textbox('getValue'))
-													var packing_kayu = parseInt($('#packing_kayu').textbox('getValue'))
-													var asuransi = parseInt($('#asuransi').textbox('getValue'))													
-													var subtotal = parseInt($('#subtotal').textbox('getValue'))														
-													var grand = subtotal + packing_kayu + asuransi + biaya
-													$('#total').textbox('setValue',grand)
-												}"> 
-											</td>
-										</tr>
-										<tr>
-											<td>Biaya Lainnya</td>
-											<td valign="top">
-												<input name="biaya" id="biaya" type="text" value="0" class="easyui-numberbox" min="0" precision="0" style="width:110px;height:25px;padding:8px" 
-												data-options="prompt:'Biaya Lainnya',onChange: function(value){
-													var biaya = parseInt($('#biaya').textbox('getValue'))
-													var packing_kayu = parseInt($('#packing_kayu').textbox('getValue'))
-													var asuransi = parseInt($('#asuransi').textbox('getValue'))													
-													var subtotal = parseInt($('#subtotal').textbox('getValue'))														
-													var grand = subtotal + packing_kayu + asuransi + biaya
-													$('#total').textbox('setValue',grand)
-												}"> 
-											</td>
-										</tr>
-										<tr>
-											<td>Total</td>
-											<td valign="top">
-												<input name="total" id="total" type="text" class="easyui-numberbox" disabled min="0" precision="0" style="width:110px;height:25px;padding:8px" data-options="prompt:'Total'"> 
-											</td>
-										</tr>
-                                    </table>
-                                    Deskripsi Paket <font color='red'>*</font> :
-                                    <table width="20%" border="0" cellpadding="2" cellspacing="1" >
+											<td colspan="4" rowspan="3" valign="middle">
+											Deskripsi Paket <font color='red'>*</font>
+                                            <table width="100%" border="0" cellpadding="2" cellspacing="1" >
                                         <tr>
                                             <td valign="top">
-                                                <input name="deskripsi" id="deskripsi" class="easyui-textbox" data-options="multiline:true,prompt:'Deskripsi Paket'" style="width:290px;height:46px;padding:8px">
+                                                <input name="deskripsi" id="deskripsi" class="easyui-textbox" data-options="multiline:true,prompt:'Deskripsi Paket'" style="width:100%;height:70px;padding:8px">
                                             </td>
-                                            <tr/>
+                                      <tr/>
                                     </table>
+										  </td>
+											<td valign="middle" bgcolor="#ADE5F7">Tarif</td>
+										  <td valign="middle" bgcolor="#ADE5F7"><input name="tarif" id="tarif" type="text" 
+																	value="0" class="easyui-numberbox" min="0" 
+																	precision="0" style="width:80px;height:25px;padding:8px" 
+																	data-options="prompt:'Tarif',onChange: function(value){
+																	var tarif = parseInt($('#tarif').textbox('getValue'))
+																	var kg = parseInt($('#kg').textbox('getValue'))
+																	var vol = parseInt($('#vol').textbox('getValue'))
+																	if(vol > kg){
+																	var sum = tarif * vol
+																	}else{
+																	var sum = tarif * kg
+																	}													
+																	$('#subtotal').textbox('setValue',sum)
+																	$('#total').textbox('setValue',sum)
+																	}">											</td>
+										</tr>
+										<tr>
+											<td bgcolor="#ADE5F7">SubTotal</td>
+										  <td bgcolor="#ADE5F7"><input name="subtotal" id="subtotal" type="text" class="easyui-numberbox" 
+												disabled min="0" precision="0" style="width:80px;height:25px;padding:8px" data-options="prompt:'SubTotal'">											</td>
+										</tr>
+										<tr>
+											<td bgcolor="#ADE5F7">Total</td>
+										  <td bgcolor="#ADE5F7"><input name="total" id="total" type="text" class="easyui-numberbox" disabled min="0" 
+												precision="0" style="width:80px;height:25px;padding:8px" data-options="prompt:'Total'">											</td>
+										</tr>
+								  </table>
+                                    <!--DESKRIPSI-->
                                 </td>
                                 </tr>
                                 <tr>
@@ -193,7 +182,7 @@
                                         <div>
 											<input
 												class="easyui-combobox" 												
-												style="width:240px;height:25px;padding:8px"
+												style="width:200px;height:25px;padding:8px"
 												name="pengirim" id="pengirim"
 												data-options="
 														url:'../json/get_customer.php',
@@ -213,7 +202,7 @@
                                         <div style="padding-bottom:2px;padding-top:2px;">
 											<input
 												class="easyui-textbox" 												
-												style="width:300px;height:25px;padding:8px"
+												style="width:200px;height:25px;padding:8px"
 												name="tujuan" id="tujuan" data-options="prompt:'Tujuan'">
 												<!--data-options="
 														url:'../json/get_tujuan.php',
@@ -230,7 +219,7 @@
 												"-->
 											
                                         </div>
-                                        <input name="alamat_pengirim" id="alamat_pengirim" class="easyui-textbox" data-options="multiline:true,prompt:'Alamat Pengirim'" style="width:300px;height:50px;padding:8px">
+                                        <input name="alamat_pengirim" id="alamat_pengirim" class="easyui-textbox" data-options="multiline:true,prompt:'Alamat Pengirim'" style="width:200px;height:50px;padding:8px">
 										<div style="padding-bottom:2px;padding-top:2px;">
 										<input name="telpon_pengirim" id="telpon_pengirim" class="easyui-numberbox" data-options="prompt:'Telpon Pengirim'" style="width:150px;height:25px;padding:8px">
 										</div>
@@ -241,9 +230,9 @@
                                     <td valign="top">:</td>
                                     <td>
                                         <div style="padding-bottom:2px;">
-                                            <input name="penerima" id="penerima" type="text" class="easyui-textbox" style="width:240px;height:25px;padding:8px" data-options="prompt:'Penerima'">
+                                            <input name="penerima" id="penerima" type="text" class="easyui-textbox" style="width:200px;height:25px;padding:8px" data-options="prompt:'Penerima'">
                                         </div>
-                                        <input name="alamat_penerima" id="alamat_penerima" class="easyui-textbox" data-options="multiline:true,prompt:'Alamat Penerima'" style="width:300px;height:50px;padding:8px">
+                                        <input name="alamat_penerima" id="alamat_penerima" class="easyui-textbox" data-options="multiline:true,prompt:'Alamat Penerima'" style="width:200px;height:50px;padding:8px">
 										<div style="padding-bottom:2px;padding-top:2px;">
 										<input name="telpon_penerima" id="telpon_penerima" class="easyui-numberbox" data-options="prompt:'Telpon Penerima'" style="width:150px;height:25px;padding:8px">
 										</div>

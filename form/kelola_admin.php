@@ -83,7 +83,7 @@
                             </tr>
                         </table>
                     </form>
-                    <table id="gridUser" class="easyui-datagrid" title="" style="width:98%;height:250px"
+                    <table id="gridUser" class="easyui-datagrid" title="" style="width:98%;height:240px"
 						data-options="rownumbers:true,singleSelect:true,collapsible:true,url:'../json/get_users.php',method:'get',
 						onSelect: function(){
 							editUser()

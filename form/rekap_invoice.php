@@ -43,13 +43,13 @@
 							pagination:true" class="easyui-datagrid">
 				<thead>
 					<tr>
-						<th field="no_inv" style="width:18%">No Inv</th>
-						<th field="tanggal" style="width:8%">Tanggal Inv</th>
-						<th field="customer_nama" style="width:30%">Cust</th>
+						<th field="no_inv" style="width:15%">No Inv</th>
+						<th field="tanggal" style="width:10%">Tanggal Inv</th>
+						<th field="customer_nama" style="width:29%">Cust</th>
 						<th field="total" align="right" style="width:10%">Total</th>
 						<th field="cicilan" align="right" style="width:10%">Cicilan</th>
 						<th field="sisa" align="right" style="width:10%">Sisa</th>
-						<th field="keterangan" style="width:10%">Keterangan</th>
+						<th field="keterangan" style="width:15%">Keterangan</th>
 					</tr>
 				</thead>
 			</table>
@@ -73,7 +73,6 @@
 					rownumbers:true,
 					loadMsg:'',
 					height:'auto',
-					width:'100%',
 					columns:[[
 						{field:'no_cn',title:'No CN',width:40,rowspan:2},
 						{field:'tujuan',title:'Tujuan',width:100,rowspan:2},

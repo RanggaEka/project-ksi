@@ -77,7 +77,7 @@
 			$string = join(',', $data);
 			$param1  = "where pengirim = '".$_GET['customer']."' and pengirim = '".$_GET['customer']."'  and sid not in (".$string.")  and is_sudah_invoice = 0 ";
 		} else {
-			$param1  = "where pengirim = '".$_GET['customer']."'"; // and is_sudah_invoice = 0 
+			$param1  = "where pengirim = '".$_GET['customer']."' and is_sudah_invoice = 0";
 		}
 	} else {
 		$param1 = "";// where is_sudah_invoice = 0

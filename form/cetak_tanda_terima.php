@@ -85,24 +85,38 @@ body {padding:0px}
                 <td width="57%" align="center"><b>Isi yang diberitahukan</b></td>
 				<td width="18%" align="center"><b>Dimensi Barang</b></td>
                 <td width="15%" align="center"><b>Berat</b></td>
+				<td width="15%" align="center"><b>Tarif</b></td>
               </tr>				
               <tr>
                 <td align="center"><?php echo $arrResult['total_coll']; ?></td>
                 <td align="center"><?php echo $arrResult['deskripsi_paket']; ?></td>
                 <td align="center"><?php echo $arrResult['total_vol']; ?> M3</td>
-				<td align="center"><?php echo $arrResult['total_berat']; ?> Kg</td>				
+				<td align="center"><?php echo $arrResult['total_berat']; ?> Kg</td>
+				<td align="right"><?php echo number_format($arrResult['tarif']);?></td>				
               </tr>              
               <tr>
-                <td colspan="2" rowspan="2" align="left" valign="top"><b>Ketentuan :</b><br>
+                <td colspan="3" rowspan="5" align="left" valign="top"><b>Ketentuan :</b><br>
                   <b>1. Isi barang tidak diperiksa </b><br>
-                  <!--b>2. Hitungan Volume : </b><br>
+                  <b>2. Hitungan Volume : </b><br>
 				  <b>&nbsp;&nbsp;- Udara : P x L x T : 6.000,-</b><br>
-				  <b>&nbsp;&nbsp;- Darat/Laut : P x L x T : 4.000,-</b><br-->				  
+				  <b>&nbsp;&nbsp;- Darat/Laut : P x L x T : 4.000,-</b><br>				  
                   <b>2. Biaya bongkar muat diluar tanggung jawab pengangkut  </b>
 				 </td>
-                <td align="right">Tarif</td>
-                <td align="right"><?php echo number_format($arrResult['tarif']);?></td>
-              </tr>              
+				<td align="right">Subtotal</td>
+                <td align="right"><?php echo number_format($arrResult['subtotal']);?></td>
+              </tr>
+			  <tr>
+                <td align="right">Packing Kayu</td>
+                <td align="right"><?php echo number_format($arrResult['packing_kayu']);?></td>
+              </tr>         
+			  <tr>
+                <td align="right">Asuransi</td>
+                <td align="right"><?php echo number_format($arrResult['asuransi']);?></td>
+              </tr>
+			  <tr>
+                <td align="right">Biaya Lainnya</td>
+                <td align="right"><?php echo number_format($arrResult['biaya']);?></td>
+              </tr>
               <tr>
                 <td align="right">Jumlah</td>
                 <td align="right"><?php echo number_format($arrResult['grand_total']);?></td>

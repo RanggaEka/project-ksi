@@ -29,6 +29,10 @@
 		$kg = $jsondata[0]->kg;
 		$vol = $jsondata[0]->vol;
 		$tarif = $jsondata[0]->tarif;
+		$subtotal = $jsondata[0]->subtotal;
+		$packing_kayu = $jsondata[0]->packing_kayu;
+		$asuransi = $jsondata[0]->asuransi;
+		$biaya = $jsondata[0]->biaya;
 		$grandtotal = $jsondata[0]->grand_total;
 		$deskripsi = $jsondata[0]->deskripsi;
 		$user_id = $_SESSION['user_sid'];
@@ -58,13 +62,13 @@
 		if(($cekCN)>=1){
 			echo "Nomor CN $cn sudah ada di database, silahkan ganti dengan yang lain !";
 		}else{		
-			$strQry = "INSERT INTO tanda_terima VALUES ('$id','$cnt','$cn','$tanggal','$pengirim', '$alamat_pengirim', $telpon_pengirim,'$tujuan', '$penerima', '$alamat_penerima', $telpon_penerima, '$udl', '$dtddtp', '$agent', '$coll', '$kg', '$vol', '$tarif', '$grandtotal', '$deskripsi', '$user_id', '$user_name', 0)";
+			$strQry = "INSERT INTO tanda_terima VALUES ('$id','$cnt','$cn','$tanggal','$pengirim', '$alamat_pengirim', $telpon_pengirim,'$tujuan', '$penerima', '$alamat_penerima', $telpon_penerima, '$udl', '$dtddtp', '$agent', '$coll', '$kg', '$vol', '$tarif', '$subtotal', '$packing_kayu', '$asuransi', '$biaya', '$grandtotal', '$deskripsi', '$user_id', '$user_name', 0)";
 			// echo ">>>".$strQry;
 			mysql_query($strQry) or die(mysql_error());
 			
 		}
 		
-	} else if ($_GET['sch_cn'] != null) {	
+	} else if ($_GET['sch_cn'] != null) {
 		$sch = mysql_query("select * from tanda_terima where no_cn = '".$_GET['sch_cn']."' ");
 		$count = mysql_num_rows($sch);
 		

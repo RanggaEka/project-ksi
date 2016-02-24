@@ -73,6 +73,7 @@
 														}else{
 															var sum = tarif * kg
 														}													
+													$('#subtotal').textbox('setValue',sum)
 													$('#total').textbox('setValue',sum)
 												  }"> KG 
 											</td>
@@ -90,6 +91,7 @@
 														}else{
 															var sum = tarif * kg
 														}													
+													$('#subtotal').textbox('setValue',sum)
 													$('#total').textbox('setValue',sum)
 												}"> M3
 											</td>
@@ -97,9 +99,69 @@
 										<tr>
 											<td>Tarif</td>
 											<td valign="top">
-												<input name="tarif" id="tarif" type="text" class="easyui-numberbox" disabled min="0" precision="0" style="width:110px;height:25px;padding:8px" data-options="prompt:'Tarif'"> 
+												<input name="tarif" id="tarif" type="text" value="0" class="easyui-numberbox" min="0" precision="0" style="width:110px;height:25px;padding:8px" 
+												data-options="prompt:'Tarif',onChange: function(value){
+													var tarif = parseInt($('#tarif').textbox('getValue'))
+													var kg = parseInt($('#kg').textbox('getValue'))
+													var vol = parseInt($('#vol').textbox('getValue'))
+														if(vol > kg){
+															var sum = tarif * vol
+														}else{
+															var sum = tarif * kg
+														}													
+													$('#subtotal').textbox('setValue',sum)
+													$('#total').textbox('setValue',sum)
+												}"> 
 											</td>
-										</tr>											
+										</tr>
+										<tr>
+											<td>SubTotal</td>
+											<td valign="top">
+												<input name="subtotal" id="subtotal" type="text" class="easyui-numberbox" disabled min="0" precision="0" style="width:110px;height:25px;padding:8px" data-options="prompt:'SubTotal'"> 
+											</td>
+										</tr>
+										<tr>
+											<td>Packing Kayu</td>
+											<td valign="top">
+												<input name="packing_kayu" id="packing_kayu" type="text" value="0" class="easyui-numberbox" min="0" precision="0" style="width:110px;height:25px;padding:8px" 
+												data-options="prompt:'Packing Kayu',onChange: function(value){													
+													var biaya = parseInt($('#biaya').textbox('getValue'))
+													var packing_kayu = parseInt($('#packing_kayu').textbox('getValue'))
+													var asuransi = parseInt($('#asuransi').textbox('getValue'))													
+													var subtotal = parseInt($('#subtotal').textbox('getValue'))														
+													var grand = subtotal + packing_kayu + asuransi + biaya
+													$('#total').textbox('setValue',grand)
+												}"> 
+											</td>
+										</tr>
+										<tr>
+											<td>Asuransi</td>
+											<td valign="top">
+												<input name="asuransi" id="asuransi" type="text" value="0" class="easyui-numberbox" min="0" precision="0" style="width:110px;height:25px;padding:8px" 
+												data-options="prompt:'Asuransi',onChange: function(value){
+													var biaya = parseInt($('#biaya').textbox('getValue'))
+													var packing_kayu = parseInt($('#packing_kayu').textbox('getValue'))
+													var asuransi = parseInt($('#asuransi').textbox('getValue'))													
+													var subtotal = parseInt($('#subtotal').textbox('getValue'))														
+													var grand = subtotal + packing_kayu + asuransi + biaya
+													$('#total').textbox('setValue',grand)
+												}"> 
+											</td>
+										</tr>
+										<tr>
+											<td>Biaya Lainnya</td>
+											<td valign="top">
+												<input name="biaya" id="biaya" type="text" value="0" class="easyui-numberbox" min="0" precision="0" style="width:110px;height:25px;padding:8px" 
+												data-options="prompt:'Biaya Lainnya',onChange: function(value){
+													var biaya = parseInt($('#biaya').textbox('getValue'))
+													var packing_kayu = parseInt($('#packing_kayu').textbox('getValue'))
+													var asuransi = parseInt($('#asuransi').textbox('getValue'))													
+													var subtotal = parseInt($('#subtotal').textbox('getValue'))														
+													var grand = subtotal + packing_kayu + asuransi + biaya
+													$('#total').textbox('setValue',grand)
+												}"> 
+											</td>
+										</tr>
 										<tr>
 											<td>Total</td>
 											<td valign="top">
@@ -150,10 +212,10 @@
                                         </div>
                                         <div style="padding-bottom:2px;padding-top:2px;">
 											<input
-												class="easyui-combobox" 												
+												class="easyui-textbox" 												
 												style="width:300px;height:25px;padding:8px"
-												name="tujuan" id="tujuan"
-												data-options="
+												name="tujuan" id="tujuan" data-options="prompt:'Tujuan'">
+												<!--data-options="
 														url:'../json/get_tujuan.php',
 														method:'get',
 														valueField:'kecamatan',
@@ -165,7 +227,7 @@
 														onSelect: function(val){
 															onSelectedTujuan(val)
 														}
-												">
+												"-->
 											
                                         </div>
                                         <input name="alamat_pengirim" id="alamat_pengirim" class="easyui-textbox" data-options="multiline:true,prompt:'Alamat Pengirim'" style="width:300px;height:50px;padding:8px">
@@ -246,7 +308,11 @@
 			$('#coll').textbox('setText',parseInt(row.total_coll))
 			$('#kg').textbox('setText',parseInt(row.total_berat))
 			$('#vol').textbox('setText',parseInt(row.total_vol))
-			$('#tarif').textbox('setText',parseInt(row.tarif))			
+			$('#tarif').textbox('setText',parseInt(row.tarif))
+			$('#packing_kayu').textbox('setText',parseInt(row.packing_kayu))
+			$('#asuransi').textbox('setText',parseInt(row.asuransi))
+			$('#biaya').textbox('setText',parseInt(row.biaya))
+			$('#subtotal').textbox('setText',parseInt(row.subtotal))
 			$('#total').textbox('setText',parseInt(row.grand_total))
 			$('#deskripsi').textbox('setText',row.deskripsi_paket)
 			document.getElementById('simpan_tt').style.display = "none"	
@@ -256,7 +322,8 @@
 	function searchNoCN(value){
 		if (value == "") {
 			//alert('Data tidak ditemukan !')
-			console.log("kosong");
+			$.messager.alert('Peringatan', 'No CN Masih Kosong !', 'warning');
+			console.log("kosong");						
 		} else {
 			$.ajax({
 				type	: "GET",
@@ -286,6 +353,10 @@
 						$('#kg').textbox('setText',parseInt(dataa[0].total_berat))
 						$('#vol').textbox('setText',parseInt(dataa[0].total_vol))
 						$('#tarif').textbox('setText',parseInt(dataa[0].tarif))
+						$('#subtotal').textbox('setText',parseInt(dataa[0].subtotal))
+						$('#packing_kayu').textbox('setText',parseInt(dataa[0].packing_kayu))
+						$('#asuransi').textbox('setText',parseInt(dataa[0].asuransi))
+						$('#biaya').textbox('setText',parseInt(dataa[0].biaya))
 						$('#total').textbox('setText',parseInt(dataa[0].grand_total))
 						$('#deskripsi').textbox('setText',dataa[0].deskripsi_paket)
 						document.getElementById('simpan_tt').style.display = "none"	
@@ -312,7 +383,7 @@
 		$('#coll').textbox('setText','1')
 		$('#kg').textbox('setText','1')
 		$('#vol').textbox('setText','1')
-		$('#tarif').textbox('setValue','')
+		$('#tarif').textbox('setValue','0')
 		$('#total').textbox('setValue','')
 		$('#deskripsi').textbox('setText','')
 		document.getElementById('simpan_tt').style.display = "inline-block"
@@ -337,6 +408,10 @@
 				kg :  $('#kg').textbox('getValue'),
 				vol :  $('#vol').textbox('getValue'),
 				tarif :  $('#tarif').textbox('getValue'),
+				subtotal :  $('#subtotal').textbox('getValue'),
+				packing_kayu :  $('#packing_kayu').textbox('getValue'),
+				asuransi :  $('#asuransi').textbox('getValue'),
+				biaya :  $('#biaya').textbox('getValue'),
 				grand_total :  $('#total').textbox('getValue'),
 				deskripsi :  $('#deskripsi').textbox('getValue')
 			}];
@@ -348,7 +423,7 @@
 			&& $('#telpon_penerima').textbox('getValue') != "" && $('#udl').combo('getValue') != "" 
 			&& $('#dtddtp').combo("getValue") != "" && $('#agent').combo("getValue") != ""
 			&& $('#coll').textbox('getValue') != "" && $('#kg').textbox("getValue") != ""
-			&& $('#vol').textbox('getValue') != "" && $('#tarif').textbox('getValue') != ""
+			&& $('#vol').textbox('getValue') != "" && $('#tarif').textbox('getValue') != "" && $('#subtotal').textbox('getValue') != ""			
 			&& $('#total').textbox("getValue") != "" && $('#deskripsi').textbox('getValue') != "") {
 		
 			$.ajax({

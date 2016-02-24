@@ -21,9 +21,9 @@
 									panelWidth: 330,
 									formatter: formatItem"/>
 					Tanggal : 
-					<input class="easyui-datebox" style="width:120px;height:25px;padding:8px" data-options="prompt:'No Invoice',iconWidth:38" id="tgl_dari" name="tgl_dari"> 
+					<input class="easyui-datebox" style="width:120px;height:25px;padding:8px" data-options="prompt:'Tanggal Awal',iconWidth:38" id="tgl_dari" name="tgl_dari"> 
 					s/d 
-					<input class="easyui-datebox" style="width:120px;height:25px;padding:8px" data-options="prompt:'No Invoice',iconWidth:38" id="tgl_sampai" name="tgl_sampai">
+					<input class="easyui-datebox" style="width:120px;height:25px;padding:8px" data-options="prompt:'Tanggal Akhir',iconWidth:38" id="tgl_sampai" name="tgl_sampai">
 					Status Pembayaran : 
 					<select class="easyui-combobox" name="status" id="status" style="width:150px;padding:8px">
 						<option value="">Silahkan Pilih</option>
@@ -59,6 +59,14 @@
 </td>
 
 <script type="text/javascript">
+	function cetakRekapInvoice() {
+		window.open('../form/cetak_rekap_invoice.php?customer_inv='+
+					$('#customer_inv').textbox('getText')+'&status='+
+					$('#status').textbox('getValue')+'&tgl_dari='+
+					$('#tgl_dari').textbox('getText')+'&tgl_sampai='+
+					$('#tgl_sampai').textbox('getText'),'_blank');
+	}
+	
 	$(function(){
 		$('#gridRekapInvoice').datagrid({
 			view: detailview,

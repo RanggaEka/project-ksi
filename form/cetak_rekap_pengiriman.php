@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-	<title>Rekap Invoice</title>
+	<title>Rekap Pengiriman</title>
     <link rel="stylesheet" href="../lib/metro/css/metro-bootstrap.css">
     <script src="../lib/metro/js/jquery/jquery.min.js"></script>
     <script src="../lib/metro/js/jquery/jquery.widget.min.js"></script>
@@ -23,7 +23,7 @@ body {padding:0px}
         <table width="100%" border="0" cellpadding="5" cellspacing="5" bordercolor="1" style="border:solid 0px #000000; padding:0px;" align="center">
           <tr>
             <!--td width="10%"><img src="../images/ksi.png" width="100" height="100" /></td-->
-            <td align="center"><p><strong>REKAP INVOICE</strong><br/>              
+            <td align="center"><p><strong>REKAP PENGIRIMAN</strong><br/>              
               <strong>CV. KIKI SOLUSI INTERNUSA (KiKi Trans)</strong><br />              
               </p>
 			</td>			

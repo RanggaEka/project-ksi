@@ -22,7 +22,7 @@ body {padding:0px}
     }
     
     //$strQuery = "select * from invoice_detail id inner join tanda_terima tt on id.tanda_terima_sid = tt.sid where id.no_inv= '$no_inv'";
-	$strQuery = "select tt.*, 
+	$strQuery = "select tt.*,		
 		ih.no_inv as no_inv,
 		ih.tanggal as tgl_inv,
 		ih.total as total_inv,
@@ -31,8 +31,11 @@ body {padding:0px}
 		ih.jatuh_tempo as jatuh_tempo_inv,
 		ih.keterangan as keterangan,
 		id.no_inv as no_inv_detail,
-		id.tarif as tarif_inv,		
-		(SELECT MAX(tanggal) FROM  invoice_pembayaran where no_inv = ih.no_inv) as tgl_pembayaran
+		id.tarif as tarif_inv,
+		SUM(tt.packing_kayu) as packing_kayu,
+		SUM(tt.asuransi) as asuransi,
+		SUM(tt.biaya) as biaya,
+		(SELECT MAX(tanggal) FROM  invoice_pembayaran where no_inv = ih.no_inv) as tgl_pembayaran		
 		
 		from invoice_header ih 
 		inner join invoice_detail id on ih.no_inv = id.no_inv
@@ -111,6 +114,7 @@ body {padding:0px}
                 <td align="center">CN</td>
                 <td align="center">Coll</td>
                 <td align="center">Berat(Kg)</td>
+				<td align="center">Vol(M3)</td>
 				<td align="center">Tarif</td>
                 <td align="center">Jumlah</td>
               </tr>
@@ -119,7 +123,9 @@ body {padding:0px}
 					$subtotal = 0;
 					$totalKG = 0;
 					$tarif = 0;
-                    $strQuery = "select * from tanda_terima tt 
+                    $strQuery = "select tt.*, 
+								tt.tarif as tariff
+								from tanda_terima tt 
 								inner join invoice_detail id on tt.sid = id.tanda_terima_sid 
 								where id.no_inv= '$no_inv'";
 					$result = mysql_query($strQuery) or die(mysql_error());					
@@ -132,7 +138,7 @@ body {padding:0px}
 									$totalKG = $arrDetail['total_berat'];
 									$tarif = $arrDetail['grand_total'] / $arrDetail['total_berat'];
 								}															
-								$subtotal = $subtotal + $arrDetail['grand_total'];
+								$subtotal = $subtotal + $arrDetail['subtotal'];
 				?>
               <tr>
                 <td align="center"><?php echo $count; ?></td>
@@ -141,36 +147,46 @@ body {padding:0px}
 				<td align="center"><?php echo "$arrDetail[service_udl]/$arrDetail[service_dtddtp]/$arrDetail[service_agent]"; ?></td>
 				<td align="center"><?php echo $arrDetail['no_cn']; ?></td>
 				<td align="right"><?php echo number_format($arrDetail['total_coll']); ?></td>
-				<td align="right"><?php echo number_format($totalKG); ?></td>
-				<td align="right"><?php echo number_format($tarif); ?></td>
-				<td align="right"><?php echo number_format($arrDetail['grand_total']); ?></td>               
+				<td align="right"><?php echo number_format($arrDetail['total_berat']); ?></td>
+				<td align="right"><?php echo number_format($arrDetail['total_vol']); ?></td>
+				<td align="right"><?php echo number_format($arrDetail['tariff']); ?></td>
+				<td align="right"><?php echo number_format($arrDetail['subtotal']); ?></td>               
               </tr>
               <?php } ?>
               <tr>
-                <td colspan="6" rowspan="4" align="left" valign="top"><b>Pembayaran dapat ditransfer ke Rekening :</b><br>
+                <td colspan="8" rowspan="5" align="left" valign="top"><b>Pembayaran dapat ditransfer ke Rekening :</b><br>
                   <b>Bank Danamon, No. 003571498470 a/n CV.KiKi Solusi Internusa </b><br>
                   <b>Bank Central Asia, No,Rek. 3422661422 a/n HARYAKA </b><br>
                   <b>Bank Mandiri, No, Rek. 117-00-0587544-8 a/n HARYAKA </b>
-				 </td>
-                <td colspan="2" align="right">Total</td>
+				</td>								
+                <td align="right">Sub Total</td>
                 <td align="right"><?php echo number_format($subtotal);?></td>
-              </tr>
-              <!--tr>
-                <td colspan="2" align="right">Packing Kayu</td>
-                <td align="right">0</td>
-              </tr>
-			  <tr>
-                <td colspan="2" align="right">Asuransi</td>
-                <td align="right">0</td>
               </tr>
               <tr>
-                <td colspan="2" align="right">Total</td>
-                <td align="right"><?php echo number_format($subtotal);?></td>
-              </tr-->
+                <td align="right">Packing Kayu</td>
+                <td align="right"><?php echo number_format($arrResult['packing_kayu']); ?></td>
+              </tr>
+			  <tr>
+                <td align="right">Asuransi</td>
+                <td align="right"><?php echo number_format($arrResult['asuransi']); ?></td>
+              </tr>
+			  <tr>
+                <td align="right">Biaya Lainnya</td>
+                <td align="right"><?php echo number_format($arrResult['biaya']); ?></td>
+              </tr>
+              <tr>
+                <td align="right">Total</td>
+                <td align="right"><?php echo number_format($subtotal+$arrResult['packing_kayu']+$arrResult['asuransi']+$arrResult['biaya']);?></td>
+              </tr>
             </table></td>
           </tr>
           <tr>
-            <td colspan="3"></td>
+            <td colspan="3">
+				<!--b>Pembayaran dapat ditransfer ke Rekening :</b><br>
+                <b>Bank Danamon, No. 003571498470 a/n CV.KiKi Solusi Internusa </b><br>
+                <b>Bank Central Asia, No,Rek. 3422661422 a/n HARYAKA </b><br>
+                <b>Bank Mandiri, No, Rek. 117-00-0587544-8 a/n HARYAKA </b-->			
+			</td>
           </tr>
           <tr>
             <td colspan="3" align="center"><table width="100%" border="0" cellpadding="5" cellspacing="5">

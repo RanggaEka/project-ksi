@@ -46,6 +46,7 @@
 				         	<td><input id="jatuh_tempo" name="jatuh_tempo" class="easyui-datebox" style="width:150px;height:25px;padding:8px" data-options="prompt:'Jatuh Tempo',formatter:myformatter,parser:myparser"></input></td>
 				        </tr>
 			    	</table>
+					<button name="cetak_inv" id="cetak_inv" onclick="cetakInvoice()">Cetak</button>
 			    	<button type="submit" onclick="saveInvoice()" name="simpan_inv" id="simpan_inv">Save</button>
 					<button type="reset" onclick="releaseLocking()">Batal</button>	
 					<br/><br/>
@@ -133,7 +134,12 @@
 	</table>
 </td>
 
-<script type="text/javascript">	
+<script type="text/javascript">
+	document.getElementById('cetak_inv').style.display = "none";	
+	function cetakInvoice() {
+		window.open('../form/cetak_invoice.php?no_inv='+$('#no_inv').textbox('getValue'),'_blank');
+	}
+	
 	var tblIndex = "";
 	function showLookupTandaTerima() {
 		if ($('#customer_inv').combo('getText') != "") {
@@ -324,7 +330,8 @@
 	function searchNoInv(value){
 		if (value == "") {
 			//alert('Data tidak ditemukan !')
-			console.log("kosong");
+			$.messager.alert('Peringatan', 'No Invoice Masih Kosong !', 'warning');			
+			console.log("kosong");			
 		} else {
 			$.ajax({
 				type	: "GET",
@@ -340,6 +347,8 @@
 						$('#no_inv').textbox('setText',dataa[0].no_inv)
 						$('#tgl_inv').datebox('setValue',dataa[0].tanggal)
 						$('#customer_inv').combo("setText",dataa[0].customer_nama)
+						$('#jatuh_tempo').datebox("setValue",dataa[0].jatuh_tempo)						
+						document.getElementById('cetak_inv').style.display = "inline-table"
 						document.getElementById('simpan_inv').style.display = "none"
 						document.getElementById('detail_invoice').style.display = "none"
 						$('#detail_invoice_ui').datagrid("getPanel").css("display","block")

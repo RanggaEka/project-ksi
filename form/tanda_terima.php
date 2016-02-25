@@ -1,21 +1,21 @@
 <td width="156">&nbsp;</td>
 <td>
     <br>
-    <table width="80%" border="1" align="left" cellpadding="4" cellspacing="2" style="border: solid 1px #efefef;">
+    <table width="80%" border="0" align="left" cellpadding="4" cellspacing="2" style="border: solid 1px #efefef;">
         <tr>
             <td>
                 <!--<form action="../system/tanda_terima_service.php" method="post" enctype="multipart/form-data">-->
-                        <table width="100%" border="0" cellspacing="0" cellpadding="1">
+                        <table width="85%" border="0" cellspacing="0" cellpadding="2">
                             <tr>
-                                <td width="8%"><label>CN <font color='red'>*</font></label></td>
+                                <td width="10%"><label>CN <font color='red'>*</font></label></td>
                                 <td width="1%">:</td>
                                 <td width="23%">
                                     <input name="cn" id="cn" type="text" class="easyui-searchbox" style="width:150px;height:25px;padding:8px" data-options="prompt:'CN',searcher:searchNoCN">
                                 </td>
-                                <td width="80%" rowspan="5" valign="top">
+                                <td width="99%" rowspan="5" valign="top">
                                     <!--SERVICE-->
                                     Service <font color='red'>*</font> :
-                                    <table width="28%" border="0" cellpadding="2" cellspacing="0" style="border:1px solid #CCCCCC; border-radius:4px;">
+                                    <table width="28%" border="1" cellpadding="2" cellspacing="0" style="border:1px solid #CCCCCC;">
                                         <tr>
 											<td width="30">U/D/L</td>
                                             <td valign="middle">
@@ -55,12 +55,12 @@
 									</table>
                                     <!--AKUMULASI-->
                                     Akumulasi <font color='red'>*</font> :
-									<table width="85%" border="1" cellpadding="2" cellspacing="0" style="border:1px solid #CCCCCC; border-radius:4px;">
+									<table width="100%" border="1" cellpadding="2" cellspacing="0" style="border:1px solid #CCCCCC;">
 										<tr>
-											<td width="40" valign="middle">Coll</td>
+											<td width="30" valign="middle">Coll</td>
 											<td width="40" valign="middle">
 										  <input name="coll" id="coll" type="text" value="1" class="easyui-numberbox" style="width:80px;height:25px;padding:8px" data-options="prompt:'Coll'"> </td>
-											<td width="30" valign="middle">Berat</td>
+											<td width="20" valign="middle">Berat</td>
 											<td width="40" valign="middle"><input name="kg" id="kg" type="text" value="1" class="easyui-numberbox" precision="2" 
 																				style="width:60px;height:25px;padding:8px" 
 																				data-options="prompt:'Berat',onChange: function(value){
@@ -76,7 +76,7 @@
 																				$('#total').textbox('setValue',sum)
 																				}">
 												KG </td>
-											<td width="80" valign="middle">Volume</td>
+											<td width="79" valign="middle">Volume</td>
 											<td width="60" valign="middle"><input name="vol" id="vol" type="text" value="1" class="easyui-numberbox" 
 																			precision="2" style="width:60px;height:25px;padding:8px" 
 																			data-options="prompt:'Volume',onChange: function(value){
@@ -93,7 +93,7 @@
 																			}">
 												M3 </td>
 										<tr>
-											<td valign="middle">Packing Kayu</td>
+											<td valign="middle">Pack. Kayu</td>
 											<td valign="middle"><input name="packing_kayu" id="packing_kayu" type="text" value="0" class="easyui-numberbox" 
 																	min="0" precision="0" style="width:80px;height:25px;padding:8px" 
 																	data-options="prompt:'Packing Kayu',onChange: function(value){													
@@ -182,7 +182,7 @@
                                         <div>
 											<input
 												class="easyui-combobox" 												
-												style="width:200px;height:25px;padding:8px"
+												style="width:210px;height:25px;padding:8px"
 												name="pengirim" id="pengirim"
 												data-options="
 														url:'../json/get_customer.php',
@@ -202,7 +202,7 @@
                                         <div style="padding-bottom:2px;padding-top:2px;">
 											<input
 												class="easyui-textbox" 												
-												style="width:200px;height:25px;padding:8px"
+												style="width:210px;height:25px;padding:8px"
 												name="tujuan" id="tujuan" data-options="prompt:'Tujuan'">
 												<!--data-options="
 														url:'../json/get_tujuan.php',
@@ -219,7 +219,7 @@
 												"-->
 											
                                         </div>
-                                        <input name="alamat_pengirim" id="alamat_pengirim" class="easyui-textbox" data-options="multiline:true,prompt:'Alamat Pengirim'" style="width:200px;height:50px;padding:8px">
+                                        <input name="alamat_pengirim" id="alamat_pengirim" class="easyui-textbox" data-options="multiline:true,prompt:'Alamat Pengirim'" style="width:240px;height:50px;padding:8px">
 										<div style="padding-bottom:2px;padding-top:2px;">
 										<input name="telpon_pengirim" id="telpon_pengirim" class="easyui-numberbox" data-options="prompt:'Telpon Pengirim'" style="width:150px;height:25px;padding:8px">
 										</div>
@@ -230,9 +230,9 @@
                                     <td valign="top">:</td>
                                     <td>
                                         <div style="padding-bottom:2px;">
-                                            <input name="penerima" id="penerima" type="text" class="easyui-textbox" style="width:200px;height:25px;padding:8px" data-options="prompt:'Penerima'">
+                                            <input name="penerima" id="penerima" type="text" class="easyui-textbox" style="width:210px;height:25px;padding:8px" data-options="prompt:'Penerima'">
                                         </div>
-                                        <input name="alamat_penerima" id="alamat_penerima" class="easyui-textbox" data-options="multiline:true,prompt:'Alamat Penerima'" style="width:200px;height:50px;padding:8px">
+                                        <input name="alamat_penerima" id="alamat_penerima" class="easyui-textbox" data-options="multiline:true,prompt:'Alamat Penerima'" style="width:240px;height:50px;padding:8px">
 										<div style="padding-bottom:2px;padding-top:2px;">
 										<input name="telpon_penerima" id="telpon_penerima" class="easyui-numberbox" data-options="prompt:'Telpon Penerima'" style="width:150px;height:25px;padding:8px">
 										</div>
@@ -249,9 +249,9 @@
                                 </tr>
                         </table>
                     <!--</form>-->
-                    <br/>
-                    <br/>
-                    <table id="gridFormTandaTerima" class="easyui-datagrid" style="width:100%;height:185px"
+                    <table id="gridFormTandaTerima" class="easyui-datagrid" 
+						style="width:100%;height:210px"
+						title="Entri Tanda Terima"
 						data-options="rownumbers:true,singleSelect:true,
 									collapsible:true,url:'../json/get_tanda_terima.php',
 									method:'get',pagination:true,
@@ -310,7 +310,6 @@
 	}
 	function searchNoCN(value){
 		if (value == "") {
-			//alert('Data tidak ditemukan !')
 			$.messager.alert('Peringatan', 'No CN Masih Kosong !', 'warning');
 			console.log("kosong");						
 		} else {

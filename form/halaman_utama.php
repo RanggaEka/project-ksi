@@ -54,7 +54,7 @@
                 <?php 
 					if ($_SESSION['jabatan'] == "ADMIN") {
 				?>
-                <a href="?page=kelolaadmin" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-tools'">Pengaturan Admin</a>
+                <a href="#" class="easyui-menubutton" data-options="menu:'#mm3admin',iconCls:'icon-tools'">Pengaturan Admin</a>
 				<?php } ?>
 			</div>
             <div id="mm1" style="width:200px;">
@@ -65,6 +65,10 @@
                 <div><a href="?page=invoice">Input Invoice</a></div>
                 <div><a href="?page=pembayaraninvoice">Input Pembayaran Invoice</a></div>
                 <div><a href="?page=rekapinvoice">Rekap Invoice</a></div>
+            </div>
+             <div id="mm3admin" style="width:230px;">
+                <div><a href="?page=kelolaadmin">Kelola Admin</a></div>
+                <div><a href="?page=useractive">User Aktif</a></div>
             </div>
         </nav>
     </nav>
@@ -97,6 +101,8 @@
                         include 'rekap_pengiriman.php';
                     } elseif ($_GET['page'] == "kelolaadmin") {
                         include 'kelola_admin.php';
+                    } elseif ($_GET['page'] == "useractive") {
+                        include 'user_active.php';
                     } else {
                         echo '<td colspan="2"><br/><br/><br/><br/><h2>KIKI SOLUSI INTERNUSA</h2></td>';
                     }

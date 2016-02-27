@@ -31,8 +31,9 @@
 											'$jenis_kelamin',
 											'$tempat_lahir',
 											'$tanggal_lahir',
-											'$alamat',											
-											'$jabatan')";
+											'$alamat',	
+											'X',										
+											'$jabatan',0)";
 		$exQuery = mysql_query($strQry) or die(mysql_error());
 		}else{				
 		$strQry = "UPDATE user SET 	username='$username',

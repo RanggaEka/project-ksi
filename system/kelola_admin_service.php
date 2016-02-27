@@ -57,5 +57,11 @@
 		} else {
 			echo "FAIL";
 		}		
+		
+	}  else if ($_GET['username'] != null) {
+		$sch = mysql_query("update user set is_active = 0 where username = '".$_GET['username']."' ");
+		if (!$sch) {
+			echo mysql_error();
+		}
 	}
 ?>

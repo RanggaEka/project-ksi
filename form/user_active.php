@@ -49,9 +49,23 @@
 	function confirmX(data) {
 		$.messager.confirm('User Aktif', 'Unlock user `'+data+'` ?', function(r){
 			if (r){
-			
-			} else {
-			
+				var obj = [{
+				username :  data
+			}];
+				$.ajax({
+				type	: "GET",
+				url		: "../system/kelola_admin_service.php",
+				data	: {
+					username : data
+				},
+				success	: function(data){
+					if (data != "") {
+						$.messager.alert('Kesalahan', data, 'error');
+					} else {					
+						location.reload()
+					}
+				}
+			});
 			}
 		});
 	}

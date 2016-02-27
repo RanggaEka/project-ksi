@@ -52,12 +52,19 @@ body {padding:0px}
 	date_default_timezone_set('Asia/Jakarta');
     include '../system/config_service.php'; 
     $param1= "";
+	$param2= "";
+	$param3= "";
 	if ($_GET['customer_inv'] != "") {
-		$param1 = " where customer_nama = '".$_GET['customer_inv']."' ";
-	} else if ($_GET['status'] != "") {
-		$param1 = " where keterangan = '".$_GET['status']."' ";	
-	} else if ($_GET['tgl_dari'] != "" && $_GET['tgl_sampai'] != "") {
-		$param1 = " and (tanggal between = '".$_GET['tgl_dari']."' and '".$_GET['tgl_sampai']."') ";	
+		$param1 = " and customer_nama like '%".$_GET['customer_inv']."%' ";
+	} 
+	
+	if ($_GET['no_inv'] != "") {
+		$param2 = " and no_inv like '%".$_GET['no_inv']."%' ";	
+	}
+	
+	if ($_GET['tgl_dari'] != "" && $_GET['tgl_sampai'] != "") {
+		//$param3 = " and (DATE_FORMAT(tanggal, '%d/%m/%Y') between '".$_GET['tgl_dari']."' and '".$_GET['tgl_sampai']."') ";	
+		$param3 = " and (tanggal between '".$_GET['tgl_dari']."' and '".$_GET['tgl_sampai']."') ";	
 	}
 		
 	$strQuery = "select  
@@ -87,8 +94,10 @@ body {padding:0px}
 		from invoice_header ih 
 		inner join invoice_detail id on ih.no_inv = id.no_inv
 		inner join tanda_terima tt on id.tanda_terima_sid = tt.sid 
-		$param1
-		order by tt.pengirim asc";
+		where 
+		ih.no_inv in (select ih.no_inv from invoice_detail)
+		$param1 $param1 $param1
+		order by ih.no_inv asc";
 
     $count = 0;    
     $result = mysql_query($strQuery) or die(mysql_error());

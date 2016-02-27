@@ -208,7 +208,7 @@
                                     <td><label>Tanggal <font color='red'>*</font></td>
 				         	<td>:</td>
 				         	<td>
-								<input name="tanggal" id="tanggal" class="easyui-datebox" style="width:150px;height:25px;padding:8px" placeholder="Tanggal" data-options="prompt:'Tanggal',formatter:myformatter"></input>					       
+								<input name="tanggal" id="tanggal" class="easyui-datebox" style="width:150px;height:25px;padding:8px" placeholder="Tanggal" data-options="prompt:'Tanggal',formatter:myformatter,parser:myparser"></input>					       
 							 </td>
 			            </tr>
 				        <tr>
@@ -321,7 +321,7 @@
 			$('#cn').textbox('setText',row.no_cn)
 			$('#tanggal').datebox('setValue',row.tanggal)
 			$('#pengirim').combo("setText",row.pengirim)
-			$('#tujuan').combo("setText",row.tujuan)
+			$('#tujuan').textbox("setText",row.tujuan)
 			$('#alamat_pengirim').textbox('setText',row.alamat_pengirim)
 			$('#telpon_pengirim').textbox('setText',row.telpon_pengirim)
 			$('#penerima').textbox('setText',row.penerima)
@@ -364,7 +364,7 @@
 						$('#cn').textbox('setText',dataa[0].no_cn)
 						$('#tanggal').datebox('setValue',dataa[0].tanggal)
 						$('#pengirim').combo("setText",dataa[0].pengirim)
-						$('#tujuan').combo("setText",dataa[0].tujuan)
+						$('#tujuan').textbox("setText",dataa[0].tujuan)
 						$('#alamat_pengirim').textbox('setText',dataa[0].alamat_pengirim)
 						$('#telpon_pengirim').textbox('setText',dataa[0].telpon_pengirim)
 						$('#penerima').textbox('setText',dataa[0].penerima)

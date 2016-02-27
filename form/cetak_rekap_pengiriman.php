@@ -14,13 +14,13 @@ body {padding:0px}
 .print-area {border:0px dashed;padding:0;margin:0}
 </style>
 <body class="metro" onload="#javascript:printDiv('print-area-1');">  
-  <table width="100%" cellspacing="30" cellpadding="30" align="center">
+  <table width="100%" cellspacing="0" cellpadding="5" align="center">
     <tr>
       <td>
-	  <div id="print-area-1" class="print-area" style="width: 100%; height: 100%; padding: 0px;" align="center">
+	  <div id="print-area-1" class="print-area" style="width: 120%; height: 100%; padding: 0px;" align="center">
         <!--fieldset style="width: 85%; padding: 0px;" align="center"-->
         <!-- <legend>Cetak TT</legend> -->
-        <table width="100%" border="0" cellpadding="5" cellspacing="5" bordercolor="1" style="border:solid 0px #000000; padding:0px;" align="center">
+        <table width="100%" border="0" cellpadding="0" cellspacing="1" bordercolor="1" style="border:solid 0px #000000; padding:0px;" align="center">
           <tr>
             <!--td width="10%"><img src="../images/ksi.png" width="100" height="100" /></td-->
             <td align="center"><p><strong>REKAP PENGIRIMAN</strong><br/>              
@@ -31,35 +31,38 @@ body {padding:0px}
 		  <tr>
             <td><table width="100%" border="1" cellpadding="5" cellspacing="5">
               <tr>                
-				<th align="center" rowspan="2"><b>No</b></th>
-                <th align="center" rowspan="2"><b>Tanggal</b></th>                
-				<th align="center" rowspan="2"><b>Pengirim</b></th>
-				<th align="center" rowspan="2"><b>CN</b></th>
-                <th align="center" rowspan="2"><b>Tujuan</b></th>				
-				<th align="center" colspan="3"><b>Service</b></th>
-				<th align="center" colspan="3"><b>Total</b></th>
-				<th align="center" colspan="4"><b>Invoice</b></th>
-				<th align="center" rowspan="2"><b>Jatuh Tempo</b></th>
-				<th align="center" rowspan="2"><b>Tanggal Bayar</b></th>
-				<th align="center" colspan="2"><b>Tanda Terima</b></th>
-				<th align="center" colspan="4"><b>Biaya</b></th>
+				<th rowspan="2" align="left">No</th>
+				<th rowspan="2" align="left">No. CN</th>
+				<th rowspan="2" align="left">No. Inv</th>
+				<th rowspan="2" align="left">Tgl. CN</th>
+				<th rowspan="2" align="left">Tgl. Inv</th>
+				<th rowspan="2" align="left">Pengirim</th>
+				<th rowspan="2" align="left">Tujuan</th>
+				<th colspan="3" align="center">Service</th>
+				<th colspan="5" align="center">Total</th>
+				<th colspan="2" align="center">Invoice</th>
+				<th rowspan="2" align="center">Jatuh Tempo</th>
+				<th rowspan="2" align="center">Tgl. Bayar </th>
+				<th colspan="2" align="center">Tanda Terima </th>
+				<th colspan="4" align="center">Biaya</th>
               </tr>
 			  <tr>
-				<th align="center"><b>U/D/L</b></th>
-				<th align="center"><b>DTD/DTP</b></th>
-				<th align="center"><b>Agent</b></th>	
-				<th align="center"><b>Coll</b></th>
-				<th align="center"><b>Kg</b></th>
-				<th align="center"><b>Vol/M3</b></th>
-				<th align="center"><b>Tgl</b></th>
-				<th align="center"><b>No</b></th>
-				<th align="center"><b>Tarif</b></th>
-				<th align="center"><b>Jumlah</b></th>
-				<th align="center"><b>Penerima</b></th>
-				<th align="center"><b>Tanggal</b></th>
-				<th align="center"><b>Freight</b></th>
-				<th align="center"><b>Lain-lain</b></th>
-				<th align="center"><b>Ket</b></th>
+				<th align="center">U/D/L</th>
+				<th align="center">DTD/DTP</th>
+				<th align="center">Agent</th>
+				<th align="center">Coll</th>
+				<th align="center">KG</th>
+				<th align="center">Vol/M3</th>
+				<th align="center">Pack Kayu</th>
+				<th align="center">Asuransi</th>
+				<th align="center">Tarif</th>
+				<th align="center">Jumlah</th>
+				<th align="center">Penerima</th>
+				<th align="center">Tgl</th>
+				<th align="center">Freight</th>
+				<th align="center">U/D/L</th>
+				<th align="center">Lain 2</th>
+				<th align="center">Ket</th>
 			  </tr>			  
 <?php 
 	date_default_timezone_set('Asia/Jakarta');
@@ -95,6 +98,9 @@ body {padding:0px}
 		tt.total_berat as total_berat,
 		tt.total_vol as total_vol,
 		tt.grand_total as grand_total,
+		tt.biaya as biaya,
+		tt.packing_kayu as pack_kayu,
+		tt.asuransi as asuransi,
 		(SELECT MAX(tanggal) FROM  invoice_pembayaran where no_inv = ih.no_inv) as tgl_pembayaran
 		
 		from invoice_header ih 
@@ -118,18 +124,20 @@ body {padding:0px}
 ?>			  
               <tr>
 				<td align="center"><?php echo $count; ?></td>
-                <td align="center"><?php echo $arrResult['tgl_inv']; ?></td>
-                <td align="center"><?php echo $arrResult['pengirim']; ?></td>
-                <td align="left"><?php echo $arrResult['no_cn']; ?> </td>
-				<td align="left"><?php echo $arrResult['tujuan']; ?> </td>				
+				<td align="left"><?php echo $arrResult['no_cn']; ?> </td>
+				<td align="left"><?php echo $arrResult['no_inv']; ?> </td>
+				<td align="left"><?php echo $arrResult['tgl_tanda_terima']; ?> </td>
+                <td align="left"><?php echo $arrResult['tgl_inv']; ?></td>
+                <td align="left"><?php echo $arrResult['pengirim']; ?></td>
+                <td align="left"><?php echo $arrResult['tujuan']; ?> </td>				
                 <td align="center"><?php echo $arrResult['service_udl']; ?></td>
                 <td align="center"><?php echo $arrResult['service_dtddtp']; ?> </td>
 				<td align="center"><?php echo $arrResult['service_agent']; ?> </td>				
 				<td align="center"><?php echo number_format($arrResult['total_coll']); ?></td>
                 <td align="center"><?php echo number_format($arrResult['total_berat']); ?></td>
                 <td align="center"><?php echo number_format($arrResult['total_vol']); ?> </td>
-				<td align="center"><?php echo $arrResult['tgl_inv']; ?> </td>
-				<td align="center"><?php echo $arrResult['no_inv']; ?> </td>
+                <td align="center"><?php echo number_format($arrResult['pack_kayu']); ?> </td>
+                <td align="center"><?php echo number_format($arrResult['asuransi']); ?> </td>
 				<td align="right"><?php echo number_format($arrResult['tarif_inv']); ?> </td>
 				<td align="right"><?php echo number_format($arrResult['grand_total']); ?> </td>
 				<td align="center"><?php echo $arrResult['jatuh_tempo_inv']; ?> </td>
@@ -137,7 +145,8 @@ body {padding:0px}
 				<td align="center"><?php echo $arrResult['penerima']; ?> </td>
 				<td align="center"><?php echo $arrResult['tgl_tanda_terima']; ?> </td>
 				<td align="center"></td>
-				<td align="center"></td>
+				<td align="center"><?php echo $arrResult['service_udl']; ?></td>
+				<td align="center"><?php echo number_format($arrResult['biaya']); ?></td>
 				<td align="center"><?php echo $arrResult['keterangan']; ?> </td>
               </tr>
 <?php } ?>      

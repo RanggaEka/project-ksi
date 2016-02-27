@@ -12,7 +12,7 @@
 body {padding:0px}
 .print-area {border:0px dashed;padding:0;margin:0}
 </style>
-<body class="metro" onload="#javascript:printDiv('print-area-1');">
+<body class="metro" onLoad="#javascript:printDiv('print-area-1');">
   <?php 
 	date_default_timezone_set('Asia/Jakarta');
     include '../system/config_service.php'; 
@@ -47,16 +47,18 @@ body {padding:0px}
               Cipinang, Jakarta Timur.<br />
               Telp. 021-47883998, 68660967, 081310756621.<br />
 			  Email : ksi_jkt@yahoo.com<br />
-              </p>
-			</td>
-			<td align="left"><strong><font size="+2" >CONSIGMENT NOTE</font></strong></td>
+              </p>			</td>
+			<td align="left">&nbsp;</td>
             <td align="right"><p>Jakarta, <?php echo $arrResult['tanggal']; ?></p><p>CN No : <?php echo $arrResult['no_cn']; ?></p></td>			
+          </tr>
+          <tr>
+            <td colspan="3" align="center"><strong><font size="+2" >CONSIGMENT NOTE</font></strong></td>
           </tr>					  
           <tr>
             <td colspan="3"><table width="100%" border="0" cellpadding="0" cellspacing="0">
               <tr>
-                <td width="50%"><b>Pengirim:</b></td>                
-                <td width="50%"><b>Penerima:</b></td>
+                <td width="67%"><b>Pengirim:</b></td>                
+                <td width="33%"><b>Penerima:</b></td>
               </tr>
               <tr>
                 <td><?php echo $arrResult['pengirim']; ?></td>				
@@ -100,8 +102,7 @@ body {padding:0px}
                   <b>2. Hitungan Volume : </b><br>
 				  <b>&nbsp;&nbsp;- Udara : P x L x T : 6.000,-</b><br>
 				  <b>&nbsp;&nbsp;- Darat/Laut : P x L x T : 4.000,-</b><br>				  
-                  <b>2. Biaya bongkar muat diluar tanggung jawab pengangkut  </b>
-				 </td>
+                  <b>2. Biaya bongkar muat diluar tanggung jawab pengangkut  </b>				 </td>
 				<td align="right">Subtotal</td>
                 <td align="right"><?php echo number_format($arrResult['subtotal']);?></td>
               </tr>

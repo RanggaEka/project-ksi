@@ -1,10 +1,12 @@
 <td width="156">&nbsp;</td>
 <td>
     <br>
-     <table width="99%" border="0" align="left" cellpadding="10" cellspacing="3" style="border: solid 1px #efefef;">
+     <table width="100%" border="0" align="left" cellpadding="5" cellspacing="0" style="border: solid 1px #efefef;">
         <tr>
 			<td>
 				<div id="tbInv" style="padding:2px 5px;">
+					No. Invoice : 
+					<input class="easyui-textbox" style="width:120px;height:25px;padding:8px" data-options="prompt:'No. Invoice'" id="no_inv" name="no_inv"> 
 					Customer :
 					<input class="easyui-combobox" 
 							name="language"
@@ -21,21 +23,15 @@
 									panelWidth: 330,
 									formatter: formatItem"/>
 					Tanggal : 
-					<input class="easyui-datebox" style="width:120px;height:25px;padding:8px" data-options="prompt:'Tanggal Awal',iconWidth:38" id="tgl_dari" name="tgl_dari"> 
+					<input class="easyui-datebox" style="width:130px;height:25px;padding:8px" data-options="prompt:'Tgl Awal',iconWidth:38,formatter:myformatter,parser:myparser" id="tgl_dari" name="tgl_dari"> 
 					s/d 
-					<input class="easyui-datebox" style="width:120px;height:25px;padding:8px" data-options="prompt:'Tanggal Akhir',iconWidth:38" id="tgl_sampai" name="tgl_sampai">
-					Status Pembayaran : 
-					<select class="easyui-combobox" name="status" id="status" style="width:150px;padding:8px">
-						<option value="">Silahkan Pilih</option>
-						<option value="LUNAS">LUNAS</option>
-						<option value="BELUM LUNAS">BELUM LUNAS</option>
-					</select>
+					<input class="easyui-datebox" style="width:130px;height:25px;padding:8px" data-options="prompt:'Tgl Akhir',iconWidth:38,formatter:myformatter,parser:myparser" id="tgl_sampai" name="tgl_sampai">
 					<button type="submit" onclick="searchRekapInvoice()" name="cari_rekap" id="cari_rekap">Cari</button>
 					<button type="reset" onclick="location.reload()">Batal</button>
 					&nbsp;
 					<img src="../images/famfam/printer.png" onClick="cetakRekapInvoice()" style="cursor:pointer;" width="18px"/>
 				</div>
-				<table id="gridRekapInvoice" style="width:100%;height:540px" title="Rekap Invoice"
+				<table id="gridRekapInvoice" style="width:99%;height:540px" title="Rekap Invoice"
 						data-options="singleSelect:true,
 							collapsible:true,url:'../json/data-header-rekap-inv.php',
 							method:'get',
@@ -59,10 +55,21 @@
 </td>
 
 <script type="text/javascript">
+	function searchRekapInvoice() {
+		$('#gridRekapInvoice').datagrid({
+			queryParams: {
+				customer_inv: $('#customer_inv').combo('getText'),
+				no_inv: $('#no_inv').combo('getText'),
+				tgl_dari: $('#tgl_dari').datebox('getValue'),
+				tgl_sampai: $('#tgl_sampai').datebox('getValue')
+			}
+		});
+	}
+	
 	function cetakRekapInvoice() {
 		window.open('../form/cetak_rekap_invoice.php?customer_inv='+
-					$('#customer_inv').textbox('getText')+'&status='+
-					$('#status').textbox('getValue')+'&tgl_dari='+
+					$('#customer_inv').textbox('getText')+'&no_inv='+
+					$('#no_inv').textbox('getValue')+'&tgl_dari='+
 					$('#tgl_dari').textbox('getText')+'&tgl_sampai='+
 					$('#tgl_sampai').textbox('getText'),'_blank');
 	}

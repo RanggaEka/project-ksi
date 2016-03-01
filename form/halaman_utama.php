@@ -39,8 +39,41 @@
     <!--<script type="text/javascript" src="../lib/jquery-1.4.4.min.js"></script>-->
 	<script type="text/javascript" src="../js/formatter.js"></script>	
     <script type="text/javascript" src="../js/mainController.js"></script>
+    <script>
+		var IDLE_TIMEOUT = 3; //seconds
+		var _idleSecondsCounter = 0;
+		var counter = 100;
+				
+		document.onclick = function() {
+			_idleSecondsCounter = 0;
+		};
+		document.onmousemove = function() {
+			_idleSecondsCounter = 0;
+		};
+		document.onkeypress = function() {
+			_idleSecondsCounter = 0;
+		};
+		window.setInterval(CheckIdleTime, 1000);
+		
+		function CheckIdleTime() {
+			_idleSecondsCounter++;
+			var oPanel = document.getElementById("SecondsUntilExpire");
+			if (oPanel)
+				oPanel.innerHTML = (IDLE_TIMEOUT - _idleSecondsCounter) + "";
+			if (_idleSecondsCounter >= IDLE_TIMEOUT) {
+				var id;
+				id = setInterval(function() {
+					counter--;
+					if(counter < 0) {
+						window.location.href = '../system/logout_service.php';
+					} else {
+						$.messager.alert('User Timeout', "Session user telah habis, <br/>Sistem akan otomatis logout <b>" + counter.toString() +"</b>", 'warning');
+					}
+				}, 1000);
+			}
+		}
+    </script>
 </head>
-
 <body class="metro" onLoad="onLoadBodyGrid()">
     <nav class="navigation-bar">
 		<nav class="navigation-bar-content">
@@ -55,6 +88,10 @@
 					if ($_SESSION['jabatan'] == "ADMIN") {
 				?>
                 <a href="#" class="easyui-menubutton" data-options="menu:'#mm3admin',iconCls:'icon-tools'">Pengaturan Admin</a>
+                 <div id="mm3admin" style="width:230px;">
+					<div><a href="?page=kelolaadmin">Kelola Admin</a></div>
+					<div><a href="?page=useractive">User Aktif</a></div>
+				</div>
 				<?php } ?>
 			</div>
             <div id="mm1" style="width:200px;">
@@ -65,10 +102,6 @@
                 <div><a href="?page=invoice">Input Invoice</a></div>
                 <div><a href="?page=pembayaraninvoice">Input Pembayaran Invoice</a></div>
                 <div><a href="?page=rekapinvoice">Rekap Invoice</a></div>
-            </div>
-             <div id="mm3admin" style="width:230px;">
-                <div><a href="?page=kelolaadmin">Kelola Admin</a></div>
-                <div><a href="?page=useractive">User Aktif</a></div>
             </div>
         </nav>
     </nav>

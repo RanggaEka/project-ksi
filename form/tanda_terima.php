@@ -72,12 +72,14 @@
 																				var asuransi = parseInt($('#asuransi').textbox('getValue'))													
 																				var subtotal = parseInt($('#subtotal').textbox('getValue'))	
 																				if(vol > kg){
-																				var sum = (tarif * vol) + packing_kayu + asuransi + biaya
+																				var sum = tarif * vol
+																				var ttl = sum + packing_kayu + asuransi + biaya
 																				}else{
-																				var sum = (tarif * kg) + packing_kayu + asuransi + biaya
+																				var sum = tarif * kg
+																				var ttl = sum + packing_kayu + asuransi + biaya
 																				}													
 																				$('#subtotal').textbox('setValue',sum)
-																				$('#total').textbox('setValue',sum)
+																				$('#total').textbox('setValue',ttl)
 																				}">
 												KG </td>
 											<td width="79" valign="middle">Volume</td>
@@ -92,19 +94,22 @@
 																				var asuransi = parseInt($('#asuransi').textbox('getValue'))													
 																				var subtotal = parseInt($('#subtotal').textbox('getValue'))	
 																				if(vol > kg){
-																				var sum = (tarif * vol) + packing_kayu + asuransi + biaya
+																				var sum = tarif * vol
+																				var ttl = sum + packing_kayu + asuransi + biaya
 																				}else{
-																				var sum = (tarif * kg) + packing_kayu + asuransi + biaya
+																				var sum = tarif * kg
+																				var ttl = sum + packing_kayu + asuransi + biaya
 																				}													
 																				$('#subtotal').textbox('setValue',sum)
-																				$('#total').textbox('setValue',sum)
+																				$('#total').textbox('setValue',ttl)
 																			}">
 												M3 </td>
 										<tr>
-											<td valign="middle">Pack. Kayu</td>
-											<td valign="middle"><input name="packing_kayu" id="packing_kayu" type="text" value="0" class="easyui-numberbox" 
-																	min="0" precision="0" style="width:80px;height:25px;padding:8px" 
-																	data-options="prompt:'Packing Kayu',onChange: function(value){													
+											<td valign="middle" >Tarif</td>
+										  <td valign="middle" ><input name="tarif" id="tarif" type="text" 
+																	value="0" class="easyui-numberbox" min="0" 
+																	precision="0" style="width:80px;height:25px;padding:8px" 
+																	data-options="prompt:'Tarif',onChange: function(value){
 																	var tarif = parseInt($('#tarif').textbox('getValue'))
 																				var kg = parseInt($('#kg').textbox('getValue'))
 																				var vol = parseInt($('#vol').textbox('getValue'))
@@ -113,12 +118,14 @@
 																				var asuransi = parseInt($('#asuransi').textbox('getValue'))													
 																				var subtotal = parseInt($('#subtotal').textbox('getValue'))	
 																				if(vol > kg){
-																				var sum = (tarif * vol) + packing_kayu + asuransi + biaya
+																				var sum = tarif * vol
+																				var ttl = sum + packing_kayu + asuransi + biaya
 																				}else{
-																				var sum = (tarif * kg) + packing_kayu + asuransi + biaya
+																				var sum = tarif * kg
+																				var ttl = sum + packing_kayu + asuransi + biaya
 																				}													
 																				$('#subtotal').textbox('setValue',sum)
-																				$('#total').textbox('setValue',sum)
+																				$('#total').textbox('setValue',ttl)
 																	}">											</td>
 											<td valign="middle">Asuransi</td>
 											<td valign="middle"><input name="asuransi" id="asuransi" type="text" value="0" class="easyui-numberbox" 
@@ -132,17 +139,19 @@
 																				var asuransi = parseInt($('#asuransi').textbox('getValue'))													
 																				var subtotal = parseInt($('#subtotal').textbox('getValue'))	
 																				if(vol > kg){
-																				var sum = (tarif * vol) + packing_kayu + asuransi + biaya
+																				var sum = tarif * vol
+																				var ttl = sum + packing_kayu + asuransi + biaya
 																				}else{
-																				var sum = (tarif * kg) + packing_kayu + asuransi + biaya
+																				var sum = tarif * kg
+																				var ttl = sum + packing_kayu + asuransi + biaya
 																				}													
 																				$('#subtotal').textbox('setValue',sum)
-																				$('#total').textbox('setValue',sum)
+																				$('#total').textbox('setValue',ttl)
 																	}">											</td>
-											<td valign="middle" bgcolor="#ADE5F7">Biaya Lainnya</td>
-										  <td valign="middle" bgcolor="#ADE5F7"><input name="biaya" id="biaya" type="text" value="0" class="easyui-numberbox" min="0" 
-																	precision="0" style="width:80px;height:25px;padding:8px" 
-																	data-options="prompt:'Biaya Lainnya',onChange: function(value){
+											<td valign="middle" bgcolor="#ADE5F7">Pack. Kayu</td>
+											<td valign="middle" bgcolor="#ADE5F7"><input name="packing_kayu" id="packing_kayu" type="text" value="0" class="easyui-numberbox" 
+																	min="0" precision="0" style="width:80px;height:25px;padding:8px" 
+																	data-options="prompt:'Packing Kayu',onChange: function(value){													
 																	var tarif = parseInt($('#tarif').textbox('getValue'))
 																				var kg = parseInt($('#kg').textbox('getValue'))
 																				var vol = parseInt($('#vol').textbox('getValue'))
@@ -151,12 +160,14 @@
 																				var asuransi = parseInt($('#asuransi').textbox('getValue'))													
 																				var subtotal = parseInt($('#subtotal').textbox('getValue'))	
 																				if(vol > kg){
-																				var sum = (tarif * vol) + packing_kayu + asuransi + biaya
+																				var sum = tarif * vol
+																				var ttl = sum + packing_kayu + asuransi + biaya
 																				}else{
-																				var sum = (tarif * kg) + packing_kayu + asuransi + biaya
+																				var sum = tarif * kg
+																				var ttl = sum + packing_kayu + asuransi + biaya
 																				}													
 																				$('#subtotal').textbox('setValue',sum)
-																				$('#total').textbox('setValue',sum)
+																				$('#total').textbox('setValue',ttl)
 																	}">											</td>
 										<tr>
 											<td colspan="4" rowspan="3" valign="middle">
@@ -169,11 +180,10 @@
                                       <tr/>
                                     </table>
 										  </td>
-											<td valign="middle" bgcolor="#ADE5F7">Tarif</td>
-										  <td valign="middle" bgcolor="#ADE5F7"><input name="tarif" id="tarif" type="text" 
-																	value="0" class="easyui-numberbox" min="0" 
+										  <td valign="middle" bgcolor="#ADE5F7">Biaya Lainnya</td>
+										  <td valign="middle" bgcolor="#ADE5F7"><input name="biaya" id="biaya" type="text" value="0" class="easyui-numberbox" min="0" 
 																	precision="0" style="width:80px;height:25px;padding:8px" 
-																	data-options="prompt:'Tarif',onChange: function(value){
+																	data-options="prompt:'Biaya Lainnya',onChange: function(value){
 																	var tarif = parseInt($('#tarif').textbox('getValue'))
 																				var kg = parseInt($('#kg').textbox('getValue'))
 																				var vol = parseInt($('#vol').textbox('getValue'))
@@ -182,13 +192,15 @@
 																				var asuransi = parseInt($('#asuransi').textbox('getValue'))													
 																				var subtotal = parseInt($('#subtotal').textbox('getValue'))	
 																				if(vol > kg){
-																				var sum = (tarif * vol) + packing_kayu + asuransi + biaya
+																				var sum = tarif * vol
+																				var ttl = sum + packing_kayu + asuransi + biaya
 																				}else{
-																				var sum = (tarif * kg) + packing_kayu + asuransi + biaya
+																				var sum = tarif * kg
+																				var ttl = sum + packing_kayu + asuransi + biaya
 																				}													
 																				$('#subtotal').textbox('setValue',sum)
-																				$('#total').textbox('setValue',sum)
-																	}">											</td>
+																				$('#total').textbox('setValue',ttl)
+																	}">											</td>										  											
 										</tr>
 										<tr>
 											<td bgcolor="#ADE5F7">SubTotal</td>

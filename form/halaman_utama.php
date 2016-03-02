@@ -27,19 +27,24 @@
             color: #666666;
         }
     </style>
+	<style type="text/css">
+		#idletimeout { background:#1ba1e2; border:1px solid #eee; color:#fff; font-family:arial, sans-serif; text-align:center; font-size:12px; padding:10px; position:relative; top:0px; left:0; right:0; z-index:100000; display:none; }
+		#idletimeout a { color:#fff; font-weight:bold }
+		#idletimeout span { font-weight:bold }
+	</style>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="../lib/jquery/themes/default/easyui.css">
     <link rel="stylesheet" type="text/css" href="../lib/jquery/themes/icon.css">
     <link rel="stylesheet" type="text/css" href="../lib/jquery/demo/demo.css">
     <link rel="stylesheet" href="../lib/metro/css/metro-bootstrap.css">
     <link rel="stylesheet" href="../lib/metro/css/metro-bootstrap-responsive.css">
-    <script type="text/javascript" src="../lib/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="../js/jquery.min.js"></script>
     <script type="text/javascript" src="../lib/jquery/jquery.easyui.min.js"></script>
     <script type="text/javascript" src="../lib/datagrid-detailview.js"></script>
     <!--<script type="text/javascript" src="../lib/jquery-1.4.4.min.js"></script>-->
 	<script type="text/javascript" src="../js/formatter.js"></script>	
     <script type="text/javascript" src="../js/mainController.js"></script>
-    <script>
+    <!--script>
 		var IDLE_TIMEOUT = 3; //seconds
 		var _idleSecondsCounter = 0;
 		var counter = 100;
@@ -53,7 +58,7 @@
 		document.onkeypress = function() {
 			_idleSecondsCounter = 0;
 		};
-		window.setInterval(CheckIdleTime, 1000);
+		window.setInterval(CheckIdleTime, 3000);
 		
 		function CheckIdleTime() {
 			_idleSecondsCounter++;
@@ -69,12 +74,18 @@
 					} else {
 						$.messager.alert('User Timeout', "Session user telah habis, <br/>Sistem akan otomatis logout <b>" + counter.toString() +"</b>", 'warning');
 					}
-				}, 1000);
+				}, 3000);
 			}
 		}
-    </script>
+    </script-->	
+	<script src="../js/jquery.idletimer.js" type="text/javascript"></script>
+	<script src="../js/jquery.idletimeout.js" type="text/javascript"></script>
 </head>
 <body class="metro" onLoad="onLoadBodyGrid()">
+	<div id="idletimeout">
+		You will be logged off in <span><!-- countdown place holder --></span>&nbsp;seconds due to inactivity. 
+		<a id="idletimeout-resume" href="#">Click here to continue using this web page</a>.
+	</div>
     <nav class="navigation-bar">
 		<nav class="navigation-bar-content">
 			<a href="?page=home" class="element"><img src="../images/ksi.png" width="128px"></a>
@@ -169,6 +180,28 @@
     for (var selector in config) {
         // $(selector).chosen(config[selector]);
     }
+</script>
+<script type="text/javascript">
+	$.idleTimeout('#idletimeout', '#idletimeout a', {
+		idleAfter: 5,
+		pollingInterval: 2,
+		keepAliveURL: '../form/halaman_utama.php?page=home',
+		serverResponseEquals: 'OK',
+		onTimeout: function(){
+			$(this).slideUp();
+			window.location.href='../system/logout_service.php';
+			//window.location = "timeout.htm";
+		},
+		onIdle: function(){
+			$(this).slideDown(); // show the warning bar
+		},
+		onCountdown: function( counter ){
+			$(this).find("span").html( counter ); // update the counter
+		},
+		onResume: function(){
+			$(this).slideUp(); // hide the warning bar
+		}
+	});
 </script>
 <script src="../js/main.js"></script>
 <?php } ?>

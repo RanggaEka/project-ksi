@@ -14,7 +14,7 @@
     <!-- <link rel="stylesheet" href="../lib/chosen/style.css"> -->
     <!-- <link rel="stylesheet" href="../lib/chosen/prism.css"> -->
     <link rel="stylesheet" href="../lib/chosen/chosen.css">
-    <style type="text/css" media="all">
+    <!--style type="text/css" media="all">
         /* fix rtl for demo */
         
         .chosen-rtl .chosen-drop {
@@ -26,7 +26,7 @@
             font-size: 12px;
             color: #666666;
         }
-    </style>
+    </style-->
 	<style type="text/css">
 		#idletimeout { background:#1ba1e2; border:1px solid #eee; color:#fff; font-family:arial, sans-serif; text-align:center; font-size:12px; padding:10px; position:relative; top:0px; left:0; right:0; z-index:100000; display:none; }
 		#idletimeout a { color:#fff; font-weight:bold }
@@ -161,7 +161,7 @@
 </html>
 <script src="../lib/chosen/chosen.jquery.js" type="text/javascript"></script>
 <script src="../lib/chosen/prism.js" type="text/javascript" charset="utf-8"></script>
-<script type="text/javascript">
+<!--script type="text/javascript">
     var config = {
         '.chosen-select': {},
         '.chosen-select-deselect': {
@@ -180,7 +180,7 @@
     for (var selector in config) {
         // $(selector).chosen(config[selector]);
     }
-</script>
+</script-->
 <script type="text/javascript">
 	$.idleTimeout('#idletimeout', '#idletimeout a', {
 		idleAfter: 5,

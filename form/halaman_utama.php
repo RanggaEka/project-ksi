@@ -83,8 +83,8 @@
 </head>
 <body class="metro" onLoad="onLoadBodyGrid()">
 	<div id="idletimeout">
-		You will be logged off in <span><!-- countdown place holder --></span>&nbsp;seconds due to inactivity. 
-		<a id="idletimeout-resume" href="#">Click here to continue using this web page</a>.
+		Anda akan logout dalam <span><!-- countdown place holder --></span>&nbsp;detik. 
+		<a id="idletimeout-resume" href="#">Klik di sini untuk melanjutkan menggunakan system ini</a>.
 	</div>
     <nav class="navigation-bar">
 		<nav class="navigation-bar-content">

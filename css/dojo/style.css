@@ -1,0 +1,87 @@
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    font-size: 25px;
+    padding: 0px;
+}
+
+#main-container{
+    height: 96%;
+    width: 100%;
+    overflow: hidden;
+}
+
+#main-content-pane{
+    width: 25%;
+}
+
+#menu-border-container{
+    width: 100%;
+    height: 96%;
+}
+
+.menu-content-pane{
+    width:30%;
+    height: 100%;
+    padding: 0px;
+}
+
+#footer-container{
+    height: 4%;
+    width: 100%;
+}
+
+#contentMessage, #imgGeneralDialog, 
+.img-gen-dlg, .msg-gen-dlg{
+    width: 100%;
+    height: 100%;
+}
+
+.footer {
+    height: 20px;
+    width: 100%;
+    position: absolute;
+    float: left;
+    display: block;
+}
+
+.hidden-field{
+    width: 100%;
+    height: 20px;
+    visibility: hidden;
+    position: absolute;
+    float: left;
+}
+
+.table-footer{
+    width: 100%;
+    height: 20px;
+    float: left;
+}
+
+#mainTabContainer{
+    width: 100%;
+    height: 100%;
+}
+.edit{
+    background:url(../img/edit.png) no-repeat 10px 8px;
+    text-indent:30px;
+    display:block;
+}
+
+.delete{
+    background:url(../img/delete.png) no-repeat 10px 8px;
+    text-indent:30px;
+    display:block;
+}
+
+.freeze{
+    background:url(../img/freeze.gif) no-repeat 10px 8px;
+    text-indent:30px;
+    display:block;
+}
+
+td.dojoxGridCell.dojoDndItem:hover  {
+    background: url(../../lib/dojo.1.10/dijit/themes/soria/images/titleBarActive.png) #e9e9e9 repeat-x top;
+}

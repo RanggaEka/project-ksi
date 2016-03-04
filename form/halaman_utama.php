@@ -44,47 +44,41 @@
     <!--<script type="text/javascript" src="../lib/jquery-1.4.4.min.js"></script>-->
 	<script type="text/javascript" src="../js/formatter.js"></script>	
     <script type="text/javascript" src="../js/mainController.js"></script>
-    <!--script>
-		var IDLE_TIMEOUT = 3; //seconds
-		var _idleSecondsCounter = 0;
-		var counter = 100;
-				
-		document.onclick = function() {
-			_idleSecondsCounter = 0;
-		};
-		document.onmousemove = function() {
-			_idleSecondsCounter = 0;
-		};
-		document.onkeypress = function() {
-			_idleSecondsCounter = 0;
-		};
-		window.setInterval(CheckIdleTime, 3000);
-		
-		function CheckIdleTime() {
-			_idleSecondsCounter++;
-			var oPanel = document.getElementById("SecondsUntilExpire");
-			if (oPanel)
-				oPanel.innerHTML = (IDLE_TIMEOUT - _idleSecondsCounter) + "";
-			if (_idleSecondsCounter >= IDLE_TIMEOUT) {
-				var id;
-				id = setInterval(function() {
-					counter--;
-					if(counter < 0) {
-						window.location.href = '../system/logout_service.php';
-					} else {
-						$.messager.alert('User Timeout', "Session user telah habis, <br/>Sistem akan otomatis logout <b>" + counter.toString() +"</b>", 'warning');
-					}
-				}, 3000);
-			}
-		}
-    </script-->	
 	<script src="../js/jquery.idletimer.js" type="text/javascript"></script>
 	<script src="../js/jquery.idletimeout.js" type="text/javascript"></script>
+	
+
+	<script>
+		dojoConfig = {
+			parseOnLoad: true,
+			baseUrl:"../lib",
+			packages: [{
+					name: 'cbtree',
+					location: '../lib/dojo.1.10/cbtree'
+				},{
+					name: 'dojo',
+					location: '../lib/dojo.1.10/dojo'
+				},{
+					name: 'dijit',
+					location: '../lib/dojo.1.10/dijit'
+				},{
+					name: 'dojox',
+					location: '../lib/dojo.1.10/dojox'
+				}
+			]
+		};
+	</script>
+	<!-- load framework -->
+	<script src="../lib/dojo.1.10/dojo/dojo.js" type="text/javascript"></script>
+	<!-- Startup Application -->
+	<script src="../lib/IncludeModule.js" type="text/javascript"></script>
+	<script src="../lib/ParseUtil.js" type="text/javascript"></script>
 </head>
+
 <body class="metro" onLoad="onLoadBodyGrid()">
 	<div id="idletimeout">
 		Anda akan logout dalam <span><!-- countdown place holder --></span>&nbsp;detik. 
-		<a id="idletimeout-resume" href="#">Klik di sini untuk melanjutkan menggunakan system ini</a>.
+		<a id="idletimeout-resume" href="#" style="text-decoration:underline;">Klik di sini untuk melanjutkan menggunakan system ini</a>.
 	</div>
     <nav class="navigation-bar">
 		<nav class="navigation-bar-content">
@@ -102,6 +96,7 @@
                  <div id="mm3admin" style="width:230px;">
 					<div><a href="?page=kelolaadmin">Kelola Admin</a></div>
 					<div><a href="?page=useractive">User Aktif</a></div>
+					<div><a href="?page=db">Database</a></div>
 				</div>
 				<?php } ?>
 			</div>
@@ -147,6 +142,8 @@
                         include 'kelola_admin.php';
                     } elseif ($_GET['page'] == "useractive") {
                         include 'user_active.php';
+                    } elseif ($_GET['page'] == "db") {
+                        include 'db.php';
                     } else {
                         echo '<td colspan="2"><br/><br/><br/><br/><h2>KIKI SOLUSI INTERNUSA</h2></td>';
                     }

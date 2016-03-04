@@ -78,8 +78,8 @@
 																				var sum = tarif * kg
 																				var ttl = sum + packing_kayu + asuransi + biaya
 																				}													
-																				$('#subtotal').textbox('setValue',sum)
-																				$('#total').textbox('setValue',ttl)
+																				$('#subtotal').textbox('setValue',formatTruncateNumber(sum,true))
+																				$('#total').textbox('setValue',formatTruncateNumber(ttl,true))
 																				}">
 												KG </td>
 											<td width="79" valign="middle">Volume</td>
@@ -100,8 +100,8 @@
 																				var sum = tarif * kg
 																				var ttl = sum + packing_kayu + asuransi + biaya
 																				}													
-																				$('#subtotal').textbox('setValue',sum)
-																				$('#total').textbox('setValue',ttl)
+																				$('#subtotal').textbox('setValue',formatTruncateNumber(sum,true))
+																				$('#total').textbox('setValue',formatTruncateNumber(ttl,true))
 																			}">
 												M3 </td>
 										<tr>
@@ -124,9 +124,12 @@
 																				var sum = tarif * kg
 																				var ttl = sum + packing_kayu + asuransi + biaya
 																				}													
-																				$('#subtotal').textbox('setValue',sum)
-																				$('#total').textbox('setValue',ttl)
-																	}">											</td>
+																				$('#subtotal').textbox('setValue',formatTruncateNumber(sum,true))
+																				$('#total').textbox('setValue',formatTruncateNumber(ttl,true))
+																				},formatter:function(val) {
+																					return formatTruncateNumber(val,true)
+																				}">											
+											</td>
 											<td valign="middle">Asuransi</td>
 											<td valign="middle"><input name="asuransi" id="asuransi" type="text" value="0" class="easyui-numberbox" 
 																	min="0" precision="0" style="width:80px;height:25px;padding:8px" 
@@ -145,9 +148,12 @@
 																				var sum = tarif * kg
 																				var ttl = sum + packing_kayu + asuransi + biaya
 																				}													
-																				$('#subtotal').textbox('setValue',sum)
-																				$('#total').textbox('setValue',ttl)
-																	}">											</td>
+																				$('#subtotal').textbox('setValue',formatTruncateNumber(sum,true))
+																				$('#total').textbox('setValue',formatTruncateNumber(ttl,true))
+																				},formatter:function(val) {
+																					return formatTruncateNumber(val,true)
+																				}">											
+											</td>
 											<td valign="middle" bgcolor="#ADE5F7">Pack. Kayu</td>
 											<td valign="middle" bgcolor="#ADE5F7"><input name="packing_kayu" id="packing_kayu" type="text" value="0" class="easyui-numberbox" 
 																	min="0" precision="0" style="width:80px;height:25px;padding:8px" 
@@ -166,9 +172,12 @@
 																				var sum = tarif * kg
 																				var ttl = sum + packing_kayu + asuransi + biaya
 																				}													
-																				$('#subtotal').textbox('setValue',sum)
-																				$('#total').textbox('setValue',ttl)
-																	}">											</td>
+																				$('#subtotal').textbox('setValue',formatTruncateNumber(sum,true))
+																				$('#total').textbox('setValue',formatTruncateNumber(ttl,true))
+																	},formatter:function(val) {
+																		return formatTruncateNumber(val,true)
+																	}">											
+											</td>
 										<tr>
 											<td colspan="4" rowspan="3" valign="middle">
 											Deskripsi Paket <font color='red'>*</font>
@@ -198,19 +207,24 @@
 																				var sum = tarif * kg
 																				var ttl = sum + packing_kayu + asuransi + biaya
 																				}													
-																				$('#subtotal').textbox('setValue',sum)
-																				$('#total').textbox('setValue',ttl)
-																	}">											</td>										  											
+																				$('#subtotal').textbox('setValue',formatTruncateNumber(sum,true))
+																				$('#total').textbox('setValue',formatTruncateNumber(ttl,true))
+																				},formatter:function(val) {
+																					return formatTruncateNumber(val,true)
+																				}">											
+												</td>										  											
 										</tr>
 										<tr>
 											<td bgcolor="#ADE5F7">SubTotal</td>
 										  <td bgcolor="#ADE5F7"><input name="subtotal" id="subtotal" type="text" class="easyui-numberbox" 
-												disabled min="0" precision="0" style="width:80px;height:25px;padding:8px" data-options="prompt:'SubTotal'">											</td>
+												disabled min="0" precision="0" style="width:80px;height:25px;padding:8px" data-options="prompt:'SubTotal'">											
+											</td>
 										</tr>
 										<tr>
 											<td bgcolor="#ADE5F7">Total</td>
 										  <td bgcolor="#ADE5F7"><input name="total" id="total" type="text" class="easyui-numberbox" disabled min="0" 
-												precision="0" style="width:80px;height:25px;padding:8px" data-options="prompt:'Total'">											</td>
+												precision="0" style="width:80px;height:25px;padding:8px" data-options="prompt:'Total'">											
+											</td>
 										</tr>
 								  </table>
                                     <!--DESKRIPSI-->
@@ -252,21 +266,7 @@
 												class="easyui-textbox" 												
 												style="width:210px;height:25px;padding:8px"
 												name="tujuan" id="tujuan" data-options="prompt:'Tujuan'">
-												<!--data-options="
-														url:'../json/get_tujuan.php',
-														method:'get',
-														valueField:'kecamatan',
-														textField:'kecamatan',
-														panelHeight:'150',
-														panelWidth: 350,
-														prompt:'Tujuan',
-														formatter: formatItemTujuan,
-														onSelect: function(val){
-															onSelectedTujuan(val)
-														}
-												"-->
-											
-                                        </div>
+										</div>
                                         <input name="alamat_pengirim" id="alamat_pengirim" class="easyui-textbox" data-options="multiline:true,prompt:'Alamat Pengirim'" style="width:240px;height:50px;padding:8px">
 										<div style="padding-bottom:2px;padding-top:2px;">
 										<input name="telpon_pengirim" id="telpon_pengirim" class="easyui-numberbox" data-options="prompt:'Telpon Pengirim'" style="width:150px;height:25px;padding:8px">

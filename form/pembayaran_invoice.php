@@ -96,12 +96,14 @@
                                 <td>
 									<input type="text" id="bayar" name="bayar" class="easyui-numberbox" min="0" precision="0" style="width:150px;height:25px;padding:8px" 
 									data-options="prompt:'Nilai Pembayaran',onChange: function(value){
-													var bayar = parseInt($('#bayar').textbox('getText'))
-													var sisa = parseInt($('#sisa').textbox('getText'))													
+													var bayar = parseInt($('#bayar').textbox('getText').replace(',',''))
+													var sisa = parseInt($('#sisa').textbox('getText').replace(',',''))													
 														if(bayar > sisa){
 															$.messager.alert('Peringatan', 'Nilai Bayar tidak boleh lebih besar dari sisa', 'warning');
 															$('#bayar').textbox('clear');
 														}
+												},formatter:function(val) {
+													return formatTruncateNumber(val,true)
 												}">
                                 </td>
                             </tr>
@@ -137,9 +139,9 @@
 			$('#no_inv').textbox('setValue', row.no_inv);
 			$('#tanggal').textbox('setValue', row.tanggal);
 			$('#customer').textbox('setValue', row.customer_nama);
-			$('#total').textbox('setValue', row.total);
-			$('#cicilan').textbox('setValue', row.cicilan);
-			$('#sisa').textbox('setValue', row.sisa);
+			$('#total').textbox('setValue', formatTruncateNumber(row.total,true));
+			$('#cicilan').textbox('setValue', formatTruncateNumber(row.cicilan,true));
+			$('#sisa').textbox('setValue', formatTruncateNumber(row.sisa,true));
 			$('#lookupinvoice').window('close');	
 			onLockingData(row.no_inv,'PEMBAYARANINVOICE')
 			setTimeout(function(){

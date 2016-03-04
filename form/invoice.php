@@ -50,17 +50,19 @@
 			    	<button type="submit" onclick="saveInvoice()" name="simpan_inv" id="simpan_inv">Save</button>
 					<button type="reset" onclick="releaseLocking()">Batal</button>	
 					<br/><br/>
+					           		
 					<table id="detail_invoice_ui" class="easyui-datagrid" title="" style="width:98%;height:250px;"
-									data-options="singleSelect:true,collapsible:true,url:'../json/get_invoice_detail.php',method:'get'">
-									<thead>
-									<tr>
-										<th style="width:15%" data-options="field:'no_cn'">No CN</th>
-										<th style="width:10%" data-options="field:'tanggal'">Tanggal</th>
-										<th style="width:50%" data-options="field:'tujuan'">Tujuan</th>
-										<th style="width:15%" data-options="field:'total'">Total</th>
-									</tr>
-									</thead>
-								</table>
+						data-options="singleSelect:true,collapsible:true,url:'../json/get_invoice_detail.php',method:'get'">
+						<thead>
+						<tr>
+							<th style="width:15%" data-options="field:'no_cn'">No CN</th>
+							<th style="width:10%" data-options="field:'tanggal'">Tanggal</th>
+							<th style="width:50%" data-options="field:'tujuan'">Tujuan</th>
+							<th style="width:15%" data-options="field:'total'">Total</th>
+						</tr>
+						</thead>
+					</table>
+					<div style="width:100%; height:25px; background:#ADE5F7;padding:3px;">Invoice Detail</div>
 	    			<table id="detail_invoice" border=0 width="100%">
 						<style>
 							.cTh {border:1px solid #CCCCCC;}
@@ -188,7 +190,7 @@
 			document.getElementById("no_cn"+tblIndex).value = row.no_cn 
 			document.getElementById("tanggal"+tblIndex).value = row.tanggal 
 			document.getElementById('tujuan'+tblIndex).value = row.tujuan 
-			document.getElementById('total'+tblIndex).value = row.grand_total
+			document.getElementById('total'+tblIndex).value = formatNumber(row.grand_total)
 			//$('#tanggal').textbox('setValue', row.tanggal);
 			//$('#pengirim').textbox('setValue', row.pengirim);
 			//$('#tujuan').textbox('setValue', row.tujuan);

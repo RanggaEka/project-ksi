@@ -1,0 +1,21 @@
+/* 
+    Document   : dojo
+    Created on : May 22, 2014, 11:26:21 AM
+    Author     : feldy
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+@import "dojo/sumsar.css";
+@import "dojo/style.css";
+@import "../lib/dojo.1.10/dojo/resources/dojo.css";
+@import "../lib/dojo.1.10/dijit/themes/soria/soria.css";
+@import "../lib/dojo.1.10/cbtree/themes/soria/soria.css";
+@import "../lib/dojo.1.10/dojox/grid/resources/soriaGrid.css"; 
+@import "../lib/dojo.1.10/dojox/grid/resources/Grid.css";
+@import "../lib/dojo.1.10/dojox/form/resources/FileInput.css";
+@import "../lib/dojo.1.10/dojox/grid/enhanced/resources/EnhancedGrid_rtl.css";
+@import "../lib/dojo.1.10/dojox/grid/enhanced/resources/claro/EnhancedGrid.css";
+@import "../lib/dojo.1.10/dijit/themes/soria/layout/TabContainer.css";
+@import "../lib/dojo.1.10/dijit/themes/soria/layout/ContentPane.css";
+

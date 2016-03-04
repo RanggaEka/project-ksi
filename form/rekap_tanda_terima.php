@@ -49,8 +49,8 @@
 							<th field="total_coll" width="5%" align="center">Coll</th>
 							<th field="total_berat" width="5%" align="center">KG</th>
 							<th field="total_vol" width="6%" align="center">Vol/M3</th>
-							<th field="tarif" width="10%" align="center">Tarif</th>
-							<th field="grand_total" width="10%" align="center">Total</th>
+							<th field="tarif" width="10%" align="center" formatter="nominal">Tarif</th>
+							<th field="grand_total" width="10%" align="center" formatter="nominal">Total</th>
 						</tr>
 					</thead>
 				</table>
@@ -59,6 +59,10 @@
 	</table>
 </td>
 <script>
+	function nominal(val) {
+		return formatNumber(val)
+	}
+	
 	var searchBoxNameRTT = "";
 	function cetakRekapTandaTerima() {
 		if (searchBoxNameRTT == "cn") {

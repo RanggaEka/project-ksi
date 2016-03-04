@@ -83,15 +83,15 @@
 						<th field="total_coll" width="5%" align="center">Coll</th>
 						<th field="total_berat" width="5%" align="center">KG</th>
 						<th field="total_vol" width="5%" align="center">Vol/M3</th>
-						<th field="pack_kayu" width="7%" align="center">Pack Kayu</th>
-						<th field="asuransi" width="6%" align="center">Asuransi</th>
-						<th field="tarif_inv" width="6%" align="center">Tarif</th>
-						<th field="grand_total" width="5%" align="center">Jumlah</th>
+						<th field="pack_kayu" width="7%" align="center" formatter="nominal">Pack Kayu</th>
+						<th field="asuransi" width="6%" align="center" formatter="nominal">Asuransi</th>
+						<th field="tarif_inv" width="6%" align="center" formatter="nominal">Tarif</th>
+						<th field="grand_total" width="5%" align="center" formatter="nominal">Jumlah</th>
 						<th field="penerima" width="10%" align="center">Penerima</th>
 						<th field="tgl_tanda_terima" width="7%" align="center">Tgl</th>
-						<th field="biaya_angkut" width="5%" align="center">Freight</th>
+						<th field="biaya_angkut" width="5%" align="center" formatter="nominal">Freight</th>
 						<th field="service_udl" width="5%" align="center">U/D/L</th>
-						<th field="biaya" width="3%" align="center">Lain 2</th>
+						<th field="biaya" width="3%" align="center" formatter="nominal">Lain 2</th>
 						<th field="keterangan" width="10%" align="center">Ket</th>
 					</tr>
 				</thead>
@@ -117,6 +117,11 @@
 </td>
 
 <script type="text/javascript">
+	function nominal(val) {
+		return formatNumber(val)
+	}
+	
+	
 	function cetakRekapPengiriman() {
 		window.open('../form/cetak_rekap_pengiriman.php?no_inv='+$('#no_inv').textbox('getText')
 					+'&no_cn='+$('#no_cn').textbox('getText')

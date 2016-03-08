@@ -47,7 +47,7 @@
 	<script src="../js/jquery.idletimer.js" type="text/javascript"></script>
 	<script src="../js/jquery.idletimeout.js" type="text/javascript"></script>
 	
-
+	<link rel="stylesheet" href="../lib/dojo.1.10/dojox/grid/enhanced/resources/claro/EnhancedGrid.css">
 	<script>
 		dojoConfig = {
 			parseOnLoad: true,
@@ -96,7 +96,7 @@
                  <div id="mm3admin" style="width:230px;">
 					<div><a href="?page=kelolaadmin">Kelola Admin</a></div>
 					<div><a href="?page=useractive">User Aktif</a></div>
-					<div><a href="?page=db">Database</a></div>
+					<!--<div><a href="?page=db">Database</a></div>-->
 				</div>
 				<?php } ?>
 			</div>
@@ -179,26 +179,26 @@
     }
 </script-->
 <script type="text/javascript">
-	$.idleTimeout('#idletimeout', '#idletimeout a', {
-		idleAfter: 5,
-		pollingInterval: 2,
-		keepAliveURL: '../form/halaman_utama.php?page=home',
-		serverResponseEquals: 'OK',
-		onTimeout: function(){
-			$(this).slideUp();
-			window.location.href='../system/logout_service.php';
-			//window.location = "timeout.htm";
-		},
-		onIdle: function(){
-			$(this).slideDown(); // show the warning bar
-		},
-		onCountdown: function( counter ){
-			$(this).find("span").html( counter ); // update the counter
-		},
-		onResume: function(){
-			$(this).slideUp(); // hide the warning bar
-		}
-	});
+	//$.idleTimeout('#idletimeout', '#idletimeout a', {
+	//	idleAfter: 5,
+	//	pollingInterval: 2,
+	//	keepAliveURL: '../form/halaman_utama.php?page=home',
+	//	serverResponseEquals: 'OK',
+	//	onTimeout: function(){
+	//		$(this).slideUp();
+	//		window.location.href='../system/logout_service.php';
+	//		//window.location = "timeout.htm";
+	//	},
+	//	onIdle: function(){
+	//		$(this).slideDown(); // show the warning bar
+	//	},
+	//	onCountdown: function( counter ){
+	//		$(this).find("span").html( counter ); // update the counter
+	//	},
+	//	onResume: function(){
+	//		$(this).slideUp(); // hide the warning bar
+	//	}
+	//});
 </script>
 <script src="../js/main.js"></script>
 <?php } ?>

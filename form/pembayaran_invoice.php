@@ -1,15 +1,15 @@
 <td width="156">&nbsp;</td>
 <td>
     <br>
-    <table width="80%" border="1" align="left" cellpadding="10" cellspacing="3" style="border: solid 1px #efefef;">
+    <table width="80%" border="1" align="left" cellpadding="4" cellspacing="2" style="border: solid 1px #efefef;">
         <tr>
             <td>
                     <!--form action="../system/pembayaran_invoice_service.php" method="post" enctype="multipart/form-data"-->
-                        <table width="80%" border="0" cellspacing="0" cellpadding="3">
+                        <table width="100%" border="0" cellspacing="0" cellpadding="3">
                             <tr>
                                 <td width="150px"><label>No. Invoice <font color='red'>*</font></label></td>
-                                <td>:</td>
-                                <td>
+                                <td width="1px">:</td>
+                                <td width="190px">
                                     <input class="easyui-textbox" style="width:150px;height:25px;padding:8px" data-options="prompt:'No Invoice',iconWidth:38" id="no_inv" name="no_inv" disabled>
                                     <a href="javascript:void(0)" class="easyui-linkbutton" onclick="$('#lookupinvoice').window('open')"><img src="../images/famfam/application_xp.png" /></a>
                                     <div id="lookupinvoice" class="easyui-window" title="Lookup Invoice" data-options="modal:true,closed:true,iconCls:'icon-save'" style="width:70%;height:320px;padding:10px; text-align:left;">
@@ -32,12 +32,12 @@
 											}">
 											<thead>
 											<tr>												
-												<th style="width:20%" data-options="field:'no_inv'">No. Invoice</th>												
-												<th style="width:12%" data-options="field:'tanggal'">Tanggal</th>
-												<th style="width:25%" data-options="field:'customer_nama'">Customer</th>
-												<th style="width:14%" data-options="field:'total'" formatter="formatPrice" align="right">Total</th>
-												<th style="width:13%" data-options="field:'cicilan'" formatter="formatPrice" align="right">Cicilan</th>
-												<th style="width:13%" data-options="field:'sisa'" formatter="formatPrice" align="right">Sisa</th>
+												<th width="20%" data-options="field:'no_inv'">No. Invoice</th>												
+												<th width="12%" data-options="field:'tanggal'">Tanggal</th>
+												<th width="25%" data-options="field:'customer_nama'">Customer</th>
+												<th width="14%" data-options="field:'total'" formatter="formatPrice" align="right">Total</th>
+												<th width="13%" data-options="field:'cicilan'" formatter="formatPrice" align="right">Cicilan</th>
+												<th width="13%" data-options="field:'sisa'" formatter="formatPrice" align="right">Sisa</th>
 											</tr>
 											</thead>
 										</table>
@@ -46,6 +46,20 @@
 											<button type="submit" onclick="selectInvoice()">Pilih</button>
 										</div>
                                     </div>
+                                </td>
+                                <td rowspan="8" valign="top">
+                                <table id="gridDetailInvoice" class="easyui-datagrid" style="width:100%;height:250px" title="Invoice Detail"
+									data-options="rownumbers:true,singleSelect:true,collapsible:true,url:'../json/get_invoice_detail.php',method:'get'">
+									<thead>
+									<tr>										
+										<th width="10%" data-options="field:'no_cn'">CN</th>
+										<th width="14%" data-options="field:'tanggal'">Tanggal</th>
+										<th width="20%" data-options="field:'pengirim'">Pengirim</th>
+										<th width="35%" data-options="field:'tujuan'">Tujuan</th>
+										<th width="16%" data-options="field:'grand_total'" align="right" formatter="formatPrice">Total</th>
+									</tr>
+									</thead>
+								</table>
                                 </td>
                             </tr>
                             <tr>
@@ -108,7 +122,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td colspan="3">
+                                <td colspan="4">
                                     <button type="submit" name="simpan_inv" onclick="savePembayaran()">Save</button>
                                     <button onclick="releaseLocking()">Batal</button>
                                 </td>
@@ -116,18 +130,24 @@
                         </table>
                     </form>
                     <br/>
-                    <table id="gridDetailInvoice" class="easyui-datagrid" title="" style="width:100%;height:228px" title="Invoice Detail"
-									data-options="rownumbers:true,singleSelect:true,collapsible:true,url:'../json/get_invoice_detail.php',method:'get'">
-									<thead>
-									<tr>										
-										<th style="width:10%" data-options="field:'no_cn'">CN</th>
-										<th style="width:14%" data-options="field:'tanggal'">Tanggal</th>
-										<th style="width:20%" data-options="field:'pengirim'">Pengirim</th>
-										<th style="width:35%" data-options="field:'tujuan'">Tujuan</th>
-										<th style="width:16%" data-options="field:'grand_total'" align="right" formatter="formatPrice">Total</th>
-									</tr>
-									</thead>
-								</table>
+                    <table id="gridRekapInvoice" style="width:101%;height:245px" title="Entri Invoice"
+							data-options="singleSelect:true,
+								collapsible:true,url:'../json/data-header-rekap-inv.php',
+								method:'get',
+								toolbar:'#tbInv',
+								pagination:true" class="easyui-datagrid">
+					<thead>
+						<tr>
+							<th field="no_inv" width="15%">No Inv</th>
+							<th field="tanggal" width="10%">Tanggal Inv</th>
+							<th field="customer_nama" width="29%">Cust</th>
+							<th field="total" align="right" width="10%">Total</th>
+							<th field="cicilan" align="right" width="10%">Cicilan</th>
+							<th field="sisa" align="right" width="10%">Sisa</th>
+							<th field="keterangan" width="15%">Keterangan</th>
+						</tr>
+					</thead>
+			</table>
 				</td>
         </tr>
     </table>

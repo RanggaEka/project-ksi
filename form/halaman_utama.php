@@ -179,26 +179,26 @@
     }
 </script-->
 <script type="text/javascript">
-	//$.idleTimeout('#idletimeout', '#idletimeout a', {
-	//	idleAfter: 5,
-	//	pollingInterval: 2,
-	//	keepAliveURL: '../form/halaman_utama.php?page=home',
-	//	serverResponseEquals: 'OK',
-	//	onTimeout: function(){
-	//		$(this).slideUp();
-	//		window.location.href='../system/logout_service.php';
-	//		//window.location = "timeout.htm";
-	//	},
-	//	onIdle: function(){
-	//		$(this).slideDown(); // show the warning bar
-	//	},
-	//	onCountdown: function( counter ){
-	//		$(this).find("span").html( counter ); // update the counter
-	//	},
-	//	onResume: function(){
-	//		$(this).slideUp(); // hide the warning bar
-	//	}
-	//});
+	$.idleTimeout('#idletimeout', '#idletimeout a', {
+		idleAfter: 5,
+		pollingInterval: 2,
+		keepAliveURL: '../form/halaman_utama.php?page=home',
+		serverResponseEquals: 'OK',
+		onTimeout: function(){
+			$(this).slideUp();
+			window.location.href='../system/logout_service.php';
+			//window.location = "timeout.htm";
+		},
+		onIdle: function(){
+			$(this).slideDown(); // show the warning bar
+		},
+		onCountdown: function( counter ){
+			$(this).find("span").html( counter ); // update the counter
+		},
+		onResume: function(){
+			$(this).slideUp(); // hide the warning bar
+		}
+	});
 </script>
 <script src="../js/main.js"></script>
 <?php } ?>

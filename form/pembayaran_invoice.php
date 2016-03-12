@@ -108,17 +108,18 @@
                                 <td><label>Nilai Pembayaran <font color='red'>*</font></label></td>
                                 <td>:</td>
                                 <td>
-									<input type="text" id="bayar" name="bayar" class="easyui-numberbox" min="0" precision="0" style="width:150px;height:25px;padding:8px" 
+									<input type="text" id="bayar" name="bayar" class="easyui-textbox" style="width:150px;height:25px;padding:8px" 
 									data-options="prompt:'Nilai Pembayaran',onChange: function(value){
-													var bayar = parseInt($('#bayar').textbox('getText').replace(',',''))
-													var sisa = parseInt($('#sisa').textbox('getText').replace(',',''))													
+													var bayar = parseInt($('#bayar').textbox('getText').split(',').join(''))
+													var sisa = parseInt($('#sisa').textbox('getText').split(',').join(''))													
 														if(bayar > sisa){
+															document.getElementById('labelAngka').innerHTML = ''
 															$.messager.alert('Peringatan', 'Nilai Bayar tidak boleh lebih besar dari sisa', 'warning');
 															$('#bayar').textbox('clear');
 														}
-												},formatter:function(val) {
-													return formatTruncateNumber(val,true)
+														document.getElementById('labelAngka').innerHTML = formatTruncateNumber(bayar,true)
 												}">
+									<span id="labelAngka">&nbsp;</span>
                                 </td>
                             </tr>
                             <tr>
@@ -130,21 +131,24 @@
                         </table>
                     </form>
                     <br/>
-                    <table id="gridRekapInvoice" style="width:101%;height:245px" title="Entri Invoice"
+                    <table id="gridRekapPembayaranInvoice" style="width:101%;height:245px" title="Entri Invoice"
 							data-options="singleSelect:true,
-								collapsible:true,url:'../json/data-header-rekap-inv.php',
+								collapsible:true,url:'../json/get_invoice.php',
 								method:'get',
-								toolbar:'#tbInv',
-								pagination:true" class="easyui-datagrid">
+								rownumbers:true,
+								pagination:true,
+								pageSize:20,
+								onSelect: function(){
+									rowClickEntriPembayaranInvoice()
+								}" class="easyui-datagrid">
 					<thead>
 						<tr>
-							<th field="no_inv" width="15%">No Inv</th>
-							<th field="tanggal" width="10%">Tanggal Inv</th>
-							<th field="customer_nama" width="29%">Cust</th>
-							<th field="total" align="right" width="10%">Total</th>
-							<th field="cicilan" align="right" width="10%">Cicilan</th>
-							<th field="sisa" align="right" width="10%">Sisa</th>
-							<th field="keterangan" width="15%">Keterangan</th>
+							<th width="20%" data-options="field:'no_inv'">No. Invoice</th>												
+							<th width="12%" data-options="field:'tanggal'">Tanggal</th>
+							<th width="25%" data-options="field:'customer_nama'">Customer</th>
+							<th width="14%" data-options="field:'total'" formatter="formatPrice" align="right">Total</th>
+							<th width="13%" data-options="field:'cicilan'" formatter="formatPrice" align="right">Cicilan</th>
+							<th width="13%" data-options="field:'sisa'" formatter="formatPrice" align="right">Sisa</th>
 						</tr>
 					</thead>
 			</table>
@@ -153,6 +157,15 @@
     </table>
 </td>
 <script type="text/javascript">	
+	setTimeout(function(){
+		$('#gridDetailInvoice').datagrid({
+			queryParams: {
+				custNama: '',
+				no_inv: '',
+			}
+		});
+	},150)	
+	
 	function selectInvoice(){
 		var row = $('#tblLookupInvoice').datagrid('getSelected');
 		if (row){
@@ -237,5 +250,25 @@
 				});
 			}
 		}
+	}
+	
+	function rowClickEntriPembayaranInvoice() {
+		var row = $('#gridRekapPembayaranInvoice').datagrid('getSelected');
+		$('#no_inv').textbox('setValue', row.no_inv);
+		$('#tanggal').textbox('setValue', row.tanggal);
+		$('#customer').textbox('setValue', row.customer_nama);
+		$('#total').textbox('setValue', formatTruncateNumber(row.total,true));
+		$('#cicilan').textbox('setValue', formatTruncateNumber(row.cicilan,true));
+		$('#sisa').textbox('setValue', formatTruncateNumber(row.sisa,true));
+		$('#lookupinvoice').window('close');	
+		onLockingData(row.no_inv,'PEMBAYARANINVOICE')
+		setTimeout(function(){
+			$('#gridDetailInvoice').datagrid({
+				queryParams: {
+					custNama: row.customer_nama,
+					no_inv: row.no_inv,
+				}
+			});
+		},150)		
 	}
 </script>

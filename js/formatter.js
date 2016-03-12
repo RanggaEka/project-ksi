@@ -4,7 +4,7 @@ function onLoadBodyGrid() {
 	$('#gridLookupTandaTerima').datagrid({striped:$(this)})
 }
 
-function formatNumber(number) {
+function formatNumberX(number) {
     number = number.toFixed(2) + '';
     x = number.split('.');
     x1 = x[0];

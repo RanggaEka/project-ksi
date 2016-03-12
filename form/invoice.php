@@ -1,4 +1,10 @@
 <td width="156">&nbsp;</td>
+<div data-dojo-type="dojo/store/JsonRest"
+	 data-dojo-props="target: '../json/get_invoice_detail.php'"
+	 data-dojo-id="memoryInvoice"></div>
+<div data-dojo-type="dojo/data/ObjectStore"
+	 data-dojo-props="objectStore: memoryInvoice"
+	 data-dojo-id="storeGridInvoice"></div>
 <td>
 	<br>
 	<table width="80%" border="1" align="left" cellpadding="10" cellspacing="3" style="border: solid 1px #efefef;">
@@ -61,20 +67,11 @@
 					<button name="cetak_inv" id="cetak_inv" onclick="cetakInvoice()">Cetak</button>
 			    	<button type="submit" onclick="saveInvoice()" name="simpan_inv" id="simpan_inv">Save</button>
 					<button type="reset" onclick="releaseLocking()">Batal</button>	
-					<br/>
-					<div data-dojo-type="dojo/store/JsonRest"
-						 data-dojo-props="target: '../json/get_invoice_detail.php'"
-						 data-dojo-id="memoryInvoice"></div>
-					<div data-dojo-type="dojo/data/ObjectStore"
-						 data-dojo-props="objectStore: memoryInvoice"
-						 data-dojo-id="storeGridInvoice"></div>
-
 					<table id="gridDetailInvoice"
 						   data-dojo-id="gridDetailInvoice"
 						   data-dojo-type="dojox/grid/EnhancedGrid"
 						   selectionMode="single"
 						   clientSort="false"
-						   onclick=""
 						   store="storeGridInvoice"
 						   style="width: 100%;height:160px;"
 						   noDataMessage="..Entri Detail Invoice..">
@@ -127,20 +124,22 @@
 				</div>
 				<!--<LOOKUP>-->
 				
-				<br/>
-			    <table id="gridRekapInvoice" style="width:100%;height:190px" title="Rekap Invoice"
+				<table id="gridRekapInvoice" style="width:101%;height:190px" title="Rekap Invoice"
 						data-options="singleSelect:true,
 							collapsible:true,url:'../json/data-header-rekap-inv.php',
 							method:'get',
-							pagination:true" class="easyui-datagrid">
+							rownumbers:true,
+							pagination:true,
+							pageSize:20,
+							onSelect: function(){
+								rowClickEntriInvoice()
+							}" class="easyui-datagrid">
 				<thead>
 					<tr>
 						<th field="no_inv" width="15%">No Inv</th>
 						<th field="tanggal" width="10%">Tanggal Inv</th>
 						<th field="customer_nama" width="29%">Cust</th>
 						<th field="total" align="right" width="10%">Total</th>
-						<th field="cicilan" align="right" width="10%">Cicilan</th>
-						<th field="sisa" align="right" width="10%">Sisa</th>
 						<th field="keterangan" width="15%">Keterangan</th>
 					</tr>
 				</thead>
@@ -158,7 +157,7 @@
 	
 	
 	function cetakInvoice() {
-		window.open('../form/cetak_invoice.php?no_inv='+$('#no_inv').textbox('getValue'),'_blank');
+		window.open('../form/cetak_invoice.php?no_inv='+$('#no_inv').textbox('getText'),'_blank');
 	}
 	
 	function formatterLookupNoCN(value, index) {
@@ -387,6 +386,25 @@
 					}
 				}
 			});
+		}
+	}
+	
+	function rowClickEntriInvoice() {
+		var row = $('#gridRekapInvoice').datagrid('getSelected');
+		var tbl = dijit.byId('gridDetailInvoice')
+		if (row){
+			$('#no_inv').textbox('setText',row.no_inv)
+			$('#tgl_inv').datebox('setValue',row.tanggal)
+			$('#customer_inv').combo("setText",row.customer_nama)
+			$('#jatuh_tempo').datebox("setValue",row.jatuh_tempo)						
+			document.getElementById('cetak_inv').style.display = "inline-table"
+			document.getElementById('simpan_inv').style.display = "none"
+			setTimeout(function(){
+				tbl.setQuery({
+						custNama: row.customer_nama,
+						no_inv: row.no_inv
+					});
+			},150)
 		}
 	}
 </script>

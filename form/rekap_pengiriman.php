@@ -56,6 +56,7 @@
 				data-options="singleSelect:true,
 					collapsible:true,url:'../json/data-header-rekap-invoice.php',
 					method:'get',
+					rownumbers:true,
 					toolbar:'#tb',
 					pagination:true" class="easyui-datagrid">
 				  <thead>

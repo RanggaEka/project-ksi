@@ -36,6 +36,7 @@
 							collapsible:true,url:'../json/data-header-rekap-inv.php',
 							method:'get',
 							toolbar:'#tbInv',
+							rownumbers:true,
 							pagination:true" class="easyui-datagrid">
 				<thead>
 					<tr>

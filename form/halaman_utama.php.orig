@@ -151,6 +151,10 @@
                         include 'user_active.php';
                     } elseif ($_GET['page'] == "db") {
                         include 'db.php';
+                    } elseif ($_GET['page'] == "mastercustomer") {
+                        include 'master_customer.php';
+                    } elseif ($_GET['page'] == "masteragent") {
+                        include 'master_agent.php';
                     } else {
                         echo '<td colspan="2"><br/><br/><br/><br/><h2>KIKI SOLUSI INTERNUSA</h2></td>';
                     }
@@ -187,8 +191,13 @@
 </script-->
 <script type="text/javascript">
 	$.idleTimeout('#idletimeout', '#idletimeout a', {
+<<<<<<< HEAD
 		idleAfter: 5,
 		pollingInterval: 5,
+=======
+		idleAfter: 300,
+		pollingInterval: 2,
+>>>>>>> f60ea7f1259624f7640226b2e44acc540956a204
 		keepAliveURL: '../form/halaman_utama.php?page=home',
 		serverResponseEquals: 'OK',
 		onTimeout: function(){

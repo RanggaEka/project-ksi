@@ -92,21 +92,21 @@
 						{field:'no_cn',title:'No CN',width:40,rowspan:2},
 						{field:'tujuan',title:'Tujuan',width:100,rowspan:2},
 						{field:'service',title:'Service',align:'center',width:80,colspan:3},
-						{field:'total',title:'Total',align:'center',width:40,colspan:3},
-						{field:'invoice',title:'Invoice',align:'center',width:40,colspan:4}
+						{field:'total',title:'Total',align:'center',width:80,colspan:3},
+						{field:'invoice',title:'Invoice',align:'center',width:80,colspan:4}
 					],[
-						{field:'service_udl',title:'U/D/L',width:20,align:'center'},
-						{field:'service_dtddtp',title:'DTD/DTP',width:36,align:'center'},
-						{field:'service_agent',title:'Agent',width:30,align:'center'},
+						{field:'service_udl',title:'U/D/L',align:'center'},
+						{field:'service_dtddtp',title:'DTD/DTP',align:'center'},
+						{field:'service_agent',title:'Agent',align:'center'},
 					
-						{field:'total_coll',title:'Coll',width:10,align:'center'},
-						{field:'total_berat',title:'KG',width:10,align:'center'},
-						{field:'total_vol',title:'Vol/M3',width:15,align:'center'},
+						{field:'total_coll',title:'Coll',align:'center'},
+						{field:'total_berat',title:'KG',align:'center'},
+						{field:'total_vol',title:'Vol/M3',align:'center'},
 						
-						{field:'service_agent',title:'Agent',width:30,align:'center'},
-						{field:'total_coll',title:'Coll',width:10,align:'center'},
-						{field:'total_berat',title:'KG',width:10,align:'center'},
-						{field:'total_vol',title:'Vol/M3',width:15,align:'center'}
+						{field:'service_agent',title:'Agent',align:'center'},
+						{field:'total_coll',title:'Coll',align:'center'},
+						{field:'total_berat',title:'KG',align:'center'},
+						{field:'total_vol',title:'Vol/M3',align:'center'}
 					]],
 					onResize:function(){
 						$('#gridRekapInvoice').datagrid('fixDetailRowHeight',index);

@@ -180,7 +180,7 @@
 </script-->
 <script type="text/javascript">
 	$.idleTimeout('#idletimeout', '#idletimeout a', {
-		idleAfter: 5,
+		idleAfter: 300,
 		pollingInterval: 2,
 		keepAliveURL: '../form/halaman_utama.php?page=home',
 		serverResponseEquals: 'OK',

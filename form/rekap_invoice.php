@@ -36,16 +36,17 @@
 							collapsible:true,url:'../json/data-header-rekap-inv.php',
 							method:'get',
 							toolbar:'#tbInv',
+							rownumbers:true,
 							pagination:true" class="easyui-datagrid">
 				<thead>
 					<tr>
-						<th field="no_inv" style="width:15%">No Inv</th>
-						<th field="tanggal" style="width:10%">Tanggal Inv</th>
-						<th field="customer_nama" style="width:29%">Cust</th>
-						<th field="total" align="right" style="width:10%">Total</th>
-						<th field="cicilan" align="right" style="width:10%">Cicilan</th>
-						<th field="sisa" align="right" style="width:10%">Sisa</th>
-						<th field="keterangan" style="width:15%">Keterangan</th>
+						<th field="no_inv" width="15%">No Inv</th>
+						<th field="tanggal" width="10%">Tanggal Inv</th>
+						<th field="customer_nama" width="29%">Cust</th>
+						<th field="total" align="right" width="10%">Total</th>
+						<th field="cicilan" align="right" width="10%">Cicilan</th>
+						<th field="sisa" align="right" width="10%">Sisa</th>
+						<th field="keterangan" width="15%">Keterangan</th>
 					</tr>
 				</thead>
 			</table>

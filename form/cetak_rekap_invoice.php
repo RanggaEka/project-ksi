@@ -97,6 +97,7 @@ body {padding:0px}
 		where 
 		ih.no_inv in (select ih.no_inv from invoice_detail)
 		$param1 $param1 $param1
+		group by tt.pengirim
 		order by ih.no_inv asc";
 
     $count = 0;    
@@ -115,19 +116,69 @@ body {padding:0px}
               <tr>
 				<td align="center"><?php echo $count; ?></td>                
                 <td align="left"><?php echo $arrResult['pengirim']; ?></td>
-				<td align="center"><?php echo $arrResult['tgl_tanda_terima']; ?> </td>
-                <td align="center"><?php echo $arrResult['no_cn']; ?> </td>
-				<td align="center"><?php echo number_format($arrResult['total_coll']); ?></td>
-                <td align="center"><?php echo number_format($arrResult['total_berat']); ?></td>
-                <td align="center"><?php echo number_format($arrResult['total_vol']); ?> </td>
-				<td align="center"><?php echo $arrResult['tgl_inv']; ?> </td>
-				<td align="center"><?php echo $arrResult['no_inv']; ?> </td>				
-				<td align="right"><?php echo number_format($arrResult['grand_total']); ?> </td>
-				<td align="center"><?php echo $arrResult['jatuh_tempo_inv']; ?> </td>
-				<td align="center"><?php echo $arrResult['tgl_pembayaran']; ?> </td>			
-				<td align="center"><?php echo $arrResult['keterangan']; ?> </td>
+				<td align="center">&nbsp;</td>
+                <td align="center">&nbsp;</td>
+				<td align="center">&nbsp;</td>
+                <td align="center">&nbsp;</td>
+                <td align="center">&nbsp;</td>
+				<td align="center">&nbsp;</td>
+				<td align="center">&nbsp;</td>				
+				<td align="right">&nbsp;</td>
+				<td align="center">&nbsp;</td>
+				<td align="center">&nbsp;</td>			
+				<td align="center">&nbsp;</td>
               </tr>
-<?php } ?>      
+              
+              <?php
+				$strQueryChild = "select  
+					ih.no_inv as no_inv,
+					ih.tanggal as tgl_inv,
+					ih.total as total_inv,
+					ih.cicilan as cicilan_inv,
+					ih.sisa as sisa_inv,
+					ih.jatuh_tempo as jatuh_tempo_inv,
+					ih.keterangan as keterangan,
+					id.no_inv as no_inv_detail,
+					tt.tarif as tarif_inv,
+					tt.no_cn as no_cn,
+					tt.tanggal as tgl_tanda_terima,
+					tt.tujuan as tujuan,
+					tt.penerima as penerima,
+					tt.pengirim as pengirim,
+					tt.service_udl as service_udl,
+					tt.service_dtddtp as service_dtddtp,
+					tt.service_agent as service_agent,
+					tt.total_coll as total_coll,
+					tt.total_berat as total_berat,
+					tt.total_vol as total_vol,
+					tt.grand_total as grand_total,
+					(SELECT MAX(tanggal) FROM  invoice_pembayaran where no_inv = ih.no_inv) as tgl_pembayaran
+					
+					from invoice_header ih 
+					inner join invoice_detail id on ih.no_inv = id.no_inv
+					inner join tanda_terima tt on id.tanda_terima_sid = tt.sid 
+					where 
+					tt.pengirim = '".$arrResult['pengirim']."'
+					order by ih.no_inv asc";
+					$resultChild = mysql_query($strQueryChild) or die(mysql_error());
+					while($arrResultChild = mysql_fetch_array($resultChild)) {
+              ?>
+              <tr>
+				<td align="center">&nbsp;</td>                
+                <td align="left"><?php echo $arrResultChild['pengirim']; ?></td>
+				<td align="center"><?php echo $arrResultChild['tgl_tanda_terima']; ?> </td>
+                <td align="center"><?php echo $arrResultChild['no_cn']; ?> </td>
+				<td align="center"><?php echo number_format($arrResultChild['total_coll']); ?></td>
+                <td align="center"><?php echo number_format($arrResultChild['total_berat']); ?></td>
+                <td align="center"><?php echo number_format($arrResultChild['total_vol']); ?> </td>
+				<td align="center"><?php echo $arrResultChild['tgl_inv']; ?> </td>
+				<td align="center"><?php echo $arrResultChild['no_inv']; ?> </td>				
+				<td align="right"><?php echo number_format($arrResultChild['grand_total']); ?> </td>
+				<td align="center"><?php echo $arrResultChild['jatuh_tempo_inv']; ?> </td>
+				<td align="center"><?php echo $arrResultChild['tgl_pembayaran']; ?> </td>			
+				<td align="center"><?php echo $arrResultChild['keterangan']; ?> </td>
+              </tr>
+<?php } } ?>      
             </table></td>
           </tr>
         </table>

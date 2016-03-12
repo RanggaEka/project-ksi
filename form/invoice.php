@@ -1,4 +1,10 @@
 <td width="156">&nbsp;</td>
+<div data-dojo-type="dojo/store/JsonRest"
+	 data-dojo-props="target: '../json/get_invoice_detail.php'"
+	 data-dojo-id="memoryInvoice"></div>
+<div data-dojo-type="dojo/data/ObjectStore"
+	 data-dojo-props="objectStore: memoryInvoice"
+	 data-dojo-id="storeGridInvoice"></div>
 <td>
 	<br>
 	<table width="80%" border="1" align="left" cellpadding="10" cellspacing="3" style="border: solid 1px #efefef;">
@@ -36,6 +42,18 @@
 											formatter: formatItem,
 											onSelect: function(rec){
 												onLockingData(rec.nama,'INVOICE')
+												dijit.byId('gridDetailInvoice').setQuery({no_query : 'XXXXX'});
+												setTimeout(function(){
+													dijit.byId('gridDetailInvoice').store.newItem({
+														sid : '',
+														no_cn : '',
+														lookup : '',
+														tanggal : '',
+														tujuan : '',
+														grand_total : '',
+														delete : ''
+													})													
+												},100)
 											}
 									">			         	
 								</td>
@@ -49,114 +67,136 @@
 					<button name="cetak_inv" id="cetak_inv" onclick="cetakInvoice()">Cetak</button>
 			    	<button type="submit" onclick="saveInvoice()" name="simpan_inv" id="simpan_inv">Save</button>
 					<button type="reset" onclick="releaseLocking()">Batal</button>	
-					<br/><br/>
-					           		
-					<table id="detail_invoice_ui" class="easyui-datagrid" title="" style="width:98%;height:250px;"
-						data-options="singleSelect:true,collapsible:true,url:'../json/get_invoice_detail.php',method:'get'">
+					<table id="gridDetailInvoice"
+						   data-dojo-id="gridDetailInvoice"
+						   data-dojo-type="dojox/grid/EnhancedGrid"
+						   selectionMode="single"
+						   clientSort="false"
+						   store="storeGridInvoice"
+						   style="width: 100%;height:160px;"
+						   noDataMessage="..Entri Detail Invoice..">
+						<thead>
+							<tr>
+								<th noresize="true" field="sid" hidden></th>&nbsp;</th>
+								<th width="50%" noresize="true" field="no_cn">No CN</th>
+								<th noresize="true" formatter="formatterLookupNoCN" width="3%">&nbsp;</th>
+								<th width="10%" noresize="true" field="tanggal">Tanggal</th>
+								<th width="40%" noresize="true" field="tujuan">Tujuan</th>
+								<th width="15%" noresize="true" field="grand_total">Total</th>
+								<th noresize="true" formatter="formatterDeleteRow" width="3%">&nbsp;</th>
+							</tr>
+						</thead>
+					</table>
+			    <!--</form>-->
+			    
+			    <!--<LOOKUP>-->
+			    <div id="lookupinvoice" class="easyui-window" title="Lookup Tanda Terima" data-options="modal:true,closed:true,iconCls:'icon-save'" style="width:70%;height:330px;padding:10px; text-align:left;">
+					Pencarian : <input id="searchBoxLookupTandaInvoice" class="easyui-searchbox" data-options="prompt:'.......',menu:'#mm',searcher:doSearchRekapLookupTandaTerima" style="width:480px;height:25px;padding:10px;"></input>
+					<br/>
+					<br/>
+					<div id="mm">
+						<div data-options="name:'semua'">Semua</div>
+						<div data-options="name:'cn'">CN</div>
+						<div data-options="name:'tanggal'">Tanggal</div>
+						<div data-options="name:'tujuan'">Tujuan</div>
+					</div>
+					<table id="gridLookupTandaTerima" class="easyui-datagrid" title="" style="width:99%;height:190px"
+						data-options="rownumbers:true,
+						singleSelect:true,
+						collapsible:true,url:'../json/get_tanda_terima.php',
+						method:'get',
+						onDblClickRow:function(){
+							selectDetailTandaTerima()
+						}">
 						<thead>
 						<tr>
-							<th style="width:15%" data-options="field:'no_cn'">No CN</th>
-							<th style="width:10%" data-options="field:'tanggal'">Tanggal</th>
-							<th style="width:50%" data-options="field:'tujuan'">Tujuan</th>
-							<th style="width:15%" data-options="field:'total'">Total</th>
+							<th width="13%" data-options="field:'no_cn'">No CN </th>
+							<th width="13%" data-options="field:'tanggal'">Tanggal</th>
+							<th width="55%" data-options="field:'tujuan'">Tujuan</th>
+							<th width="15%" data-options="field:'grand_total'" formatter="formatPrice">Total</th>
 						</tr>
 						</thead>
 					</table>
-					<div style="width:100%; height:25px; background:#ADE5F7;padding:3px;">Invoice Detail</div>
-	    			<table id="detail_invoice" border=0 width="100%">
-						<style>
-							.cTh {border:1px solid #CCCCCC;}
-						</style>
-                        <thead>
-                        <tr style="background:#ADE5F7;">
-                            <th class="cTh" width="15px" height="30px">No</th>
-                            <th class="cTh" width="120px">No CN <font color='red'>*</font></th>
-                            <th class="cTh" width="25px">&nbsp;</th>
-                            <th class="cTh" width="70px">Tanggal</th>
-                            <th class="cTh" width="330px">Tujuan</th>
-							<th class="cTh" width="100px">Total</th>
-                        </tr>
-                        </thead>
-						<style>
-							
-						</style>
-                        <tbody style="border:1px solid #CCCCCC; max-height: 60px;overflow: auto;">
-                    	<tr>
-                        	<td><input type="text" disabled style="width:100%;height:25px;padding:1px;text-align:center;" id="no1" name="no1"/></td>
-                        	<td><input style="width:100%;height:25px;padding:1px" id="no_cn1" name="no_cn1"/></td>
-                        	<td>
-								<div style="width:100%; text-align:center;">
-								<a id="btnLookup1" href="javascript:void(0)" onclick="showLookupTandaTerima()"><img src="../images/famfam/application_xp.png" /></a>
-								</div>
-                                    <div id="lookupinvoice" class="easyui-window" title="Lookup Tanda Terima" data-options="modal:true,closed:true,iconCls:'icon-save'" style="width:70%;height:320px;padding:10px; text-align:left;">
-                                        Pencarian : <input id="searchBoxLookupTandaInvoice" class="easyui-searchbox" data-options="prompt:'.......',menu:'#mm',searcher:doSearchRekapLookupTandaTerima" style="width:480px;height:25px;padding:10px;"></input>
-                                        <br/>
-                                        <br/>
-                                        <div id="mm">
-                                            <div data-options="name:'semua'">Semua</div>
-                                            <div data-options="name:'cn'">CN</div>
-                                            <div data-options="name:'tanggal'">Tanggal</div>
-                                            <div data-options="name:'tujuan'">Tujuan</div>
-                                        </div>
-                                        <table id="gridLookupTandaTerima" class="easyui-datagrid" title="" style="width:98%;height:180px"
-									data-options="rownumbers:true,
-									singleSelect:true,
-									collapsible:true,url:'../json/get_tanda_terima.php',
-									method:'get',
-									onDblClickRow:function(){
-										selectDetailTandaTerima()
-									}">
-									<thead>
-									<tr>
-										<th style="width:13%" data-options="field:'no_cn'">No CN </th>
-										<th style="width:13%" data-options="field:'tanggal'">Tanggal</th>
-										<th style="width:55%" data-options="field:'tujuan'">Tujuan</th>
-										<th style="width:15%" data-options="field:'grand_total'" formatter="formatPrice">Total</th>
-									</tr>
-									</thead>
-								</table>
-                                        <br/>
-                                        <div style="float:right;">
-											<button type="submit" onclick="selectDetailTandaTerima()">Pilih</button>
-										</div>
-                                    </div>
-                        	</td>
-                        	<td><input type="text" disabled style="width:100%;height:25px;padding:1px" id="tanggal1" name="tanggal1"/></td>
-                        	<td><input type="text" disabled style="width:100%;height:25px;padding:1px" id="tujuan1" name="tujuan1"/></td>
-                        	<td>
-								<input disabled style="width:100%;height:25px;padding:1px" id="total1" name="total1" />
-								<input disabled style="width:100%;height:25px;padding:1px" id="sid1" name="sid1" hidden />
-                        	</td>
-                        </tr>
-                        </tbody>
-                    </table>
-			    <!--</form>-->
+					<br/>
+					<div style="float:right;">
+						<button type="submit" onclick="selectDetailTandaTerima()">Pilih</button>
+					</div>
+				</div>
+				<!--<LOOKUP>-->
+				
+				<table id="gridRekapInvoice" style="width:101%;height:190px" title="Rekap Invoice"
+						data-options="singleSelect:true,
+							collapsible:true,url:'../json/data-header-rekap-inv.php',
+							method:'get',
+							rownumbers:true,
+							pagination:true,
+							pageSize:20,
+							onSelect: function(){
+								rowClickEntriInvoice()
+							}" class="easyui-datagrid">
+				<thead>
+					<tr>
+						<th field="no_inv" width="15%">No Inv</th>
+						<th field="tanggal" width="10%">Tanggal Inv</th>
+						<th field="customer_nama" width="29%">Cust</th>
+						<th field="total" align="right" width="10%">Total</th>
+						<th field="keterangan" width="15%">Keterangan</th>
+					</tr>
+				</thead>
 			</td>
 	    </tr>
 	</table>
 </td>
 
 <script type="text/javascript">
-	document.getElementById('cetak_inv').style.display = "none";	
+	var tblIndex = "";
+	document.getElementById('cetak_inv').style.display = "none";
+	setTimeout(function() {
+		dijit.byId('gridDetailInvoice').setQuery({no_query : 'XXXXX'});
+	},100)
+	
+	
 	function cetakInvoice() {
-		window.open('../form/cetak_invoice.php?no_inv='+$('#no_inv').textbox('getValue'),'_blank');
+		window.open('../form/cetak_invoice.php?no_inv='+$('#no_inv').textbox('getText'),'_blank');
 	}
 	
-	var tblIndex = "";
-	function showLookupTandaTerima() {
+	function formatterLookupNoCN(value, index) {
+		tblIndex = index
+		var tbl = dijit.byId('gridDetailInvoice')
+		var getSID = tbl.getItem(index).sid
+		if (getSID != "") {
+			return ""
+		} else {
+			return "<a id='btnLookup"+index+"' href='javascript:void(0)' onclick='showLookupTandaTerima("+index+")'><img src='../images/famfam/application_xp.png' /></a>"
+		}
+	}
+	
+	function formatterDeleteRow(value, index) {
+		var tbl = dijit.byId('gridDetailInvoice')
+		var getSID = tbl.getItem(index).sid
+		if (getSID == "") {
+			return ""
+		} else {
+			if (tbl.getItem(index).is_sudah_invoice) {
+				return ""
+			} else {
+				return "<a id='btnDeleteLookup"+index+"' href='javascript:void(0)' onclick='deleteRowTandaTerima("+index+")'><img src='../images/famfam/delete.png' /></a>"
+			}
+		}
+	}
+	
+	function showLookupTandaTerima(index) {
 		if ($('#customer_inv').combo('getText') != "") {
-			$('#detail_invoice').find('tr').click( function(){
-				tblIndex = ($(this).index()+1);
-			});
-			
 			setTimeout(function(){
 				$('#lookupinvoice').window('open')
 				$('#searchBoxLookupTandaInvoice').searchbox('clear');
-				var count = document.getElementById("detail_invoice").rows.length;
+				var tbl = dijit.byId('gridDetailInvoice')
+				var count = dijit.byId('gridDetailInvoice').rowCount
 				var dataSelected = []
-				for (var i = 1; i < count-1; i++) {
-					if ($("#sid"+i).val() != "") {
-						dataSelected.push("'"+$("#sid"+i).val()+"'")
+				for (var i = 0; i < count; i++) {
+					var getSID = tbl.getItem(i).sid
+					if (getSID != "") {
+						dataSelected.push("'"+getSID+"'")
 					}
 				}
 				
@@ -173,54 +213,35 @@
 	}
 	
 	function deleteRowTandaTerima() {
-		$('#detail_invoice').find('tr').click( function(){
-			tblIndex = ($(this).index()+1);
-		});
-		setTimeout(function(){
-			document.getElementById("detail_invoice").deleteRow(tblIndex);
-		},100)
+		var tbl = dijit.byId('gridDetailInvoice')
+		tbl.removeSelectedRows();
 	}
 	
-	function selectDetailTandaTerima(){
+	function selectDetailTandaTerima(e){
+		var tbl = dijit.byId('gridDetailInvoice')
 		var row = $('#gridLookupTandaTerima').datagrid('getSelected');
 		if (row){
 			//$("#no_cn"+tblIndex).textbox('setValue', row.no_cn);
-			document.getElementById("sid"+tblIndex).value = row.sid
-			document.getElementById("no"+tblIndex).value = tblIndex 
-			document.getElementById("no_cn"+tblIndex).value = row.no_cn 
-			document.getElementById("tanggal"+tblIndex).value = row.tanggal 
-			document.getElementById('tujuan'+tblIndex).value = row.tujuan 
-			document.getElementById('total'+tblIndex).value = formatNumber(row.grand_total)
-			//$('#tanggal').textbox('setValue', row.tanggal);
-			//$('#pengirim').textbox('setValue', row.pengirim);
-			//$('#tujuan').textbox('setValue', row.tujuan);
-			//$('#total').textbox('setValue', row.grand_total);
-			//$('#tt_sid').textbox('setValue', row.sid);
-			
-			var table = document.getElementById("detail_invoice");
-			var count = document.getElementById("detail_invoice").rows.length;
-			var table = document.getElementById("detail_invoice");
-			var newRow = table.insertRow(count);
-			
-			var cell1 = newRow.insertCell(0);
-			var cell2 = newRow.insertCell(1);
-			var cell3 = newRow.insertCell(2);
-			var cell4 = newRow.insertCell(3);
-			var cell5 = newRow.insertCell(4);
-			var cell6 = newRow.insertCell(5);
-			//var cell7 = newRow.insertCell(6);
-			
-			cell1.innerHTML = "<input type='text' disabled style='width:100%;height:25px;padding:1px;text-align:center;' id='no"+(tblIndex + 1)+"' name='no"+(tblIndex + 1)+"'/>";
-			cell2.innerHTML = "<input style='width:100%;height:25px;padding:1px' id='no_cn"+(tblIndex + 1)+"' name='no_cn"+(tblIndex + 1)+"'/>";
-			cell3.innerHTML = "<div style='width:100%; text-align:center;'> <a id='btnLookup"+(tblIndex + 1)+"' href='javascript:void(0)' class='easyui-linkbutton' onclick='showLookupTandaTerima()'><img src='../images/famfam/application_xp.png' /></a></div>";
-			cell4.innerHTML = "<input type='text' disabled style='width:100%;height:25px;padding:1px' id='tanggal"+(tblIndex + 1)+"' name='tanggal"+(tblIndex + 1)+"'/>";
-			cell5.innerHTML = "<input type='text' disabled style='width:100%;height:25px;padding:1px' id='tujuan"+(tblIndex + 1)+"' name='tujuan"+(tblIndex + 1)+"'/>";
-			cell6.innerHTML = "<input disabled style='width:100%;height:25px;padding:1px' id='total"+(tblIndex + 1)+"' name='total"+(tblIndex + 1)+"'>" + 
-							  "<input hidden disabled style='width:100%;height:25px;padding:1px' id='sid"+(tblIndex + 1)+"' name='sid"+(tblIndex + 1)+"'>";
-			//cell7.innerHTML = "<div style='width:100%; text-align:center;'> <a id='btnDelete"+(count+1)+"' style='visibility:hidden;' href='javascript:void(0)' class='easyui-linkbutton' onclick='deleteRowTandaTerima()'><img src='../images/famfam/delete.png' /></a></div>";
+			tbl.getItem(tblIndex).sid = row.sid
+			tbl.getItem(tblIndex).no_cn = row.no_cn
+			tbl.getItem(tblIndex).tanggal = row.tanggal
+			tbl.getItem(tblIndex).tujuan = row.tujuan
+			tbl.getItem(tblIndex).grand_total = row.grand_total
 			
 			setTimeout(function(){
-				document.getElementById("btnLookup"+tblIndex).style.visibility = 'hidden'  
+				tbl.store.newItem({
+					sid : '',
+					no_cn : '',
+					lookup : '',
+					tanggal : '',
+					tujuan : '',
+					grand_total : '',
+					delete : ''
+				})													
+			},100)
+			
+			setTimeout(function(){
+				tbl.updateRowCount(tbl.rowCount);
 			},200)
 			$('#lookupinvoice').window('close')			
 		
@@ -230,11 +251,13 @@
 	}
 	
 	function doSearchRekapLookupTandaTerima(value,name){
-		var count = document.getElementById("detail_invoice").rows.length;
+		var tbl = dijit.byId('gridDetailInvoice')
+		var count = dijit.byId('gridDetailInvoice').rowCount
 		var dataSelected = []
-		for (var i = 1; i < count; i++) {
-			if ($("#sid"+i).val() != "") {
-				dataSelected.push("'"+$("#sid"+i).val()+"'")
+		for (var i = 0; i < count; i++) {
+			var getSID = tbl.getItem(i).sid
+			if (getSID != "") {
+				dataSelected.push("'"+getSID+"'")
 			}
 		}
 		
@@ -273,16 +296,17 @@
 	}
 	
 	function saveInvoice() {
+		var tbl = dijit.byId('gridDetailInvoice')
 		var objDtl = []
 		var dtl = {}
-		var count = document.getElementById("detail_invoice").rows.length;
+		var count = tbl.rowCount;
 		if ($('#no_inv').textbox('getValue') != "" && $('#tgl_inv').datebox('getValue') != ""
 			&& $('#customer_inv').textbox('getValue') != ""){	
 
-			for (var i = 1; i < count-1; i++) {
-				if (document.getElementById("sid"+i).value != "") {
+			for (var i = 0; i < count; i++) {
+				if (tbl.getItem(i).sid != "") {
 					dtl = {
-						sid :  document.getElementById("sid"+i).value
+						sid :  tbl.getItem(i).sid
 					}
 					objDtl.push(dtl)
 				}
@@ -330,6 +354,7 @@
 	}
 	
 	function searchNoInv(value){
+		var tbl = dijit.byId('gridDetailInvoice')
 		if (value == "") {
 			//alert('Data tidak ditemukan !')
 			$.messager.alert('Peringatan', 'No Invoice Masih Kosong !', 'warning');			
@@ -352,19 +377,34 @@
 						$('#jatuh_tempo').datebox("setValue",dataa[0].jatuh_tempo)						
 						document.getElementById('cetak_inv').style.display = "inline-table"
 						document.getElementById('simpan_inv').style.display = "none"
-						document.getElementById('detail_invoice').style.display = "none"
-						$('#detail_invoice_ui').datagrid("getPanel").css("display","block")
 						setTimeout(function(){
-							$('#detail_invoice_ui').datagrid({
-								queryParams: {
+							tbl.setQuery({
 									custNama: dataa[0].customer_nama,
-									no_inv: dataa[0].no_inv,
-								}
-							});
+									no_inv: dataa[0].no_inv
+								});
 						},150)
 					}
 				}
 			});
+		}
+	}
+	
+	function rowClickEntriInvoice() {
+		var row = $('#gridRekapInvoice').datagrid('getSelected');
+		var tbl = dijit.byId('gridDetailInvoice')
+		if (row){
+			$('#no_inv').textbox('setText',row.no_inv)
+			$('#tgl_inv').datebox('setValue',row.tanggal)
+			$('#customer_inv').combo("setText",row.customer_nama)
+			$('#jatuh_tempo').datebox("setValue",row.jatuh_tempo)						
+			document.getElementById('cetak_inv').style.display = "inline-table"
+			document.getElementById('simpan_inv').style.display = "none"
+			setTimeout(function(){
+				tbl.setQuery({
+						custNama: row.customer_nama,
+						no_inv: row.no_inv
+					});
+			},150)
 		}
 	}
 </script>

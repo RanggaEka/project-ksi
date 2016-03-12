@@ -2,11 +2,9 @@ function onLoadBodyGrid() {
 	$('#gridFormTandaTerima').datagrid({striped:$(this)})
 	$('#gridTandaTerima').datagrid({striped:$(this)})
 	$('#gridLookupTandaTerima').datagrid({striped:$(this)})
-	$('#gridDetailInvoice').datagrid({striped:$(this)})
-	$('#detail_invoice_ui').datagrid("getPanel").css("display","none")
 }
 
-function formatNumber(number) {
+function formatNumberX(number) {
     number = number.toFixed(2) + '';
     x = number.split('.');
     x1 = x[0];

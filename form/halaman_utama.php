@@ -47,7 +47,7 @@
 	<script src="../js/jquery.idletimer.js" type="text/javascript"></script>
 	<script src="../js/jquery.idletimeout.js" type="text/javascript"></script>
 	
-
+	<link rel="stylesheet" href="../lib/dojo.1.10/dojox/grid/enhanced/resources/claro/EnhancedGrid.css">
 	<script>
 		dojoConfig = {
 			parseOnLoad: true,
@@ -96,7 +96,7 @@
                  <div id="mm3admin" style="width:230px;">
 					<div><a href="?page=kelolaadmin">Kelola Admin</a></div>
 					<div><a href="?page=useractive">User Aktif</a></div>
-					<div><a href="?page=db">Database</a></div>
+					<!--<div><a href="?page=db">Database</a></div>-->
 				</div>
 				<?php } ?>
 			</div>

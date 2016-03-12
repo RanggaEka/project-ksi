@@ -91,12 +91,12 @@
 					">
 						<thead>
 							<tr>																
-								<th data-options="field:'nama',width:100">Nama</th>
-								<th data-options="field:'jenis_kelamin',width:80">Jenis Kelamin</th>
-								<th data-options="field:'tempat',width:100">Tempat</th>
-								<th data-options="field:'tanggal_lahir',width:100">Tanggal Lahir</th>
-								<th data-options="field:'alamat',width:200">Alamat</th>
-								<th data-options="field:'jabatan',width:50">Jabatan</th>								
+								<th width="20%" data-options="field:'nama'">Nama</th>
+								<th width="20%" data-options="field:'jenis_kelamin'">Jenis Kelamin</th>
+								<th width="20%" data-options="field:'tempat'">Tempat</th>
+								<th width="20%" data-options="field:'tanggal_lahir'">Tanggal Lahir</th>
+								<th width="20%" data-options="field:'alamat'">Alamat</th>
+								<th width="20%" data-options="field:'jabatan'">Jabatan</th>								
 							</tr>
 						</thead>
 					</table>

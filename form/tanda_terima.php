@@ -15,7 +15,7 @@
                                 <td width="99%" rowspan="5" valign="top">
                                     <!--SERVICE-->
                                     Service <font color='red'>*</font> :
-                                    <table width="28%" border="1" cellpadding="2" cellspacing="0" style="border:1px solid #CCCCCC;">
+                                    <table width="28%" border="0" cellpadding="2" cellspacing="0" style="border:1px solid #CCCCCC;">
                                         <tr>
 											<td width="30">U/D/L</td>
                                             <td valign="middle">
@@ -55,13 +55,13 @@
 									</table>
                                     <!--AKUMULASI-->
                                     Akumulasi <font color='red'>*</font> :
-									<table width="100%" border="1" cellpadding="2" cellspacing="0" style="border:1px solid #CCCCCC;">
+									<table width="100%" border="0" cellpadding="2" cellspacing="0" style="border:1px solid #CCCCCC;">
 										<tr>
 											<td width="30" valign="middle">Coll</td>
 											<td width="40" valign="middle">
 										  <input name="coll" id="coll" type="text" value="1" class="easyui-numberbox" style="width:80px;height:25px;padding:8px" data-options="prompt:'Coll'"> </td>
 											<td width="20" valign="middle">Berat</td>
-											<td width="40" valign="middle"><input name="kg" id="kg" type="text" value="1" class="easyui-numberbox" precision="2" 
+											<td width="40" valign="middle"><input name="kg" id="kg" type="text" value="1" class="easyui-textbox" 
 																				style="width:60px;height:25px;padding:8px" 
 																				data-options="prompt:'Berat',onChange: function(value){
 																				var tarif = parseInt($('#tarif').textbox('getValue'))
@@ -107,10 +107,9 @@
 										<tr>
 											<td valign="middle" >Tarif</td>
 										  <td valign="middle" ><input name="tarif" id="tarif" type="text" 
-																	value="0" class="easyui-numberbox" min="0" 
-																	precision="0" style="width:80px;height:25px;padding:8px" 
+																	value="0" class="easyui-textbox" style="width:80px;height:25px;padding:8px" 
 																	data-options="prompt:'Tarif',onChange: function(value){
-																	var tarif = parseInt($('#tarif').textbox('getValue'))
+																				var tarif = parseInt($('#tarif').textbox('getValue'))
 																				var kg = parseInt($('#kg').textbox('getValue'))
 																				var vol = parseInt($('#vol').textbox('getValue'))
 																				var biaya = parseInt($('#biaya').textbox('getValue'))
@@ -129,12 +128,12 @@
 																				},formatter:function(val) {
 																					return formatTruncateNumber(val,true)
 																				}">											
-											</td>
+																		</td>
 											<td valign="middle">Asuransi</td>
-											<td valign="middle"><input name="asuransi" id="asuransi" type="text" value="0" class="easyui-numberbox" 
-																	min="0" precision="0" style="width:80px;height:25px;padding:8px" 
+											<td valign="middle"><input name="asuransi" id="asuransi" type="text" value="0" class="easyui-textbox" 
+																	style="width:80px;height:25px;padding:8px" 
 																	data-options="prompt:'Asuransi',onChange: function(value){
-																	var tarif = parseInt($('#tarif').textbox('getValue'))
+																				var tarif = parseInt($('#tarif').textbox('getValue'))
 																				var kg = parseInt($('#kg').textbox('getValue'))
 																				var vol = parseInt($('#vol').textbox('getValue'))
 																				var biaya = parseInt($('#biaya').textbox('getValue'))
@@ -152,11 +151,10 @@
 																				$('#total').textbox('setValue',formatTruncateNumber(ttl,true))
 																				},formatter:function(val) {
 																					return formatTruncateNumber(val,true)
-																				}">											
-											</td>
+																				}">											</td>
 											<td valign="middle" bgcolor="#ADE5F7">Pack. Kayu</td>
-											<td valign="middle" bgcolor="#ADE5F7"><input name="packing_kayu" id="packing_kayu" type="text" value="0" class="easyui-numberbox" 
-																	min="0" precision="0" style="width:80px;height:25px;padding:8px" 
+											<td valign="middle" bgcolor="#ADE5F7"><input name="packing_kayu" id="packing_kayu" type="text" value="0" class="easyui-textbox" 
+																	style="width:80px;height:25px;padding:8px" 
 																	data-options="prompt:'Packing Kayu',onChange: function(value){													
 																	var tarif = parseInt($('#tarif').textbox('getValue'))
 																				var kg = parseInt($('#kg').textbox('getValue'))
@@ -176,22 +174,19 @@
 																				$('#total').textbox('setValue',formatTruncateNumber(ttl,true))
 																	},formatter:function(val) {
 																		return formatTruncateNumber(val,true)
-																	}">											
-											</td>
+																	}">											</td>
 										<tr>
 											<td colspan="4" rowspan="3" valign="middle">
 											Deskripsi Paket <font color='red'>*</font>
                                             <table width="100%" border="0" cellpadding="2" cellspacing="1" >
                                         <tr>
                                             <td valign="top">
-                                                <input name="deskripsi" id="deskripsi" class="easyui-textbox" data-options="multiline:true,prompt:'Deskripsi Paket'" style="width:100%;height:70px;padding:8px">
-                                            </td>
+                                                <input name="deskripsi" id="deskripsi" class="easyui-textbox" data-options="multiline:true,prompt:'Deskripsi Paket'" style="width:100%;height:70px;padding:8px">                                            </td>
                                       <tr/>
-                                    </table>
-										  </td>
+                                    </table>										  </td>
 										  <td valign="middle" bgcolor="#ADE5F7">Biaya Lainnya</td>
-										  <td valign="middle" bgcolor="#ADE5F7"><input name="biaya" id="biaya" type="text" value="0" class="easyui-numberbox" min="0" 
-																	precision="0" style="width:80px;height:25px;padding:8px" 
+										  <td valign="middle" bgcolor="#ADE5F7"><input name="biaya" id="biaya" type="text" value="0" class="easyui-textbox"
+																	style="width:80px;height:25px;padding:8px" 
 																	data-options="prompt:'Biaya Lainnya',onChange: function(value){
 																	var tarif = parseInt($('#tarif').textbox('getValue'))
 																				var kg = parseInt($('#kg').textbox('getValue'))
@@ -211,21 +206,28 @@
 																				$('#total').textbox('setValue',formatTruncateNumber(ttl,true))
 																				},formatter:function(val) {
 																					return formatTruncateNumber(val,true)
-																				}">											
-												</td>										  											
+																				}">												
+											</td>										  											
 										</tr>
 										<tr>
 											<td bgcolor="#ADE5F7">SubTotal</td>
-										  <td bgcolor="#ADE5F7"><input name="subtotal" id="subtotal" type="text" class="easyui-numberbox" 
-												disabled min="0" precision="0" style="width:80px;height:25px;padding:8px" data-options="prompt:'SubTotal'">											
+										  <td bgcolor="#ADE5F7"><input name="subtotal" id="subtotal" type="text" class="easyui-textbox" 
+												disabled style="width:80px;height:25px;padding:8px" data-options="prompt:'SubTotal'">											
 											</td>
 										</tr>
 										<tr>
 											<td bgcolor="#ADE5F7">Total</td>
-										  <td bgcolor="#ADE5F7"><input name="total" id="total" type="text" class="easyui-numberbox" disabled min="0" 
-												precision="0" style="width:80px;height:25px;padding:8px" data-options="prompt:'Total'">											
+										  <td bgcolor="#ADE5F7"><input name="total" id="total" type="text" class="easyui-textbox" disabled
+												 style="width:80px;height:25px;padding:8px" data-options="prompt:'Total'">											
 											</td>
 										</tr>
+										<tr>
+										  <td colspan="6" valign="middle">
+										  <button name="cetak_tt" id="cetak_tt" onclick="cetakTandaTerima()">Cetak</button>
+                                        <button name="simpan_tt" id="simpan_tt" onclick="saveTandaTerima()">Save</button>
+                                        <button onclick="location.reload()">Batal</button>
+										</td>
+									  </tr>
 								  </table>
                                     <!--DESKRIPSI-->
                                 </td>
@@ -290,9 +292,7 @@
                                     <td></td>
                                     <td></td>
                                     <td>
-										<button name="cetak_tt" id="cetak_tt" onclick="cetakTandaTerima()">Cetak</button>
-                                        <button name="simpan_tt" id="simpan_tt" onclick="saveTandaTerima()">Save</button>
-                                        <button onclick="location.reload()">Batal</button>
+										
                                     </td>
                                 </tr>
                         </table>
@@ -309,11 +309,11 @@
 									}">
                         <thead>
                         <tr>                            
-                            <th style="width:10%" data-options="field:'no_cn'">CN</th>
-                            <th style="width:14%" data-options="field:'tanggal'">Tanggal</th>
-                            <th style="width:20%" data-options="field:'pengirim'">Pengirim</th>
-                            <th style="width:35%" data-options="field:'tujuan'">Tujuan</th>
-                            <th style="width:16%" data-options="field:'grand_total'" align="right" formatter="formatPrice">Total</th>
+                            <th width="10%" data-options="field:'no_cn'">CN</th>
+                            <th width="14%" data-options="field:'tanggal'">Tanggal</th>
+                            <th width="20%" data-options="field:'pengirim'">Pengirim</th>
+                            <th width="35%" data-options="field:'tujuan'">Tujuan</th>
+                            <th width="16%" data-options="field:'grand_total'" align="right" formatter="formatPrice">Total</th>
                         </tr>
                         </thead>
                     </table>
@@ -345,12 +345,12 @@
 			$('#coll').textbox('setText',parseInt(row.total_coll))
 			$('#kg').textbox('setText',parseInt(row.total_berat))
 			$('#vol').textbox('setText',parseInt(row.total_vol))
-			$('#tarif').textbox('setText',parseInt(row.tarif))
-			$('#packing_kayu').textbox('setText',parseInt(row.packing_kayu))
-			$('#asuransi').textbox('setText',parseInt(row.asuransi))
-			$('#biaya').textbox('setText',parseInt(row.biaya))
-			$('#subtotal').textbox('setText',parseInt(row.subtotal))
-			$('#total').textbox('setText',parseInt(row.grand_total))
+			$('#tarif').textbox('setText',formatTruncateNumber(parseInt(row.tarif),true))
+			$('#packing_kayu').textbox('setText',formatTruncateNumber(parseInt(row.packing_kayu),true))
+			$('#asuransi').textbox('setText',formatTruncateNumber(parseInt(row.asuransi),true))
+			$('#biaya').textbox('setText',formatTruncateNumber(parseInt(row.biaya),true))
+			$('#subtotal').textbox('setText',formatTruncateNumber(parseInt(row.subtotal),true))
+			$('#total').textbox('setText',formatTruncateNumber(parseInt(row.grand_total),true))
 			$('#deskripsi').textbox('setText',row.deskripsi_paket)
 			document.getElementById('simpan_tt').style.display = "none"	
 			document.getElementById('cetak_tt').style.display = "inline-table"	
@@ -388,12 +388,12 @@
 						$('#coll').textbox('setText',parseInt(dataa[0].total_coll))
 						$('#kg').textbox('setText',parseInt(dataa[0].total_berat))
 						$('#vol').textbox('setText',parseInt(dataa[0].total_vol))
-						$('#tarif').textbox('setText',parseInt(dataa[0].tarif))
-						$('#subtotal').textbox('setText',parseInt(dataa[0].subtotal))
-						$('#packing_kayu').textbox('setText',parseInt(dataa[0].packing_kayu))
-						$('#asuransi').textbox('setText',parseInt(dataa[0].asuransi))
-						$('#biaya').textbox('setText',parseInt(dataa[0].biaya))
-						$('#total').textbox('setText',parseInt(dataa[0].grand_total))
+						$('#tarif').textbox('setText',formatTruncateNumber(parseInt(dataa[0].tarif),true))
+						$('#subtotal').textbox('setText',formatTruncateNumber(parseInt(dataa[0].subtotal),true))
+						$('#packing_kayu').textbox('setText',formatTruncateNumber(parseInt(dataa[0].packing_kayu),true))
+						$('#asuransi').textbox('setText',formatTruncateNumber(parseInt(dataa[0].asuransi),true))
+						$('#biaya').textbox('setText',formatTruncateNumber(parseInt(dataa[0].biaya),true))
+						$('#total').textbox('setText',formatTruncateNumber(parseInt(dataa[0].grand_total),true))
 						$('#deskripsi').textbox('setText',dataa[0].deskripsi_paket)
 						document.getElementById('simpan_tt').style.display = "none"	
 						document.getElementById('cetak_tt').style.display = "inline-table"	
@@ -444,11 +444,11 @@
 				kg :  $('#kg').textbox('getValue'),
 				vol :  $('#vol').textbox('getValue'),
 				tarif :  $('#tarif').textbox('getValue'),
-				subtotal :  $('#subtotal').textbox('getValue'),
+				subtotal :  $('#subtotal').textbox('getValue').split(",").join(""),
 				packing_kayu :  $('#packing_kayu').textbox('getValue'),
 				asuransi :  $('#asuransi').textbox('getValue'),
 				biaya :  $('#biaya').textbox('getValue'),
-				grand_total :  $('#total').textbox('getValue'),
+				grand_total :  $('#total').textbox('getValue').split(",").join(""),
 				deskripsi :  $('#deskripsi').textbox('getValue')
 			}];
 			

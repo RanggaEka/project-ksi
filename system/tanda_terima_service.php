@@ -25,6 +25,8 @@
 		$udl = $jsondata[0]->udl;
 		$dtddtp = $jsondata[0]->dtddtp;
 		$agent = $jsondata[0]->agent;
+		$telp_agent = $jsondata[0]->telp_agent;
+		$alamat_agent = $jsondata[0]->alamat_agent;
 		$coll = $jsondata[0]->coll;
 		$kg = $jsondata[0]->kg;
 		$vol = $jsondata[0]->vol;
@@ -56,13 +58,13 @@
 		}
 		
 		if(($cekAgent)<1){
-			$newAgent = mysql_query("insert into agent values ('".$id."','".$agent."') ");
+			$newAgent = mysql_query("insert into agent values ('".$id."','".$agent."','".$telp_agent."','".$alamat_agent."') ");
 		}
 		
 		if(($cekCN)>=1){
 			echo "Nomor CN $cn sudah ada di database, silahkan ganti dengan yang lain !";
 		}else{		
-			$strQry = "INSERT INTO tanda_terima VALUES ('$id','$cnt','$cn','$tanggal','$pengirim', '$alamat_pengirim', $telpon_pengirim,'$tujuan', '$penerima', '$alamat_penerima', $telpon_penerima, '$udl', '$dtddtp', '$agent', '$coll', '$kg', '$vol', '$tarif', '$subtotal', '$packing_kayu', '$asuransi', '$biaya', '$grandtotal', '$deskripsi', '$user_id', '$user_name', 0)";
+			$strQry = "INSERT INTO tanda_terima VALUES ('$id','$cnt','$cn','$tanggal','$pengirim', '$alamat_pengirim', $telpon_pengirim,'$tujuan', '$penerima', '$alamat_penerima', $telpon_penerima, '$udl', '$dtddtp', '$agent', '$telp_agent', '$alamat_agent', '$coll', '$kg', '$vol', '$tarif', '$subtotal', '$packing_kayu', '$asuransi', '$biaya', '$grandtotal', '$deskripsi', '$user_id', '$user_name', 0)";
 			// echo ">>>".$strQry;
 			mysql_query($strQry) or die(mysql_error());
 			

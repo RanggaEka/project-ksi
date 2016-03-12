@@ -89,6 +89,8 @@
                 <a href="#" class="easyui-menubutton" data-options="menu:'#mm1',iconCls:'icon-newspaper'">Form Tanda Terima</a>
                 <a href="#" class="easyui-menubutton" data-options="menu:'#mm2',iconCls:'icon-coins'">Form Invoice</a>
 				<a href="?page=rekappengiriman" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-file-excel'">Rekap Pengiriman</a>
+				<a href="#" class="easyui-menubutton" data-options="menu:'#mm3Master',iconCls:'icon-cabinet'">Master</a>
+                
                 <?php 
 					if ($_SESSION['jabatan'] == "ADMIN") {
 				?>
@@ -109,6 +111,11 @@
                 <div><a href="?page=pembayaraninvoice">Input Pembayaran Invoice</a></div>
                 <div><a href="?page=rekapinvoice">Rekap Invoice</a></div>
             </div>
+			<div id="mm3Master" style="width:230px;">
+					<div><a href="?page=mastercustomer">Input Customer</a></div>
+					<div><a href="?page=masteragent">Input Agent</a></div>
+					<!--<div><a href="?page=db">Database</a></div>-->
+				</div>
         </nav>
     </nav>
     <table width="100%" border="0">
@@ -124,7 +131,7 @@
             </td>
         </tr>
         <tr align="center">
-            <?php
+            <?php 
                 if (isset($_GET['page'])) {
                     if ($_GET['page'] == "tandaterima") {
                         include 'tanda_terima.php';
@@ -144,6 +151,10 @@
                         include 'user_active.php';
                     } elseif ($_GET['page'] == "db") {
                         include 'db.php';
+                    } elseif ($_GET['page'] == "mastercustomer") {
+                        include 'master_customer.php';
+                    } elseif ($_GET['page'] == "masteragent") {
+                        include 'master_agent.php';
                     } else {
                         echo '<td colspan="2"><br/><br/><br/><br/><h2>KIKI SOLUSI INTERNUSA</h2></td>';
                     }
@@ -181,7 +192,7 @@
 <script type="text/javascript">
 	$.idleTimeout('#idletimeout', '#idletimeout a', {
 		idleAfter: 5,
-		pollingInterval: 2,
+		pollingInterval: 5,
 		keepAliveURL: '../form/halaman_utama.php?page=home',
 		serverResponseEquals: 'OK',
 		onTimeout: function(){

@@ -32,7 +32,7 @@
 			$.data( elem[0], 'idletimeout', this );
 			
 			// start the idle timer
-			$.idleTimer(options.idleAfter * 1000);
+			$.idleTimer(options.idleAfter * 2000);
 			
 			// once the user becomes idle
 			$(document).bind("idle.idleTimer", function(){
@@ -152,7 +152,7 @@
 		serverResponseEquals: "OK",
 		
 		// user is considered idle after this many seconds.  10 minutes default
-		idleAfter: 600,
+		idleAfter: 900,
 		
 		// a polling request will be sent to the server every X seconds
 		pollingInterval: 60,

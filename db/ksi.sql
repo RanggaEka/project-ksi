@@ -1,13 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 3.4.5
+-- version 4.0.10deb1
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 16, 2016 at 07:38 AM
--- Server version: 5.5.16
--- PHP Version: 5.3.8
+-- Generation Time: Mar 12, 2016 at 12:11 PM
+-- Server version: 5.5.44-0ubuntu0.14.04.1
+-- PHP Version: 5.5.9-1ubuntu4.12
 
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 
@@ -32,6 +32,16 @@ CREATE TABLE IF NOT EXISTS `agent` (
   PRIMARY KEY (`sid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `agent`
+--
+
+INSERT INTO `agent` (`sid`, `agent`) VALUES
+('5c41f728-0640-4f61-8ce8-2b69bdbb9439', 'RPX'),
+('60780fce-919c-4c50-8bfa-b5b0b3809e99', 'BOM'),
+('953c0f92-29c5-4e31-9fdf-ecba6da452ae', 'Pahala'),
+('df181f5d-4877-41a2-9728-36d42622937d', 'TIKI');
+
 -- --------------------------------------------------------
 
 --
@@ -51,6 +61,7 @@ CREATE TABLE IF NOT EXISTS `customer` (
 --
 
 INSERT INTO `customer` (`sid`, `nama`, `alamat`, `telpon`) VALUES
+('0a999d3f-d5f8-11e5-be15-a01d48c20069', 'Rangga Eka', 'Perum Kemang Swatama C 23A Depok', '087875740197'),
 ('3d7cb896-d3e7-11e5-a96b-3085a979acce', 'FUAD', 'TAMAN GRIYA PERMAI BLOK A4 NO. 11', '08986265770');
 
 -- --------------------------------------------------------
@@ -73,11 +84,11 @@ CREATE TABLE IF NOT EXISTS `invoice_detail` (
 --
 
 INSERT INTO `invoice_detail` (`sid`, `no_inv`, `tanda_terima_sid`, `tanda_terima_nomor`, `tarif`) VALUES
-('460467f7-a9a9-421f-97fc-9db5e29606c8', 'KSI-001', 'c216c506-d6a0-4492-b5c3-277198f09e98', 'KSI-003', 425000),
-('9d7c4113-d0cc-49d9-9255-79b50ced248f', 'KSI-001', '99904d3e-b728-4220-8048-55c3e3345956', 'KSI-005', 100000),
-('9e5d42d0-bd69-4922-aef5-3f3ae3b81c6d', 'INV-002', 'af44265d-e2f2-4e26-8af9-96e529905386', 'KSI-001', 10000),
-('de5604ed-f0db-4fc3-a9ad-ea6badcfa5dc', 'INV-002', 'bd2e4628-aa9f-48d5-b86f-a30adc737bf8', 'KSI-002', 14000),
-('ea656ab1-b7e0-425a-a138-5fb73779c934', 'KSI-001', '85a4aee7-6b87-41e4-989f-10387bbf7074', 'KSI-004', 270000);
+('077681f1-cc12-4d66-a06a-192efcbf5b7b', 'INV943805', '7cc311b8-b325-4e33-af55-4b2086fda02f', 'SDF', 1600),
+('39627d5e-d09f-46bc-81bd-a77569445f4f', 'INV943805', '60780fce-919c-4c50-8bfa-b5b0b3809e99', 'DERWEWRWE', 38349990),
+('66c20494-deb6-445d-b95b-ebb40785e3ab', 'INV033424', '5c41f728-0640-4f61-8ce8-2b69bdbb9439', 'FDSJK', 420),
+('6abb6815-ea8c-4e94-b8e0-05ca2482e714', 'INV033424', '953c0f92-29c5-4e31-9fdf-ecba6da452ae', 'KDSJFNDJKF', 539000),
+('9b555d81-1dcd-46de-a6b2-83287914ee7e', 'INV-001', 'df181f5d-4877-41a2-9728-36d42622937d', 'KSI-TT-001', 178);
 
 -- --------------------------------------------------------
 
@@ -88,13 +99,14 @@ INSERT INTO `invoice_detail` (`sid`, `no_inv`, `tanda_terima_sid`, `tanda_terima
 CREATE TABLE IF NOT EXISTS `invoice_header` (
   `sid` varchar(36) NOT NULL,
   `no_inv` varchar(30) NOT NULL,
-  `tanggal` date NOT NULL,
+  `tanggal` varchar(30) NOT NULL,
   `customer_sid` varchar(36) NOT NULL,
   `customer_nama` text NOT NULL,
   `total` double NOT NULL,
   `cicilan` double NOT NULL,
   `sisa` double NOT NULL,
-  `keterangan` enum('LUNAS','BELUM LUNAS') NOT NULL DEFAULT 'BELUM LUNAS',
+  `jatuh_tempo` varchar(30) NOT NULL,
+  `keterangan` varchar(20) NOT NULL,
   `user_id` varchar(36) NOT NULL,
   `user_name` varchar(30) NOT NULL,
   PRIMARY KEY (`sid`),
@@ -106,9 +118,49 @@ CREATE TABLE IF NOT EXISTS `invoice_header` (
 -- Dumping data for table `invoice_header`
 --
 
-INSERT INTO `invoice_header` (`sid`, `no_inv`, `tanggal`, `customer_sid`, `customer_nama`, `total`, `cicilan`, `sisa`, `keterangan`, `user_id`, `user_name`) VALUES
-('dfeba55f-5af1-4f8f-8f39-20f6fd60fd28', 'KSI-001', '2016-02-16', '3d7cb896-d3e7-11e5-a96b-3085a979acce', 'FUAD', 795000, 0, 795000, 'BELUM LUNAS', '325532e2-3ddc-11e5-a727-38b1db16526a', 'dev'),
-('ed9914dc-0054-4209-9463-f690df30800c', 'INV-002', '2016-02-16', '3d7cb896-d3e7-11e5-a96b-3085a979acce', 'FUAD', 24000, 0, 24000, 'BELUM LUNAS', '325532e2-3ddc-11e5-a727-38b1db16526a', 'dev');
+INSERT INTO `invoice_header` (`sid`, `no_inv`, `tanggal`, `customer_sid`, `customer_nama`, `total`, `cicilan`, `sisa`, `jatuh_tempo`, `keterangan`, `user_id`, `user_name`) VALUES
+('5abd1e9c-aa71-4b7f-badc-01edc4629226', 'INV-001', '12/03/2016', '3d7cb896-d3e7-11e5-a96b-3085a979acce', 'FUAD', 178, 0, 178, '', 'BELUM LUNAS', '325532e2-3ddc-11e5-a727-38b1db16526a', 'dev'),
+('5e990a84-4f5d-4eb9-8849-9f2b79d597f9', 'INV033424', '12/03/2016', '3d7cb896-d3e7-11e5-a96b-3085a979acce', 'FUAD', 539420, 0, 539420, '', 'BELUM LUNAS', '325532e2-3ddc-11e5-a727-38b1db16526a', 'dev'),
+('7fd77e52-49fb-498d-9499-245b118e30a3', 'INV943805', '12/03/2016', '0a999d3f-d5f8-11e5-be15-a01d48c20069', 'Rangga Eka', 38351590, 38351590, 0, '', 'LUNAS', '325532e2-3ddc-11e5-a727-38b1db16526a', 'dev');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `invoice_pembayaran`
+--
+
+CREATE TABLE IF NOT EXISTS `invoice_pembayaran` (
+  `sid` varchar(36) NOT NULL,
+  `no_inv` varchar(30) NOT NULL,
+  `tanggal` varchar(30) NOT NULL,
+  `nilai_bayar` double NOT NULL,
+  `user_id` varchar(36) NOT NULL,
+  `user_name` varchar(30) NOT NULL,
+  PRIMARY KEY (`sid`),
+  UNIQUE KEY `sid` (`sid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `invoice_pembayaran`
+--
+
+INSERT INTO `invoice_pembayaran` (`sid`, `no_inv`, `tanggal`, `nilai_bayar`, `user_id`, `user_name`) VALUES
+('a2412e2c-c1d1-4490-9152-7110fece4eb2', 'INV943805', '12/03/2016', 38351590, '325532e2-3ddc-11e5-a727-38b1db16526a', 'dev');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `locking`
+--
+
+CREATE TABLE IF NOT EXISTS `locking` (
+  `sid` varchar(36) NOT NULL,
+  `form_name` varchar(30) NOT NULL,
+  `value` varchar(100) NOT NULL,
+  `user_id` varchar(40) NOT NULL,
+  `user_name` varchar(40) NOT NULL,
+  PRIMARY KEY (`sid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -120,7 +172,7 @@ CREATE TABLE IF NOT EXISTS `tanda_terima` (
   `sid` varchar(36) NOT NULL,
   `no` int(5) NOT NULL,
   `no_cn` varchar(25) NOT NULL,
-  `tanggal` date NOT NULL,
+  `tanggal` varchar(30) NOT NULL,
   `pengirim` varchar(50) NOT NULL,
   `alamat_pengirim` text NOT NULL,
   `telpon_pengirim` varchar(50) NOT NULL,
@@ -134,10 +186,16 @@ CREATE TABLE IF NOT EXISTS `tanda_terima` (
   `total_coll` int(10) NOT NULL,
   `total_berat` int(10) NOT NULL,
   `total_vol` int(10) NOT NULL,
+  `tarif` int(11) NOT NULL,
+  `subtotal` int(11) NOT NULL,
+  `packing_kayu` int(11) NOT NULL,
+  `asuransi` int(11) NOT NULL,
+  `biaya` int(11) NOT NULL,
   `grand_total` int(11) NOT NULL,
   `deskripsi_paket` text NOT NULL,
   `user_id` varchar(36) NOT NULL,
   `user_name` varchar(20) NOT NULL,
+  `is_sudah_invoice` tinyint(1) NOT NULL,
   PRIMARY KEY (`sid`),
   UNIQUE KEY `no_cn` (`no_cn`),
   KEY `no_cn_2` (`no_cn`)
@@ -147,13 +205,12 @@ CREATE TABLE IF NOT EXISTS `tanda_terima` (
 -- Dumping data for table `tanda_terima`
 --
 
-INSERT INTO `tanda_terima` (`sid`, `no`, `no_cn`, `tanggal`, `pengirim`, `alamat_pengirim`, `telpon_pengirim`, `tujuan`, `penerima`, `alamat_penerima`, `telpon_penerima`, `service_udl`, `service_dtddtp`, `service_agent`, `total_coll`, `total_berat`, `total_vol`, `grand_total`, `deskripsi_paket`, `user_id`, `user_name`) VALUES
-('7cd2ba7f-b09a-426e-9c0e-b8324355e1be', 6, 'KSI-006', '2016-02-16', 'FEBRI', 'TAMAN GRIYA PERMAI BLOK A4 NO. 11', '6285287468749', 'Jawa Barat - Kota Bekasi - Bekasi Selatan ', 'FUAD', 'JL. KH. NOER ALI NO. 1 BEKASI', '628986265770', 'U', 'DTD', 'JNE', 1, 5, 10, 90000, 'Palu Hog Rider', '325532e2-3ddc-11e5-a727-38b1db16526a', 'dev'),
-('85a4aee7-6b87-41e4-989f-10387bbf7074', 4, 'KSI-004', '2016-02-15', 'FUAD', 'TAMAN GRIYA PERMAI BLOK A4 NO. 11', '8986265770', 'Kalimantan Barat - Kota Singkawang - Singkawang Utara ', 'Crinkle', 'Ambon', '8855378', 'U', 'DTD', 'JNE', 1, 5, 6, 270000, '', '82e08a47-cff6-11e5-a595-3085a979acce', 'fuad93'),
-('99904d3e-b728-4220-8048-55c3e3345956', 5, 'KSI-005', '2016-02-16', 'FUAD', 'TAMAN GRIYA PERMAI BLOK A4 NO. 11', '8986265770', 'Jawa Barat - Kab. Karawang - Cikampek', 'FEBRIANSYAH', 'SMP N 1 TIRTAMULYA', '89912345678', 'U', 'DTD', 'JNE', 1, 5, 10, 100000, 'Naga Max War', '325532e2-3ddc-11e5-a727-38b1db16526a', 'dev'),
-('af44265d-e2f2-4e26-8af9-96e529905386', 1, 'KSI-001', '2016-02-15', 'A00001', 'JAKARTA', '8855378', 'Jawa Barat - Kab. Karawang - Cikampek', 'Fuad', 'Taman Griya Permai Blok A4 No. 11', '8986265770', 'U', 'DTD', 'JNE', 1, 1, 1, 10000, 'Kaos COC', '82e08a47-cff6-11e5-a595-3085a979acce', 'fuad93'),
-('bd2e4628-aa9f-48d5-b86f-a30adc737bf8', 2, 'KSI-002', '2016-02-15', 'A00001', 'JAKARTA', '8986265770', 'Jawa Barat - Kab. Bandung Barat - Cikalong Wetan ', 'Fuad', 'Cikalong', '8986265770', 'U', 'DTD', 'JNE', 1, 1, 1, 14000, 'Boneka', '82e08a47-cff6-11e5-a595-3085a979acce', 'fuad93'),
-('c216c506-d6a0-4492-b5c3-277198f09e98', 3, 'KSI-003', '2016-02-15', 'FUAD', 'TAMAN GRIYA PERMAI BLOK A4 NO. 11', '8986265770', 'Jawa Barat - Kab. Sukabumi - Parakan Salak', 'Fuad', 'Jl. Raya No. 22 RT.06/RW.04', '85287468749', 'U', 'DTP', 'Kumis Logistic', 1, 25, 1, 425000, 'Palu Hog Rider', '82e08a47-cff6-11e5-a595-3085a979acce', 'fuad93');
+INSERT INTO `tanda_terima` (`sid`, `no`, `no_cn`, `tanggal`, `pengirim`, `alamat_pengirim`, `telpon_pengirim`, `tujuan`, `penerima`, `alamat_penerima`, `telpon_penerima`, `service_udl`, `service_dtddtp`, `service_agent`, `total_coll`, `total_berat`, `total_vol`, `tarif`, `subtotal`, `packing_kayu`, `asuransi`, `biaya`, `grand_total`, `deskripsi_paket`, `user_id`, `user_name`, `is_sudah_invoice`) VALUES
+('5c41f728-0640-4f61-8ce8-2b69bdbb9439', 2, 'FDSJK', '12/03/2016', 'FUAD', 'TAMAN GRIYA PERMAI BLOK A4 NO. 11', '8986265770', 'DD', 'DD', 'DD', '32434', 'D', 'DTD', 'RPX', 1, 1, 1, 250000, 250, 30000, 50000, 90000, 420, 'drewrewrewr', '325532e2-3ddc-11e5-a727-38b1db16526a', 'dev', 1),
+('60780fce-919c-4c50-8bfa-b5b0b3809e99', 5, 'DERWEWRWE', '12/03/2016', 'Rangga Eka', 'Perum Kemang Swatama C 23A Depok', '87875740197', 'fdsafdf', '324324', 'fdsfdsf', '234344', 'U', 'DTD', 'BOM', 1, 10, 1, 3680000, 36800000, 50000, 500000, 999990, 38349990, 'eeeeeeeeeee', '325532e2-3ddc-11e5-a727-38b1db16526a', 'dev', 1),
+('7cc311b8-b325-4e33-af55-4b2086fda02f', 4, 'SDF', '12/03/2016', 'Rangga Eka', 'Perum Kemang Swatama C 23A Depok', '87875740197', 'TER', '234', 'ertwter', '34324', 'D', 'DTD', 'RPX', 1, 5, 1, 100000, 500000, 400000, 100000, 600000, 1600, '23443434', '325532e2-3ddc-11e5-a727-38b1db16526a', 'dev', 1),
+('953c0f92-29c5-4e31-9fdf-ecba6da452ae', 3, 'KDSJFNDJKF', '12/03/2016', 'FUAD', 'TAMAN GRIYA PERMAI BLOK A4 NO. 11', '8986265770', '3455', '234', '435', '3243244', 'L', 'DTD', 'Pahala', 1, 1, 1, 250000, 250000, 9000, 30000, 250000, 539000, 'rwrewrre', '325532e2-3ddc-11e5-a727-38b1db16526a', 'dev', 1),
+('df181f5d-4877-41a2-9728-36d42622937d', 1, 'KSI-TT-001', '12/03/2016', 'FUAD', 'TAMAN GRIYA PERMAI BLOK A4 NO. 11', '8986265770', 'Malang', 'Nia', 'Malang Jawa Timur', '27894739204', 'D', 'DTD', 'TIKI', 1, 3, 1, 25, 75, 0, 10, 93, 178, 'bom buku', '325532e2-3ddc-11e5-a727-38b1db16526a', 'dev', 1);
 
 -- --------------------------------------------------------
 
@@ -5796,6 +5853,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `alamat` varchar(30) NOT NULL,
   `photo` varchar(10) NOT NULL,
   `jabatan` varchar(20) NOT NULL,
+  `is_active` tinyint(4) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -5803,9 +5861,10 @@ CREATE TABLE IF NOT EXISTS `user` (
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id`, `username`, `password`, `nama`, `jenis_kelamin`, `tempat`, `tanggal_lahir`, `alamat`, `photo`, `jabatan`) VALUES
-('2ebd6f6f-c89d-11e5-8c7e-a01d48c20069', 'sales-dev', 'sales', 'Eka Putra', 'L', 'Kebumen', '2004-05-03', 'Depok', '', 'USER'),
-('325532e2-3ddc-11e5-a727-38b1db16526a', 'dev', 'admin', 'Rangga Eka', 'L', 'Kebumen', '1993-06-04', 'Bogor Permai Indah 5', '', 'ADMIN');
+INSERT INTO `user` (`id`, `username`, `password`, `nama`, `jenis_kelamin`, `tempat`, `tanggal_lahir`, `alamat`, `photo`, `jabatan`, `is_active`) VALUES
+('0b5ef2ac-d79c-11e5-ba4a-60eb691e4d46', 'devel', 'admin', 'Fuad', 'Laki-Laki', 'Karawang', '2014-08-06', 'd', '', 'ADMIN', 0),
+('325532e2-3ddc-11e5-a727-38b1db16526a', 'dev', 'admin', 'Rangga Eka', 'Laki-laki', 'KebumenD', '1993-06-04', 'Bogor Permai Indah 5', '', 'ADMIN', 0),
+('adea03ee-9c7b-447f-afa1-2da917262dc5', 'user', 'user', 'user', 'Laki-laki', 'jakarta', '0000-00-00', 'jakarta', 'X', 'USER', 0);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

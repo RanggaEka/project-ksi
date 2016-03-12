@@ -30,39 +30,6 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><label>Jenis Kelamin <font color='red'>*</font></label></td>
-                                <td>:</td>
-                                <td>
-									<select class="easyui-combobox" name="jenis_kelamin" id="jenis_kelamin" style="width:110px;height:25px;padding:8px">
-										<option value="Laki-laki">Laki-laki</option>
-										<option value="Perempuan">Perempuan</option>
-									</select>
-                                </td>
-                            </tr>
-							<tr>
-                                <td><label>Tempat Lahir<font color='red'>*</font></label></td>
-                                <td>:</td>
-                                <td>
-									<input type="text" id="tempat_lahir" name="tempat_lahir" class="easyui-textbox" style="width:150px;height:25px;padding:8px" data-options="prompt:'Tempat Lahir',iconWidth:38">
-                                </td>
-                            </tr>
-							<tr>
-                                <td><label>Tanggal Lahir <font color='red'>*</font></label></td>
-                                <td>:</td>
-                                <td>
-									<input type="text" id="tanggal_lahir" name="tanggal_lahir" class="easyui-datebox" style="width:150px;height:25px;padding:8px" placeholder="Tanggal Lahir" 
-									data-options="prompt:'Tanggal Lahir',formatter:myformatter,parser:myparser"></input>
-									Format Tanggal : YYYY-MM-DD
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><label>Alamat <font color='red'>*</font></label></td>
-                                <td>:</td>
-                                <td>
-									<input name="alamat" id="alamat" class="easyui-textbox" data-options="multiline:true,prompt:'Alamat'" style="width:300px;height:50px;padding:8px">
-                                </td>
-                            </tr>
-                            <tr>
                                 <td><label>Jabatan <font color='red'>*</font></label></td>
                                 <td>:</td>
                                 <td>
@@ -92,10 +59,8 @@
 						<thead>
 							<tr>																
 								<th width="20%" data-options="field:'nama'">Nama</th>
-								<th width="20%" data-options="field:'jenis_kelamin'">Jenis Kelamin</th>
-								<th width="20%" data-options="field:'tempat'">Tempat</th>
-								<th width="20%" data-options="field:'tanggal_lahir'">Tanggal Lahir</th>
-								<th width="20%" data-options="field:'alamat'">Alamat</th>
+								<th width="20%" data-options="field:'username'">Username</th>
+								<th width="20%" data-options="field:'password'">Password</th>
 								<th width="20%" data-options="field:'jabatan'">Jabatan</th>								
 							</tr>
 						</thead>
@@ -112,10 +77,6 @@
 			$('#username').textbox('setValue', row.username);
 			$('#password').textbox('setValue', row.password);
 			$('#nama').textbox('setValue', row.nama);
-			$('#jenis_kelamin').combobox('setValue', row.jenis_kelamin);
-			$('#tempat_lahir').textbox('setValue', row.tempat);
-			$('#tanggal_lahir').textbox('setValue', row.tanggal_lahir);
-			$('#alamat').textbox('setValue', row.alamat);
 			$('#jabatan').combobox('setValue', row.jabatan);			
 		}else{
 			$.messager.alert('Peringatan', 'Data belum di pilih !', 'warning');
@@ -128,17 +89,11 @@
 				username :  $('#username').textbox('getValue'),
 				password :  $('#password').textbox('getValue'),
 				nama :  $('#nama').textbox('getValue'),
-				jenis_kelamin :  $('#jenis_kelamin').combobox("getValue"),
-				tempat_lahir :  $('#tempat_lahir').textbox('getValue'),
-				tanggal_lahir :  $('#tanggal_lahir').textbox('getValue'),
-				alamat :  $('#alamat').textbox('getValue'),
 				jabatan :  $('#jabatan').combobox("getValue")
 			}];
 			
 		if ($('#username').textbox('getValue') != "" && $('#password').textbox('getValue') != ""
-			&& $('#nama').textbox('getValue') != "" && $('#jenis_kelamin').combobox("getValue") != ""
-			&& $('#tempat_lahir').textbox('getValue') != "" && $('#tanggal_lahir').textbox('getValue') != ""
-			&& $('#alamat').textbox('getValue') != "" &&  $('#jabatan').combobox('getValue') != "") {
+			&& $('#nama').textbox('getValue') != ""  &&  $('#jabatan').combobox('getValue') != "") {
 		
 			$.ajax({
 				type	: "POST",

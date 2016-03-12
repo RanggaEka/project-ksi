@@ -1,13 +1,13 @@
 <td width="156">&nbsp;</td>
 <td>
     <br>
-    <table width="80%" border="0" align="left" cellpadding="4" cellspacing="2" style="border: solid 1px #efefef;">
+    <table width="85%" border="0" align="left" cellpadding="4" cellspacing="2" style="border: solid 1px #efefef;">
         <tr>
             <td>
                 <!--<form action="../system/tanda_terima_service.php" method="post" enctype="multipart/form-data">-->
                         <table width="85%" border="0" cellspacing="0" cellpadding="2">
                             <tr>
-                                <td width="10%"><label>CN <font color='red'>*</font></label></td>
+                                <td width="15%"><label>CN <font color='red'>*</font></label></td>
                                 <td width="1%">:</td>
                                 <td width="23%">
                                     <input name="cn" id="cn" type="text" class="easyui-searchbox" style="width:150px;height:25px;padding:8px" data-options="prompt:'CN',searcher:searchNoCN">
@@ -15,9 +15,9 @@
                                 <td width="99%" rowspan="5" valign="top">
                                     <!--SERVICE-->
                                     Service <font color='red'>*</font> :
-                                    <table width="28%" border="0" cellpadding="2" cellspacing="0" style="border:1px solid #CCCCCC;">
+                                    <table width="100%" border="0" cellpadding="2" cellspacing="0" style="border:1px solid #CCCCCC;">
                                         <tr>
-											<td width="30">U/D/L</td>
+											<td width="20">U/D/L</td>
                                             <td valign="middle">
                                                 <select class="easyui-combobox" name="udl" id="udl" style="width:110px;height:25px;padding:8px">
 														<option value="U">U</option>
@@ -25,6 +25,30 @@
 														<option value="L">L</option>
 											  </select>
                                             </td>
+											<td rowspan="3" valign="top">
+											Agent &nbsp;
+											<input class="easyui-combobox" 												
+												style="width:110px;height:25px;padding:8px"
+												name="agent" id="agent"
+												data-options="
+												url:'../json/get_agent.php',
+												method:'get',
+												valueField:'agent',
+												textField:'agent',
+												panelHeight:'150',
+												panelWidth: 150,
+												prompt:'Agent',
+												onSelect: function(val){
+													$('#alamat_agent').textbox('setValue', val.alamat);
+													$('#telp_agent').textbox('setValue', val.no_telp);
+												}"> 
+												Telp : 
+												<input name="telp_agent" id="telp_agent" type="text" class="easyui-numberbox" style="width:110px;height:25px;padding:4px" data-options="prompt:'Telp Agent'">
+												<div style="padding-top:2px;">
+												Alamat &nbsp;
+												<input name="alamat_agent" id="alamat_agent" class="easyui-textbox" data-options="prompt:'Alamat Agent'" style="width:84%;height:40px;padding:4px">
+												</div>
+											</td>
                                         </tr>
 										<tr>
 											<td>DTD/DTP</td>
@@ -36,21 +60,8 @@
 											</td>
 										</tr>
 										<tr>
-											<td>Agent</td>
-											<td valign="middle">
-												<input
-													class="easyui-combobox" 												
-													style="width:110px;height:25px;padding:8px"
-													name="agent" id="agent"
-													data-options="
-															url:'../json/get_agent.php',
-															method:'get',
-															valueField:'agent',
-															textField:'agent',
-															panelHeight:'150',
-															panelWidth: 150,
-															prompt:'Agent'">
-											</td>
+											<td>&nbsp;</td>
+											<td>&nbsp;</td>
 										</tr>
 									</table>
                                     <!--AKUMULASI-->
@@ -152,7 +163,7 @@
 																				},formatter:function(val) {
 																					return formatTruncateNumber(val,true)
 																				}">											</td>
-											<td valign="middle" bgcolor="#ADE5F7">Pack. Kayu</td>
+											<td valign="middle" bgcolor="#ADE5F7">Packing</td>
 											<td valign="middle" bgcolor="#ADE5F7"><input name="packing_kayu" id="packing_kayu" type="text" value="0" class="easyui-textbox" 
 																	style="width:80px;height:25px;padding:8px" 
 																	data-options="prompt:'Packing Kayu',onChange: function(value){													
@@ -184,7 +195,7 @@
                                                 <input name="deskripsi" id="deskripsi" class="easyui-textbox" data-options="multiline:true,prompt:'Deskripsi Paket'" style="width:100%;height:70px;padding:8px">                                            </td>
                                       <tr/>
                                     </table>										  </td>
-										  <td valign="middle" bgcolor="#ADE5F7">Biaya Lainnya</td>
+										  <td valign="middle" bgcolor="#ADE5F7">Biaya Lain</td>
 										  <td valign="middle" bgcolor="#ADE5F7"><input name="biaya" id="biaya" type="text" value="0" class="easyui-textbox"
 																	style="width:80px;height:25px;padding:8px" 
 																	data-options="prompt:'Biaya Lainnya',onChange: function(value){
@@ -342,6 +353,8 @@
 			$('#udl').combo('setText',row.service_udl)
 			$('#dtddtp').combo("setText",row.service_dtddtp)
 			$('#agent').combo("setText",row.service_agent)
+			$('#telp_agent').textbox("setText",row.service_telp_agent)
+			$('#alamat_agent').textbox("setText",row.service_alamat_agent)
 			$('#coll').textbox('setText',parseInt(row.total_coll))
 			$('#kg').textbox('setText',parseInt(row.total_berat))
 			$('#vol').textbox('setText',parseInt(row.total_vol))
@@ -353,7 +366,7 @@
 			$('#total').textbox('setText',formatTruncateNumber(parseInt(row.grand_total),true))
 			$('#deskripsi').textbox('setText',row.deskripsi_paket)
 			document.getElementById('simpan_tt').style.display = "none"	
-			document.getElementById('cetak_tt').style.display = "inline-table"	
+			document.getElementById('cetak_tt').style.display = "none"	
 		}
 	}
 	function searchNoCN(value){
@@ -385,6 +398,8 @@
 						$('#udl').combo('setText',dataa[0].service_udl)
 						$('#dtddtp').combo("setText",dataa[0].service_dtddtp)
 						$('#agent').combo("setText",dataa[0].service_agent)
+						$('#telp_agent').textbox("setText",dataa[0].service_telp_agent)
+						$('#alamat_agent').textbox("setText",dataa[0].service_alamat_agent)
 						$('#coll').textbox('setText',parseInt(dataa[0].total_coll))
 						$('#kg').textbox('setText',parseInt(dataa[0].total_berat))
 						$('#vol').textbox('setText',parseInt(dataa[0].total_vol))
@@ -396,7 +411,7 @@
 						$('#total').textbox('setText',formatTruncateNumber(parseInt(dataa[0].grand_total),true))
 						$('#deskripsi').textbox('setText',dataa[0].deskripsi_paket)
 						document.getElementById('simpan_tt').style.display = "none"	
-						document.getElementById('cetak_tt').style.display = "inline-table"	
+						document.getElementById('cetak_tt').style.display = "none"	
 					}
 				}
 			});
@@ -416,6 +431,7 @@
 		$('#udl').combo('clear','')
 		$('#dtddtp').combo("clear")
 		$('#agent').combo("clear")
+		$('#telp_agent').combo("clear")
 		$('#coll').textbox('setText','1')
 		$('#kg').textbox('setText','1')
 		$('#vol').textbox('setText','1')
@@ -440,6 +456,8 @@
 				udl : $('#udl').combo('getValue'),
 				dtddtp :  $('#dtddtp').combo("getValue"),
 				agent :  $('#agent').combo("getValue"),
+				telp_agent :  $('#telp_agent').textbox("getValue"),
+				alamat_agent :  $('#alamat_agent').textbox("getValue"),
 				coll :  $('#coll').textbox('getValue'),
 				kg :  $('#kg').textbox('getValue'),
 				vol :  $('#vol').textbox('getValue'),
@@ -457,7 +475,8 @@
 			&& $('#alamat_pengirim').textbox('getValue') != "" && $('#telpon_pengirim').textbox('getValue') != ""
 			&& $('#penerima').textbox('getValue') != "" &&  $('#alamat_penerima').textbox('getValue') != "" 
 			&& $('#telpon_penerima').textbox('getValue') != "" && $('#udl').combo('getValue') != "" 
-			&& $('#dtddtp').combo("getValue") != "" && $('#agent').combo("getValue") != ""
+			&& $('#dtddtp').combo("getValue") != "" && $('#agent').combo("getValue") != "" && $('#telp_agent').textbox("getValue") != ""
+			&& $('#alamat_agent').textbox("getValue") != ""
 			&& $('#coll').textbox('getValue') != "" && $('#kg').textbox("getValue") != ""
 			&& $('#vol').textbox('getValue') != "" && $('#tarif').textbox('getValue') != "" && $('#subtotal').textbox('getValue') != ""			
 			&& $('#total').textbox("getValue") != "" && $('#deskripsi').textbox('getValue') != "") {
@@ -472,17 +491,17 @@
 					if (data != "") {
 						$.messager.alert('Peringatan', data, 'warning');
 					} else {					
-						setTimeout(function() {
-							$.messager.confirm('Print Tanda Terima', 'Cetak Tanda Terima Sekarang ?', function(r){
-								if (r){
-									//window.location.href='../form/cetak_invoice.php?no_inv='+$('#no_inv').textbox('getValue');
-									window.open('../form/cetak_tanda_terima.php?CN='+$('#cn').textbox('getValue'),'_blank');
+						//setTimeout(function() {
+						//	$.messager.confirm('Print Tanda Terima', 'Cetak Tanda Terima Sekarang ?', function(r){
+						//		if (r){
+						//			//window.location.href='../form/cetak_invoice.php?no_inv='+$('#no_inv').textbox('getValue');
+						//			window.open('../form/cetak_tanda_terima.php?CN='+$('#cn').textbox('getValue'),'_blank');
+						//			location.reload()
+						//		} else {
 									location.reload()
-								} else {
-									location.reload()
-								}
-							});
-						},100)
+						//		}
+						//	});
+						//},100)
 					}
 				}
 			});
